@@ -1,10 +1,10 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import { getAuthToken } from "../store";
 import { AppConfigs } from "../../const";
 
 const serverUrl = AppConfigs.serverUrl;
 
-const _makeRequest = (instantAxios: any) => async (args: any) => {
+const _makeRequest = (instantAxios: AxiosInstance) => async (args: any) => {
   const _headers = args.headers ? args.headers : {};
   const body = args.body ? args.body : {};
   const defaultHeaders = {};
@@ -20,13 +20,13 @@ const _makeRequest = (instantAxios: any) => async (args: any) => {
   const request = instantAxios(args);
 
   return request
-    .then((response: any) => response.data)
+    .then((response: any) => (response?.data ? response?.data : response))
     .catch((error: any) => {
-      throw error.response.data ? error.response.data : error.response;
+      throw error.response?.data ? error.response?.data : error.response;
     });
 };
 
-const _makeAuthRequest = (instantAxios: any) => async (args: any) => {
+const _makeAuthRequest = (instantAxios: AxiosInstance) => async (args: any) => {
   const requestHeaders = args.headers ? args.headers : {};
   const accessToken = getAuthToken();
 
@@ -45,10 +45,10 @@ const _makeAuthRequest = (instantAxios: any) => async (args: any) => {
   const request = instantAxios(args);
 
   return request
-    .then((response: any) => response.data)
+    .then((response: any) => (response?.data ? response?.data : response))
     .catch((error: any) => {
       throw {
-        message: error.response.data ? error.response.data : error.response,
+        message: error.response?.data ? error.response?.data : error.response,
       };
     });
 };
@@ -58,7 +58,7 @@ const request = (options: any = {}) => {
 
   if (options.BaseURL) BaseURL = options.BaseURL;
 
-  const instance = axios.create({
+  const instance: AxiosInstance = axios.create({
     baseURL: BaseURL,
     timeout: 30000,
   });

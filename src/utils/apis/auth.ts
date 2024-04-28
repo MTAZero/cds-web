@@ -8,7 +8,7 @@ const login = (uname = "", password = "") => {
     username: uname,
   };
   return api.makeRequest({
-    url: "auth/login",
+    url: "/authentication/login",
     method: "POST",
     data: body,
   });
@@ -16,7 +16,7 @@ const login = (uname = "", password = "") => {
 
 const getUserInfo = () => {
   return api.makeAuthRequest({
-    url: "auth/my-info",
+    url: "authentication/my-info",
     method: "GET",
     data: {},
   });
@@ -24,7 +24,7 @@ const getUserInfo = () => {
 
 const changeMyPassword = (old_password = "", new_password = "") => {
   return api.makeAuthRequest({
-    url: "/auth/change-my-password",
+    url: "/authentication/change-my-password",
     method: "PUT",
     data: {
       old_password,
@@ -40,7 +40,7 @@ const updateUserInfo = (user: any = {}) => {
   }
 
   return api.makeAuthRequest({
-    url: `auth/update-info`,
+    url: `authentication/update-info`,
     method: "PUT",
     data: form_data,
   });

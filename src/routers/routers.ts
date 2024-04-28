@@ -1,5 +1,5 @@
 export const RouterLink = {
   LOGIN: "/login",
-  HOME: "/",
+  HOME: "/home",
   CONTACT: "/contact",
 };

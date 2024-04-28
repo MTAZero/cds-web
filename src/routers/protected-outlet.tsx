@@ -1,5 +1,7 @@
 import { FC } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import { RouterLink } from "./routers";
+import { useAppSelector } from "../hooks";
 
 type RouterProps = {
   module?: string;
@@ -8,11 +10,11 @@ type RouterProps = {
 };
 
 const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
-  const canAccess = true;
+  const isLogin = useAppSelector((state) => state.auth.isLogin);
 
-  if (canAccess) return <Outlet />;
+  if (requireLogin && !isLogin) return <Navigate to={RouterLink.LOGIN} />;
 
-  return <div>ProtectedOutlet</div>;
+  return <Outlet />;
 };
 
 export default ProtectedOutlet;
