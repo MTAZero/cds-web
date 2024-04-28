@@ -3,8 +3,8 @@ import { LoginPage } from "../pages/login";
 import { RouterLink } from "./routers";
 import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import { MainLayout } from "../layouts/main";
 import { HomePage } from "../pages/home";
+import { MainLayout } from "../layouts";
 
 const MainRoutes = [
   { path: "", element: <Navigate to={RouterLink.LOGIN} replace /> },
@@ -28,6 +28,26 @@ const MainRoutes = [
           {
             path: RouterLink.CONTACT,
             element: <ContactPage />,
+          },
+          {
+            path: RouterLink.TROOP_REPORT,
+            element: <HomePage />,
+          },
+          {
+            path: RouterLink.LEAVE_APPROVE,
+            element: <HomePage />,
+          },
+          {
+            path: RouterLink.LEAVE_REGISTER,
+            element: <HomePage />,
+          },
+          {
+            path: RouterLink.MANAGER_GUARD_SETTING,
+            element: <HomePage />,
+          },
+          {
+            path: RouterLink.PERSONA_GUARD_SCHEDULE,
+            element: <HomePage />,
           },
         ],
       },

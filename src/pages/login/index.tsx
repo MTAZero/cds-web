@@ -79,7 +79,7 @@ export const LoginPage: FC = () => {
         </Box>
 
         <Button
-          disabled={!state.username.trim() || !state.password.trim()}
+          // disabled={!state.username.trim() && !state.password.trim()}
           sx={styles.buttonStyle}
           onClick={handleSubmit}
           type="submit"
