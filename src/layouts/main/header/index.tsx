@@ -32,11 +32,11 @@ export const Header = () => {
     return (
       <Box sx={styles.menuContainerStyle}>
         <Box sx={styles.menuItemStyle}>
-          <FaLock style={styles.menuIconStyle} />
+          <FaLock />
           Đổi mật khẩu
         </Box>
         <Box sx={styles.menuItemStyle} onClick={handleLogout}>
-          <FaSignOutAlt style={styles.menuIconStyle} />
+          <FaSignOutAlt />
           Đăng xuất
         </Box>
       </Box>
@@ -47,7 +47,7 @@ export const Header = () => {
     <Box sx={styles.containStyle}>
       <Box sx={styles.appNameStyle}>CDS</Box>
       <Box sx={styles.topbarMenuStyle}>
-        {info && <Box>{info.name}</Box>}
+        {info && <Box sx={styles.infoStyle}>{info.name}</Box>}
         <img
           src={UserImage}
           alt="avatar"

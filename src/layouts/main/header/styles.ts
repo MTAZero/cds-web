@@ -59,4 +59,10 @@ export const menuItemStyle = {
   },
 };
 
-export const menuIconStyle = {};
+export const infoStyle = {
+  textAlign: "center",
+  fontFamily: "Montserrat",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "700",
+};

@@ -55,10 +55,11 @@ export const LoginPage: FC = () => {
 
       const data = request?.data ? request?.data : {};
       const { access_token } = data;
+      const { user } = data;
       console.log({ data });
 
       dispatch(
-        loginSuccess({ name: data?.full_name, username: data?.username })
+        loginSuccess({ name: user?.full_name, username: user?.username })
       );
       dispatch(setToken(access_token));
 
