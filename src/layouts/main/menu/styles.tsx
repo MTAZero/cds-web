@@ -1,5 +1,3 @@
-import { display, height } from "@mui/system";
-
 export const mainContainerStyle = {
   width: "300px",
   background: "white",

@@ -4,7 +4,6 @@ import { SideMenuItem } from "../../../types";
 import * as styles from "./styles";
 import { Box, Collapse } from "@mui/material";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { RouterLink } from "../../../routers/routers";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../hooks";
 import { checkPermisison } from "../../../utils";

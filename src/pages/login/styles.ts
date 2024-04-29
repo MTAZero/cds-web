@@ -1,4 +1,3 @@
-import { height, width } from "@mui/system";
 import BackgroundImage from "../../assests/images/background.jpeg";
 
 export const containerStyle = {

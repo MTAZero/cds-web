@@ -16,7 +16,7 @@ const ThemeRoutes = () => {
 
   const ans = useMemo(() => {
     return finalRouter(MainRoutes);
-  }, [permission]);
+  }, [permission, finalRouter, MainRoutes]);
 
   return useRoutes(ans);
 };

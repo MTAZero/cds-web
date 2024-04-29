@@ -5,7 +5,7 @@ import { APIServices } from "../../utils";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { RouterLink } from "../../routers/routers";
-import { Navigate, redirect, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   loginSuccess,
   setToken,
@@ -25,8 +25,6 @@ export const LoginPage: FC = () => {
 
   const dispatch = useAppDispatch();
   const { isLogin } = useAppSelector((state) => state.auth);
-
-  const location = useLocation();
 
   const loadPermission = async () => {
     try {
