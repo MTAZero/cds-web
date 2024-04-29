@@ -16,7 +16,9 @@ type MenuItemProps = {
 
 export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
   const navigate = useNavigate();
-  const [collapse, setCollapse] = useState<boolean>(false);
+  const [collapse, setCollapse] = useState<boolean>(
+    window.location.href.includes(item.key)
+  );
 
   const { permission } = useAppSelector((state) => state.auth);
 
@@ -42,12 +44,16 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
       </Box>
     );
 
+  const _styleParent = window.location.href.includes(item.key)
+    ? styles.selectParentItem
+    : styles.menuItemStyle;
+
   return (
     <>
       <Box
         key={keyRender}
         sx={{
-          ..._style,
+          ..._styleParent,
           ...{
             marginLeft: `{${level * 20}}px`,
           },

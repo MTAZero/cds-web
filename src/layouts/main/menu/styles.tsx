@@ -47,3 +47,14 @@ export const selectedItem = {
     background: "#177DB8",
   },
 };
+
+export const selectParentItem = {
+  ...menuItemBaseStyle,
+  ...{
+    color: "#177DB8",
+  },
+
+  "&:hover": {
+    color: "#177DB8",
+  },
+};
