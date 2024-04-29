@@ -3,6 +3,7 @@ import { Permission, SystemAction, SystemFeatures } from "../types";
 
 export * as APIServices from "./apis";
 export * as StoreService from "./store";
+export * as NotificationService from "./notification";
 
 export const checkPermisison = (
   permission: Array<Permission>,

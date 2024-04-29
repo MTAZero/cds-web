@@ -17,10 +17,46 @@ export const appNameStyle = {
   fontWeight: "700",
 };
 
-export const topbarMenuStyle = {};
+export const topbarMenuStyle = {
+  display: "flex",
+  gap: "10px",
+  alignItems: "center",
+  color: "white",
+};
 
 export const buttonLogoutStyle = {
   background: "white",
   padding: "5px 30px",
   color: "black",
 };
+
+export const avatarStyle = {
+  height: "50px",
+  width: "50px",
+  borderRadius: "50%",
+  cursor: "pointer",
+};
+
+export const menuContainerStyle = {
+  width: "200px",
+};
+
+export const menuItemStyle = {
+  padding: "10px 25px",
+  display: "flex",
+  flexDirection: "row",
+  gap: "8px",
+  cursor: "pointer",
+
+  textAlign: "center",
+  fontFamily: "Montserrat",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "700",
+
+  "&:hover": {
+    background: "#f2f2f2",
+  },
+};
+
+export const menuIconStyle = {};

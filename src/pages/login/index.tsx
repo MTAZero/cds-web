@@ -1,8 +1,7 @@
 import { Box, Button, FormControl } from "@mui/material";
 import * as styles from "./styles";
 import { FC, useState } from "react";
-import { APIServices } from "../../utils";
-import { toast } from "react-toastify";
+import { APIServices, NotificationService } from "../../utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { RouterLink } from "../../routers/routers";
 import { Navigate } from "react-router-dom";
@@ -56,16 +55,19 @@ export const LoginPage: FC = () => {
 
       const data = request?.data ? request?.data : {};
       const { access_token } = data;
+      console.log({ data });
 
-      dispatch(loginSuccess({ name: "admin", username: state.username }));
+      dispatch(
+        loginSuccess({ name: data?.full_name, username: data?.username })
+      );
       dispatch(setToken(access_token));
 
       loadPermission();
 
-      toast.success("Đăng nhập thành công");
+      NotificationService.success("Đăng nhập thành công");
     } catch (ex) {
       console.log(ex);
-      toast.error("Đăng nhập thất bại");
+      NotificationService.error("Đăng nhập thất bại");
     }
   };
 
