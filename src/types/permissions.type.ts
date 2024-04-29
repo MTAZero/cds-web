@@ -1,4 +1,6 @@
+import { SystemAction, SystemFeatures } from ".";
+
 export type Permission = {
-  module: string;
-  action: string;
+  module: SystemFeatures;
+  action: SystemAction;
 };

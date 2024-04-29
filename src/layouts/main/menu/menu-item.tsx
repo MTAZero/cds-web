@@ -6,6 +6,7 @@ import { Box, Collapse } from "@mui/material";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RouterLink } from "../../../routers/routers";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../../hooks";
 
 type MenuItemProps = {
   item: SideMenuItem;
@@ -17,9 +18,27 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
   const navigate = useNavigate();
   const [collapse, setCollapse] = useState<boolean>(false);
 
+  const { permission } = useAppSelector((state) => state.auth);
+
   const _style = window.location.href.includes(item.key)
     ? styles.selectedItem
     : styles.menuItemStyle;
+
+  if (item.module && item.action && Array.isArray(item.action)) {
+    let canVisible: boolean = false;
+
+    for (let index = 0; index < item.action.length; index++) {
+      const action = item.action[index];
+      if (
+        permission.find((i) => i.module === item.module && i.action === action)
+      ) {
+        canVisible = true;
+        break;
+      }
+    }
+
+    if (!canVisible) return null;
+  }
 
   if (item.children.length === 0)
     return (

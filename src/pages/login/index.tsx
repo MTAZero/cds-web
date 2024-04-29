@@ -6,7 +6,12 @@ import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { RouterLink } from "../../routers/routers";
 import { Navigate, redirect, useLocation } from "react-router-dom";
-import { loginSuccess } from "../../redux/auth/auth.slice";
+import {
+  loginSuccess,
+  setToken,
+  updatePermisson,
+} from "../../redux/auth/auth.slice";
+import { Permission } from "../../types";
 interface LoginFormState {
   username: string;
   password: string;
@@ -23,6 +28,25 @@ export const LoginPage: FC = () => {
 
   const location = useLocation();
 
+  const loadPermission = async () => {
+    try {
+      const request = await APIServices.Auth.getPermission();
+      const { data } = request;
+      const { permisisons } = data;
+
+      if (Array.isArray(permisisons)) {
+        const ix: Array<Permission> = permisisons.map((i) => {
+          return {
+            module: i?.module,
+            action: i?.action,
+          };
+        });
+
+        dispatch(updatePermisson(ix));
+      }
+    } catch {}
+  };
+
   const handleSubmit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
 
@@ -31,9 +55,14 @@ export const LoginPage: FC = () => {
         state.username,
         state.password
       );
-      console.log({ request });
+
+      const data = request?.data ? request?.data : {};
+      const { access_token } = data;
 
       dispatch(loginSuccess({ name: "admin", username: state.username }));
+      dispatch(setToken(access_token));
+
+      loadPermission();
 
       toast.success("Đăng nhập thành công");
     } catch (ex) {

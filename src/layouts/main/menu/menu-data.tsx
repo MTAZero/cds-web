@@ -1,5 +1,5 @@
 import { RouterLink } from "../../../routers/routers";
-import { SideMenuItem } from "../../../types";
+import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
 
 import { FaBeer, FaCalendar, FaCheck, FaHome, FaPhone } from "react-icons/fa";
 
@@ -17,6 +17,8 @@ export const mainMenu: Array<SideMenuItem> = [
     icon: <FaHome />,
     children: [],
     text: "Báo quân số",
+    module: SystemFeatures.TroopReports,
+    action: [SystemAction.View],
   },
   {
     url: RouterLink.LEAVE_MENU,
@@ -37,6 +39,8 @@ export const mainMenu: Array<SideMenuItem> = [
         icon: <FaCheck />,
         children: [],
         text: "Phê duyệt nghỉ phép",
+        module: SystemFeatures.ManagerRegisterLeave,
+        action: [SystemAction.Approve, SystemAction.UnitApprove],
       },
     ],
   },
@@ -52,6 +56,8 @@ export const mainMenu: Array<SideMenuItem> = [
         icon: <FaBeer />,
         children: [],
         text: "Quản lý vị trí trực",
+        module: SystemFeatures.ManagerGuardDutty,
+        action: [SystemAction.View],
       },
       {
         url: RouterLink.PERSONA_GUARD_SCHEDULE,

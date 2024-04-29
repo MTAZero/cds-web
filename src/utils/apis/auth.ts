@@ -14,9 +14,17 @@ const login = (uname = "", password = "") => {
   });
 };
 
-const getUserInfo = () => {
+const getPermission = () => {
   return api.makeAuthRequest({
     url: "authentication/my-info",
+    method: "GET",
+    data: {},
+  });
+};
+
+const checkToken = () => {
+  return api.makeAuthRequest({
+    url: "authentication/check-token",
     method: "GET",
     data: {},
   });
@@ -48,7 +56,8 @@ const updateUserInfo = (user: any = {}) => {
 
 export const Auth = {
   login,
-  getUserInfo,
+  getPermission,
+  checkToken,
   changeMyPassword,
   updateUserInfo,
 };
