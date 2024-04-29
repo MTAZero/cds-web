@@ -41,8 +41,6 @@ export const authSlice = createSlice({
       if (state.isLogin) state.permission = action.payload;
     },
     logout: (state: AuthState) => {
-      console.log("logout");
-
       state.isLogin = false;
       state.info = null;
       state.permission = [];

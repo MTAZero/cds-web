@@ -7,6 +7,7 @@ import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { RouterLink } from "../../../routers/routers";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../../hooks";
+import { checkPermisison } from "../../../utils";
 
 type MenuItemProps = {
   item: SideMenuItem;
@@ -25,17 +26,11 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
     : styles.menuItemStyle;
 
   if (item.module && item.action && Array.isArray(item.action)) {
-    let canVisible: boolean = false;
-
-    for (let index = 0; index < item.action.length; index++) {
-      const action = item.action[index];
-      if (
-        permission.find((i) => i.module === item.module && i.action === action)
-      ) {
-        canVisible = true;
-        break;
-      }
-    }
+    const canVisible: boolean = checkPermisison(
+      permission,
+      item.module,
+      item.action
+    );
 
     if (!canVisible) return null;
   }

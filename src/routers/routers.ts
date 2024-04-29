@@ -14,5 +14,5 @@ export const RouterLink = {
   // Lịch trực 
   GUARD_MENU: 'guard',
   MANAGER_GUARD_SETTING: '/manager-guard-setting',
-  PERSONA_GUARD_SCHEDULE: '/personal-guard-schedule',
+  PERSONAL_GUARD_SCHEDULE: '/personal-guard-schedule',
 };

@@ -5,9 +5,15 @@ import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
 import { HomePage } from "../pages/home";
 import { MainLayout } from "../layouts";
+import { TroopReport } from "../pages/troop-report";
+import { LeaveApprove } from "../pages/leave-approve";
+import { LeaveRegister } from "../pages/leave-register";
+import { GuardSetting } from "../pages/guard-setting";
+import { PersonalGuardSchedule } from "../pages/personal-guard-schedule";
+import { SystemFeatures, SystemAction } from "../types";
 
 const MainRoutes = [
-  { path: "", element: <Navigate to={RouterLink.LOGIN} replace /> },
+  { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
   {
     path: RouterLink.LOGIN,
     element: <LoginPage />,
@@ -31,23 +37,29 @@ const MainRoutes = [
           },
           {
             path: RouterLink.TROOP_REPORT,
-            element: <HomePage />,
+            element: <TroopReport />,
+            module: SystemFeatures.TroopReports,
+            action: [SystemAction.View],
           },
           {
             path: RouterLink.LEAVE_APPROVE,
-            element: <HomePage />,
+            element: <LeaveApprove />,
+            module: SystemFeatures.ManagerRegisterLeave,
+            action: [SystemAction.Approve, SystemAction.UnitApprove],
           },
           {
             path: RouterLink.LEAVE_REGISTER,
-            element: <HomePage />,
+            element: <LeaveRegister />,
           },
           {
             path: RouterLink.MANAGER_GUARD_SETTING,
-            element: <HomePage />,
+            element: <GuardSetting />,
+            module: SystemFeatures.ManagerDuttySetting,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.PERSONA_GUARD_SCHEDULE,
-            element: <HomePage />,
+            path: RouterLink.PERSONAL_GUARD_SCHEDULE,
+            element: <PersonalGuardSchedule />,
           },
         ],
       },
