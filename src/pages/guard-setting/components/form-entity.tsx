@@ -30,7 +30,12 @@ export const FormEntity: FC<FormEntityProps> = ({
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSave({ name: formData.name, description: formData.name, rate: 1 });
+    onSave({
+      _id: entity?._id,
+      name: formData.name,
+      description: formData.description,
+      rate: 1,
+    });
   };
 
   return (

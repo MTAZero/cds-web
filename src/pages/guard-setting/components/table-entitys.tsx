@@ -12,6 +12,7 @@ import * as styles from "./table-entity.styles";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 export type Entity = {
+  _id?: string;
   name: string;
   description: string;
   rate: number;
@@ -21,7 +22,8 @@ type TableEntityProps = {
   data: Array<Entity>;
   handleEdit: (entity: Entity) => void;
   handleRemove: (entity: Entity) => void;
-  startIndex?: number;
+  pageSize?: number;
+  pageIndex?: number;
 };
 
 const columns = [
@@ -36,10 +38,13 @@ const columns = [
 
 export const TableEntity: React.FC<TableEntityProps> = ({
   data,
-  startIndex = 0,
+  pageIndex = 1,
+  pageSize = 10,
   handleRemove,
   handleEdit,
 }) => {
+  const startIndex = (pageIndex - 1) * pageSize;
+
   return (
     <Box sx={styles.containerStyle}>
       <TableContainer>

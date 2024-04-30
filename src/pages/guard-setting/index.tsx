@@ -1,30 +1,99 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as styles from "./styles";
 import { Box, Button, Pagination, TablePagination } from "@mui/material";
 import { Entity, TableEntity } from "./components/table-entitys";
 
-import { data } from "./fake_data";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import { ModalComponent, ModalConfirm } from "../../components";
 import { FormEntity } from "./components/form-entity";
+import { APIServices, NotificationService } from "../../utils";
 
 export const GuardSetting: React.FC = () => {
-  const listEntities: Array<Entity> = data as Array<Entity>;
-
   const [modalConfirmRemove, setModalConfirmRemoveState] =
     useState<boolean>(false);
   const [modalState, setModalState] = useState<boolean>(false);
   const [currentEntity, setCurrentEntity] = useState<Entity | null>(null);
 
+  const [entites, setEntites] = useState<Array<Entity>>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pageIndex, setPageIndex] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [textSearch, setTextSearch] = useState<string>("");
+
+  const loadEntitys = async () => {
+    try {
+      const req = await APIServices.GuardDutty.getListEntity(
+        pageIndex,
+        pageSize,
+        textSearch
+      );
+      const { data } = req;
+      const { items, total, size, page } = data;
+
+      setEntites(items);
+      setTotal(total);
+      setPageIndex(page);
+      setPageSize(size);
+    } catch (ex) {
+      console.log("error : ", ex);
+    }
+  };
+
+  useEffect(() => {
+    loadEntitys();
+  }, [pageIndex, pageSize]);
+
+  const handleSaveEntity = async (entity: Entity) => {
+    if (entity) {
+      try {
+        if (entity._id)
+          await APIServices.GuardDutty.updateEntity(entity._id, entity);
+        else await APIServices.GuardDutty.insertEntity(entity);
+
+        loadEntitys();
+
+        NotificationService.success("Lưu thông tin thành công");
+      } catch {
+        NotificationService.error("Lưu thông tin thất bại");
+      }
+    }
+  };
+
+  const handleRemoveEntity = async (entity: Entity) => {
+    if (entity._id) {
+      try {
+        await APIServices.GuardDutty.removeEntity(entity._id);
+        loadEntitys();
+
+        NotificationService.success("Xoá thành công");
+      } catch (ex) {
+        NotificationService.error("Xoá thất bại");
+      }
+    }
+  };
+
   return (
     <Box sx={styles.containerStyles}>
       <Box sx={styles.controlPanelStyle}>
         <Box sx={styles.searchBoxStyle}>
-          <FaSearch />
+          <FaSearch
+            onClick={() => {
+              loadEntitys();
+            }}
+          />
           <input
             type="text"
             placeholder="Tìm kiếm"
             style={styles.searchTextBoxStyle}
+            value={textSearch}
+            onChange={(e) => {
+              setTextSearch(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                loadEntitys();
+              }
+            }}
           />
         </Box>
         <Button
@@ -40,7 +109,7 @@ export const GuardSetting: React.FC = () => {
       </Box>
 
       <TableEntity
-        data={listEntities}
+        data={entites}
         handleEdit={(entity) => {
           setCurrentEntity(entity);
           setModalState(true);
@@ -49,18 +118,26 @@ export const GuardSetting: React.FC = () => {
           setCurrentEntity(entity);
           setModalConfirmRemoveState(true);
         }}
+        pageSize={pageSize}
+        pageIndex={pageIndex}
       />
 
       <Box sx={styles.paginatePanelStyle}>
         <TablePagination
           component="div"
-          count={1000}
-          page={1}
-          onPageChange={() => {}}
-          rowsPerPage={10}
-          onRowsPerPageChange={() => {}}
+          count={total}
+          page={pageIndex}
+          onPageChange={(e, page: number) => {
+            setPageIndex(page);
+          }}
+          rowsPerPage={pageSize}
+          onRowsPerPageChange={(e: any) => {
+            setPageSize(e.target.value);
+            setPageIndex(1);
+          }}
           showFirstButton={true}
           showLastButton={true}
+          rowsPerPageOptions={[1, 2, 10, 20, 50, 100, 500]}
         />
       </Box>
 
@@ -70,6 +147,7 @@ export const GuardSetting: React.FC = () => {
         message={"Bạn có chắc chẵn xoá không?"}
         onConfirm={() => {
           setModalConfirmRemoveState(false);
+          if (currentEntity) handleRemoveEntity(currentEntity);
         }}
         onClose={() => {
           setModalConfirmRemoveState(false);
@@ -93,6 +171,7 @@ export const GuardSetting: React.FC = () => {
             setModalState(false);
           }}
           onSave={(entity: Entity) => {
+            handleSaveEntity(entity);
             setCurrentEntity(null);
             setModalState(false);
           }}
