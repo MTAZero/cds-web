@@ -9,7 +9,7 @@ export const MainLayout = () => {
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Header />
       <Box
-        sx={{ display: "flex", gap: "20px", flex: 1, background: "#f2f2f2" }}
+        sx={{ display: "flex", gap: "10px", flex: 1, background: "#f2f2f2" }}
       >
         <Menu />
         <Outlet />
