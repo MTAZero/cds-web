@@ -1,7 +1,18 @@
 import { RouterLink } from "../../../routers/routers";
 import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
 
-import { FaBeer, FaCalendar, FaCheck, FaHome, FaPhone } from "react-icons/fa";
+import {
+  FaBeer,
+  FaBook,
+  FaCalendar,
+  FaCalendarCheck,
+  FaCheck,
+  FaHome,
+  FaPhone,
+  FaUserClock,
+  FaUserFriends,
+  FaWrench,
+} from "react-icons/fa";
 
 export const mainMenu: Array<SideMenuItem> = [
   {
@@ -14,7 +25,7 @@ export const mainMenu: Array<SideMenuItem> = [
   {
     url: RouterLink.TROOP_REPORT,
     key: RouterLink.TROOP_REPORT,
-    icon: <FaHome />,
+    icon: <FaUserFriends />,
     children: [],
     text: "Báo quân số",
     module: SystemFeatures.TroopReports,
@@ -23,13 +34,13 @@ export const mainMenu: Array<SideMenuItem> = [
   {
     url: RouterLink.LEAVE_MENU,
     key: RouterLink.LEAVE_MENU,
-    icon: <FaCalendar />,
+    icon: <FaCalendarCheck />,
     text: "Nghỉ phép",
     children: [
       {
         url: RouterLink.LEAVE_REGISTER,
         key: RouterLink.LEAVE_REGISTER,
-        icon: <FaBeer />,
+        icon: <FaBook />,
         children: [],
         text: "Đăng ký nghỉ phép",
       },
@@ -53,7 +64,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.MANAGER_GUARD_SETTING,
         key: RouterLink.MANAGER_GUARD_SETTING,
-        icon: <FaBeer />,
+        icon: <FaWrench />,
         children: [],
         text: "Quản lý vị trí trực",
         module: SystemFeatures.ManagerGuardDutty,
@@ -62,7 +73,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.PERSONAL_GUARD_SCHEDULE,
         key: RouterLink.PERSONAL_GUARD_SCHEDULE,
-        icon: <FaCheck />,
+        icon: <FaUserClock />,
         children: [],
         text: "Lịch trực cá nhân",
       },
