@@ -28,11 +28,11 @@ type TableEntityProps = {
 const columns = [
   {
     name: "STT",
-    width: "100px",
+    width: "60px",
   },
-  { name: "Tên", width: "250px" },
+  { name: "Tên", width: "300px" },
   { name: "Mô tả", width: "full" },
-  { name: "Hành động", width: "80px" },
+  { name: "Hành động", width: "100px" },
 ];
 
 export const TableEntity: React.FC<TableEntityProps> = ({

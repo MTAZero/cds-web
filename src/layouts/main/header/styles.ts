@@ -11,10 +11,10 @@ export const containStyle = {
 export const appNameStyle = {
   color: "#fff",
   textAlign: "center",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "28px",
   fontStyle: "normal",
-  fontWeight: "700",
+  fontWeight: "500",
 };
 
 export const topbarMenuStyle = {
@@ -49,10 +49,10 @@ export const menuItemStyle = {
   cursor: "pointer",
 
   textAlign: "center",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
-  fontWeight: "700",
+  fontWeight: "500",
 
   "&:hover": {
     background: "#f2f2f2",
@@ -61,8 +61,8 @@ export const menuItemStyle = {
 
 export const infoStyle = {
   textAlign: "center",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
-  fontWeight: "700",
+  fontWeight: "500",
 };

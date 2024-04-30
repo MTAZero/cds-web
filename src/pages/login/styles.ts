@@ -12,7 +12,7 @@ export const containerStyle = {
 export const nameSystemStyle = {
   color: "#fff",
   textAlign: "center",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "26px",
   fontStyle: "normal",
   fontWeight: "500",
@@ -35,12 +35,12 @@ export const loginPanelStyle = {
   flexDirection: "column",
   gap: "10px",
   color: "white",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
 };
 
 export const labelStyle = {
   color: "#fff",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "600",
@@ -53,7 +53,7 @@ export const textInputStyle = {
   outline: "none",
 
   color: "#002D56",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "600",
@@ -78,7 +78,7 @@ export const buttonStyle = {
   // boxShadow: "0px 4px 0px 0px #A13A18",
   // background: "#004f99",
   color: "#FFF",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "900",

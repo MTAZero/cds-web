@@ -16,7 +16,7 @@ export const menuItemBaseStyle = {
   gap: "5px",
   alignSelf: "stretch",
   borderRadius: "5px",
-  fontFamily: "Montserrat",
+  fontFamily: "Inter",
   fontSize: "15px",
   fontStyle: "normal",
   fontWeight: "400",
