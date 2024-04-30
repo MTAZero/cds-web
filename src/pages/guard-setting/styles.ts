@@ -38,8 +38,6 @@ export const searchTextBoxStyle = {
   fontStyle: "normal",
   fontWeight: "400",
   lineHeight: "20px",
-
-  paddingLeft: 40,
   outline: "none",
 };
 

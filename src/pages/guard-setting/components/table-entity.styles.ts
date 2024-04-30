@@ -53,6 +53,7 @@ export const buttonEditStyle = {
   color: "white",
   padding: "10px",
   cursor: "pointer",
+  borderRadius: "5px",
 
   "&:hover": {
     opacity: "0.9",
@@ -67,6 +68,7 @@ export const buttonRemoveStyle = {
   color: "white",
   padding: "10px",
   cursor: "pointer",
+  borderRadius: "5px",
 
   "&:hover": {
     opacity: "0.9",

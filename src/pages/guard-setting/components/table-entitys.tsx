@@ -38,6 +38,8 @@ const columns = [
 export const TableEntity: React.FC<TableEntityProps> = ({
   data,
   startIndex = 0,
+  handleRemove,
+  handleEdit,
 }) => {
   return (
     <Box sx={styles.containerStyle}>
@@ -80,10 +82,16 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                   </TableCell>
                   <TableCell sx={styles.cellStyle}>
                     <Box sx={styles.cellContentStyle}>
-                      <Box sx={styles.buttonEditStyle}>
+                      <Box
+                        sx={styles.buttonEditStyle}
+                        onClick={() => handleEdit(item)}
+                      >
                         <FaEdit />
                       </Box>
-                      <Box style={styles.buttonRemoveStyle}>
+                      <Box
+                        style={styles.buttonRemoveStyle}
+                        onClick={() => handleRemove(item)}
+                      >
                         <FaTrash />
                       </Box>
                     </Box>
