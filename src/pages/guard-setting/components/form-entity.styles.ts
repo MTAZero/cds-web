@@ -1,51 +1,33 @@
-export const modalStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
 export const containerStyle = {
-  minWidth: "300px",
-  display: "flex",
-  flexDirection: "column",
-
-  padding: "24px 24px 24px 24px",
-  alignItems: "flex-start",
-  gap: "16px",
-  background: "#FFF",
-
-  border: "none",
-  borderRadius: "12px",
-  boxShadow:
-    "0px 20px 24px -4px rgba(16, 24, 40, 0.10), 0px 8px 8px -4px rgba(16, 24, 40, 0.04)",
-  outline: "none",
+  width: "500px",
 };
 
-export const topModalStyle = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-  width: "100%",
-};
-
-export const titleStyle = {
-  color: "#101828",
-  fontFamily: "Inter",
-  fontSize: "18px",
-  fontStyle: "normal",
-  fontWeight: "600",
-  lineHeight: "28px",
-};
-
-export const contentStyle = {
+export const labelStyle = {
   color: "#475467",
   fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "400",
   lineHeight: "20px",
-  marginTop: "10px",
+  marginTop: "5px",
+  marginBottom: "5px",
+};
+
+export const textInputStyle = {
+  color: "#475467",
+  fontFamily: "Inter",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "400",
+  lineHeight: "20px",
+  marginTop: "5px",
   marginBottom: "15px",
+
+  outline: "none",
+  background: "#f2f2f2",
+  border: "none",
+
+  "& fieldset": { border: "none" },
 };
 
 export const buttonPanelStyle = {
@@ -53,10 +35,12 @@ export const buttonPanelStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  gap: "10px",
+  gap: "5px",
+  marginTop: "15px",
 };
 
-export const buttonOKStyle = {
+export const buttonSaveStyle = {
+  width: "100px",
   display: "flex",
   padding: "10px 18px",
   justifyContent: "center",
@@ -64,9 +48,9 @@ export const buttonOKStyle = {
   gap: "8px",
   borderRadius: "8px",
   border: "1px solid #187DB8",
-  background: " #187DB8",
+  background: "#187DB8",
   boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-  color: " #FFF",
+  color: "#FFF",
   fontFamily: "Inter",
   fontSize: "14px",
   fontStyle: "normal",
@@ -76,7 +60,7 @@ export const buttonOKStyle = {
 
   "&:hover": {
     opacity: "0.9",
-    background: " #187DB8",
+    background: "#187DB8",
   },
 };
 

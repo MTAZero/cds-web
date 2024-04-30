@@ -5,13 +5,16 @@ import { Entity, TableEntity } from "./components/table-entitys";
 
 import { data } from "./fake_data";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { ModalConfirm } from "../../components";
+import { ModalComponent, ModalConfirm } from "../../components";
+import { FormEntity } from "./components/form-entity";
 
 export const GuardSetting: React.FC = () => {
   const listEntities: Array<Entity> = data as Array<Entity>;
 
   const [modalConfirmRemove, setModalConfirmRemoveState] =
     useState<boolean>(false);
+  const [modalState, setModalState] = useState<boolean>(false);
+  const [currentEntity, setCurrentEntity] = useState<Entity | null>(null);
 
   return (
     <Box sx={styles.containerStyles}>
@@ -24,7 +27,13 @@ export const GuardSetting: React.FC = () => {
             style={styles.searchTextBoxStyle}
           />
         </Box>
-        <Button sx={styles.buttonAddStyle}>
+        <Button
+          sx={styles.buttonAddStyle}
+          onClick={() => {
+            setCurrentEntity(null);
+            setModalState(true);
+          }}
+        >
           <FaPlus />
           Thêm vị trí trực
         </Button>
@@ -32,8 +41,12 @@ export const GuardSetting: React.FC = () => {
 
       <TableEntity
         data={listEntities}
-        handleEdit={(entity) => {}}
+        handleEdit={(entity) => {
+          setCurrentEntity(entity);
+          setModalState(true);
+        }}
         handleRemove={(entity) => {
+          setCurrentEntity(entity);
           setModalConfirmRemoveState(true);
         }}
       />
@@ -65,6 +78,26 @@ export const GuardSetting: React.FC = () => {
           setModalConfirmRemoveState(false);
         }}
       />
+
+      <ModalComponent
+        visible={modalState}
+        title={"Chi tiết vị trí trực"}
+        onClose={() => {
+          setModalState(false);
+        }}
+      >
+        <FormEntity
+          entity={currentEntity}
+          onCancel={() => {
+            setCurrentEntity(null);
+            setModalState(false);
+          }}
+          onSave={(entity: Entity) => {
+            setCurrentEntity(null);
+            setModalState(false);
+          }}
+        />
+      </ModalComponent>
     </Box>
   );
 };

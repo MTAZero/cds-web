@@ -15,7 +15,6 @@ export type Entity = {
   name: string;
   description: string;
   rate: number;
-  startIndex?: number;
 };
 
 type TableEntityProps = {
