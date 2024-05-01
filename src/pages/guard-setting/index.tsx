@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as styles from "./styles";
-import { Box, Button, Pagination, TablePagination } from "@mui/material";
+import { Box, Button, TablePagination } from "@mui/material";
 import { Entity, TableEntity } from "./components/table-entitys";
 
 import { FaPlus, FaSearch } from "react-icons/fa";
@@ -20,11 +20,14 @@ export const GuardSetting: React.FC = () => {
   const [pageSize, setPageSize] = useState<number>(10);
   const [textSearch, setTextSearch] = useState<string>("");
 
-  const loadEntitys = async () => {
+  const loadEntitys = async (
+    _size: number = pageSize,
+    _page: number = pageIndex
+  ) => {
     try {
       const req = await APIServices.GuardDutty.getListEntity(
-        pageIndex,
-        pageSize,
+        _page,
+        _size,
         textSearch
       );
       const { data } = req;
@@ -32,8 +35,8 @@ export const GuardSetting: React.FC = () => {
 
       setEntites(items);
       setTotal(total);
-      setPageIndex(page);
-      setPageSize(size);
+      if (page !== pageIndex) setPageIndex(page);
+      if (size !== pageSize) setPageSize(size);
     } catch (ex) {
       console.log("error : ", ex);
     }
@@ -41,7 +44,7 @@ export const GuardSetting: React.FC = () => {
 
   useEffect(() => {
     loadEntitys();
-  }, [pageIndex, pageSize]);
+  }, []);
 
   const handleSaveEntity = async (entity: Entity) => {
     if (entity) {
@@ -126,14 +129,13 @@ export const GuardSetting: React.FC = () => {
         <TablePagination
           component="div"
           count={total}
-          page={pageIndex}
+          page={pageIndex - 1}
           onPageChange={(e, page: number) => {
-            setPageIndex(page);
+            loadEntitys(pageSize, page + 1);
           }}
           rowsPerPage={pageSize}
           onRowsPerPageChange={(e: any) => {
-            setPageSize(e.target.value);
-            setPageIndex(1);
+            loadEntitys(e.target.value, 1);
           }}
           showFirstButton={true}
           showLastButton={true}
