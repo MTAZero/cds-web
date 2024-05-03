@@ -13,12 +13,13 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 
 export type Entity = {
   _id?: string;
-  name: string;
-  description?: string;
-  rate: number;
   last_update?: number;
   created_date?: number;
   __v?: number;
+
+  stt: string;
+  name: string;
+  status: string;
 };
 
 type TableEntityProps = {
@@ -85,7 +86,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                   </TableCell>
                   <TableCell sx={styles.cellStyle}>{item.name}</TableCell>
                   <TableCell sx={styles.cellStyle}>
-                    {item.description}
+                    {/* {item.description} */}
                   </TableCell>
                   <TableCell sx={styles.cellStyle}>
                     <Box sx={styles.cellContentStyle}>
