@@ -55,6 +55,9 @@ export const treeStyle = (isReport: boolean) => {
     fontStyle: "normal",
     fontWeight: "400",
     lineHeight: "28px",
+
+    display: "flex",
+    gap: "5px",
   };
 
   if (isReport)
@@ -111,11 +114,11 @@ export const normalTextStyle = {
 };
 
 export const menuContainerStyle = {
-  width: "200px",
+  width: "250px",
 };
 
 export const menuItemStyle = {
-  padding: "10px 25px",
+  padding: "10px 10px",
   display: "flex",
   flexDirection: "row",
   gap: "8px",
@@ -126,8 +129,4 @@ export const menuItemStyle = {
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "500",
-
-  "&:hover": {
-    background: "#f2f2f2",
-  },
 };
