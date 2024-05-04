@@ -1,60 +1,87 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import * as styles from "./index.styles";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
-import { TreeItem } from "@mui/x-tree-view/TreeItem";
-import { Entity, TableEntity } from "../guard-setting/components/table-entitys";
-import { data } from "../guard-setting/fake_data";
+import { data, unitStatusData } from "./fake_data";
+import { TableEntity } from "./components/table-entitys";
+import { TroopStatus } from "../../types";
+import { UnitItem } from "./unit-item";
+import { useState } from "react";
+import { ModalComponent } from "../../components";
 
 export const TroopReport: React.FC = () => {
+  const [modalDetailUnitState, setModalDetailUnitState] =
+    useState<boolean>(false);
+  const [currentUnit, setCurrentUnit] = useState<any>(null);
+
   return (
     <Box sx={styles.containerStyle}>
       <Box sx={styles.dateSelectPanelStyle}>
-        <Box>
-          <label>Ngày</label>
-          <DatePicker format="DD/MM/YYYY" />
+        <Box sx={{ display: "flex", alignItems: "center", gap: "15px" }}>
+          <label style={styles.normalTextStyle}>Ngày</label>
+          <DatePicker sx={styles.datePickerStyle} format="DD/MM/YYYY" />
         </Box>
-        <Box>
-          <label>
-            Quân số Cụm 12: Chưa đủ quân số
+        <Box sx={{ display: "flex", flex: 1 }}>
+          <label style={styles.normalTextStyle}>
+            Quân số Trung tâm 1: Có mặt: 02/05(SQ: 02/04; QNCN: 00/01). Vắng: 03
+            (Trong đó: nghỉ cuối tuần: 01; công tác: 01; đi học: 01)
           </label>
         </Box>
       </Box>
       <Box sx={styles.contentPanelStyle}>
         <Box sx={styles.childStatusPanelStyle}>
           <Box sx={styles.titleStyle}>Tình hình quân số các đơn vị</Box>
-          <Box>
-            <SimpleTreeView>
-              <TreeItem itemId="grid" label="Data Grid">
-                <TreeItem itemId="grid-community" label="Cụm 11 (Chưa báo quân số)" />
-                <TreeItem itemId="grid-pro" label="Cụm 12 (22/28)">
-                  <TreeItem itemId="c5" label="Đội 5 (4/5)" />
-                  <TreeItem itemId="c6" label="Đội 6 (5/6)" />
-                  <TreeItem itemId="c7" label="Đội 7 (8/9)" />
-                  <TreeItem itemId="c8" label="Đội 8 (1/1)" />
-                </TreeItem>
-                <TreeItem itemId="grid-premium" label={<Box>Cụm 13 (Chưa báo quân số)</Box>} />
-              </TreeItem>
-            </SimpleTreeView>
-          </Box>
+          <SimpleTreeView defaultExpandedItems={[unitStatusData._id]}>
+            <UnitItem
+              onDetail={(item) => {
+                setModalDetailUnitState(true);
+                setCurrentUnit(item);
+              }}
+              item={unitStatusData}
+            />
+          </SimpleTreeView>
         </Box>
         <Box sx={styles.currentUnitReportPanelStyle}>
           <Box sx={styles.titleStyle}>Cập nhật quân số trực tiếp</Box>
           <Box>
             <TableEntity
               data={data}
-              handleEdit={function (entity: Entity): void {
-                throw new Error("Function not implemented.");
-              }}
-              handleRemove={function (entity: Entity): void {
+              handleUpdateStatus={function (
+                entity: string,
+                status: TroopStatus
+              ): void {
                 throw new Error("Function not implemented.");
               }}
             />
           </Box>
-          <Box>Cập nhật</Box>
+          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Button sx={styles.buttonSaveStyle}>
+              Cập nhật tình hình quân số
+            </Button>
+          </Box>
         </Box>
       </Box>
+
+      <ModalComponent
+        visible={modalDetailUnitState}
+        title={`${currentUnit?.name} (${currentUnit?.troop_info?.totalAttendance}/${currentUnit?.troop_info?.total})`}
+        onClose={function (): void {
+          setModalDetailUnitState(false);
+        }}
+      >
+        <Box>
+          <TableEntity
+            data={data}
+            handleUpdateStatus={function (
+              entity: string,
+              status: TroopStatus
+            ): void {
+              throw new Error("Function not implemented.");
+            }}
+          />
+        </Box>
+      </ModalComponent>
     </Box>
   );
 };

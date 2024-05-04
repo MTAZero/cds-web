@@ -75,3 +75,15 @@ export const buttonRemoveStyle = {
     background: "light-orange",
   },
 };
+
+export const selectStatusStyle = {
+  color: "#101828",
+  fontFamily: "Inter",
+  fontSize: "13px",
+  fontStyle: "normal",
+  lineHeight: "28px",
+  width: "100%",
+  border: "none !important",
+
+  '&&': { padding: "2px" },
+};
