@@ -1,19 +1,29 @@
-import { Navigate } from "react-router-dom";
-import { LoginPage } from "../pages/login";
-import { RouterLink } from "./routers";
-import { ContactPage } from "../pages/contact";
+import {Navigate} from "react-router-dom";
+import {LoginPage} from "../pages/login";
+import {RouterLink} from "./routers";
+import {ContactPage} from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import { HomePage } from "../pages/home";
-import { MainLayout } from "../layouts";
-import { TroopReport } from "../pages/troop-report";
-import { LeaveApprove } from "../pages/leave-approve";
-import { LeaveRegister } from "../pages/leave-register";
-import { GuardSetting } from "../pages/guard-setting";
-import { PersonalGuardSchedule } from "../pages/personal-guard-schedule";
-import { SystemFeatures, SystemAction } from "../types";
+import {HomePage} from "../pages/home";
+import {MainLayout} from "../layouts";
+import {TroopReport} from "../pages/troop-report";
+import {LeaveApprove} from "../pages/leave-approve";
+import {LeaveRegister} from "../pages/leave-register";
+import {GuardSetting} from "../pages/guard-setting";
+import {PersonalGuardSchedule} from "../pages/personal-guard-schedule";
+import {SystemFeatures, SystemAction} from "../types";
+import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
+import User from "pages/admin/user";
+import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
+import ListThongKe from "pages/thong-ke-huan-luyen";
+import RutKinhNghiem from "pages/rut-kinh-nghiem/list";
+import DetailRutKinhNghiem from "pages/rut-kinh-nghiem/chi-tiet-rut-kinh-nghiem";
+import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
+import SoSach from "pages/so-sach";
+import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
+import VanKien from "pages/VanKien";
 
 const MainRoutes = [
-  { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
+  {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
     path: RouterLink.LOGIN,
     element: <LoginPage />,
@@ -60,6 +70,67 @@ const MainRoutes = [
           {
             path: RouterLink.PERSONAL_GUARD_SCHEDULE,
             element: <PersonalGuardSchedule />,
+          },
+          {
+            path: RouterLink.VAN_KIEN_ROUTE,
+            element: <VanKien />,
+            module: SystemFeatures.ManagerDocuments,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+            element: <TienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.TIEN_TRINH_BIEU_DETAIL_ROUTE,
+            element: <DetailTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.TIEN_TRINH_BIEU_CHECK_ROUTE,
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.RUT_KINH_NGHIEM_ROUTE,
+            element: <RutKinhNghiem />,
+            module: SystemFeatures.ManagerExperiences,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE,
+            element: <DetailRutKinhNghiem />,
+            module: SystemFeatures.ManagerExperiences,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+
+          {
+            path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
+            element: <ThongKeHLCaNhan />,
+            module: SystemFeatures.ManagerPersonalDiarys,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.SO_SACH_CA_NHAN_DETAIL_ROUTE,
+            element: <SoSach />,
+            module: SystemFeatures.ManagerPersonalDiarys,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+            element: <User />,
+            module: SystemFeatures.ManagerUsers,
+            action: [SystemAction.View, SystemAction.Edit],
           },
         ],
       },

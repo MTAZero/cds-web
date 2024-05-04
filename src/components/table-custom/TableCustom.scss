@@ -1,0 +1,29 @@
+.table-custom:not(.table-print) {
+  &.hide-checkbox-column {
+    td.ant-table-cell.ant-table-selection-column,
+    th.ant-table-cell.ant-table-selection-column {
+      display: none;
+    }
+    thead {
+      tr {
+        th:nth-child(2) {
+          border-top-left-radius: 4px !important;
+        }
+        th:last-child {
+          border-top-right-radius: 4px !important;
+        }
+      }
+    }
+    tbody {
+      tr:last-child {
+        td:nth-child(2) {
+          border-bottom-left-radius: 4px !important;
+        }
+
+        td:last-child {
+          border-bottom-right-radius: 4px !important;
+        }
+      }
+    }
+  }
+}

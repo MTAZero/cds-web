@@ -1,0 +1,19 @@
+@import "assests/styles/_color.scss";
+@import "assests/styles/_variables.scss";
+.collapse-custom {
+  .ant-collapse {
+    background-color: $colorSub;
+  }
+  .ant-collapse-item {
+    border: none;
+    .ant-collapse-header {
+      padding: 8px 8px !important;
+      color: $colorWhite !important;
+      font-weight: $weightMedium !important;
+      font-size: $sizeMedium;
+    }
+    .ant-collapse-content-box {
+      padding: 0;
+    }
+  }
+}

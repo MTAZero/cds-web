@@ -1,5 +1,5 @@
-import { RouterLink } from "../../../routers/routers";
-import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
+import {RouterLink} from "../../../routers/routers";
+import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
 
 import {
   FaBeer,
@@ -76,6 +76,85 @@ export const mainMenu: Array<SideMenuItem> = [
         icon: <FaUserClock />,
         children: [],
         text: "Lịch trực cá nhân",
+      },
+    ],
+  },
+
+  {
+    url: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+    key: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+    icon: <FaCalendar />,
+    text: "Huấn luyện chiến đấu",
+    children: [
+      {
+        url: RouterLink.VAN_KIEN_ROUTE,
+        key: RouterLink.VAN_KIEN_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Văn kiện, mẫu biểu",
+        module: SystemFeatures.ManagerDocuments,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+        key: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Tiến trình biểu",
+        module: SystemFeatures.ManagerProgresses,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
+        key: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Thống kê huấn luyện",
+        module: SystemFeatures.ManagerTrainnings,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.RUT_KINH_NGHIEM_ROUTE,
+        key: RouterLink.RUT_KINH_NGHIEM_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Rút kinh nghiệm huấn luyện",
+        module: SystemFeatures.ManagerExperiences,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+    ],
+  },
+  {
+    url: RouterLink.GUARD_MENU,
+    key: RouterLink.GUARD_MENU,
+    icon: <FaCalendar />,
+    text: "Sổ sách cá nhân",
+    children: [
+      {
+        url: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
+        key: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
+        icon: <FaWrench />,
+        children: [],
+        text: "Thống kê huấn luyện cá nhân",
+        module: SystemFeatures.ManagerPersonalDiarys,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+    ],
+  },
+  {
+    url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+    key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+    icon: <FaCalendar />,
+    text: "Quản trị",
+    children: [
+      {
+        url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+        key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Người dùng",
+        module: SystemFeatures.ManagerUsers,
+        action: [SystemAction.View, SystemAction.Edit],
       },
     ],
   },

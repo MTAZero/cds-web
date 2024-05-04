@@ -3,12 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^41.3.1",
+    "@ckeditor/ckeditor5-react": "^6.3.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.15",
     "@mui/x-date-pickers": "^7.3.2",
     "@mui/x-tree-view": "^7.3.1",
+    "@phuocng/react-pdf-viewer": "^1.7.0",
     "@reduxjs/toolkit": "^2.2.3",
+    "@syncfusion/ej2-base": "^25.1.35",
+    "@syncfusion/ej2-react-spreadsheet": "^25.1.42",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -17,18 +22,25 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.3.0",
     "@types/store": "^2.0.5",
+    "antd": "^5.16.5",
     "axios": "^1.6.8",
+    "ckeditor5-custom-build": "file:./ckeditor5",
     "dayjs": "^1.11.11",
+    "pdfjs-dist": "^2.4.456",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.1.0",
     "react-redux": "^9.1.1",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.15.1",
     "react-toastify": "^10.0.5",
     "redux-persist": "^6.0.0",
+    "sass": "^1.49.7",
     "store": "^2.0.12",
+    "swr": "^2.2.5",
     "typescript": "^4.4.2",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -54,5 +66,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/node-sass": "^4.11.7"
   }
 }

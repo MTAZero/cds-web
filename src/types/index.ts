@@ -1,6 +1,9 @@
 export * from "./permissions.type";
 export * from "./menu-items.type";
-
+export * from "./param-search.type";
+export * from "./format-time.enum";
+export * from "./field-type.enum";
+export * from "./catalog.enum";
 export enum SystemFeatures {
   ManagerUsers = "ManagerUsers",
   ManagerRoles = "ManagerRoles",
@@ -14,6 +17,8 @@ export enum SystemFeatures {
   ManagerProgresses = "ManagerProgresses",
   ManagerDocuments = "ManagerDocuments",
   ManagerTrainnings = "ManagerTrainings",
+  ManagerExperiences = "ManagerExperiences",
+  ManagerPersonalDiarys = "ManagerPersonalDiarys",
 }
 
 export enum SystemAction {

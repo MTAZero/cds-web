@@ -1,0 +1,14 @@
+@import "assests/styles/_variables.scss";
+.title-custom {
+  &.small {
+    font-size: $sizeSmall;
+  }
+  &.medium {
+    font-size: $sizeMedium;
+  }
+  &.large {
+    font-size: $sizeBig;
+  }
+  font-weight: $weightLarge;
+  margin-bottom: 6px;
+}

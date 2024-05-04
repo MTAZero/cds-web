@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { Permission } from "../../types";
-import { StoreService } from "../../utils";
+import {createSlice} from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit";
+import {Permission} from "../../types";
+import {StoreService} from "../../utils";
 
 export interface AuthState {
   isLogin: boolean;
@@ -53,7 +53,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, updatePermisson, logout, setToken } =
+export const {loginSuccess, updatePermisson, logout, setToken} =
   authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,0 +1,35 @@
+@import "assests/styles/_color.scss";
+.modal-custom {
+  .ant-modal-content {
+    padding: 0px;
+    button.ant-modal-close {
+      top: 8px;
+      right: 4px;
+      height: 22px !important;
+      color: white;
+    }
+    .ant-modal-header {
+      background-color: $colorSub;
+      height: 40px;
+      padding-left: 12px;
+      margin-bottom: 0px;
+      display: flex;
+      align-items: center;
+      .ant-modal-title {
+        color: $colorWhite;
+      }
+    }
+    .ant-modal-body {
+      padding: 12px;
+    }
+    .modal-footer {
+      border-top: 1px solid $colorBorder;
+      padding-top: 8px;
+      display: flex;
+      justify-content: flex-end;
+      button {
+        height: 32px !important;
+      }
+    }
+  }
+}

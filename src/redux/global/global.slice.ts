@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit";
 
 export interface GlobalState {
   number: number;
@@ -25,6 +25,6 @@ export const globalSlice = createSlice({
   },
 });
 
-export const { setNumber, incNumber, decNumber } = globalSlice.actions;
+export const {setNumber, incNumber, decNumber} = globalSlice.actions;
 
 export default globalSlice.reducer;

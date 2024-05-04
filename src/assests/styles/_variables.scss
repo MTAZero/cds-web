@@ -1,0 +1,88 @@
+@import "./color";
+
+$weightSmall: 400;
+$weightMedium: 500;
+$weightLarge: 700;
+$sizeSmall: 14px;
+$sizeMedium: 16px;
+$sizeBig: 18px;
+$sizeXL: 22px;
+$sizeXXL: 30px;
+$size3XL: 32px;
+$border: 1px solid rgb(212, 212, 212);
+
+@mixin table-print {
+  th,
+  td {
+    border-radius: 0px !important;
+    background: none !important;
+    border: 1.5px solid black;
+    border-inline-end: none !important;
+    border-bottom: none !important;
+  }
+  tr:last-child > td {
+    border-bottom: 1.5px solid black !important;
+  }
+  th:last-child,
+  td:last-child {
+    border-inline-end: 1.5px solid black !important;
+  }
+  thead {
+    tr {
+      th {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+        text-align: center !important;
+      }
+      th:last-child {
+        text-align: center;
+      }
+    }
+  }
+  tbody {
+    tr:not(.ant-table-measure-row) {
+      td {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+      }
+      td:last-child {
+        text-align: center;
+        padding: 10px;
+      }
+    }
+  }
+  tfoot {
+    tr {
+      td {
+        padding: 4px !important;
+      }
+      td:last-child {
+        text-align: center;
+        padding: 10px;
+      }
+    }
+    &:focus {
+      border-color: none;
+    }
+  }
+}
+@mixin font-print {
+  div,
+  span,
+  article,
+  h1 {
+    font-family: "Times New Roman", Times, serif !important;
+  }
+}
+@mixin page-a3 {
+  width: 420mm;
+  padding: 2cm 2.5cm 2cm 2.5cm;
+}
+@mixin page-a4 {
+  width: 210mm;
+  padding: 0cm 2.5cm 2cm 2.5cm;
+}

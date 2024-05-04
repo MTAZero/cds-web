@@ -1,0 +1,15 @@
+@import "assests/styles/_variables.scss";
+.print-ket-qua {
+  table {
+    width: 100%;
+  }
+  margin-top: 2cm;
+  @include font-print;
+  @include page-a3;
+  div,
+  span,
+  article,
+  h1 {
+    font-size: $size3XL;
+  }
+}
