@@ -1,6 +1,7 @@
 import {
   Box,
-  Paper,
+  MenuItem,
+  Select,
   Table,
   TableBody,
   TableCell,
@@ -9,22 +10,23 @@ import {
   TableRow,
 } from "@mui/material";
 import * as styles from "./table-entity.styles";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { TroopStatus, selectTroopData } from "../../../types";
 
 export type Entity = {
   _id?: string;
-  name: string;
-  description?: string;
-  rate: number;
   last_update?: number;
   created_date?: number;
   __v?: number;
+
+  stt: string;
+  full_name: string;
+  status: string;
+  type: string;
 };
 
 type TableEntityProps = {
   data: Array<Entity>;
-  handleEdit: (entity: Entity) => void;
-  handleRemove: (entity: Entity) => void;
+  handleUpdateStatus: (id: string, status: TroopStatus) => void;
   pageSize?: number;
   pageIndex?: number;
 };
@@ -34,17 +36,16 @@ const columns = [
     name: "STT",
     width: "60px",
   },
-  { name: "Tên", width: "300px" },
-  { name: "Mô tả", width: "full" },
-  { name: "Hành động", width: "100px" },
+  { name: "Họ và tên", width: "300px" },
+  { name: "Loại", width: "full" },
+  { name: "Trạng thái", width: "250px" },
 ];
 
 export const TableEntity: React.FC<TableEntityProps> = ({
   data,
   pageIndex = 1,
   pageSize = 10,
-  handleRemove,
-  handleEdit,
+  handleUpdateStatus,
 }) => {
   const startIndex = (pageIndex - 1) * pageSize;
 
@@ -83,25 +84,22 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                   <TableCell sx={styles.cellStyle}>
                     {index + 1 + startIndex}
                   </TableCell>
-                  <TableCell sx={styles.cellStyle}>{item.name}</TableCell>
+                  <TableCell sx={styles.cellStyle}>{item.full_name}</TableCell>
+                  <TableCell sx={styles.cellStyle}>{item.type}</TableCell>
                   <TableCell sx={styles.cellStyle}>
-                    {item.description}
-                  </TableCell>
-                  <TableCell sx={styles.cellStyle}>
-                    <Box sx={styles.cellContentStyle}>
-                      <Box
-                        sx={styles.buttonEditStyle}
-                        onClick={() => handleEdit(item)}
-                      >
-                        <FaEdit />
-                      </Box>
-                      <Box
-                        style={styles.buttonRemoveStyle}
-                        onClick={() => handleRemove(item)}
-                      >
-                        <FaTrash />
-                      </Box>
-                    </Box>
+                    <Select
+                      size={"small"}
+                      value={item.status}
+                      sx={styles.selectStatusStyle}
+                    >
+                      {selectTroopData.map((item, index) => {
+                        return (
+                          <MenuItem key={index} value={item.value}>
+                            {item.text}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
                   </TableCell>
                 </TableRow>
               );

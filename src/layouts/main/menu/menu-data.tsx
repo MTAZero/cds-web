@@ -29,7 +29,7 @@ export const mainMenu: Array<SideMenuItem> = [
     children: [],
     text: "Báo quân số",
     module: SystemFeatures.TroopReports,
-    action: [SystemAction.View],
+    action: [SystemAction.View, SystemAction.Report],
   },
   {
     url: RouterLink.LEAVE_MENU,

@@ -39,7 +39,7 @@ const MainRoutes = [
             path: RouterLink.TROOP_REPORT,
             element: <TroopReport />,
             module: SystemFeatures.TroopReports,
-            action: [SystemAction.View],
+            action: [SystemAction.View, SystemAction.Report],
           },
           {
             path: RouterLink.LEAVE_APPROVE,

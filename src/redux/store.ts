@@ -4,7 +4,7 @@ import globalInfoSliceReducer from "./global/global.slice";
 import authSliceReducer from "./auth/auth.slice";
 
 import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/es/storage/session";
+import storage from 'redux-persist/lib/storage'
 
 const rootReducer = combineReducers({
   global: globalInfoSliceReducer,
