@@ -1,0 +1,33 @@
+body {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+iframe#webpack-dev-server-client-overlay {
+  display: none !important;
+}
+@font-face {
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("./assests//fonts/montserrat/Montserrat-Regular.ttf")
+    format("truetype");
+}
+@font-face {
+  font-family: "Montserrat default";
+  src: url("./assests//fonts/montserrat/Montserrat-Regular.ttf")
+    format("truetype");
+}
+@import "assests/styles/variables";
+@import "assests/styles/color";
+@import "assests/styles/global";
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-grids/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-react-spreadsheet/styles/material.css";

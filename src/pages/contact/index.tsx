@@ -1,8 +1,8 @@
-import { useAppSelector, useAppDispatch } from "../../hooks";
-import { incNumber, decNumber } from "../../redux/global/global.slice";
+import {useAppSelector, useAppDispatch} from "../../hooks";
+import {incNumber, decNumber} from "../../redux/global/global.slice";
 
 export const ContactPage = () => {
-  const number = useAppSelector((state) => state.global.number);
+  const number = useAppSelector(state => state.global.number);
   const dispatch = useAppDispatch();
 
   const handleInc = () => {

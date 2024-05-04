@@ -1,10 +1,12 @@
-import { RouteObject } from "react-router-dom";
-import { Permission, SystemAction, SystemFeatures } from "../types";
+import {RouteObject} from "react-router-dom";
+import {Permission, SystemAction, SystemFeatures} from "../types";
 
 export * as APIServices from "./apis";
 export * as StoreService from "./store";
 export * as NotificationService from "./notification";
-
+export * from "./parse";
+export * from "./check";
+export * from "./common";
 export const checkPermisison = (
   permission: Array<Permission>,
   module: SystemFeatures,

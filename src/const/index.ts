@@ -1,11 +1,11 @@
-import { SystemFeatures, SystemAction } from "../types";
+import {SystemFeatures, SystemAction} from "../types";
 
 export const MAIN_MESSAGE = process.env.REACT_APP_MESSAGE
   ? process.env.REACT_APP_MESSAGE
   : "Hello React";
 export * from "./keys";
 export * from "./config";
-
+export * from "./option";
 export const FEATURES_SYSTEM = [
   SystemFeatures.ManagerUsers,
   SystemFeatures.ManagerRoles,
@@ -19,7 +19,7 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.ManagerPositions,
   SystemFeatures.ManagerProgresses,
   SystemFeatures.ManagerDocuments,
-  SystemFeatures.ManagerTrainnings
+  SystemFeatures.ManagerTrainnings,
 ];
 
 export const ACTIONS_SYSTEM = [

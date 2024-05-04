@@ -1,0 +1,12 @@
+@import "assets/styles/_variables.scss";
+.print-tien-trinh {
+  @include font-print;
+  //   @include table-print;
+  @include page-a3;
+  div,
+  span,
+  article,
+  h1 {
+    font-size: $sizeXL;
+  }
+}

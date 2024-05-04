@@ -1,10 +1,10 @@
-import { FC, useCallback, useEffect } from "react";
-import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { RouterLink } from "./routers";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { APIServices } from "../utils";
-import { logout, updatePermisson } from "../redux/auth/auth.slice";
-import { Permission } from "../types";
+import {FC, useCallback, useEffect} from "react";
+import {Navigate, Outlet, useLocation} from "react-router-dom";
+import {RouterLink} from "./routers";
+import {useAppDispatch, useAppSelector} from "hooks";
+import {APIServices} from "../utils";
+import {Permission} from "../types";
+import {logout, updatePermisson} from "../redux/auth/auth.slice";
 
 type RouterProps = {
   module?: string;
@@ -12,8 +12,8 @@ type RouterProps = {
   requireLogin?: boolean;
 };
 
-const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
-  const { isLogin } = useAppSelector((state) => state.auth);
+const ProtectedOutlet: FC<RouterProps> = ({requireLogin = false}) => {
+  const {isLogin} = useAppSelector(state => state.auth);
 
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -21,11 +21,11 @@ const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
   const loadPermission = useCallback(async () => {
     try {
       const request = await APIServices.Auth.getPermission();
-      const { data } = request;
-      const { permisisons } = data;
+      const {data} = request;
+      const {permisisons} = data;
 
       if (Array.isArray(permisisons)) {
-        const ix: Array<Permission> = permisisons.map((i) => {
+        const ix: Array<Permission> = permisisons.map(i => {
           return {
             module: i?.module,
             action: i?.action,

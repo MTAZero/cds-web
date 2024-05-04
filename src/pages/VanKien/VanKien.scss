@@ -1,0 +1,16 @@
+@import "assests/styles/_color.scss";
+@import "assests/styles/_variables.scss";
+.van-kien {
+  .file-info {
+    &:hover {
+      cursor: pointer;
+    }
+    .title {
+      font-weight: $weightMedium;
+      color: $colorDanger;
+    }
+    .bold {
+      font-weight: $weightMedium;
+    }
+  }
+}
