@@ -102,18 +102,18 @@ input.ant-input-number-input {
 
 // --------------------------------------BUTTON--------------------------
 
-button:not(.ant-picker-month-btn):not(.ant-picker-year-btn):not(
-    .ant-picker-decade-btn
-  ):not(.ant-picker-header-super-next-btn):not(
-    .ant-picker-header-super-prev-btn
-  ):not(.ant-picker-header-next-btn):not(.ant-picker-header-prev-btn):not(
-    .ant-table-row-expand-icon
-  ):not(span.ant-input-group-addon button) {
-  height: 26px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center;
-}
+// button:not(.ant-picker-month-btn):not(.ant-picker-year-btn):not(
+//     .ant-picker-decade-btn
+//   ):not(.ant-picker-header-super-next-btn):not(
+//     .ant-picker-header-super-prev-btn
+//   ):not(.ant-picker-header-next-btn):not(.ant-picker-header-prev-btn):not(
+//     .ant-table-row-expand-icon
+//   ):not(span.ant-input-group-addon button) {
+//   height: 26px !important;
+//   display: flex !important;
+//   align-items: center !important;
+//   justify-content: center;
+// }
 // button.ant-picker-month-btn,
 // button.ant-picker-year-btn {
 //   display: inline-flex !important;
