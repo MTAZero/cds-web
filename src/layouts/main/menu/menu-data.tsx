@@ -158,11 +158,11 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
-  {
-    url: RouterLink.CONTACT,
-    key: RouterLink.CONTACT,
-    icon: <FaPhone />,
-    children: [],
-    text: "Liên hệ",
-  },
+  // {
+  //   url: RouterLink.CONTACT,
+  //   key: RouterLink.CONTACT,
+  //   icon: <FaPhone />,
+  //   children: [],
+  //   text: "Liên hệ",
+  // },
 ];

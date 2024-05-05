@@ -1,13 +1,17 @@
-import {createSlice} from "@reduxjs/toolkit";
-import type {PayloadAction} from "@reduxjs/toolkit";
-import {Permission} from "../../types";
-import {StoreService} from "../../utils";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { Permission } from "../../types";
+import { StoreService } from "../../utils";
 
 export interface AuthState {
   isLogin: boolean;
   info: {
     name: string;
     username: string;
+    unit: string;
+    role: string;
+    type: string;
+    rank: string;
   } | null;
   permission: Array<Permission>;
   token: string | null;
@@ -29,6 +33,10 @@ export const authSlice = createSlice({
       action: PayloadAction<{
         name: string;
         username: string;
+        role: string;
+        type: string;
+        unit: string;
+        rank: string;
       }>
     ) => {
       state.isLogin = true;
@@ -50,10 +58,24 @@ export const authSlice = createSlice({
       state.token = action.payload;
       StoreService.setAuthToken(action.payload);
     },
+    updateInfo: (
+      state: AuthState,
+      action: PayloadAction<{
+        name: string;
+        username: string;
+        role: string;
+        type: string;
+        unit: string;
+        rank: string;
+      }>
+    ) => {
+      state.isLogin = true;
+      state.info = action.payload;
+    },
   },
 });
 
-export const {loginSuccess, updatePermisson, logout, setToken} =
+export const { loginSuccess, updatePermisson, logout, setToken, updateInfo } =
   authSlice.actions;
 
 export default authSlice.reducer;

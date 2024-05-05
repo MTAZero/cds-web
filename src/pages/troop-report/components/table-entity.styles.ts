@@ -87,3 +87,20 @@ export const selectStatusStyle = {
 
   '&&': { padding: "2px" },
 };
+
+export const buttonSaveStyle = {
+  display: "flex",
+  alignItem: "center",
+  justifyContent: "center",
+  background: "#187DB8",
+  color: "white",
+  padding: "10px 20px",
+  cursor: "pointer",
+  borderRadius: "5px",
+  textTransform: "none",
+
+  "&:hover": {
+    opacity: "0.9",
+    background: "#187DB8",
+  },
+};

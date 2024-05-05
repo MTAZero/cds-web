@@ -20,11 +20,11 @@ export const titleStyle = {
 
 export const dateSelectPanelStyle = {
   display: "flex",
-  flexDirection: "row",
+  flexDirection: "column",
   gap: "10px",
   background: "#f2f2f2",
   padding: "15px",
-  alignItems: "center",
+  justifyContent: "center",
 };
 
 export const datePickerStyle = {
@@ -85,23 +85,6 @@ export const currentUnitReportPanelStyle = {
 };
 
 export const searchPanelStyle = {};
-
-export const buttonSaveStyle = {
-  display: "flex",
-  alignItem: "center",
-  justifyContent: "center",
-  background: "#187DB8",
-  color: "white",
-  padding: "10px 20px",
-  cursor: "pointer",
-  borderRadius: "5px",
-  textTransform: "none",
-
-  "&:hover": {
-    opacity: "0.9",
-    background: "#187DB8",
-  },
-};
 
 export const tablePanelStyle = {};
 

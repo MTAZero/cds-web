@@ -59,7 +59,14 @@ export const LoginPage: FC = () => {
       console.log({ data });
 
       dispatch(
-        loginSuccess({ name: user?.full_name, username: user?.username })
+        loginSuccess({
+          name: user?.full_name,
+          username: user?.username,
+          role: user?.role,
+          type: user?.type,
+          rank: user?.rank,
+          unit: user?.unit,
+        })
       );
       dispatch(setToken(access_token));
 
