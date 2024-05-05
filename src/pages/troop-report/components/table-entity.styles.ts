@@ -87,3 +87,56 @@ export const selectStatusStyle = {
 
   '&&': { padding: "2px" },
 };
+
+export const buttonSaveStyle = {
+  display: "flex",
+  alignItem: "center",
+  justifyContent: "center",
+  background: "#187DB8",
+  color: "white",
+  padding: "10px 20px",
+  cursor: "pointer",
+  borderRadius: "5px",
+  textTransform: "none",
+
+  "&:hover": {
+    opacity: "0.9",
+    background: "#187DB8",
+  },
+};
+
+
+export const controlPanelStyle = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  marginBottom: "15px",
+};
+
+export const searchBoxStyle = {
+  display: "flex",
+  width: "320px",
+  padding: "8px 12px",
+  alignItems: "center",
+  gap: "8px",
+  borderRadius: "6px",
+  background: "#FFF",
+  boxShadow:
+    "0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(104, 113, 130, 0.16)",
+};
+
+export const searchTextBoxStyle = {
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  border: "none",
+
+  color: "black",
+  fontFamily: "Inter",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "400",
+  lineHeight: "20px",
+  outline: "none",
+};
+
