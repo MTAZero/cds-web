@@ -14,6 +14,7 @@ import {
 import * as styles from "./table-entity.styles";
 import { TroopStatus, selectTroopData } from "../../../types";
 import { useEffect, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 export type Entity = {
   _id?: string;
@@ -31,14 +32,22 @@ export type Entity = {
 };
 
 type TableEntityProps = {
-  data: Array<Entity>;
   handleTroopReport: (
     absentTroops: Array<{ user: string; reason: string }>
   ) => void;
-  pageSize?: number;
-  pageIndex?: number;
-
   showButtonSave?: boolean;
+  loadEntitys: (
+    pageSize: number,
+    pageIndex: number,
+    textSearch: string,
+    status: string,
+    type: string
+  ) => Promise<{
+    items: Array<Entity>;
+    total: number;
+    size: number;
+    page: number;
+  }>;
 };
 
 const columns = [
@@ -56,26 +65,40 @@ const columns = [
 ];
 
 export const TableEntity: React.FC<TableEntityProps> = ({
-  data,
-  pageIndex = 1,
-  pageSize = 10,
   handleTroopReport,
   showButtonSave = false,
+  loadEntitys,
 }) => {
-  const startIndex = (pageIndex - 1) * pageSize;
-  const [currentFilter, setCurrentFilter] = useState<string>("all");
-  const filterData = [{ value: "all", text: "Tất cả" }, ...selectTroopData];
+  const filterData = [
+    { value: "", text: "Tất cả trạng thái" },
+    ...selectTroopData,
+  ];
+  const filterTypes = [
+    { value: "", text: "Tất cả loại" },
+    { value: "SQ", text: "Sĩ quan" },
+    { value: "QNCN", text: "Quân nhân CN" },
+    { value: "CCQP", text: "CCQP" },
+    { value: "HSQCS", text: "HSQCS" },
+  ];
 
-  const [currentData, setCurrentData] = useState<Array<Entity>>(data);
+  const [filterType, setFilterType] = useState<string>("");
+  const [filterStatus, setFilterStatus] = useState<string>("");
+  const [textSearch, setTextSearch] = useState<string>("");
+  const [total, setTotal] = useState<number>(0);
+  const [pageIndex, setPageIndex] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(5);
+  const [entites, setEntites] = useState<Array<Entity>>([]);
+
+  const startIndex = (pageIndex - 1) * pageSize;
 
   useEffect(() => {
-    setCurrentData(data);
-  }, [data]);
+    handleLoadEntitys();
+  }, []);
 
-  const updateStatus = (id: string, status: TroopStatus) => {
+  const _updateStatus = (id: string, status: TroopStatus) => {
     const temp = [];
-    for (let index = 0; index < currentData.length; index++) {
-      let item = currentData[index];
+    for (let index = 0; index < entites.length; index++) {
+      let item = entites[index];
 
       if (id === item._id)
         item = {
@@ -88,7 +111,28 @@ export const TableEntity: React.FC<TableEntityProps> = ({
       temp.push(item);
     }
 
-    setCurrentData(temp);
+    setEntites(temp);
+  };
+
+  const handleLoadEntitys = async (
+    _size: number = pageSize,
+    _page: number = pageIndex,
+    _textSearch: string = textSearch,
+    _status: string = filterStatus,
+    _type: string = filterType
+  ) => {
+    try {
+      const data = await loadEntitys(_size, _page, _textSearch, _status, _type);
+      if (!data) return;
+
+      const { items, total, size, page } = data;
+      setEntites(items);
+      setTotal(total);
+      if (page !== pageIndex) setPageIndex(page);
+      if (size !== pageSize) setPageSize(size);
+    } catch (ex) {
+      console.log("error : ", ex);
+    }
   };
 
   return (
@@ -97,19 +141,27 @@ export const TableEntity: React.FC<TableEntityProps> = ({
         sx={{
           display: "flex",
           flexWrap: "wrap",
-          marginBottom: "20px",
+          marginBottom: "10px",
           gap: "10px",
         }}
       >
         {filterData.map((item, index) => {
           return (
             <Box
-              onClick={() => setCurrentFilter(item.value)}
+              onClick={() => {
+                setFilterStatus(item.value);
+                handleLoadEntitys(
+                  pageSize,
+                  1,
+                  textSearch,
+                  item.value,
+                  filterType
+                );
+              }}
               key={index}
               sx={{
-                background:
-                  item.value === currentFilter ? "#187DB8" : "#e2e2e2",
-                color: item.value === currentFilter ? "white" : "black",
+                background: item.value === filterStatus ? "#187DB8" : "#e2e2e2",
+                color: item.value === filterStatus ? "white" : "black",
                 padding: "10px 15px",
                 borderRadius: "5px",
                 cursor: "pointer",
@@ -122,6 +174,67 @@ export const TableEntity: React.FC<TableEntityProps> = ({
           );
         })}
       </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          marginBottom: "10px",
+          gap: "10px",
+        }}
+      >
+        {filterTypes.map((item, index) => {
+          return (
+            <Box
+              onClick={() => {
+                setFilterType(item.value);
+                handleLoadEntitys(
+                  pageSize,
+                  1,
+                  textSearch,
+                  filterStatus,
+                  item.value
+                );
+              }}
+              key={index}
+              sx={{
+                background: item.value === filterType ? "#187DB8" : "#e2e2e2",
+                color: item.value === filterType ? "white" : "black",
+                padding: "10px 15px",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontFamily: "Inter",
+                fontSize: "13px",
+              }}
+            >
+              {item.text}
+            </Box>
+          );
+        })}
+      </Box>
+      <Box sx={styles.controlPanelStyle}>
+        <Box sx={styles.searchBoxStyle}>
+          <FaSearch
+            onClick={() => {
+              handleLoadEntitys(pageSize, 1);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Tìm kiếm"
+            style={styles.searchTextBoxStyle}
+            value={textSearch}
+            onChange={(e) => {
+              setTextSearch(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleLoadEntitys(pageSize, 1);
+              }
+            }}
+          />
+        </Box>
+      </Box>
+
       <TableContainer>
         <Table sx={styles.tableContainerStyle}>
           <TableHead>
@@ -146,7 +259,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {currentData.map((item, index) => {
+            {entites.map((item, index) => {
               let _style = styles.rowOddStyle;
               if (index % 2 === 1) _style = styles.rowEventStyle;
 
@@ -166,7 +279,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                       value={item.status}
                       sx={styles.selectStatusStyle}
                       onChange={(e) =>
-                        updateStatus(item._id, e.target.value as TroopStatus)
+                        _updateStatus(item._id, e.target.value as TroopStatus)
                       }
                     >
                       {selectTroopData.map((item, index) => {
@@ -186,24 +299,24 @@ export const TableEntity: React.FC<TableEntityProps> = ({
       </TableContainer>
       <TablePagination
         component="div"
-        count={100}
+        count={total}
         page={pageIndex - 1}
         onPageChange={(e, page: number) => {
-          // loadEntitys(pageSize, page + 1);
+          handleLoadEntitys(pageSize, page + 1);
         }}
         rowsPerPage={pageSize}
         onRowsPerPageChange={(e: any) => {
-          // loadEntitys(e.target.value, 1);
+          handleLoadEntitys(e.target.value, 1);
         }}
         showFirstButton={true}
         showLastButton={true}
-        rowsPerPageOptions={[1, 2, 10, 20, 50, 100, 500]}
+        rowsPerPageOptions={[1, 2, 5, 10, 20, 50, 100, 500]}
       />
       {showButtonSave && (
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             onClick={() => {
-              const _items = currentData.map((item, i) => {
+              const _items = entites.map((item, i) => {
                 if (item.status === TroopStatus.CoMat) return null;
 
                 return {

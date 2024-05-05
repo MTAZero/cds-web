@@ -1,10 +1,9 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import * as styles from "./index.styles";
 
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
-import { data, unitStatusData } from "./fake_data";
-import { TableEntity } from "./components/table-entitys";
+import { unitStatusData } from "./fake_data";
+import { Entity, TableEntity } from "./components/table-entitys";
 import { UnitItem } from "./unit-item";
 import { useEffect, useState } from "react";
 import { ModalComponent } from "../../components";
@@ -16,12 +15,9 @@ export const TroopReport: React.FC = () => {
   const [modalDetailUnitState, setModalDetailUnitState] =
     useState<boolean>(false);
   const [currentUnit, setCurrentUnit] = useState<any>(null);
-  const [dataUnitCurrent, setDataUnitCurrent] = useState<any>([]);
   const [troopInfoUnit, setTroopInfoUnit] = useState<string>("");
 
   const [unitReportStatus, setUnitReportStatus] = useState<any>(null);
-  const [dataUserCurrent, setDataUserCurrent] = useState<any>([]);
-
   const unitId = useAppSelector((state) => state.auth.info.unit);
 
   const [troopInfo, setTroopInfo] = useState<string>("");
@@ -37,17 +33,6 @@ export const TroopReport: React.FC = () => {
     } catch {}
   };
 
-  const loadListUserAndChilds = async () => {
-    try {
-      const ans = await APIServices.TroopReport.loadListUserTroopStatusOfUnit(
-        unitId,
-        new Date().getTime()
-      );
-      const { items } = ans;
-      setDataUserCurrent(items);
-    } catch {}
-  };
-
   const loadTroopInfo = async () => {
     try {
       const ans = await APIServices.TroopReport.getTroopInfo(
@@ -58,9 +43,78 @@ export const TroopReport: React.FC = () => {
     } catch {}
   };
 
+  const loadListUserOfUnit = async (
+    pageSize: number,
+    pageIndex: number,
+    textSearch: string,
+    status: string,
+    type: string
+  ): Promise<{
+    items: Array<Entity>;
+    total: number;
+    size: number;
+    page: number;
+  }> => {
+    try {
+      const ans = await APIServices.TroopReport.loadListUserTroopStatusOfUnit(
+        unitId,
+        new Date().getTime(),
+        pageSize,
+        pageIndex,
+        textSearch,
+        status,
+        type
+      );
+      const { items, total, size, page } = ans;
+      return {
+        items,
+        total,
+        size,
+        page,
+      };
+    } catch {}
+
+    return null;
+  };
+
+  const loadListUserOfUnitTree = async (
+    pageSize: number,
+    pageIndex: number,
+    textSearch: string,
+    status: string,
+    type: string
+  ): Promise<{
+    items: Array<Entity>;
+    total: number;
+    size: number;
+    page: number;
+  }> => {
+    try {
+      const ans =
+        await APIServices.TroopReport.getListUserTroopStatusOfUnitTree(
+          currentUnit?._id,
+          new Date().getTime(),
+          pageSize,
+          pageIndex,
+          textSearch,
+          status,
+          type
+        );
+      const { items, total, size, page } = ans;
+      return {
+        items,
+        total,
+        size,
+        page,
+      };
+    } catch {}
+
+    return null;
+  };
+
   const reload = () => {
     loadUnitStatusReport();
-    loadListUserAndChilds();
+    // loadListUserAndChilds();
     loadTroopInfo();
   };
 
@@ -70,29 +124,16 @@ export const TroopReport: React.FC = () => {
 
   useEffect(() => {
     if (!modalDetailUnitState || !currentUnit) {
-      setDataUnitCurrent([]);
       setTroopInfoUnit("");
       return;
     }
 
     const loadCurrentDataUnit = async () => {
-      try {
-        const ans =
-          await APIServices.TroopReport.getListUserTroopStatusOfUnitTree(
-            currentUnit?._id,
-            new Date().getTime()
-          );
-        const { items } = ans;
-        setDataUnitCurrent(items);
-
-        const res = await APIServices.TroopReport.getTroopInfo(
-          currentUnit?._id,
-          new Date().getTime()
-        );
-        setTroopInfoUnit(res);
-      } catch {
-        setDataUnitCurrent([]);
-      }
+      const res = await APIServices.TroopReport.getTroopInfo(
+        currentUnit?._id,
+        new Date().getTime()
+      );
+      setTroopInfoUnit(res);
     };
 
     loadCurrentDataUnit();
@@ -130,8 +171,6 @@ export const TroopReport: React.FC = () => {
             gap: "15px",
           }}
         >
-          {/* <label style={styles.normalTextStyle}>Ngày</label> */}
-          {/* <DatePicker sx={styles.datePickerStyle} format="DD/MM/YYYY" /> */}
           <Box>{formattedDate}</Box>
         </Box>
         <Box sx={{ display: "flex", flex: 1 }}>
@@ -141,7 +180,7 @@ export const TroopReport: React.FC = () => {
       <Box sx={styles.contentPanelStyle}>
         <Box sx={styles.childStatusPanelStyle}>
           <Box sx={styles.titleStyle}>Tình hình quân số các đơn vị</Box>
-          <SimpleTreeView defaultExpandedItems={[unitStatusData._id]}>
+          <SimpleTreeView defaultExpandedItems={[unitId]}>
             {unitReportStatus && (
               <UnitItem
                 onDetail={(item) => {
@@ -157,9 +196,9 @@ export const TroopReport: React.FC = () => {
           <Box sx={styles.titleStyle}>Cập nhật quân số trực tiếp</Box>
           <Box>
             <TableEntity
-              data={dataUserCurrent}
               handleTroopReport={handleReportTroops}
               showButtonSave={true}
+              loadEntitys={loadListUserOfUnit}
             />
           </Box>
         </Box>
@@ -176,7 +215,10 @@ export const TroopReport: React.FC = () => {
           <Box sx={{ marginBottom: "10px", fontFamily: "Inter" }}>
             {troopInfoUnit}
           </Box>
-          <TableEntity data={dataUnitCurrent} handleTroopReport={() => {}} />
+          <TableEntity
+            handleTroopReport={() => {}}
+            loadEntitys={loadListUserOfUnitTree}
+          />
         </Box>
       </ModalComponent>
     </Box>

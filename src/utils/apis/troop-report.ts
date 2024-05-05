@@ -1,4 +1,3 @@
-import { ParamSearch } from "../../types";
 import createApiServices from "./make-api-request";
 
 const api = createApiServices();
@@ -20,10 +19,12 @@ const loadListUserTroopStatusOfUnit = async (
   time: number,
   pageSize = 10,
   pageIndex = 1,
-  keyword = ""
+  keyword = "",
+  status = "",
+  type = ""
 ) => {
   const res = await api.makeAuthRequest({
-    url: `/troop-report/unit-troop-detail/${unitId}?pageSize=${pageSize}&pageIndex=${pageIndex}&time=${time}&keyword=${keyword}`,
+    url: `/troop-report/unit-troop-detail/${unitId}?pageSize=${pageSize}&pageIndex=${pageIndex}&time=${time}&keyword=${keyword}&status=${status}&type=${type}`,
     method: "GET",
     data: {
       unitId,
@@ -38,10 +39,12 @@ const getListUserTroopStatusOfUnitTree = async (
   time: number,
   pageSize = 10,
   pageIndex = 1,
-  keyword = ""
+  keyword = "",
+  status = "",
+  type = ""
 ) => {
   const res = await api.makeAuthRequest({
-    url: `/troop-report/unit-tree-troop-detail/${unitId}?pageSize=${pageSize}&pageIndex=${pageIndex}&time=${time}&keyword=${keyword}`,
+    url: `/troop-report/unit-tree-troop-detail/${unitId}?pageSize=${pageSize}&pageIndex=${pageIndex}&time=${time}&keyword=${keyword}&status=${status}&type=${type}`,
     method: "GET",
     data: {
       unitId,
