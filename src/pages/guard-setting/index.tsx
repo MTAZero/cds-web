@@ -7,6 +7,7 @@ import { FaPlus, FaSearch } from "react-icons/fa";
 import { ModalComponent, ModalConfirm } from "../../components";
 import { FormEntity } from "./components/form-entity";
 import { APIServices, NotificationService } from "../../utils";
+import { MAX_ENTITY_REQUEST } from "const";
 
 export const GuardSetting: React.FC = () => {
   const [modalConfirmRemove, setModalConfirmRemoveState] =
@@ -19,6 +20,8 @@ export const GuardSetting: React.FC = () => {
   const [pageIndex, setPageIndex] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(10);
   const [textSearch, setTextSearch] = useState<string>("");
+
+  const [units, setUnits] = useState<Array<{ name: string; _id: string }>>([]);
 
   const loadEntitys = async (
     _size: number = pageSize,
@@ -42,8 +45,20 @@ export const GuardSetting: React.FC = () => {
     }
   };
 
+  const loadUnits = async () => {
+    try {
+      const req = await APIServices.Unit.getListEntity(1, MAX_ENTITY_REQUEST);
+      const { data } = req;
+      const { items } = data;
+      setUnits(items);
+    } catch {
+      setUnits([]);
+    }
+  };
+
   useEffect(() => {
     loadEntitys();
+    loadUnits();
   }, []);
 
   const handleSaveEntity = async (entity: Entity) => {
@@ -177,6 +192,7 @@ export const GuardSetting: React.FC = () => {
             setCurrentEntity(null);
             setModalState(false);
           }}
+          units={units}
         />
       </ModalComponent>
     </Box>

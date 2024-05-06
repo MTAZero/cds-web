@@ -1,4 +1,4 @@
-import {SystemFeatures, SystemAction} from "../types";
+import { SystemFeatures, SystemAction } from "../types";
 
 export const MAIN_MESSAGE = process.env.REACT_APP_MESSAGE
   ? process.env.REACT_APP_MESSAGE
@@ -29,3 +29,5 @@ export const ACTIONS_SYSTEM = [
   SystemAction.Report,
   SystemAction.UnitApprove,
 ];
+
+export const MAX_ENTITY_REQUEST = 1000;

@@ -17,7 +17,7 @@ export const UnitItem: FC<UnitItemProps> = ({item, onDetail}) => {
 
   if (isReport)
     str = `${item?.name} (${troop_info?.totalAttendance}/${troop_info?.total})`;
-  else str = `${item?.name} chưa báo quân số`;
+  else str = `${item?.name} (Chưa báo)`;
 
   return (
     <TreeItem
