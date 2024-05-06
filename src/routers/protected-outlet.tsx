@@ -47,8 +47,6 @@ const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
         const ans = await APIServices.Auth.checkToken();
         const { data } = ans;
 
-        console.log({ data });
-
         dispatch(
           updateInfo({
             name: data?.full_name,

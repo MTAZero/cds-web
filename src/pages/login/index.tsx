@@ -56,7 +56,6 @@ export const LoginPage: FC = () => {
       const data = request?.data ? request?.data : {};
       const { access_token } = data;
       const { user } = data;
-      console.log({ data });
 
       dispatch(
         loginSuccess({

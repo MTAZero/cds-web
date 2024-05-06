@@ -16,6 +16,12 @@ export type Entity = {
   name: string;
   description?: string;
   rate: number;
+  unit: string;
+  unit_info?: {
+    name: string;
+  };
+  is_generate: boolean;
+  number: number;
   last_update?: number;
   created_date?: number;
   __v?: number;
@@ -35,7 +41,8 @@ const columns = [
     width: "60px",
   },
   { name: "Tên", width: "300px" },
-  { name: "Mô tả", width: "full" },
+  { name: "Đơn vị đảm nhiệm", width: "full" },
+  { name: "Số lượng", witdh: "70px" },
   { name: "Hành động", width: "100px" },
 ];
 
@@ -85,8 +92,9 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                   </TableCell>
                   <TableCell sx={styles.cellStyle}>{item.name}</TableCell>
                   <TableCell sx={styles.cellStyle}>
-                    {item.description}
+                    {item.unit_info?.name}
                   </TableCell>
+                  <TableCell sx={styles.cellStyle}>{item.number}</TableCell>
                   <TableCell sx={styles.cellStyle}>
                     <Box sx={styles.cellContentStyle}>
                       <Box
