@@ -1,5 +1,18 @@
 export const containerStyle = {
-  //   color: "red",
+  display: "flex",
+  flexDirection: "column",
+  flex: 3,
+  padding: "15px",
+};
+
+export const titleStyle = {
+  color: "#101828",
+  fontFamily: "Inter",
+  fontSize: "18px",
+  fontStyle: "normal",
+  fontWeight: "600",
+  lineHeight: "28px",
+  marginBottom: "10px",
 };
 
 export const headerRowStyle = {};
@@ -85,7 +98,7 @@ export const selectStatusStyle = {
   width: "100%",
   border: "none !important",
 
-  '&&': { padding: "2px" },
+  "&&": { padding: "2px" },
 };
 
 export const buttonSaveStyle = {
@@ -104,7 +117,6 @@ export const buttonSaveStyle = {
     background: "#187DB8",
   },
 };
-
 
 export const controlPanelStyle = {
   display: "flex",
@@ -139,4 +151,3 @@ export const searchTextBoxStyle = {
   lineHeight: "20px",
   outline: "none",
 };
-

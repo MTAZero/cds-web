@@ -171,7 +171,9 @@ export const TroopReport: React.FC = () => {
             gap: "15px",
           }}
         >
-          <Box>{formattedDate}</Box>
+          <Box sx={{ fontFamily: "Inter", fontWeight: 600 }}>
+            {formattedDate}
+          </Box>
         </Box>
         <Box sx={{ display: "flex", flex: 1 }}>
           <label style={styles.normalTextStyle}>{troopInfo}</label>
@@ -192,16 +194,11 @@ export const TroopReport: React.FC = () => {
             )}
           </SimpleTreeView>
         </Box>
-        <Box sx={styles.currentUnitReportPanelStyle}>
-          <Box sx={styles.titleStyle}>Cập nhật quân số trực tiếp</Box>
-          <Box>
-            <TableEntity
-              handleTroopReport={handleReportTroops}
-              showButtonSave={true}
-              loadEntitys={loadListUserOfUnit}
-            />
-          </Box>
-        </Box>
+        <TableEntity
+          handleTroopReport={handleReportTroops}
+          showButtonSave={true}
+          loadEntitys={loadListUserOfUnit}
+        />
       </Box>
 
       <ModalComponent

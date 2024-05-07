@@ -135,8 +135,14 @@ export const TableEntity: React.FC<TableEntityProps> = ({
     }
   };
 
+  if (entites.length === 0) return null;
+
   return (
     <Box sx={styles.containerStyle}>
+      {showButtonSave && (
+        <Box sx={styles.titleStyle}>Cập nhật quân số trực tiếp</Box>
+      )}
+
       <Box
         sx={{
           display: "flex",

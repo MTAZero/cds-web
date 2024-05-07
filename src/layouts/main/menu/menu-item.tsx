@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { SideMenuItem } from "../../../types";
 
 import * as styles from "./styles";
@@ -47,6 +47,25 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
   const _styleParent = window.location.href.includes(item.key)
     ? styles.selectParentItem
     : styles.menuItemStyle;
+
+  const checkChild = item.children
+    .map((item: SideMenuItem, i: number) => {
+      if (item.module && item.action && Array.isArray(item.action)) {
+        const canVisible: boolean = checkPermisison(
+          permission,
+          item.module,
+          item.action
+        );
+
+        if (!canVisible) return null;
+      }
+
+      return item.text;
+    })
+    .filter((i) => i);
+
+  if (checkChild && Array.isArray(checkChild) && checkChild.length === 0)
+    return null;
 
   return (
     <>
