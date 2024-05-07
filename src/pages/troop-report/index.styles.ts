@@ -5,7 +5,7 @@ export const containerStyle = {
   flex: 1,
   margin: "10px",
   padding: "15px",
-  gap: "20px",
+  gap: "5px",
   height: "strech",
 };
 
@@ -16,6 +16,7 @@ export const titleStyle = {
   fontStyle: "normal",
   fontWeight: "600",
   lineHeight: "28px",
+  marginBottom: "10px",
 };
 
 export const dateSelectPanelStyle = {
@@ -42,7 +43,10 @@ export const contentPanelStyle = {
 };
 
 export const childStatusPanelStyle = {
-  width: "250px",
+  display: "flex",
+  flexDirection: "column",
+  flex: 1,
+  minWidth: "350px",
   background: "#f2f2f2",
   padding: "15px",
   minHeight: "70vh",
@@ -74,14 +78,6 @@ export const treeStyle = (isReport: boolean) => {
       color: "red",
     },
   };
-};
-
-export const currentUnitReportPanelStyle = {
-  display: "flex",
-  flexDirection: "column",
-  flex: 1,
-  padding: "15px",
-  gap: "15px",
 };
 
 export const searchPanelStyle = {};
