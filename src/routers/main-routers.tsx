@@ -3,14 +3,14 @@ import { LoginPage } from "../pages/login";
 import { RouterLink } from "./routers";
 import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import { HomePage } from "../pages/home";
-import { MainLayout } from "../layouts";
-import { TroopReport } from "../pages/troop-report";
-import { LeaveApprove } from "../pages/leave-approve";
-import { LeaveRegister } from "../pages/leave-register";
-import { GuardSetting } from "../pages/guard-dutty/guard-dutty-manager";
-import { PersonalGuardSchedule } from "../pages/personal-guard-schedule";
-import { SystemFeatures, SystemAction } from "../types";
+import {  HomePage  } from "../pages/home";
+import {  MainLayout  } from "../layouts";
+import {  TroopReport  } from "../pages/troop-report";
+import {  LeaveApprove  } from "../pages/leave-approve";
+import {  LeaveRegister  } from "../pages/leave-register";
+import {  GuardSetting  } from "../pages/guard-dutty/guard-dutty-manager";
+import {  PersonalGuardSchedule  } from "../pages/personal-guard-schedule";
+import {  SystemFeatures, SystemAction  } from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -72,8 +72,8 @@ const MainRoutes = [
           },
           {
             path: RouterLink.UPDATE_GUARD_DUTTY,
-            element: <UpdateGuardDuttyPage />,
-            module: SystemFeatures.ManagerGuardDutty,
+            element: <PersonalGuardSchedule />,
+            module: SystemFeatures.ManagerDuttySetting,
             action: [SystemAction.Edit],
           },
           {
