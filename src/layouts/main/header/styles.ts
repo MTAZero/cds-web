@@ -6,6 +6,9 @@ export const containStyle = {
   alignItems: "center",
   margin: 0,
   padding: "0px 15px",
+  position: "fixed",
+  width: "100%",
+  zIndex: 1
 };
 
 export const appNameStyle = {

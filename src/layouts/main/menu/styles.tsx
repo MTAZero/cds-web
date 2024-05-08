@@ -3,6 +3,8 @@ export const mainContainerStyle = {
   background: "white",
   display: "flex",
   flexDirection: "column",
+  position: "fixed",
+  height: "100%",
 };
 
 export const menuContainerStyle = {

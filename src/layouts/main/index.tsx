@@ -6,13 +6,35 @@ import { Menu } from "./menu";
 
 export const MainLayout = () => {
   return (
-    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Header />
       <Box
-        sx={{ display: "flex", gap: "10px", flex: 1, background: "#f2f2f2" }}
+        sx={{
+          display: "flex",
+          gap: "10px",
+          flex: 1,
+          background: "#f2f2f2",
+          height: "calc(100vh-65px)",
+          paddingTop: "65px",
+        }}
       >
         <Menu />
-        <Outlet />
+        <Box
+          sx={{
+            paddingLeft: "320px",
+            display: "flex",
+            flex: 1,
+            height: "100%",
+          }}
+        >
+          <Outlet />
+        </Box>
       </Box>
     </Box>
   );
