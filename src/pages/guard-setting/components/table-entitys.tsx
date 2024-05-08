@@ -22,6 +22,7 @@ export type Entity = {
   };
   is_generate: boolean;
   number: number;
+  priority_display: number;
   last_update?: number;
   created_date?: number;
   __v?: number;

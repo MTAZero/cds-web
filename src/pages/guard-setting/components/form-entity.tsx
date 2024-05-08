@@ -35,6 +35,7 @@ export const FormEntity: FC<FormEntityProps> = ({
     is_generate: entity ? entity.is_generate : false,
     unit: entity ? entity.unit : null,
     rate: entity ? entity.rate : 1,
+    priority_display: entity ? entity.priority_display : 1,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +62,7 @@ export const FormEntity: FC<FormEntityProps> = ({
       unit: formData.unit,
       is_generate: formData.is_generate,
       number: parseInt(formData.number.toString()),
+      priority_display: parseInt(formData.priority_display.toString()),
     });
   };
 
@@ -123,10 +125,19 @@ export const FormEntity: FC<FormEntityProps> = ({
         </Box>
         <TextField
           fullWidth
-          label="Number"
+          label="Số lượng"
           name="number"
           type="number"
           value={formData.number}
+          onChange={handleChange}
+          sx={{ marginBottom: "20px" }}
+        />
+        <TextField
+          fullWidth
+          label="Ưu tiên hiển thị"
+          name="priority_display"
+          type="number"
+          value={formData.priority_display}
           onChange={handleChange}
         />
         <FormControlLabel

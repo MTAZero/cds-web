@@ -135,7 +135,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
     }
   };
 
-  if (entites.length === 0) return null;
+  if (entites.length === 0 && showButtonSave) return null;
 
   return (
     <Box sx={styles.containerStyle}>
