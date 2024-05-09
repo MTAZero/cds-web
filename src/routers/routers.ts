@@ -36,4 +36,8 @@ export const RouterLink = {
 
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",
+  QUAN_TRI_PERMISSION_ROUTE: "/quan-tri/permission",
+  QUAN_TRI_CHUC_DANH_ROUTE: "/quan-tri/chuc-danh",
+  QUAN_TRI_ROLE_ROUTE: "/quan-tri/role",
+  QUAN_TRI_DON_VI_ROUTE: "/quan-tri/don-vi",
 };

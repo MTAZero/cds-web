@@ -21,6 +21,10 @@ import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
 import VanKien from "pages/VanKien";
+import Permission from "pages/admin/permission";
+import Position from "pages/admin/position";
+import Role from "pages/admin/role";
+import Unit from "pages/admin/Unit";
 
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
@@ -130,6 +134,30 @@ const MainRoutes = [
             path: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
             element: <User />,
             module: SystemFeatures.ManagerUsers,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_TRI_PERMISSION_ROUTE,
+            element: <Permission />,
+            module: SystemFeatures.ManagerPermission,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_TRI_CHUC_DANH_ROUTE,
+            element: <Position />,
+            module: SystemFeatures.ManagerPermission,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_TRI_ROLE_ROUTE,
+            element: <Role />,
+            module: SystemFeatures.ManagerRoles,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_TRI_DON_VI_ROUTE,
+            element: <Unit />,
+            module: SystemFeatures.ManagerUnits,
             action: [SystemAction.View, SystemAction.Edit],
           },
         ],
