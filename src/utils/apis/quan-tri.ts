@@ -54,7 +54,6 @@ const getDetailUnit = async (id: string) => {
   const res = await api.makeAuthRequest({
     url: `/units/${id}`,
     method: "GET",
-    params: {id: id},
   });
   return res?.data;
 };
@@ -109,7 +108,6 @@ const getDetailRole = async (id: string) => {
   const res = await api.makeAuthRequest({
     url: `/roles/${id}`,
     method: "GET",
-    params: {id: id},
   });
   return res?.data;
 };
@@ -151,7 +149,6 @@ const getDetailPosition = async (id: string) => {
   const res = await api.makeAuthRequest({
     url: `/positions/${id}`,
     method: "GET",
-    params: {id: id},
   });
   return res?.data;
 };
@@ -179,6 +176,47 @@ const deletePosition = async (id: any) => {
   });
   return res?.data;
 };
+
+// Permission
+const getListPermission = async (params: ParamSearch) => {
+  const res = await api.makeAuthRequest({
+    url: `/permissions`,
+    method: "GET",
+    params: params,
+  });
+  return res?.data;
+};
+const getDetailPermission = async (id: string) => {
+  const res = await api.makeAuthRequest({
+    url: `/permissions/${id}`,
+    method: "GET",
+  });
+  return res?.data;
+};
+
+const createPermission = async (data: any) => {
+  const res = await api.makeAuthRequest({
+    url: `/permissions`,
+    method: "POST",
+    data: data,
+  });
+  return res?.data;
+};
+const updatePermission = async (data: any) => {
+  const res = await api.makeAuthRequest({
+    url: `/permissions/${data?._id}`,
+    method: "PUT",
+    data: data,
+  });
+  return res?.data;
+};
+const deletePermission = async (id: any) => {
+  const res = await api.makeAuthRequest({
+    url: `/permissions/${id}`,
+    method: "DELETE",
+  });
+  return res?.data;
+};
 export const QuanTri = {
   getListUser,
   getDetailUser,
@@ -202,4 +240,9 @@ export const QuanTri = {
   createPosition,
   updatePosition,
   deletePosition,
+  getListPermission,
+  getDetailPermission,
+  createPermission,
+  updatePermission,
+  deletePermission,
 };

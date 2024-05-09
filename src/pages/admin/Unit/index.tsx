@@ -1,23 +1,21 @@
-import {ListActionButton, ModalCustom, TableCustom} from "components";
+import {
+  InputFields,
+  ListActionButton,
+  ModalCustom,
+  TableCustom,
+} from "components";
 import React, {useEffect, useRef, useState} from "react";
-import {useAppDispatch} from "hooks";
-import {columns as columnsInit, fields} from "./config";
-// import QuanTriService from "api/QuanTri";
+import {columns, fields} from "./config";
 import {Button, Form, Row} from "antd";
-import Search from "antd/es/input/Search";
 import Modal from "./modal";
-import {APIServices, isValuable} from "utils";
-const User = () => {
+import Search from "antd/es/input/Search";
+import {APIServices} from "utils";
+const Unit = () => {
   const tableRef = useRef(null);
   const modalRef = useRef(null);
-  const modalChildRef = useRef(null);
-  const dispatch = useAppDispatch();
   const [id, setId] = useState(null);
   const [form] = Form.useForm();
   const [data, setData] = useState<any[]>();
-  const [listRole, setListRole] = useState<any[]>();
-  const [listUnit, setListUnit] = useState<any[]>();
-  const [listPosition, setListPosition] = useState<any[]>();
   const [total, setTotal] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [params, setParams] = useState({
@@ -25,7 +23,6 @@ const User = () => {
     pageSize: 10,
     keyword: "",
   });
-  const [columns, setColumns] = useState(columnsInit);
 
   const listActionButton = (value, record, index) => {
     return (
@@ -42,51 +39,14 @@ const User = () => {
   const getData = async params => {
     try {
       setIsLoading(true);
-      const res = await APIServices.QuanTri.getListUser(params);
+      const res = await APIServices.QuanTri.getListUnit(params);
       setIsLoading(false);
-      console.log(res);
       setData(res?.items);
       setTotal(res?.total);
     } catch (error) {
       setIsLoading(false);
     }
   };
-  useEffect(() => {
-    const getListRole = async () => {
-      try {
-        const res = await APIServices.QuanTri.getListRole({
-          pageIndex: 1,
-          pageSize: 50,
-        });
-        setListRole(res?.items);
-      } catch (error) {}
-    };
-    getListRole();
-  }, []);
-  useEffect(() => {
-    const getListUnit = async () => {
-      try {
-        const res = await APIServices.QuanTri.getListUnit({
-          pageIndex: 1,
-          pageSize: 50,
-        });
-        setListUnit(res?.items);
-      } catch (error) {}
-    };
-    getListUnit();
-  }, []);
-  useEffect(() => {
-    const getListPosition = async () => {
-      try {
-        const res = await APIServices.QuanTri.getListPosition({
-          pageIndex: 1,
-          pageSize: 50,
-        });
-        setListPosition(res?.items);
-      } catch (error) {}
-    };
-    getListPosition();
-  }, []);
   useEffect(() => {
     getData(params);
   }, [params]);
@@ -106,53 +66,19 @@ const User = () => {
   };
   const search = () => {
     console.log(form.getFieldValue("keyword"));
-    setParams({
-      ...params,
-      keyword: form.getFieldValue("keyword"),
-      pageIndex: 1,
-    });
-    setPage(1);
+    setParams({...params, keyword: form.getFieldValue("keyword")});
   };
   const deleteRecord = async id => {
     try {
-      await APIServices.QuanTri.deleteUser(id);
+      await APIServices.QuanTri.deleteUnit(id);
       recallTable();
     } catch (error) {}
   };
   const recallTable = () => {
-    setParams({
-      ...params,
-      keyword: form.getFieldValue("keyword"),
-      pageIndex: 1,
-    });
+    getData({...params, pageIndex: 1});
     setPage(1);
   };
-  useEffect(() => {
-    const renderColumnRole = () => {
-      columns.find(e => e?.dataIndex == "role").render = (
-        value,
-        record,
-        index
-      ) => {
-        return <>{listRole?.find(e => e?._id == value)?.name}</>;
-      };
-      setColumns([...columns]);
-    };
-    renderColumnRole();
-  }, [listRole]);
-  useEffect(() => {
-    const renderColumnUnit = () => {
-      columns.find(e => e?.dataIndex == "unit").render = (
-        value,
-        record,
-        index
-      ) => {
-        return <>{listUnit?.find(e => e?._id == value)?.name}</>;
-      };
-      setColumns([...columns]);
-    };
-    renderColumnUnit();
-  }, [listUnit]);
+
   return (
     <div className="page">
       <div className="main">
@@ -168,7 +94,6 @@ const User = () => {
                     console.log(value);
                     search();
                   }}
-                  onChange={search}
                 />
               </Form.Item>
               <Button type="primary" onClick={openCreateModal}>
@@ -194,27 +119,14 @@ const User = () => {
           onCloseModal={() => {
             setId(null);
           }}
-          onOpenModal={() => {
-            console.log(id);
-            if (!isValuable(id)) {
-              modalChildRef?.current?.resetFields();
-            }
-          }}
           width={600}
           ref={modalRef}
-          title={`${id ? "Cập nhật" : "Thêm"} thông tin người dùng`}
+          title={`${id ? "Cập nhật" : "Thêm"} thông tin đơn vị`}
         >
-          <Modal
-            ref={modalChildRef}
-            id={id}
-            getList={recallTable}
-            listUnit={listUnit}
-            listRole={listRole}
-            listPosition={listPosition}
-          ></Modal>
+          <Modal id={id} getList={recallTable}></Modal>
         </ModalCustom>
       </div>
     </div>
   );
 };
-export default User;
+export default Unit;

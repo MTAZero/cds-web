@@ -78,6 +78,7 @@ const FormItem = (props: any) => {
     ...rest
   } = props;
   const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   useEffect(() => {}, [isOpenDate]);
   const renderFormItem = () => {
     switch (type) {
@@ -163,7 +164,32 @@ const FormItem = (props: any) => {
             options={options}
             disabled={disable}
             allowClear={allowClear}
-            onChange={onChange}
+            onChange={(value, option) => {
+              if (onChange) {
+                onChange(value, option);
+              }
+
+              setIsOpen(false);
+              console.log("change");
+            }}
+            open={isOpen}
+            onFocus={() => {
+              setIsOpen(true);
+            }}
+            onBlur={() => {
+              setIsOpen(false);
+            }}
+            onClick={() => {
+              if (!isOpen) {
+                setIsOpen(true);
+              }
+              // setIsOpen(true);
+              console.log("click");
+            }}
+            onSelect={() => {
+              setIsOpen(false);
+              console.log("select");
+            }}
             {...rest}
           />
         );
