@@ -5,7 +5,6 @@ export const containerStyles = {
   flex: 1,
   margin: "10px",
   padding: "15px",
-  // height: "calc(100vh-65px)",
 };
 
 export const controlPanelStyle = {
