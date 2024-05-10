@@ -6,6 +6,10 @@ export const containStyle = {
   alignItems: "center",
   margin: 0,
   padding: "0px 15px",
+  position: "fixed",
+  width: "100%",
+  zIndex: 1,
+  paddingRight: "15px",
 };
 
 export const appNameStyle = {
@@ -22,6 +26,7 @@ export const topbarMenuStyle = {
   gap: "10px",
   alignItems: "center",
   color: "white",
+  marginRight: "30px",
 };
 
 export const buttonLogoutStyle = {

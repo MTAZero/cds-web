@@ -135,8 +135,14 @@ export const TableEntity: React.FC<TableEntityProps> = ({
     }
   };
 
+  if (entites.length === 0 && showButtonSave) return null;
+
   return (
     <Box sx={styles.containerStyle}>
+      {showButtonSave && (
+        <Box sx={styles.titleStyle}>Cập nhật quân số trực tiếp</Box>
+      )}
+
       <Box
         sx={{
           display: "flex",
@@ -276,7 +282,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                   <TableCell sx={styles.cellStyle}>
                     <Select
                       size={"small"}
-                      value={item.status}
+                      value={item.status ? item.status : TroopStatus.CoMat}
                       sx={styles.selectStatusStyle}
                       onChange={(e) =>
                         _updateStatus(item._id, e.target.value as TroopStatus)
@@ -317,7 +323,8 @@ export const TableEntity: React.FC<TableEntityProps> = ({
           <Button
             onClick={() => {
               const _items = entites.map((item, i) => {
-                if (item.status === TroopStatus.CoMat) return null;
+                if (item.status === TroopStatus.CoMat || !item.status)
+                  return null;
 
                 return {
                   user: item._id,

@@ -12,9 +12,11 @@ export const RouterLink = {
   LEAVE_REGISTER: "/leave-register",
 
   // Lịch trực
-  GUARD_MENU: "guard",
-  MANAGER_GUARD_SETTING: "/manager-guard-setting",
-  PERSONAL_GUARD_SCHEDULE: "/personal-guard-schedule",
+  GUARD_MENU: "guard-dutty",
+  MANAGER_GUARD_SETTING: "/manager-guard-dutty-position",
+  UPDATE_GUARD_DUTTY: "/update-guard-dutty",
+  GUARD_DUTTY_UNIT: "/guard-dutty-unit",
+  PERSONAL_GUARD_SCHEDULE: "/personal-guard-dutty",
 
   // Văn kiện
   VAN_KIEN_ROUTE: "/van-kien",

@@ -1,18 +1,16 @@
-import {RouterLink} from "../../../routers/routers";
-import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
+import { RouterLink } from "../../../routers/routers";
+import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
 
 import {
-  FaBeer,
-  FaBook,
   FaCalendar,
   FaCalendarCheck,
-  FaCheck,
+  FaChalkboardTeacher,
   FaHome,
-  FaPhone,
   FaUserClock,
   FaUserFriends,
   FaWrench,
 } from "react-icons/fa";
+import { IoIosSettings } from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
   {
@@ -31,30 +29,30 @@ export const mainMenu: Array<SideMenuItem> = [
     module: SystemFeatures.TroopReports,
     action: [SystemAction.View, SystemAction.Report],
   },
-  {
-    url: RouterLink.LEAVE_MENU,
-    key: RouterLink.LEAVE_MENU,
-    icon: <FaCalendarCheck />,
-    text: "Nghỉ phép",
-    children: [
-      {
-        url: RouterLink.LEAVE_REGISTER,
-        key: RouterLink.LEAVE_REGISTER,
-        icon: <FaBook />,
-        children: [],
-        text: "Đăng ký nghỉ phép",
-      },
-      {
-        url: RouterLink.LEAVE_APPROVE,
-        key: RouterLink.LEAVE_APPROVE,
-        icon: <FaCheck />,
-        children: [],
-        text: "Phê duyệt nghỉ phép",
-        module: SystemFeatures.ManagerRegisterLeave,
-        action: [SystemAction.Approve, SystemAction.UnitApprove],
-      },
-    ],
-  },
+  // {
+  //   url: RouterLink.LEAVE_MENU,
+  //   key: RouterLink.LEAVE_MENU,
+  //   icon: <FaCalendarCheck />,
+  //   text: "Nghỉ phép",
+  //   children: [
+  //     {
+  //       url: RouterLink.LEAVE_REGISTER,
+  //       key: RouterLink.LEAVE_REGISTER,
+  //       icon: <FaBook />,
+  //       children: [],
+  //       text: "Đăng ký nghỉ phép",
+  //     },
+  //     {
+  //       url: RouterLink.LEAVE_APPROVE,
+  //       key: RouterLink.LEAVE_APPROVE,
+  //       icon: <FaCheck />,
+  //       children: [],
+  //       text: "Phê duyệt nghỉ phép",
+  //       module: SystemFeatures.ManagerRegisterLeave,
+  //       action: [SystemAction.Approve, SystemAction.UnitApprove],
+  //     },
+  //   ],
+  // },
   {
     url: RouterLink.GUARD_MENU,
     key: RouterLink.GUARD_MENU,
@@ -64,11 +62,27 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.MANAGER_GUARD_SETTING,
         key: RouterLink.MANAGER_GUARD_SETTING,
-        icon: <FaWrench />,
+        icon: <IoIosSettings />,
         children: [],
         text: "Quản lý vị trí trực",
         module: SystemFeatures.ManagerGuardDutty,
         action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.UPDATE_GUARD_DUTTY,
+        key: RouterLink.UPDATE_GUARD_DUTTY,
+        icon: <FaChalkboardTeacher />,
+        children: [],
+        text: "Cắt lịch trực",
+        module: SystemFeatures.ManagerGuardDutty,
+        action: [SystemAction.Edit],
+      },
+      {
+        url: RouterLink.GUARD_DUTTY_UNIT,
+        key: RouterLink.GUARD_DUTTY_UNIT,
+        icon: <FaCalendarCheck />,
+        children: [],
+        text: "Lịch trực trung tâm",
       },
       {
         url: RouterLink.PERSONAL_GUARD_SCHEDULE,

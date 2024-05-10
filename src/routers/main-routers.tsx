@@ -1,16 +1,16 @@
-import {Navigate} from "react-router-dom";
-import {LoginPage} from "../pages/login";
-import {RouterLink} from "./routers";
-import {ContactPage} from "../pages/contact";
+import { Navigate } from "react-router-dom";
+import { LoginPage } from "../pages/login";
+import { RouterLink } from "./routers";
+import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import {HomePage} from "../pages/home";
-import {MainLayout} from "../layouts";
-import {TroopReport} from "../pages/troop-report";
-import {LeaveApprove} from "../pages/leave-approve";
-import {LeaveRegister} from "../pages/leave-register";
-import {GuardSetting} from "../pages/guard-setting";
-import {PersonalGuardSchedule} from "../pages/personal-guard-schedule";
-import {SystemFeatures, SystemAction} from "../types";
+import {  HomePage  } from "../pages/home";
+import {  MainLayout  } from "../layouts";
+import {  TroopReport  } from "../pages/troop-report";
+import {  LeaveApprove  } from "../pages/leave-approve";
+import {  LeaveRegister  } from "../pages/leave-register";
+import {  GuardSetting  } from "../pages/guard-dutty/guard-dutty-manager";
+import {  PersonalGuardSchedule  } from "../pages/personal-guard-schedule";
+import {  SystemFeatures, SystemAction  } from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -21,13 +21,14 @@ import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
 import VanKien from "pages/VanKien";
+import { UpdateGuardDuttyPage } from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
 import Unit from "pages/admin/Unit";
 
 const MainRoutes = [
-  {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
+  { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
   {
     path: RouterLink.LOGIN,
     element: <LoginPage />,
@@ -66,9 +67,19 @@ const MainRoutes = [
             element: <LeaveRegister />,
           },
           {
+            path: RouterLink.GUARD_DUTTY_UNIT,
+            element: <PersonalGuardSchedule />,
+          },
+          {
+            path: RouterLink.UPDATE_GUARD_DUTTY,
+            element: <UpdateGuardDuttyPage />,
+            module: SystemFeatures.ManagerGuardDutty,
+            action: [SystemAction.Edit],
+          },
+          {
             path: RouterLink.MANAGER_GUARD_SETTING,
             element: <GuardSetting />,
-            module: SystemFeatures.ManagerDuttySetting,
+            module: SystemFeatures.ManagerGuardDutty,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {

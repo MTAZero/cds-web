@@ -4,9 +4,9 @@ import { Box, Button, TablePagination } from "@mui/material";
 import { Entity, TableEntity } from "./components/table-entitys";
 
 import { FaPlus, FaSearch } from "react-icons/fa";
-import { ModalComponent, ModalConfirm } from "../../components";
+import { ModalComponent, ModalConfirm } from "../../../components";
 import { FormEntity } from "./components/form-entity";
-import { APIServices, NotificationService } from "../../utils";
+import { APIServices, NotificationService } from "../../../utils";
 import { MAX_ENTITY_REQUEST } from "const";
 
 export const GuardSetting: React.FC = () => {
@@ -18,7 +18,7 @@ export const GuardSetting: React.FC = () => {
   const [entites, setEntites] = useState<Array<Entity>>([]);
   const [total, setTotal] = useState<number>(0);
   const [pageIndex, setPageIndex] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(10);
+  const [pageSize, setPageSize] = useState<number>(8);
   const [textSearch, setTextSearch] = useState<string>("");
 
   const [units, setUnits] = useState<Array<{ name: string; _id: string }>>([]);
@@ -154,7 +154,7 @@ export const GuardSetting: React.FC = () => {
           }}
           showFirstButton={true}
           showLastButton={true}
-          rowsPerPageOptions={[1, 2, 10, 20, 50, 100, 500]}
+          rowsPerPageOptions={[5, 8, 10, 20, 50, 100, 500]}
         />
       </Box>
 
