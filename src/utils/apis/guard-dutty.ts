@@ -39,10 +39,44 @@ const updateEntity = (id: string, entity: any = {}) => {
   });
 };
 
+const getListGuardDuttyPendingOfUnit = async (unitId: string, time: number) => {
+  const res = await api.makeAuthRequest({
+    url: `/guard-dutty/pending/${unitId}?time=${time}`,
+    method: "GET",
+  });
+  return res.data;
+};
+
+const updateGuardDutty = async (
+  id: string,
+  isSendToChild = false,
+  value = ""
+) => {
+  let data = {};
+  if (isSendToChild)
+    data = {
+      unit: value,
+    };
+  else
+    data = {
+      user: value,
+    };
+
+  const res = await api.makeAuthRequest({
+    url: `/guard-dutty/assign/${id}`,
+    method: "PUT",
+    data,
+  });
+
+  return res.data;
+};
+
 export const GuardDutty = {
   getListEntity,
   getDetailEntity,
   insertEntity,
   updateEntity,
   removeEntity,
+  getListGuardDuttyPendingOfUnit,
+  updateGuardDutty,
 };

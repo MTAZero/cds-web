@@ -8,7 +8,7 @@ import { MainLayout } from "../layouts";
 import { TroopReport } from "../pages/troop-report";
 import { LeaveApprove } from "../pages/leave-approve";
 import { LeaveRegister } from "../pages/leave-register";
-import { GuardSetting } from "../pages/guard-setting";
+import { GuardSetting } from "../pages/guard-dutty/guard-dutty-manager";
 import { PersonalGuardSchedule } from "../pages/personal-guard-schedule";
 import { SystemFeatures, SystemAction } from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
@@ -21,6 +21,7 @@ import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
 import VanKien from "pages/VanKien";
+import { UpdateGuardDuttyPage } from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
@@ -71,14 +72,14 @@ const MainRoutes = [
           },
           {
             path: RouterLink.UPDATE_GUARD_DUTTY,
-            element: <PersonalGuardSchedule />,
-            module: SystemFeatures.ManagerDuttySetting,
+            element: <UpdateGuardDuttyPage />,
+            module: SystemFeatures.ManagerGuardDutty,
             action: [SystemAction.Edit],
           },
           {
             path: RouterLink.MANAGER_GUARD_SETTING,
             element: <GuardSetting />,
-            module: SystemFeatures.ManagerDuttySetting,
+            module: SystemFeatures.ManagerGuardDutty,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
