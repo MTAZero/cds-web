@@ -72,8 +72,8 @@ const MainRoutes = [
           },
           {
             path: RouterLink.UPDATE_GUARD_DUTTY,
-            element: <PersonalGuardSchedule />,
-            module: SystemFeatures.ManagerDuttySetting,
+            element: <UpdateGuardDuttyPage />,
+            module: SystemFeatures.ManagerGuardDutty,
             action: [SystemAction.Edit],
           },
           {
