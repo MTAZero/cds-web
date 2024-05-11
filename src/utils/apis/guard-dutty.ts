@@ -87,6 +87,14 @@ const getUnitGuardDutty = async (unitId: string, time: number) => {
   return res.data;
 };
 
+const getUnitRootGuardDutty = async (unitId: string, time: number) => {
+  const res = await api.makeAuthRequest({
+    url: `/guard-dutty/root/${unitId}?time=${time}`,
+    method: "GET",
+  });
+  return res.data;
+};
+
 export const GuardDutty = {
   getListEntity,
   getDetailEntity,
@@ -97,4 +105,5 @@ export const GuardDutty = {
   updateGuardDutty,
   getPersonalGuardDutty,
   getUnitGuardDutty,
+  getUnitRootGuardDutty,
 };

@@ -59,6 +59,7 @@ export const LoginPage: FC = () => {
 
       dispatch(
         loginSuccess({
+          _id: user?._id,
           name: user?.full_name,
           username: user?.username,
           role: user?.role,

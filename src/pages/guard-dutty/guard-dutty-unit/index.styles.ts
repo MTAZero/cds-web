@@ -50,7 +50,7 @@ export const timePanelCellEmptyStyle = {
   display: "flex",
   flexDirection: "column",
   border: "1px solid #e2e2e2",
-  height: "110px",
+  minHeight: "110px",
   padding: "10px",
   gap: "5px",
   flex: 1,
@@ -123,6 +123,8 @@ export const detailGuardDuttyPanel = {
   width: "350px",
   padding: "20px 10px",
   borderRadius: "10px",
+  height: "83vh",
+  overflow: "scroll",
 };
 
 export const detaiPanelRowStyle = {
@@ -173,54 +175,21 @@ export const detailPanelRowValueStyle = {
   fontSize: "14px",
 };
 
-export const editGuardDuttyButtonStyle = {
-  display: "none",
-  alignItems: "center",
-  justifyContent: "center",
-  padding: "5px",
-  // background: "#187DB8",
-  // color: "#187DB8",
-
-  cursor: "pointer",
-};
-
-// modal update
-export const modalUpdateContainerStyle = {
+export const positionItemStyle = {
   display: "flex",
   flexDirection: "column",
-  gap: "20px",
-};
+  gap: "5px",
+  padding: "10px",
+  width: "90%",
 
-export const modalLabelStyle = {};
-
-export const inputSeachStyle = {
   fontFamily: "Inter",
   fontSize: "14px",
-  fontStyle: "normal",
   fontWeight: "500",
-  lineHeight: "24px",
-};
 
-export const buttonSaveStyle = {
-  display: "flex",
-  padding: "10px 18px",
-  justifyContent: "center",
   alignItems: "center",
-  gap: "8px",
-  borderRadius: "8px",
-  border: "1px solid #187DB8",
-  background: " #187DB8",
-  boxShadow: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
-  color: " #FFF",
-  fontFamily: "Inter",
-  fontSize: "14px",
-  fontStyle: "normal",
-  fontWeight: "500",
-  lineHeight: "24px",
-  textTransform: "none",
+  justifyContent: "center",
+  borderRadius: "5px",
 
-  "&:hover": {
-    opacity: "0.9",
-    background: " #187DB8",
-  },
+  background: "#98e698",
+  color: "black",
 };

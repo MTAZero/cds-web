@@ -11,7 +11,7 @@ import {
 import * as styles from "./index.styles";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
-import { FaEdit, FaSave } from "react-icons/fa";
+import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import { ModalComponent } from "components";
 import Autocomplete from "@mui/material/Autocomplete";
 import dayjs, { Dayjs } from "dayjs";
@@ -216,7 +216,11 @@ export const UpdateGuardDuttyPage = () => {
       {currentSelectDay && (
         <Box sx={styles.detailGuardDuttyPanel}>
           <Box sx={styles.detailPanelTitleStyle}>
-            Ngày {currentSelectDay?.title}
+            <Box>Ngày {currentSelectDay?.title}</Box>
+            <FaTimes
+              style={{ cursor: "pointer" }}
+              onClick={() => setCurrentDay(null)}
+            />
           </Box>
           <Box sx={styles.detailPanelMainContent}>
             {currentSelectDay?.items &&

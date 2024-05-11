@@ -3,14 +3,13 @@ import { LoginPage } from "../pages/login";
 import { RouterLink } from "./routers";
 import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import {  HomePage  } from "../pages/home";
-import {  MainLayout  } from "../layouts";
-import {  TroopReport  } from "../pages/troop-report";
-import {  LeaveApprove  } from "../pages/leave-approve";
-import {  LeaveRegister  } from "../pages/leave-register";
-import {  GuardSetting  } from "../pages/guard-dutty/guard-dutty-manager";
-import {  PersonalGuardSchedule  } from "../pages/personal-guard-schedule";
-import {  SystemFeatures, SystemAction  } from "../types";
+import { HomePage } from "../pages/home";
+import { MainLayout } from "../layouts";
+import { TroopReport } from "../pages/troop-report";
+import { LeaveApprove } from "../pages/leave-approve";
+import { LeaveRegister } from "../pages/leave-register";
+import { GuardSetting } from "../pages/guard-dutty/guard-dutty-manager";
+import { SystemFeatures, SystemAction } from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -26,6 +25,8 @@ import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
 import Unit from "pages/admin/Unit";
+import { GuardDuttyUnitPage } from "pages/guard-dutty/guard-dutty-unit";
+import { GuardDuttyPersonalPage } from "pages/guard-dutty/guard-dutty-personal";
 
 const MainRoutes = [
   { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
@@ -68,7 +69,7 @@ const MainRoutes = [
           },
           {
             path: RouterLink.GUARD_DUTTY_UNIT,
-            element: <PersonalGuardSchedule />,
+            element: <GuardDuttyUnitPage />,
           },
           {
             path: RouterLink.UPDATE_GUARD_DUTTY,
@@ -84,7 +85,7 @@ const MainRoutes = [
           },
           {
             path: RouterLink.PERSONAL_GUARD_SCHEDULE,
-            element: <PersonalGuardSchedule />,
+            element: <GuardDuttyPersonalPage />,
           },
           {
             path: RouterLink.VAN_KIEN_ROUTE,

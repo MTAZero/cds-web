@@ -4,11 +4,7 @@ import { RouterLink } from "./routers";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { APIServices } from "../utils";
 import { Permission } from "../types";
-import {
-  logout,
-  updateInfo,
-  updatePermisson,
-} from "../redux/auth/auth.slice";
+import { logout, updateInfo, updatePermisson } from "../redux/auth/auth.slice";
 
 type RouterProps = {
   module?: string;
@@ -49,6 +45,7 @@ const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
 
         dispatch(
           updateInfo({
+            _id: data?._id,
             name: data?.full_name,
             username: data?.username,
             role: data?.role,

@@ -6,6 +6,7 @@ import { StoreService } from "../../utils";
 export interface AuthState {
   isLogin: boolean;
   info: {
+    _id: string;
     name: string;
     username: string;
     unit: string;
@@ -31,6 +32,7 @@ export const authSlice = createSlice({
     loginSuccess: (
       state: AuthState,
       action: PayloadAction<{
+        _id: string;
         name: string;
         username: string;
         role: string;
@@ -61,6 +63,7 @@ export const authSlice = createSlice({
     updateInfo: (
       state: AuthState,
       action: PayloadAction<{
+        _id: string;
         name: string;
         username: string;
         role: string;
