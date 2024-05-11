@@ -9,8 +9,6 @@ import {
 } from "@mui/material";
 
 import * as styles from "./index.styles";
-
-import { data, units, users } from "./sample.data";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useEffect, useState } from "react";
 import { FaEdit, FaSave } from "react-icons/fa";
@@ -19,6 +17,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import dayjs, { Dayjs } from "dayjs";
 import { APIServices, NotificationService } from "utils";
 import { useAppSelector } from "hooks";
+import { MAX_ENTITY_REQUEST } from "const";
 
 export const UpdateGuardDuttyPage = () => {
   const [currentSelectDay, setCurrentDay] = useState<any>(null);
@@ -32,6 +31,79 @@ export const UpdateGuardDuttyPage = () => {
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [dataPending, setDataPending] = useState<Array<any>>([]);
   const unitId = useAppSelector((state) => state.auth.info.unit);
+
+  const [units, setUnits] = useState<Array<any>>([]);
+  const [users, setUsers] = useState<Array<any>>([]);
+
+  useEffect(() => {
+    if (!dataPending) return;
+    let currentNew = null;
+
+    for (let index = 0; index < dataPending?.length; index++) {
+      const dataTemp = dataPending[index];
+      const day = dataTemp?.days?.find(
+        (i) => i?.title === currentSelectDay?.title
+      );
+      if (day) currentNew = day;
+    }
+    setCurrentDay(currentNew);
+  }, [dataPending]);
+
+  const loadDataPending = async () => {
+    const time = date.unix() * 1000;
+
+    try {
+      const ans = await APIServices.GuardDutty.getListGuardDuttyPendingOfUnit(
+        unitId,
+        time
+      );
+      setDataPending(ans);
+    } catch {}
+  };
+
+  const loadChildUnit = async () => {
+    try {
+      const data = await APIServices.Unit.getUnitChild(unitId);
+      setUnits(data);
+    } catch {}
+  };
+
+  const loadUserOfTreeUnit = async () => {
+    try {
+      const data = await APIServices.User.getListUserOfTreeUnit(
+        unitId,
+        1,
+        MAX_ENTITY_REQUEST
+      );
+      const { items } = data;
+      setUsers(items);
+    } catch {}
+  };
+
+  useEffect(() => {
+    loadUserOfTreeUnit();
+    loadChildUnit();
+  }, []);
+
+  useEffect(() => {
+    loadDataPending();
+  }, [date]);
+
+  const handleSave = async (
+    id: string,
+    isSendToChild: boolean,
+    value: string
+  ) => {
+    try {
+      await APIServices.GuardDutty.updateGuardDutty(id, isSendToChild, value);
+
+      NotificationService.success("Phân công lịch trực thành công");
+      loadDataPending();
+      setModalUpdateState(false);
+    } catch {
+      NotificationService.error("Phân công lịch trực thất bại");
+    }
+  };
 
   const renderDayItem = (dayItem: any) => {
     if (dayItem?.isEmpty) return <Box sx={styles.timePanelCellEmptyStyle} />;
@@ -80,52 +152,6 @@ export const UpdateGuardDuttyPage = () => {
         </Box>
       </Box>
     );
-  };
-
-  useEffect(() => {
-    if (!dataPending) return;
-    let currentNew = null;
-
-    for (let index = 0; index < dataPending?.length; index++) {
-      const dataTemp = dataPending[index];
-      const day = dataTemp?.days?.find(
-        (i) => i?.title === currentSelectDay?.title
-      );
-      if (day) currentNew = day;
-    }
-    setCurrentDay(currentNew);
-  }, [dataPending]);
-
-  const loadDataPending = async () => {
-    const time = date.unix() * 1000;
-
-    try {
-      const ans = await APIServices.GuardDutty.getListGuardDuttyPendingOfUnit(
-        unitId,
-        time
-      );
-      setDataPending(ans);
-    } catch {}
-  };
-
-  useEffect(() => {
-    loadDataPending();
-  }, [date]);
-
-  const handleSave = async (
-    id: string,
-    isSendToChild: boolean,
-    value: string
-  ) => {
-    try {
-      await APIServices.GuardDutty.updateGuardDutty(id, isSendToChild, value);
-
-      NotificationService.success("Phân công lịch trực thành công");
-      loadDataPending();
-      setModalUpdateState(false);
-    } catch {
-      NotificationService.error("Phân công lịch trực thất bại");
-    }
   };
 
   return (

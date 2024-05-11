@@ -71,6 +71,22 @@ const updateGuardDutty = async (
   return res.data;
 };
 
+const getPersonalGuardDutty = async (userId: string, time: number) => {
+  const res = await api.makeAuthRequest({
+    url: `/guard-dutty/personal/${userId}?time=${time}`,
+    method: "GET",
+  });
+  return res.data;
+};
+
+const getUnitGuardDutty = async (unitId: string, time: number) => {
+  const res = await api.makeAuthRequest({
+    url: `/guard-dutty/unit/${unitId}?time=${time}`,
+    method: "GET",
+  });
+  return res.data;
+};
+
 export const GuardDutty = {
   getListEntity,
   getDetailEntity,
@@ -79,4 +95,6 @@ export const GuardDutty = {
   removeEntity,
   getListGuardDuttyPendingOfUnit,
   updateGuardDutty,
+  getPersonalGuardDutty,
+  getUnitGuardDutty,
 };

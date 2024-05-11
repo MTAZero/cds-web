@@ -39,10 +39,20 @@ const updateEntity = (id: string, entity: any = {}) => {
   });
 };
 
+const getUnitChild = async (unitId: string) => {
+  const res = await api.makeAuthRequest({
+    url: `/units/child/${unitId}`,
+    method: "GET",
+  });
+
+  return res?.data;
+};
+
 export const Unit = {
   getListEntity,
   getDetailEntity,
   insertEntity,
   updateEntity,
   removeEntity,
+  getUnitChild,
 };
