@@ -48,6 +48,7 @@ type TableEntityProps = {
     size: number;
     page: number;
   }>;
+  time: number;
 };
 
 const columns = [
@@ -68,6 +69,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
   handleTroopReport,
   showButtonSave = false,
   loadEntitys,
+  time,
 }) => {
   const filterData = [
     { value: "", text: "Tất cả trạng thái" },
@@ -93,7 +95,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
 
   useEffect(() => {
     handleLoadEntitys();
-  }, []);
+  }, [time]);
 
   const _updateStatus = (id: string, status: TroopStatus) => {
     const temp = [];

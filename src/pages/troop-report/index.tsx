@@ -2,16 +2,18 @@ import { Box } from "@mui/material";
 import * as styles from "./index.styles";
 
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
-import { unitStatusData } from "./fake_data";
 import { Entity, TableEntity } from "./components/table-entitys";
 import { UnitItem } from "./unit-item";
 import { useEffect, useState } from "react";
 import { ModalComponent } from "../../components";
 import { useAppSelector } from "hooks";
 import { APIServices, NotificationService } from "utils";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers";
 
 export const TroopReport: React.FC = () => {
+  const [date, setDate] = useState<Dayjs>(dayjs());
+
   const [modalDetailUnitState, setModalDetailUnitState] =
     useState<boolean>(false);
   const [currentUnit, setCurrentUnit] = useState<any>(null);
@@ -27,7 +29,7 @@ export const TroopReport: React.FC = () => {
     try {
       const ans = await APIServices.TroopReport.loadUnitChildStatusReport(
         unitId,
-        new Date().getTime()
+        date.unix() * 1000
       );
       setUnitReportStatus(ans);
     } catch {}
@@ -37,7 +39,7 @@ export const TroopReport: React.FC = () => {
     try {
       const ans = await APIServices.TroopReport.getTroopInfo(
         unitId,
-        new Date().getTime()
+        date.unix() * 1000
       );
       setTroopInfo(ans);
     } catch {}
@@ -58,7 +60,7 @@ export const TroopReport: React.FC = () => {
     try {
       const ans = await APIServices.TroopReport.loadListUserTroopStatusOfUnit(
         unitId,
-        new Date().getTime(),
+        date.unix() * 1000,
         pageSize,
         pageIndex,
         textSearch,
@@ -93,7 +95,7 @@ export const TroopReport: React.FC = () => {
       const ans =
         await APIServices.TroopReport.getListUserTroopStatusOfUnitTree(
           currentUnit?._id,
-          new Date().getTime(),
+          date.unix() * 1000,
           pageSize,
           pageIndex,
           textSearch,
@@ -120,7 +122,7 @@ export const TroopReport: React.FC = () => {
 
   useEffect(() => {
     reload();
-  }, [unitId]);
+  }, [unitId, date]);
 
   useEffect(() => {
     if (!modalDetailUnitState || !currentUnit) {
@@ -131,13 +133,13 @@ export const TroopReport: React.FC = () => {
     const loadCurrentDataUnit = async () => {
       const res = await APIServices.TroopReport.getTroopInfo(
         currentUnit?._id,
-        new Date().getTime()
+        date.unix() * 1000
       );
       setTroopInfoUnit(res);
     };
 
     loadCurrentDataUnit();
-  }, [modalDetailUnitState, currentUnit]);
+  }, [modalDetailUnitState, currentUnit, date]);
 
   // handle report troop
   const handleReportTroops = async (
@@ -146,7 +148,7 @@ export const TroopReport: React.FC = () => {
     try {
       await APIServices.TroopReport.reportTroop(
         unitId,
-        new Date().getTime(),
+        date.unix() * 1000,
         absentTroops
       );
 
@@ -158,9 +160,6 @@ export const TroopReport: React.FC = () => {
     }
   };
 
-  const dateTime = dayjs(new Date());
-  const formattedDate = dateTime.format("DD/MM/YYYY");
-
   return (
     <Box sx={styles.containerStyle}>
       <Box sx={styles.dateSelectPanelStyle}>
@@ -171,9 +170,19 @@ export const TroopReport: React.FC = () => {
             gap: "15px",
           }}
         >
-          <Box sx={{ fontFamily: "Inter", fontWeight: 600 }}>
-            {formattedDate}
-          </Box>
+          <DatePicker
+            sx={{
+              fontFamily: "Inter",
+              fontSize: "13px",
+              fontWeight: "bold",
+            }}
+            label={"Chọn ngày"}
+            format="DD/MM/YYYY"
+            value={date}
+            onChange={(value) => {
+              setDate(value);
+            }}
+          />
         </Box>
         <Box sx={{ display: "flex", flex: 1 }}>
           <label style={styles.normalTextStyle}>{troopInfo}</label>
@@ -198,6 +207,7 @@ export const TroopReport: React.FC = () => {
           handleTroopReport={handleReportTroops}
           showButtonSave={true}
           loadEntitys={loadListUserOfUnit}
+          time={date.unix() * 1000}
         />
       </Box>
 
@@ -215,6 +225,7 @@ export const TroopReport: React.FC = () => {
           <TableEntity
             handleTroopReport={() => {}}
             loadEntitys={loadListUserOfUnitTree}
+            time={date.unix() * 1000}
           />
         </Box>
       </ModalComponent>

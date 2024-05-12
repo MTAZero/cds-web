@@ -1,4 +1,9 @@
 enum Rank {
+  BinhNhi = "Binh nhì",
+  BinhNhat = "Binh nhất",
+  HaSi = "Hạ sĩ",
+  TrungSi = "Trung sĩ",
+  ThuongSi = "Thượng sĩ",
   ThieuUyCN = "Thiếu úy CN",
   TrungUyCN = "Trung úy CN",
   ThuongUyCN = "Thượng úy CN",
@@ -25,4 +30,4 @@ enum UserType {
   CCQP = "CCQP",
   HQSCS = "HSQCS",
 }
-export {UserType, Rank};
+export { UserType, Rank };

@@ -50,7 +50,7 @@ export const timePanelCellEmptyStyle = {
   display: "flex",
   flexDirection: "column",
   border: "1px solid #e2e2e2",
-  height: "110px",
+  minHeight: "110px",
   padding: "10px",
   gap: "5px",
   flex: 1,
