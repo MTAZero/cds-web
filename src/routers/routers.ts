@@ -18,6 +18,11 @@ export const RouterLink = {
   GUARD_DUTTY_UNIT: "/guard-dutty-unit",
   PERSONAL_GUARD_SCHEDULE: "/personal-guard-dutty",
 
+  // lịch công tác
+  WORK_CALENDAR: "work-calendar",
+  UNIT_WORK_CALENDAR: "/work-calendar-unit",
+  USER_WORK_CALENDAR: "/work-calendar-user",
+
   // Văn kiện
   VAN_KIEN_ROUTE: "/van-kien",
 

@@ -10,7 +10,7 @@ import {
   FaUserFriends,
   FaWrench,
 } from "react-icons/fa";
-import { IoIosSettings } from "react-icons/io";
+import { IoIosList, IoIosPeople, IoIosSettings } from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
   {
@@ -90,6 +90,33 @@ export const mainMenu: Array<SideMenuItem> = [
         icon: <FaUserClock />,
         children: [],
         text: "Lịch trực cá nhân",
+      },
+    ],
+  },
+
+  {
+    url: RouterLink.WORK_CALENDAR,
+    key: RouterLink.WORK_CALENDAR,
+    icon: <FaCalendar />,
+    text: "Lịch công tác",
+    children: [
+      {
+        url: RouterLink.UNIT_WORK_CALENDAR,
+        key: RouterLink.UNIT_WORK_CALENDAR,
+        icon: <IoIosList />,
+        children: [],
+        text: "Lịch công tác đơn vị",
+        module: SystemFeatures.WorkCalendar,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.USER_WORK_CALENDAR,
+        key: RouterLink.USER_WORK_CALENDAR,
+        icon: <IoIosPeople />,
+        children: [],
+        text: "Lịch công tác cá nhân",
+        module: SystemFeatures.WorkCalendar,
+        action: [SystemAction.View, SystemAction.Edit],
       },
     ],
   },

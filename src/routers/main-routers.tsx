@@ -27,6 +27,8 @@ import Role from "pages/admin/role";
 import Unit from "pages/admin/Unit";
 import { GuardDuttyUnitPage } from "pages/guard-dutty/guard-dutty-unit";
 import { GuardDuttyPersonalPage } from "pages/guard-dutty/guard-dutty-personal";
+import { UnitCalendarPage } from "pages/work-calendar/unit-calendar";
+import { UserCalendarPage } from "pages/work-calendar/user-calendar";
 
 const MainRoutes = [
   { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
@@ -86,6 +88,19 @@ const MainRoutes = [
           {
             path: RouterLink.PERSONAL_GUARD_SCHEDULE,
             element: <GuardDuttyPersonalPage />,
+          },
+          // lịch công tác
+          {
+            path: RouterLink.UNIT_WORK_CALENDAR,
+            element: <UnitCalendarPage />,
+            module: SystemFeatures.WorkCalendar,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.USER_WORK_CALENDAR,
+            element: <UserCalendarPage />,
+            module: SystemFeatures.WorkCalendar,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
             path: RouterLink.VAN_KIEN_ROUTE,
