@@ -10,6 +10,7 @@ import {
   APIServices,
   convertDateStringToDateObject,
   formatDateToString,
+  getItemLocalStorage,
   toArray,
 } from "utils";
 import dayjs from "dayjs";
@@ -34,7 +35,7 @@ const TienTrinh = (props: any) => {
   const [fields, setFields] = useState(fieldsInit);
   const [listUnit, setListUnit] = useState<any[]>();
   const [dataSource, setDataSource] = useState<any>();
-  const tienTrinhBieuSearch = parseJson(localStorage.getItem(nameObjectLocal));
+  const tienTrinhBieuSearch = getItemLocalStorage(nameObjectLocal);
   const [params, setParams] = useState(null);
   const navigate = useNavigate();
   const expandRef = useRef<any>();
@@ -131,10 +132,7 @@ const TienTrinh = (props: any) => {
         tienTrinhBieuSearch?.month ?? dayjs().month() + 1
       );
       expandRef.current?.setFieldValue("week", tienTrinhBieuSearch?.tuan ?? 1);
-      expandRef.current?.setFieldValue(
-        "unit",
-        tienTrinhBieuSearch?.unit ?? localStorage.getItem("unit")
-      );
+      expandRef.current?.setFieldValue("unit", tienTrinhBieuSearch?.unit);
     };
     setDefaultValues();
 
@@ -197,8 +195,8 @@ const TienTrinh = (props: any) => {
             <Space>
               <ReactToPrint
                 documentTitle={`Tiến trình biểu tuần ${
-                  dataSource?.[0]?.tuan ?? "..."
-                } tháng ${dataSource?.[0]?.thang ?? "..."}  `}
+                  dataSource?.[0]?.week ?? "..."
+                } tháng ${dataSource?.[0]?.month ?? "..."}  `}
                 trigger={() => {
                   return <Button type="primary">Xuất file</Button>;
                 }}
@@ -228,6 +226,7 @@ const TienTrinh = (props: any) => {
               columns={columns?.filter(
                 (e: {key: string}) => e?.key !== "action"
               )}
+              listUnit={listUnit}
             ></PrintTienTrinh>
           </div>
         </div>

@@ -17,46 +17,81 @@ import {
 } from "components";
 import {Button, Col, Form, Row, Space} from "antd";
 import ReactToPrint from "react-to-print";
-import {formatDateToString} from "utils";
+import {
+  APIServices,
+  convertDateStringToDateObject,
+  formatDateToString,
+  getItemLocalStorage,
+  setItemLocalStorage,
+} from "utils";
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
+import dayjs from "dayjs";
 const RutKinhNghiem = props => {
   const dispatch = useAppDispatch();
-  const [params, setParams] = useState(null);
+  const [params, setParams] = useState({});
   const nameObjectLocal = "rutKinhNghiemSearch";
-  const [dataSource, setDataSource] = useState<any>(mockData);
+  const rutKinhNghiemSearch = getItemLocalStorage(nameObjectLocal);
   const [fields, setFields] = useState(fieldsInit);
   const expandRef = useRef<any>();
+  const tableRef = useRef(null);
   const printRef = useRef<any>();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [listUnit, setListUnit] = useState<any[]>();
+  const [data, setData] = useState<any[]>();
+  const [total, setTotal] = useState();
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
         editFunction={() => {
           navigateToDetail(record, index);
         }}
-        checkFunction={() => {
-          // navigateToRollcall(record, index);
-        }}
-        toolTips={{edit: "Chỉnh sửa", check: "Đánh giá"}}
+        toolTips={{edit: "Chỉnh sửa"}}
       ></ListActionButton>
     );
   };
+  useEffect(() => {
+    const getListUnit = async () => {
+      try {
+        const res = await APIServices.QuanTri.getListUnit({
+          pageIndex: 1,
+          pageSize: 20,
+        });
+        setListUnit(res?.items);
+      } catch (error) {
+        setListUnit([]);
+      }
+    };
+    getListUnit();
+  }, []);
+  useEffect(() => {
+    const setOptionsDonVi = async listUnit => {
+      fields.find((e: {name: string}) => e?.name === "unit").options =
+        listUnit?.map((e: {_id: any; name: any}) => ({
+          value: e?._id,
+          label: e?.name,
+        }));
 
+      setFields([...fields]);
+    };
+    setOptionsDonVi(listUnit);
+  }, [listUnit]);
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
     setParams({
       ...searchFields,
-      nam: formatDateToString(searchFields?.nam, formatTime.year),
+      year: formatDateToString(searchFields?.year, formatTime.year),
     });
+    setPage(1);
   };
   const onFieldsChange = (changedFields, allFields) => {
     const searchFields = expandRef.current?.getFieldsValue();
-    const valuesLocal = JSON.stringify({
+    const valuesLocal = {
       ...searchFields,
-      nam: formatDateToString(searchFields?.nam, null),
-    });
-    localStorage.setItem(nameObjectLocal, valuesLocal);
+      year: formatDateToString(searchFields?.year, null),
+    };
+    setItemLocalStorage(nameObjectLocal, valuesLocal);
   };
   const navigateToDetail = (record: {_id: any}, rowIndex: any) => {
     const routeRollcall = RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE.replace(
@@ -65,6 +100,44 @@ const RutKinhNghiem = props => {
     );
     navigate(routeRollcall);
   };
+  const setPage = pageIndex => {
+    tableRef?.current?.setPage(pageIndex);
+  };
+  useEffect(() => {
+    const setDefaultValues = () => {
+      expandRef.current?.setFieldValue(
+        "year",
+        rutKinhNghiemSearch?.year
+          ? convertDateStringToDateObject(rutKinhNghiemSearch?.year)
+          : dayjs()
+      );
+      expandRef.current?.setFieldValue(
+        "month",
+        rutKinhNghiemSearch?.month ?? dayjs().month() + 1
+      );
+      expandRef.current?.setFieldValue("week", rutKinhNghiemSearch?.tuan ?? 1);
+      expandRef.current?.setFieldValue("unit", rutKinhNghiemSearch?.unit);
+    };
+    setDefaultValues();
+
+    onClickSearch();
+  }, []);
+  useEffect(() => {
+    const getData = async params => {
+      try {
+        setIsLoading(true);
+        const res = await APIServices.SoRutKinhNghiem.getListSoRutKinhNghiem(
+          params
+        );
+        setIsLoading(false);
+        setData(res?.items);
+        setTotal(res?.total);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    };
+    getData(params);
+  }, [params]);
   return (
     <div className="page">
       <div className="main">
@@ -82,8 +155,11 @@ const RutKinhNghiem = props => {
             <TitleCustom text="Rút kinh nghiệm"></TitleCustom>
           </Row>
           <TableCustom
-            dataSource={dataSource}
+            ref={tableRef}
             pagination={false}
+            isLoading={isLoading}
+            dataSource={data}
+            total={total}
             columns={columns}
             hideCheckboxCol={true}
             listActionButton={listActionButton}

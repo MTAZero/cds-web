@@ -193,31 +193,37 @@ const StatisticTienTrinh = () => {
     );
   };
   const submit = async () => {
-    // const tableValues = form.getFieldValue("list");
-    // console.log(tableValues);
-    // const listThanhVienOfTable = tableValues
-    //   .filter(e => !list_doi_tuong.includes(e?.full_name))
-    //   .map(e => ({
-    //     ...e,
-    //     joined: selectedRowKeys.includes(e?.key) ? 1 : e?.joined == -1 ? -1 : 0,
-    //   }));
-    // console.log(listThanhVienOfTable);
-    // const listThanhPhanFormat = listThanhPhan?.map(thanhPhan => ({
-    //   ...thanhPhan,
-    //   ds_thanh_vien: listThanhVienOfTable.filter(
-    //     thanhVien => thanhVien?.object == thanhPhan?.object
-    //   ),
-    // }));
-    // console.log(listThanhPhanFormat);
-    // const data = {
-    //   progressId: id,
-    //   thanh_phan: listThanhPhanFormat,
-    //   evaluation: form.getFieldValue("evaluation"),
-    //   time_train_actual: form.getFieldValue("time_train_actual"),
-    // };
-    // try {
-    //   const res = await APIServices.TienTrinhBieu.danhGiaHuanLuyen(data);
-    // } catch (error) {}
+    const tableValues = form.getFieldValue("list");
+    console.log(tableValues);
+    const listThanhVienOfTable = tableValues
+      .filter(
+        e =>
+          !listPosition.some(
+            position =>
+              position?._id == e?.full_name || position?.name == e?.full_name
+          )
+      )
+      .map(e => ({
+        ...e,
+        joined: selectedRowKeys.includes(e?.key) ? 1 : e?.joined == -1 ? -1 : 0,
+      }));
+    console.log(listThanhVienOfTable);
+    const listThanhPhanFormat = listThanhPhan?.map(thanhPhan => ({
+      ...thanhPhan,
+      listPeople: listThanhVienOfTable.filter(
+        thanhVien => thanhVien?.object == thanhPhan?.object
+      ),
+    }));
+    console.log(listThanhPhanFormat);
+    const data = {
+      progressId: id,
+      thanh_phan: listThanhPhanFormat,
+      evaluation: form.getFieldValue("evaluation"),
+      time_train_actual: form.getFieldValue("time_train_actual"),
+    };
+    try {
+      const res = await APIServices.TienTrinhBieu.danhGiaHuanLuyen(data);
+    } catch (error) {}
   };
 
   return (
