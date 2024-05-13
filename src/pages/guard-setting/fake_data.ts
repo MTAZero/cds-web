@@ -1,5 +1,3 @@
-import {Entity} from "./components/table-entitys";
-
 export const data: Array<any> = [
   {
     _id: "6630633aadd0b0800e92c872",
