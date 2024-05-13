@@ -6,3 +6,6 @@ export * from "./thong-ke";
 export * from "./troop-report";
 export * from "./units";
 export * from "./users";
+export * from "./so-rut-kinh-nghiem";
+export * from "./so-sach-ca-nhan";
+export * from "./van-kien";

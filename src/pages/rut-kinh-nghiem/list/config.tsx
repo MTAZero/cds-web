@@ -1,5 +1,6 @@
-import {months} from "const";
-import {fieldType} from "types";
+import {months, weeks} from "const";
+import {fieldType, formatTime} from "types";
+import {formatDateToString} from "utils";
 
 const {COMBO_BOX, DATE} = fieldType;
 const columns: any = [
@@ -8,6 +9,9 @@ const columns: any = [
     dataIndex: "date",
     title: "Thời gian",
     align: "center",
+    render: (value, record, index) => {
+      return <>{formatDateToString(value, formatTime.dayFull)}</>;
+    },
   },
   {
     key: "content",
@@ -16,8 +20,8 @@ const columns: any = [
     align: "left",
   },
   {
-    key: "sum_time_train",
-    dataIndex: "sum_time_train",
+    key: "join",
+    dataIndex: "join",
     title: "Tham gia",
     align: "center",
   },
@@ -40,7 +44,7 @@ const fields: any = [
   {
     type: DATE,
     label: "Năm",
-    name: "nam",
+    name: "year",
     picker: "year",
     optionsTime: {format: "YYYY"},
     allowClear: false,
@@ -49,14 +53,20 @@ const fields: any = [
     type: COMBO_BOX,
     label: "Tháng",
     options: months.map(e => ({value: e, label: e})),
-    name: "thang",
+    name: "month",
     allowClear: false,
   },
-
+  {
+    type: COMBO_BOX,
+    label: "Tuần",
+    name: "week",
+    options: weeks.map((e: any) => ({value: e, label: e})),
+    allowClear: false,
+  },
   {
     type: COMBO_BOX,
     label: "Đơn vị",
-    name: "don_vi",
+    name: "unit",
     allowClear: false,
   },
 ];

@@ -4,13 +4,15 @@ import {useAppDispatch} from "hooks";
 import {columns, data, fields} from "./config";
 import {useNavigate} from "react-router-dom";
 import {RouterLink} from "routers/routers";
+import {APIServices} from "utils";
 const ThongKeHLCaNhan = prop => {
   const dispatch = useAppDispatch();
   const path = window.location.pathname;
   const [dataSource, setDataSource] = useState(data);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const [total, setTotal] = useState();
+  const [params, setParams] = useState(null);
   const navigateToDetail = (record, rowIndex) => {
     const routeRollcall = RouterLink.SO_SACH_CA_NHAN_DETAIL_ROUTE.replace(
       ":id",
@@ -24,15 +26,30 @@ const ThongKeHLCaNhan = prop => {
         editFunction={() => {
           navigateToDetail(record, index);
         }}
-        toolTips={{edit: "Chỉnh sửa", check: "Đánh giá"}}
+        toolTips={{edit: "Ghi sổ sách"}}
       ></ListActionButton>
     );
   };
-
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        setIsLoading(true);
+        const res = await APIServices.SoSachHuanLuyen.getListHuanLuyenCaNhan(
+          params
+        );
+        setDataSource(res?.items);
+        setTotal(res?.total);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, [params]);
   return (
     <div className="page">
       <div className="main">
-        <div className="container">
+        {/* <div className="container">
           <ExpandSearch
             // ref={expandRef}
             fields={fields}
@@ -40,11 +57,12 @@ const ThongKeHLCaNhan = prop => {
             // onClickSearch={onClickSearch}
             // onFieldsChange={onFieldsChange}
           ></ExpandSearch>
-        </div>
+        </div> */}
         <div className="container">
           <TableCustom
             isLoading={isLoading}
             dataSource={dataSource}
+            total={total}
             pagination={false}
             columns={columns}
             hideCheckboxCol={true}

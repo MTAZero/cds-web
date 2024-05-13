@@ -1,5 +1,6 @@
 import {months} from "const";
-import {fieldType} from "types";
+import {fieldType, formatTime} from "types";
+import {formatDateToString} from "utils";
 
 const {COMBO_BOX, DATE, INPUT} = fieldType;
 const fields: any = [
@@ -31,22 +32,37 @@ const columns: any[] = [
     width: 80,
   },
   {
-    key: "thoi_gian",
-    dataIndex: "thoi_gian",
+    key: "date",
+    dataIndex: "date",
     title: "Thời gian huấn luyện",
     align: "center",
     width: 180,
+    render: (value, record, index) => {
+      return <>{formatDateToString(value, formatTime.dateTime)}</>;
+    },
   },
   {
-    key: "noi_dung",
-    dataIndex: "noi_dung",
+    key: "content",
+    dataIndex: "content",
     title: "Nội dung huấn luyện",
-    align: "left",
+    align: "center",
   },
   {
-    key: "ket_qua",
-    dataIndex: "ket_qua",
-    title: "Điểm",
+    key: "evaluation",
+    dataIndex: "evaluation",
+    title: "Đánh giá huấn luyện",
+    align: "center",
+  },
+  {
+    key: "sum_joiner",
+    dataIndex: "sum_joiner",
+    title: "Quân số tham gia",
+    align: "center",
+  },
+  {
+    key: "unit_charge",
+    dataIndex: "unit_charge",
+    title: "Đơn vị phụ trách",
     align: "center",
   },
   {

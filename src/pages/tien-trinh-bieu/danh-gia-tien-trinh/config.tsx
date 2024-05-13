@@ -57,7 +57,7 @@ const fields = [
   {
     label: "Thời gian HLTT",
     type: INPUT,
-    name: "thoi_gian",
+    name: "time",
   },
 ];
 const mockData = [

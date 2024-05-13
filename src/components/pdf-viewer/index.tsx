@@ -19,18 +19,20 @@ const PdfViewer = (props: Props) => {
       const bytes = atob(data);
       let length = bytes.length;
       let out = new Uint8Array(length);
-
+      console.log(bytes);
       while (length--) {
         out[length] = bytes.charCodeAt(length);
       }
 
       return new Blob([out], {type: pdfContentType});
     } catch (error) {
+      console.log(error);
       return null;
     }
   };
 
   useEffect(() => {
+    console.log(typeof blob);
     if (!blob) {
       setUrl(URL.createObjectURL(base64toBlob(base64OfBlank)));
     } else {

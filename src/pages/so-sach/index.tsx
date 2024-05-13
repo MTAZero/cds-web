@@ -1,4 +1,4 @@
-import {Row} from "antd";
+import {Button, Row, Spin} from "antd";
 import {Descriptions, DescriptionsItem, TitleCustom} from "components";
 import {data as dataInit} from "./config";
 import React, {useEffect, useState} from "react";
@@ -6,74 +6,126 @@ import {useAppDispatch} from "hooks";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import "./style.scss";
+import {useParams} from "react-router-dom";
+import {
+  APIServices,
+  NotificationService,
+  formatDateToString,
+  isValuable,
+} from "utils";
+import {formatTime} from "types";
 const SoSach = prop => {
   const dispatch = useAppDispatch();
   const path = window.location.pathname;
-  const [data, setData] = useState<any>(dataInit);
-
-  const info = [
+  const [dataEditor, setDataEditor] = useState<any>();
+  const {id} = useParams();
+  const info: any = [
     {
       label: "Thời gian",
-      value: "09:00 15/4/2024",
       span: 8,
+      name: "date",
     },
     {
       label: "Nội dung",
-      value: "Huấn luyện nội bộ",
       span: 8,
+      name: "content",
     },
     {
-      label: "Địa điểm",
-      value: "Phòng giao ban cụm",
+      label: "Đơn vị phụ trách",
       span: 8,
+      name: "unit_charge",
     },
     {
-      label: "Người phụ trách",
-      value: "Cụm trưởng",
+      label: "Vật chất",
       span: 8,
-    },
-    {
-      label: "Kết quả",
-      value: "8",
-      span: 8,
+      name: "guaranteed_material",
     },
   ];
+  const [data, setData] = useState<any>();
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const getData = async id => {
+      try {
+        setLoading(true);
+        const res = await APIServices.SoSachHuanLuyen.getSoSachOfHuanLuyen(id);
+        console.log(res);
+        setData(res);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setData(null);
+      }
+    };
+    if (isValuable(id)) {
+      getData(id);
+    }
+  }, [id]);
+  const submit = async () => {
+    try {
+      const values = {
+        type: "Sổ tay",
+        training: id,
+        note: dataEditor,
+        _id: data?._id,
+      };
+      setLoading(true);
+      const callApi = isValuable(id)
+        ? APIServices.SoSachHuanLuyen.updateSoSachOfHuanLuyen
+        : APIServices.SoSachHuanLuyen.createSoSachOfHuanLuyen;
+      const res = await callApi(values);
+      setLoading(false);
+      NotificationService.success("Lưu thông tin thành công");
+    } catch (error) {
+      setLoading(false);
+      NotificationService.error("Đã có lỗi");
+    }
+  };
+  useEffect(() => {}, [data]);
   return (
-    <div className="page">
-      <div className="main">
-        <div className="container">
-          <TitleCustom text="Thông tin huấn luyện"></TitleCustom>
+    <Spin spinning={loading}>
+      <div className="page">
+        <div className="main">
+          <div className="container">
+            <TitleCustom text="Thông tin huấn luyện"></TitleCustom>
 
-          <Descriptions>
-            {info?.map(e => (
-              <DescriptionsItem label={e?.label} span={e?.span}>
-                {e?.value}
-              </DescriptionsItem>
-            ))}
-          </Descriptions>
-        </div>
-        <div className="container" style={{width: 1200}}>
-          <TitleCustom text="Nội dung ghi chép"></TitleCustom>
+            <Descriptions>
+              {info?.map(e => (
+                <DescriptionsItem label={e?.label} span={e?.span}>
+                  {e?.name == "date"
+                    ? formatDateToString(data?.[e?.name], formatTime.dateTime)
+                    : data?.[e?.name]}
+                </DescriptionsItem>
+              ))}
+            </Descriptions>
+          </div>
+          <div className="container" style={{width: 1200}}>
+            <TitleCustom text="Nội dung ghi chép"></TitleCustom>
 
-          <CKEditor
-            editor={Editor as any}
-            // config={}editorConfiguration
-            data={data}
-            onReady={event => {
-              // You can store the "editor" and use when it is needed.
-            }}
-            onChange={(event, editor: any) => {
-              const _data = editor?.getData();
-              console.log(_data);
-              setData(_data);
-            }}
-            onBlur={(event, editor) => {}}
-            onFocus={(event, editor) => {}}
-          />
+            <CKEditor
+              editor={Editor as any}
+              // config={}editorConfiguration
+              data={data?.note}
+              onReady={event => {
+                // You can store the "editor" and use when it is needed.
+              }}
+              onChange={(event, editor: any) => {
+                const _data = editor?.getData();
+                console.log(_data);
+                setDataEditor(_data);
+              }}
+              onBlur={(event, editor) => {}}
+              onFocus={(event, editor) => {}}
+            />
+            <Row justify={"end"} style={{marginTop: 8}}>
+              <Button type="primary" onClick={submit}>
+                Lưu lại
+              </Button>
+            </Row>
+          </div>
         </div>
       </div>
-    </div>
+    </Spin>
   );
 };
 export default SoSach;

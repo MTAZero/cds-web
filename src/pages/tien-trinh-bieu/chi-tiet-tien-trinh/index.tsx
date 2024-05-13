@@ -144,6 +144,7 @@ const DetailTienTrinh = props => {
     try {
       setLoading(true);
       const formValues = await form.validateFields();
+      console.log(formValues);
       let callApi =
         id == "tao-moi"
           ? APIServices.TienTrinhBieu.createTienTrinhBieu
@@ -262,7 +263,7 @@ const DetailTienTrinh = props => {
                 <InputFields data={fields2}></InputFields>
               </Row>
               <Divider></Divider>
-              <TitleCustom text="Tải giáo án"></TitleCustom>
+              {/* <TitleCustom text="Tải giáo án"></TitleCustom>
               <Row justify={"start"} style={{marginTop: 4}}>
                 <Space split={<Divider></Divider>}>
                   <Upload
@@ -300,7 +301,7 @@ const DetailTienTrinh = props => {
                     </Space>
                   )}
                 </Space>
-              </Row>
+              </Row> */}
               <Divider></Divider>
               <TitleCustom text="Thời gian nội dung huấn luyện"></TitleCustom>
 

@@ -3,8 +3,9 @@ import Icons from "assests/icons";
 import {InputFields} from "components";
 import React, {forwardRef, useImperativeHandle, useState} from "react";
 import {fieldType} from "types";
+import {APIServices, NotificationService, getItemLocalStorage} from "utils";
 const UploadFile = forwardRef((props: any, ref) => {
-  const {mutate, closeModal} = props;
+  const {getListFile, closeModal} = props;
   const [loading, setLoading] = useState(false);
   useImperativeHandle(ref, () => ({
     resetFields: () => {
@@ -17,7 +18,7 @@ const UploadFile = forwardRef((props: any, ref) => {
   const fields = [
     {
       type: fieldType.INPUT,
-      name: "ten_file",
+      name: "name",
       css: {xs: 24, sm: 24, md: 24, lg: 24, xl: 24},
       label: "Tiêu đề",
       rules: [{required: true, message: "Chưa nhập tiêu đề"}],
@@ -48,11 +49,12 @@ const UploadFile = forwardRef((props: any, ref) => {
       }
       const formData = new FormData();
       formData.append("file", selectedFile as Blob);
-      formData.append("ten_file", values?.ten_file);
-      // await vanKienService.uploadFile(formData);
-      // Notification("success", "Đã tải file thành công!");
+      formData.append("name", values?.name);
+      formData.append("type", "Văn kiện");
+      await APIServices.VanKien.uploadVanKien(formData);
+      NotificationService.success("Đã tải file thành công!");
       setLoading(false);
-      mutate();
+      getListFile();
       closeModal();
     } catch (error) {
       setLoading(false);
@@ -76,12 +78,10 @@ const UploadFile = forwardRef((props: any, ref) => {
         </Form>
 
         <Row justify={"space-between"}>
-          <Col xs={10} md={8} xl={6} lg={8}>
+          {/* <Col xs={10} md={8} xl={6} lg={8}>
             Người đăng
-          </Col>
-          <Col xs={14} md={16} xl={18} lg={16} style={{fontWeight: 700}}>
-            {localStorage.getItem("ho_ten")}
-          </Col>
+          </Col> */}
+          <Col xs={14} md={16} xl={18} lg={16} style={{fontWeight: 700}}></Col>
         </Row>
         <Row justify={"space-between"}>
           <Col xs={10} md={8} xl={6} lg={8}>

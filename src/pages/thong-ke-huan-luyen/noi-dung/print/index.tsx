@@ -14,15 +14,15 @@ const PrintNoiDung = props => {
         <tbody>
           <Row justify={"center"}>
             <TitleCustom
-              text={`NỘI DUNG HUẤN LUYỆN THÁNG ${params?.thang} NĂM ${
-                formatDateToString(params?.nam, formatTime.year) ?? "..."
+              text={`NỘI DUNG HUẤN LUYỆN THÁNG ${params?.month} NĂM ${
+                formatDateToString(params?.year, formatTime.year) ?? "..."
               } `}
               style={{fontSize: 32, fontWeight: "bold"}}
             ></TitleCustom>
           </Row>
           <Row justify={"center"}>
             <Space direction="vertical" align="start">
-              <div>Đơn vị: {params?.don_vi}</div>
+              <div>Đơn vị: </div>
             </Space>
           </Row>
           <TableCustom

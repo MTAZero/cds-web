@@ -10,6 +10,7 @@ import {
   APIServices,
   convertDateStringToDateObject,
   formatDateToString,
+  getItemLocalStorage,
   parseJson,
   setItemLocalStorage,
 } from "utils";
@@ -23,7 +24,7 @@ const ListThongKe = () => {
   const [params, setParams] = useState(null);
   const [fields, setFields] = useState(fieldsInit);
   const nameObjectLocal = "thongKeHuanLuyen";
-  const thongKeHuanLuyen = parseJson(localStorage.getItem(nameObjectLocal));
+  const thongKeHuanLuyen = getItemLocalStorage(nameObjectLocal);
   const [listUnit, setListUnit] = useState<any[]>();
   const [listPosition, setListPosition] = useState<any[]>();
   useEffect(() => {
@@ -68,7 +69,7 @@ const ListThongKe = () => {
     const searchFields = expandRef.current?.getFieldsValue();
     const valuesLocal = {
       ...searchFields,
-      nam: formatDateToString(searchFields?.nam, null),
+      year: formatDateToString(searchFields?.year, null),
     };
     setItemLocalStorage(nameObjectLocal, valuesLocal);
   };

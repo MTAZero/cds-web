@@ -5,7 +5,7 @@ import {Row, Space} from "antd";
 import {formatDateToString} from "utils";
 import {formatTime} from "types";
 const PrintTienTrinh = (props: any) => {
-  const {dataSource, columns} = props;
+  const {dataSource, columns, listUnit} = props;
   const [checker, setChecker] = useState<string>();
   const [signer, setSigner] = useState<any>();
   const [sample, setSample] = useState<any>();
@@ -14,11 +14,11 @@ const PrintTienTrinh = (props: any) => {
     setSample(dataSource?.[0]);
   }, [dataSource]);
   useEffect(() => {
-    const _setCheckerAndSigner = (donVi: any) => {
+    const _setCheckerAndSigner = (unit: any) => {
       let _checker;
       let _signer;
-
-      switch (donVi) {
+      const nameUnit = listUnit?.find(e => e?._id == unit)?.name;
+      switch (nameUnit) {
         case "Trung tâm":
           _signer = "chỉ huy trưởng";
           break;
@@ -36,7 +36,7 @@ const PrintTienTrinh = (props: any) => {
           _signer = "Cụm trưởng";
           break;
       }
-      if (donVi?.includes("Đội")) {
+      if (nameUnit?.includes("Đội")) {
         _checker = "cụm trưởng";
         _signer = "đội trưởng";
       } else {
@@ -45,7 +45,7 @@ const PrintTienTrinh = (props: any) => {
       setChecker(_checker);
       setSigner(_signer);
     };
-    _setCheckerAndSigner(sample?.don_vi);
+    _setCheckerAndSigner(sample?.unit);
   }, [sample]);
   return (
     <div className="print-tien-trinh container">
@@ -87,15 +87,15 @@ const PrintTienTrinh = (props: any) => {
               <Space direction="vertical" align="center">
                 <div style={{fontSize: "30pt"}}>TIẾN TRÌNH BIỂU</div>
                 <div style={{fontSize: "26pt"}}>
-                  Huấn luyện chiến đấu tuần {sample?.tuan ?? "..."} tháng{" "}
-                  {sample?.thang ?? "..."}
+                  Huấn luyện chiến đấu tuần {sample?.week ?? "..."} tháng{" "}
+                  {sample?.month ?? "..."}
                 </div>
                 <div style={{fontSize: "26pt"}}>
                   (Từ ngày{" "}
-                  {formatDateToString(sample?.tu_ngay, formatTime.dayMonth) ??
+                  {formatDateToString(sample?.from_date, formatTime.dayMonth) ??
                     "..."}{" "}
                   đến ngày{" "}
-                  {formatDateToString(sample?.den_ngay, formatTime.dayMonth) ??
+                  {formatDateToString(sample?.to_date, formatTime.dayMonth) ??
                     "..."}{" "}
                   )
                 </div>

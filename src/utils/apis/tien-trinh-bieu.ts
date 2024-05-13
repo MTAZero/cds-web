@@ -26,8 +26,9 @@ const getThanhPhanTienTrinhBieu = async (id: any) => {
 };
 const createTienTrinhBieu = async (data: any) => {
   const res = await api.makeAuthRequest({
-    url: `/progresses/`,
+    url: `/progresses`,
     method: "POST",
+    data: data,
   });
   return res?.data;
 };

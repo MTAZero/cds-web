@@ -6,7 +6,7 @@ const {COMBO_BOX} = fieldType;
 const fileInfo = record => {
   return (
     <div className="file-info">
-      <div className="title">{record?.ten_van_kien}</div>
+      <div className="title">{record?.name}</div>
       <div className="time">
         {" "}
         <span className="bold">Cập nhật: </span>
@@ -18,8 +18,8 @@ const fileInfo = record => {
 
 const columns = [
   {
-    key: "ten_van_kien",
-    dataIndex: "ten_van_kien",
+    key: "name",
+    dataIndex: "name",
     title: "Danh sách văn kiện",
     align: "left",
     render: (v, r, i) => {
