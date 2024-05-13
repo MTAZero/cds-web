@@ -76,9 +76,9 @@ const TienTrinh = (props: any) => {
         checkFunction={() => {
           navigateToRollcall(record, index);
         }}
-        viewFunction={() => {
-          giaoAnRef?.current?.openModal();
-        }}
+        // viewFunction={() => {
+        //   giaoAnRef?.current?.openModal();
+        // }}
         toolTips={{edit: "Chỉnh sửa", check: "Đánh giá", view: "Xem giáo án"}}
       ></ListActionButton>
     );

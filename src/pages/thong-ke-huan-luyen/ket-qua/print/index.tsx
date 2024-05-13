@@ -22,7 +22,7 @@ const PrintKetQua = props => {
           </Row>
           <Row justify={"center"}>
             <Space direction="vertical" align="start">
-              <div>Đơn vị: {params?.unit}</div>
+              <div>Đơn vị: </div>
             </Space>
           </Row>
 

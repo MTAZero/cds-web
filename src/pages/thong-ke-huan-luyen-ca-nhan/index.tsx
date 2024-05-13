@@ -49,7 +49,7 @@ const ThongKeHLCaNhan = prop => {
   return (
     <div className="page">
       <div className="main">
-        <div className="container">
+        {/* <div className="container">
           <ExpandSearch
             // ref={expandRef}
             fields={fields}
@@ -57,7 +57,7 @@ const ThongKeHLCaNhan = prop => {
             // onClickSearch={onClickSearch}
             // onFieldsChange={onFieldsChange}
           ></ExpandSearch>
-        </div>
+        </div> */}
         <div className="container">
           <TableCustom
             isLoading={isLoading}

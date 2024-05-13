@@ -14,14 +14,14 @@ const PrintNhatKy = props => {
           <Row justify={"center"}>
             <TitleCustom
               text={`NHẬT KÝ HUẤN LUYỆN THÁNG ${params?.month} NĂM ${
-                formatDateToString(params?.nam, formatTime.year) ?? "..."
+                formatDateToString(params?.year, formatTime.year) ?? "..."
               } `}
               style={{fontSize: 32, fontWeight: "bold"}}
             ></TitleCustom>
           </Row>
           <Row justify={"center"}>
             <Space direction="vertical" align="start">
-              <div>Đơn vị: {params?.don_vi}</div>
+              <div>Đơn vị: ......</div>
             </Space>
           </Row>
           <TableCustom

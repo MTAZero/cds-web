@@ -13,13 +13,13 @@ const fields1: any[] = [
     css: css,
     optionsTime: {format: formatTime.dateTime},
   },
-  {
-    type: INPUT,
-    label: "Nội dung",
-    name: "content",
-    css: css,
-    options: months.map(e => ({value: e, label: e})),
-  },
+  // {
+  //   type: INPUT,
+  //   label: "Nội dung",
+  //   name: "content",
+  //   css: css,
+  //   options: months.map(e => ({value: e, label: e})),
+  // },
   {
     type: INPUT,
     label: "Tham gia",
