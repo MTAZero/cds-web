@@ -13,13 +13,13 @@ import {
 import { IoIosList, IoIosPeople, IoIosSettings } from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
-  {
-    url: RouterLink.HOME,
-    key: RouterLink.HOME,
-    icon: <FaHome />,
-    children: [],
-    text: "Trang chủ",
-  },
+  // {
+  //   url: RouterLink.HOME,
+  //   key: RouterLink.HOME,
+  //   icon: <FaHome />,
+  //   children: [],
+  //   text: "Trang chủ",
+  // },
   {
     url: RouterLink.TROOP_REPORT,
     key: RouterLink.TROOP_REPORT,

@@ -87,7 +87,7 @@ export const LoginPage: FC = () => {
     }));
   };
 
-  if (isLogin) return <Navigate to={RouterLink.HOME} />;
+  if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
 
   return (
     <Box sx={styles.containerStyle}>

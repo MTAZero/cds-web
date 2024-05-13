@@ -24,7 +24,7 @@ export const UserCalendarPage = () => {
           <TableHead>
             <TableRow>
               <TableCell
-                sx={{ ...{ width: "90px" }, ...styles.cellCenterStyle }}
+                sx={{ ...{ width: "110px" }, ...styles.cellCenterStyle }}
               >
                 Ngày
               </TableCell>
