@@ -1,18 +1,18 @@
-import { Box, Button, FormControl } from "@mui/material";
+import {Box, Button, FormControl} from "@mui/material";
 import * as styles from "./styles";
-import { FC, useState } from "react";
-import { APIServices, NotificationService, serialize } from "../../utils";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { RouterLink } from "../../routers/routers";
-import { Navigate, useNavigate } from "react-router-dom";
+import {FC, useState} from "react";
+import {APIServices, NotificationService, serialize} from "../../utils";
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {RouterLink} from "../../routers/routers";
+import {Navigate, useNavigate} from "react-router-dom";
 import {
   loginSuccess,
   setIdToken,
   setToken,
   updatePermisson,
 } from "../../redux/auth/auth.slice";
-import { Permission } from "../../types";
-import { SSOConfigs } from "const";
+import {Permission} from "../../types";
+import {SSOConfigs} from "const";
 interface LoginFormState {
   username: string;
   password: string;
@@ -23,18 +23,18 @@ export const LoginPage: FC = () => {
     username: "",
     password: "",
   });
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { isLogin } = useAppSelector((state) => state.auth);
+  const {isLogin} = useAppSelector(state => state.auth);
 
   const loadPermission = async () => {
     try {
       const request = await APIServices.Auth.getPermission();
-      const { data } = request;
-      const { permisisons } = data;
+      const {data} = request;
+      const {permisisons} = data;
 
       if (Array.isArray(permisisons)) {
-        const ix: Array<Permission> = permisisons.map((i) => {
+        const ix: Array<Permission> = permisisons.map(i => {
           return {
             module: i?.module,
             action: i?.action,
@@ -56,8 +56,8 @@ export const LoginPage: FC = () => {
       );
 
       const data = request?.data ? request?.data : {};
-      const { access_token } = data;
-      const { user } = data;
+      const {access_token} = data;
+      const {user} = data;
 
       dispatch(
         loginSuccess({
@@ -71,7 +71,7 @@ export const LoginPage: FC = () => {
         })
       );
       dispatch(setToken(access_token));
-      dispatch(setIdToken(null))
+      dispatch(setIdToken(null));
       loadPermission();
 
       NotificationService.success("Đăng nhập thành công");
@@ -82,19 +82,26 @@ export const LoginPage: FC = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setState((prevState) => ({
+    const {name, value} = event.target;
+    setState(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
-  console.log(isLogin)
+  console.log(isLogin);
   if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
-  const directToSSO=()=>{
-    const ssoConfig={response_type:SSOConfigs.responseType,client_id: SSOConfigs.clientId,scope:SSOConfigs.scope,redirect_uri:SSOConfigs.callbackLoginUrl};
-    const ssoUrl= `${SSOConfigs.urlSSO}/oauth2/authorize?${serialize(ssoConfig)}`;
-    window.location.replace(ssoUrl)
-  }
+  const directToSSO = () => {
+    const ssoConfig = {
+      response_type: SSOConfigs.responseType,
+      client_id: SSOConfigs.clientId,
+      scope: SSOConfigs.scope,
+      redirect_uri: SSOConfigs.callbackLoginUrl,
+    };
+    const ssoUrl = `${SSOConfigs.urlSSO}/oauth2/authorize?${serialize(
+      ssoConfig
+    )}`;
+    window.location.replace(ssoUrl);
+  };
   return (
     <Box sx={styles.containerStyle}>
       <FormControl sx={styles.loginPanelStyle} onSubmit={handleSubmit}>
@@ -129,10 +136,7 @@ export const LoginPage: FC = () => {
         >
           Đăng nhập
         </Button>
-        <Button
-          onClick={directToSSO}
-          sx={styles.buttonStyle}
-        >
+        <Button onClick={directToSSO} sx={styles.buttonSSOStyle}>
           Đăng nhập bằng SSO
         </Button>
       </FormControl>

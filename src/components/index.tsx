@@ -5,6 +5,6 @@ export * from "./modal-custom";
 export * from "./list-action-button";
 export * from "./expand-search";
 export * from "./button-excel";
-export * from "./InputFields";
+export * from "./input-fields";
 export * from "./collapse-custom";
 export * from "./description-custom/DescriptionsCustom";

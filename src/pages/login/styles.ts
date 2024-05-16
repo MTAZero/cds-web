@@ -74,7 +74,7 @@ export const buttonStyle = {
   alignSelf: "stretch",
   borderRadius: "32px",
   border: "2px solid #fff",
-  // background: "linear-gradient(0deg, #AB3D0C 0%, #FF7D42 100%)",
+  background: "linear-gradient(0deg, #342BB5 0%, #261F8D 100%)",
   // boxShadow: "0px 4px 0px 0px #A13A18",
   // background: "#004f99",
   color: "#FFF",
@@ -90,7 +90,32 @@ export const buttonStyle = {
     opacity: "0.9",
   },
 };
+export const buttonSSOStyle = {
+  marginTop: "20px",
+  display: "flex",
+  padding: "16px 24px",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "8px",
+  alignSelf: "stretch",
+  borderRadius: "32px",
+  border: "2px solid #fff",
+  background: "linear-gradient(0deg, #AB3D0C 0%, #FF7D42 100%)",
+  // boxShadow: "0px 4px 0px 0px #A13A18",
+  // background: "#004f99",
+  color: "#FFF",
+  fontFamily: "Inter",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "900",
+  lineHeight: "20px",
+  letterSpacing: "0.5px",
+  minWidth: "100px",
 
+  "&:hover": {
+    opacity: "0.9",
+  },
+};
 export const rowStyle = {
   width: "100%",
   display: "flex",
