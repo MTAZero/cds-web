@@ -31,6 +31,12 @@ const SoSach = prop => {
       name: "content",
     },
     {
+      label: "Địa điểm",
+      span: 8,
+      name: "location",
+    },
+
+    {
       label: "Đơn vị phụ trách",
       span: 8,
       name: "unit_charge",
@@ -67,13 +73,13 @@ const SoSach = prop => {
         type: "Sổ tay",
         training: id,
         note: dataEditor,
-        _id: data?._id,
       };
       setLoading(true);
-      const callApi = isValuable(id)
-        ? APIServices.SoSachHuanLuyen.updateSoSachOfHuanLuyen
-        : APIServices.SoSachHuanLuyen.createSoSachOfHuanLuyen;
-      const res = await callApi(values);
+      if (data?.created) {
+        await APIServices.SoSachHuanLuyen.updateSoSachOfHuanLuyen(values, id);
+      } else {
+        await APIServices.SoSachHuanLuyen.createSoSachOfHuanLuyen(values);
+      }
       setLoading(false);
       NotificationService.success("Lưu thông tin thành công");
     } catch (error) {

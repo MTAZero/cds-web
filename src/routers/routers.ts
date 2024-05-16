@@ -2,6 +2,7 @@ export const RouterLink = {
   LOGIN: "/login",
   HOME: "/home",
   CONTACT: "/contact",
+  XAC_THUC_SSO:'/xac-thuc',
 
   // báo quân số
   TROOP_REPORT: "/troop-report",

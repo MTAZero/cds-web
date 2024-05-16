@@ -24,7 +24,8 @@ const toArray = (data: any) => {
 };
 const formatDateToString = (
   date: Object | string | null,
-  format: string | null = null
+  format: string | null = null,
+  unix: boolean = false
 ) => {
   const validDate = dayjs(date?.toString())?.isValid();
   return date && validDate

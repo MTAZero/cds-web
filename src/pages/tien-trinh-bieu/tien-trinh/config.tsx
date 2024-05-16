@@ -68,7 +68,7 @@ const columns: any = [
     key: "guaranteed_material",
     dataIndex: "guaranteed_material",
     title: "Vật chất bảo đảm",
-    align: "left",
+    align: "center",
   },
   {
     key: "action",

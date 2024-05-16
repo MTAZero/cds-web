@@ -25,9 +25,9 @@ const createSoSachOfHuanLuyen = async (data: any) => {
   });
   return res?.data;
 };
-const updateSoSachOfHuanLuyen = async (data: any) => {
+const updateSoSachOfHuanLuyen = async (data: any, id) => {
   const res = await api.makeAuthRequest({
-    url: `/personal-diary/${data?._id}`,
+    url: `/personal-diary/${id}`,
     method: "PUT",
     data: data,
   });

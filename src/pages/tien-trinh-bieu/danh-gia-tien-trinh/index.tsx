@@ -16,7 +16,13 @@ import {columns, fields, mockData} from "./config";
 import {TableRowSelection} from "antd/es/table/interface";
 import {InputFields, TitleCustom} from "components";
 import {useAppDispatch, useAppSelector} from "hooks";
-import {APIServices, formatDateToString, randomId, toArray} from "utils";
+import {
+  APIServices,
+  NotificationService,
+  formatDateToString,
+  randomId,
+  toArray,
+} from "utils";
 import {formatTime} from "types";
 import {setListPosition} from "../../../redux/catalog/catalog.slice";
 const StatisticTienTrinh = () => {
@@ -117,7 +123,8 @@ const StatisticTienTrinh = () => {
     setFieldsValue();
   }, [dataSource]);
   useEffect(() => {
-    form.setFieldValue("danh_gia", dataTTB?.danh_gia);
+    form.setFieldValue("evaluation", dataTTB?.evaluation);
+    form.setFieldValue("time_train_actual", dataTTB?.time_train_actual);
   }, [dataTTB]);
   useEffect(() => {
     const _setSelectedRowKeys = () => {
@@ -185,13 +192,7 @@ const StatisticTienTrinh = () => {
           !record?.children?.length), // Column configuration not to be checked
     }),
   };
-  const saveButton = () => {
-    return (
-      <Button type="primary" onClick={submit} loading={loading}>
-        Lưu lại
-      </Button>
-    );
-  };
+
   const submit = async () => {
     const tableValues = form.getFieldValue("list");
     console.log(tableValues);
@@ -210,20 +211,22 @@ const StatisticTienTrinh = () => {
     console.log(listThanhVienOfTable);
     const listThanhPhanFormat = listThanhPhan?.map(thanhPhan => ({
       ...thanhPhan,
-      listPeople: listThanhVienOfTable.filter(
+      list_people: listThanhVienOfTable.filter(
         thanhVien => thanhVien?.object == thanhPhan?.object
       ),
     }));
     console.log(listThanhPhanFormat);
     const data = {
-      progressId: id,
-      thanh_phan: listThanhPhanFormat,
+      element_join: listThanhPhanFormat,
       evaluation: form.getFieldValue("evaluation"),
       time_train_actual: form.getFieldValue("time_train_actual"),
     };
     try {
-      const res = await APIServices.TienTrinhBieu.danhGiaHuanLuyen(data);
-    } catch (error) {}
+      await APIServices.TienTrinhBieu.danhGiaHuanLuyen(data, id);
+      NotificationService.success("Lưu thông tin thành công");
+    } catch (error) {
+      NotificationService.error("Đã có lỗi");
+    }
   };
 
   return (

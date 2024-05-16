@@ -10,7 +10,7 @@ const fileInfo = record => {
       <div className="time">
         {" "}
         <span className="bold">Cập nhật: </span>
-        {formatDateToString(dayjs(), formatTime.dateTime)}
+        {formatDateToString(dayjs(record?.update_at), formatTime.dateTime)}
       </div>
     </div>
   );

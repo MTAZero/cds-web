@@ -29,9 +29,14 @@ import {GuardDuttyUnitPage} from "pages/guard-dutty/guard-dutty-unit";
 import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
 import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
 import {UserCalendarPage} from "pages/work-calendar/user-calendar";
+import XacThucSSO from "pages/xac-thuc-sso";
 
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
+  {
+    path: RouterLink.XAC_THUC_SSO,
+    element: <XacThucSSO />,
+  },
   {
     path: RouterLink.LOGIN,
     element: <LoginPage />,

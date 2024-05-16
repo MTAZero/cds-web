@@ -256,8 +256,7 @@ const FormItem = (props: any) => {
             }}
             placeholder={placeholder ?? optionsTime.format}
             disabled={disable}
-            // format={optionsTime.format}
-            // showTime={optionsTime.format == formatTime.time}
+            format={optionsTime.format ?? formatTime.time_24h}
             {...rest}
           />
         );

@@ -5,6 +5,7 @@ export const mainContainerStyle = {
   flexDirection: "column",
   position: "fixed",
   height: "100%",
+  overflow: "auto",
 };
 
 export const menuContainerStyle = {
