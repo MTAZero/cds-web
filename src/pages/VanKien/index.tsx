@@ -9,7 +9,7 @@ import {useLocation} from "react-router-dom";
 import {useAppDispatch} from "hooks";
 import UploadFile from "./upload/UploadFile";
 import PdfViewer from "components/pdf-viewer";
-import {APIServices, toArray} from "utils";
+import {APIServices, randomId, toArray} from "utils";
 const VanKien = props => {
   const modalRef = useRef(null);
   const uploadRef = useRef(null);
@@ -24,7 +24,11 @@ const VanKien = props => {
     try {
       const res = await APIServices.VanKien.getListVanKien();
       console.log(res);
-      setListFile(toArray(res)?.reverse());
+      setListFile(
+        toArray(res)
+          ?.sort((a, b) => b?.update_at - a?.update_at)
+          ?.map(e => ({...e, key: randomId()}))
+      );
     } catch (error) {}
   };
   useEffect(() => {

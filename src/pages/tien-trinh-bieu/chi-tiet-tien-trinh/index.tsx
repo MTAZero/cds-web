@@ -75,7 +75,7 @@ const DetailTienTrinh = props => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 40,
         });
         setListUnit(res?.items);
       } catch (error) {
@@ -149,9 +149,8 @@ const DetailTienTrinh = props => {
         id == "tao-moi"
           ? APIServices.TienTrinhBieu.createTienTrinhBieu
           : APIServices.TienTrinhBieu.updateTienTrinhBieu;
-      const data = {
+      let data = {
         ...formValues,
-        _id: id,
         year: toNumber(formatDateToString(formValues?.year, formatTime.year)),
         date: formatDateToString(formValues?.date, formatTime.dayFullRevert),
         from_date: formatDateToString(
@@ -167,7 +166,9 @@ const DetailTienTrinh = props => {
           time: convertDateArrayToThoiGianHL(e?.time),
         })),
       };
-      console.log(data);
+      if (id != "tao-moi") {
+        data = {...data, _id: id};
+      }
       await callApi(data);
       setLoading(false);
       NotificationService.success(

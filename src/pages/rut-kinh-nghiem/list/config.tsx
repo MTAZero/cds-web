@@ -5,20 +5,24 @@ import {formatDateToString} from "utils";
 const {COMBO_BOX, DATE} = fieldType;
 const columns: any = [
   {
+    key: "time",
+    dataIndex: "time",
+    title: "Thời gian",
+    align: "center",
+    render: (value, record, index) => {
+      return <>{formatDateToString(value, formatTime.time_24h)}</>;
+    },
+  },
+  {
     key: "date",
     dataIndex: "date",
-    title: "Thời gian",
+    title: "Ngày",
     align: "center",
     render: (value, record, index) => {
       return <>{formatDateToString(value, formatTime.dayFull)}</>;
     },
   },
-  {
-    key: "content",
-    dataIndex: "content",
-    title: "Nội dung",
-    align: "left",
-  },
+
   {
     key: "join",
     dataIndex: "join",

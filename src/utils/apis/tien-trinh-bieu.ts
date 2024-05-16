@@ -40,9 +40,9 @@ const updateTienTrinhBieu = async data => {
   });
   return res?.data;
 };
-const danhGiaHuanLuyen = async data => {
+const danhGiaHuanLuyen = async (data, id) => {
   const res = await api.makeAuthRequest({
-    url: `/training/${data?._id}`,
+    url: `/training/${id}`,
     method: "PUT",
     data: data,
   });

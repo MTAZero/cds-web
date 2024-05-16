@@ -1,25 +1,59 @@
-import {months} from "const";
+import {months, weeks} from "const";
 import {fieldType, formatTime} from "types";
 
-const {INPUT, DATE, COMBO_BOX, TEXT_AREA} = fieldType;
+const {INPUT, DATE, COMBO_BOX, TEXT_AREA, TIME} = fieldType;
 const css = {xs: 24, sm: 24, md: 24, lg: 24, xl: 24};
 const css2 = {xs: 24, sm: 24, md: 24, lg: 24, xl: 24};
 const fields1: any[] = [
   {
-    type: DATE,
+    type: TIME,
     label: "Thời gian",
-    name: "date",
+    name: "time",
     rules: [{required: true, message: "Chưa chọn thời gian"}],
     css: css,
-    optionsTime: {format: formatTime.dateTime},
+    optionsTime: {format: formatTime.time_24h},
+  },
+  {
+    type: DATE,
+    label: "Ngày",
+    name: "date",
+    disableDate: false,
+    rules: [{required: true, message: "Chưa nhập ngày"}],
+    css: css,
   },
   // {
-  //   type: INPUT,
-  //   label: "Nội dung",
-  //   name: "content",
+  //   type: COMBO_BOX,
+  //   label: "Tháng",
+  //   name: "month",
   //   css: css,
   //   options: months.map(e => ({value: e, label: e})),
+  //   rules: [{required: true, message: "Chưa chọn tháng"}],
   // },
+  // {
+  //   type: DATE,
+  //   label: "Năm",
+  //   name: "year",
+  //   rules: [{required: true, message: "Chưa chọn năm"}],
+  //   css: css,
+  //   picker: "year",
+  //   optionsTime: {format: "YYYY"},
+  // },
+
+  {
+    type: COMBO_BOX,
+    label: "Tuần",
+    name: "week",
+    css: css,
+    options: weeks.map(e => ({value: e, label: e})),
+    rules: [{required: true, message: "Chưa chọn tuần"}],
+  },
+  {
+    type: COMBO_BOX,
+    label: "Đơn vị",
+    name: "unit",
+    css: css,
+    rules: [{required: true, message: "Chưa nhập đơn vị"}],
+  },
   {
     type: INPUT,
     label: "Tham gia",

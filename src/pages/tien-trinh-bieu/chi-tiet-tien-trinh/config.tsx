@@ -106,6 +106,7 @@ const fields2: any[] = [
     label: "Vật chất bảo đảm chính",
     name: "guaranteed_material",
     css: css,
+    rules: [{required: true, message: "Chưa nhập vật chất bảo đảm"}],
   },
 ];
 const columns = [

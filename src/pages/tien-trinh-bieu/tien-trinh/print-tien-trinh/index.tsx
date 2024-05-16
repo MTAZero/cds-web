@@ -17,8 +17,8 @@ const PrintTienTrinh = (props: any) => {
     const _setCheckerAndSigner = (unit: any) => {
       let _checker;
       let _signer;
-      const nameUnit = listUnit?.find(e => e?._id == unit)?.name;
-      switch (nameUnit) {
+
+      switch (unit) {
         case "Trung tâm":
           _signer = "chỉ huy trưởng";
           break;
@@ -36,7 +36,7 @@ const PrintTienTrinh = (props: any) => {
           _signer = "Cụm trưởng";
           break;
       }
-      if (nameUnit?.includes("Đội")) {
+      if (unit?.includes("Đội")) {
         _checker = "cụm trưởng";
         _signer = "đội trưởng";
       } else {
@@ -48,89 +48,93 @@ const PrintTienTrinh = (props: any) => {
     _setCheckerAndSigner(sample?.unit);
   }, [sample]);
   return (
-    <div className="print-tien-trinh container">
-      <table>
-        <thead style={{height: "20mm"}}></thead>
-        <tbody>
-          <div
-            className="header"
-            style={{
-              display: "-webkit-box",
-              position: "relative",
-              flexDirection: "row",
-            }}
-          >
-            <div className="left">
+    <div className="print-tien-trinh">
+      <div style={{width: "100%"}}>
+        <table style={{width: "100%"}}>
+          <thead style={{height: "20mm"}}></thead>
+          <tbody>
+            <div
+              className="header"
+              style={{
+                display: "-webkit-box",
+                position: "relative",
+                flexDirection: "row",
+              }}
+            >
+              <div className="left">
+                <Space align="center" direction="vertical">
+                  <div style={{fontSize: "26pt"}}>PHÊ DUYỆT</div>
+                  <div style={{fontSize: 28, fontStyle: "italic"}}>
+                    {" "}
+                    Ngày ... tháng ... năm 20...
+                  </div>
+                  <div style={{fontSize: "26pt", textTransform: "uppercase"}}>
+                    {checker}
+                  </div>
+                  <br />
+                  <br />
+                  <br />
+                  ......................................
+                </Space>
+              </div>
+              <div
+                className="center"
+                style={{
+                  position: "absolute",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                }}
+              >
+                <Space direction="vertical" align="center">
+                  <div style={{fontSize: "30pt"}}>TIẾN TRÌNH BIỂU</div>
+                  <div style={{fontSize: "26pt"}}>
+                    Huấn luyện chiến đấu tuần {sample?.week ?? "..."} tháng{" "}
+                    {sample?.month ?? "..."}
+                  </div>
+                  <div style={{fontSize: "26pt"}}>
+                    (Từ ngày{" "}
+                    {formatDateToString(
+                      sample?.from_date,
+                      formatTime.dayMonth
+                    ) ?? "..."}{" "}
+                    đến ngày{" "}
+                    {formatDateToString(sample?.to_date, formatTime.dayMonth) ??
+                      "..."}{" "}
+                    )
+                  </div>
+                </Space>
+              </div>
+            </div>
+            <TableCustom
+              className={["table-print"]}
+              id="table-print"
+              dataSource={dataSource}
+              pagination={false}
+              columns={columns}
+              hideCheckboxCol={true}
+            ></TableCustom>
+            <Row justify={"end"} style={{marginTop: 30}}>
               <Space align="center" direction="vertical">
-                <div style={{fontSize: "26pt"}}>PHÊ DUYỆT</div>
-                <div style={{fontSize: 28, fontStyle: "italic"}}>
-                  {" "}
-                  Ngày ... tháng ... năm 20...
-                </div>
-                <div style={{fontSize: "26pt", textTransform: "uppercase"}}>
-                  {checker}
+                <div style={{fontSize: 28}}> Ngày ... tháng ... năm 20...</div>
+                <div
+                  style={{
+                    fontSize: "26pt",
+                    textTransform: "uppercase",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {signer}
                 </div>
                 <br />
                 <br />
                 <br />
                 ......................................
               </Space>
-            </div>
-            <div
-              className="center"
-              style={{
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              <Space direction="vertical" align="center">
-                <div style={{fontSize: "30pt"}}>TIẾN TRÌNH BIỂU</div>
-                <div style={{fontSize: "26pt"}}>
-                  Huấn luyện chiến đấu tuần {sample?.week ?? "..."} tháng{" "}
-                  {sample?.month ?? "..."}
-                </div>
-                <div style={{fontSize: "26pt"}}>
-                  (Từ ngày{" "}
-                  {formatDateToString(sample?.from_date, formatTime.dayMonth) ??
-                    "..."}{" "}
-                  đến ngày{" "}
-                  {formatDateToString(sample?.to_date, formatTime.dayMonth) ??
-                    "..."}{" "}
-                  )
-                </div>
-              </Space>
-            </div>
-          </div>
-          <TableCustom
-            className={["table-print"]}
-            id="table-print"
-            dataSource={dataSource}
-            pagination={false}
-            columns={columns}
-            hideCheckboxCol={true}
-          ></TableCustom>
-          <Row justify={"end"} style={{marginTop: 30}}>
-            <Space align="center" direction="vertical">
-              <div style={{fontSize: 28}}> Ngày ... tháng ... năm 20...</div>
-              <div
-                style={{
-                  fontSize: "26pt",
-                  textTransform: "uppercase",
-                  fontWeight: "bold",
-                }}
-              >
-                {signer}
-              </div>
-              <br />
-              <br />
-              <br />
-              ......................................
-            </Space>
-          </Row>
-        </tbody>
-        <tfoot style={{height: "20mm"}}></tfoot>
-      </table>
+            </Row>
+          </tbody>
+          <tfoot style={{height: "20mm"}}></tfoot>
+        </table>
+      </div>
     </div>
   );
 };

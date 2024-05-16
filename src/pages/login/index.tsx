@@ -1,16 +1,18 @@
 import { Box, Button, FormControl } from "@mui/material";
 import * as styles from "./styles";
 import { FC, useState } from "react";
-import { APIServices, NotificationService } from "../../utils";
+import { APIServices, NotificationService, serialize } from "../../utils";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { RouterLink } from "../../routers/routers";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   loginSuccess,
+  setIdToken,
   setToken,
   updatePermisson,
 } from "../../redux/auth/auth.slice";
 import { Permission } from "../../types";
+import { SSOConfigs } from "const";
 interface LoginFormState {
   username: string;
   password: string;
@@ -21,7 +23,7 @@ export const LoginPage: FC = () => {
     username: "",
     password: "",
   });
-
+  const navigate=useNavigate();
   const dispatch = useAppDispatch();
   const { isLogin } = useAppSelector((state) => state.auth);
 
@@ -69,7 +71,7 @@ export const LoginPage: FC = () => {
         })
       );
       dispatch(setToken(access_token));
-
+      dispatch(setIdToken(null))
       loadPermission();
 
       NotificationService.success("Đăng nhập thành công");
@@ -86,9 +88,13 @@ export const LoginPage: FC = () => {
       [name]: value,
     }));
   };
-
+  console.log(isLogin)
   if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
-
+  const directToSSO=()=>{
+    const ssoConfig={response_type:SSOConfigs.responseType,client_id: SSOConfigs.clientId,scope:SSOConfigs.scope,redirect_uri:SSOConfigs.callbackLoginUrl};
+    const ssoUrl= `${SSOConfigs.urlSSO}/oauth2/authorize?${serialize(ssoConfig)}`;
+    window.location.replace(ssoUrl)
+  }
   return (
     <Box sx={styles.containerStyle}>
       <FormControl sx={styles.loginPanelStyle} onSubmit={handleSubmit}>
@@ -122,6 +128,12 @@ export const LoginPage: FC = () => {
           type="submit"
         >
           Đăng nhập
+        </Button>
+        <Button
+          onClick={directToSSO}
+          sx={styles.buttonStyle}
+        >
+          Đăng nhập bằng SSO
         </Button>
       </FormControl>
     </Box>

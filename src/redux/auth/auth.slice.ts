@@ -16,6 +16,8 @@ export interface AuthState {
   } | null;
   permission: Array<Permission>;
   token: string | null;
+  id_token:string|null;
+  
 }
 
 const initialState: AuthState = {
@@ -23,6 +25,7 @@ const initialState: AuthState = {
   info: null,
   permission: [],
   token: null,
+  id_token:null
 };
 
 export const authSlice = createSlice({
@@ -54,11 +57,16 @@ export const authSlice = createSlice({
       state.isLogin = false;
       state.info = null;
       state.permission = [];
+      state.id_token=null;
       StoreService.setAuthToken(null);
     },
     setToken: (state: AuthState, action: PayloadAction<string>) => {
       state.token = action.payload;
       StoreService.setAuthToken(action.payload);
+    },
+    setIdToken: (state: AuthState, action: PayloadAction<string>) => {
+      state.id_token = action.payload;
+      
     },
     updateInfo: (
       state: AuthState,
@@ -78,7 +86,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { loginSuccess, updatePermisson, logout, setToken, updateInfo } =
+export const { loginSuccess, updatePermisson, logout, setToken,setIdToken, updateInfo } =
   authSlice.actions;
 
 export default authSlice.reducer;

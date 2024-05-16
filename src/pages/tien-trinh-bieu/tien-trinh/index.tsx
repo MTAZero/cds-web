@@ -46,9 +46,9 @@ const TienTrinh = (props: any) => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 40,
         });
-        setListUnit(res?.items);
+        setListUnit(toArray(res?.items));
       } catch (error) {
         setListUnit([]);
       }

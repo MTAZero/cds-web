@@ -1,9 +1,8 @@
 import {Button, Col, Divider, Form, Row, Space, Spin, Upload} from "antd";
-import {InputFields, TitleCustom} from "components";
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 
-import {fields1} from "./config";
+import {fields1 as fieldInit} from "./config";
 import dayjs from "dayjs";
 import {useAppDispatch} from "hooks";
 import {
@@ -11,18 +10,18 @@ import {
   NotificationService,
   convertDateStringToDateObject,
   formatDateToString,
-  isValuable,
 } from "utils";
 import {formatTime} from "types";
+import {InputFields, TitleCustom} from "components";
 
 const DetailRutKinhNghiem = props => {
   const dispatch = useAppDispatch();
   const {id} = useParams();
+  const [fields, setFields] = useState<any>(fieldInit);
   const [form] = Form.useForm();
   const [selectedFile, setSelectedFile] = useState(null);
   const [listUnit, setListUnit] = useState<any[]>();
   const [data, setData] = useState<any>();
-  const [spinning, setSpinning] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -38,22 +37,55 @@ const DetailRutKinhNghiem = props => {
         setLoading(false);
       }
     };
-    if (isValuable(id)) {
+    if (id != "tao-moi") {
       getData(id);
     }
   }, [id]);
-  const submit = async () => {
-    const formValues = form.getFieldsValue();
-    const data = {
-      ...formValues,
-      _id: id,
-      date: formatDateToString(formValues?.date, formatTime.dayFullRevert),
+  useEffect(() => {
+    const setOptionsDonVi = async listUnit => {
+      fields.find((e: {name: string}) => e?.name === "unit").options =
+        listUnit?.map((e: {_id: any; name: any}) => ({
+          value: e?._id,
+          label: e?.name,
+        }));
+
+      setFields([...fields]);
     };
+    setOptionsDonVi(listUnit);
+  }, [listUnit]);
+  useEffect(() => {
+    const getListUnit = async () => {
+      try {
+        const res = await APIServices.QuanTri.getListUnit({
+          pageIndex: 1,
+          pageSize: 20,
+        });
+        setListUnit(res?.items);
+      } catch (error) {
+        setListUnit([]);
+      }
+    };
+    getListUnit();
+  }, []);
+
+  const submit = async () => {
     try {
+      const formValues = await form.validateFields();
+      console.log(formValues);
+      let data = {
+        ...formValues,
+        year: formatDateToString(formValues?.date, "YYYY"),
+        month: formatDateToString(formValues?.date, "MM"),
+        date: formatDateToString(formValues?.date, "YYYY-MM-DD"),
+      };
+      if (id != "tao-moi") {
+        data = {...data, _id: id};
+      }
       setLoading(true);
-      const callApi = isValuable(id)
-        ? APIServices.SoRutKinhNghiem.updateSoRutKinhNghiem
-        : APIServices.SoRutKinhNghiem.createSoRutKinhNghiem;
+      const callApi =
+        id == "tao-moi"
+          ? APIServices.SoRutKinhNghiem.createSoRutKinhNghiem
+          : APIServices.SoRutKinhNghiem.updateSoRutKinhNghiem;
       const res = await callApi(data);
       setLoading(false);
       NotificationService.success(`Đã lưu thành công`);
@@ -67,6 +99,7 @@ const DetailRutKinhNghiem = props => {
       const formatData = {
         ...data,
         date: convertDateStringToDateObject(data?.date),
+        time: convertDateStringToDateObject(data?.time),
       };
       form.setFieldsValue(formatData);
     };
@@ -78,10 +111,9 @@ const DetailRutKinhNghiem = props => {
         <div className="container">
           <Spin spinning={loading}>
             <Form form={form}>
-              <Divider></Divider>
               <TitleCustom text="Rút kinh nghiệm công tác huấn luyện"></TitleCustom>
               <Row gutter={[4, 4]}>
-                <InputFields data={fields1}></InputFields>
+                <InputFields data={fields}></InputFields>
               </Row>
             </Form>
             <Row justify={"end"} style={{marginTop: 8}}>

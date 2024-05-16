@@ -42,7 +42,6 @@ const ProtectedOutlet: FC<RouterProps> = ({ requireLogin = false }) => {
       try {
         const ans = await APIServices.Auth.checkToken();
         const { data } = ans;
-
         dispatch(
           updateInfo({
             _id: data?._id,

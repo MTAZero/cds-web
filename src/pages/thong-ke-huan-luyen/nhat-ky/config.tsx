@@ -7,15 +7,7 @@ const columnsNK: any = [
   {
     key: "day_of_week",
     dataIndex: "day_of_week",
-    title: "Thứ/Ngày/Tháng",
-    render: (value, record, index) => {
-      return (
-        <div>
-          {record?.days_of_week} (
-          {formatDateToString(value, formatTime.dayMonth)})
-        </div>
-      );
-    },
+    title: "Thứ",
   },
   {
     key: "unit",

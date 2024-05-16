@@ -100,6 +100,13 @@ const RutKinhNghiem = props => {
     );
     navigate(routeRollcall);
   };
+  const navigateToNew = () => {
+    const routeDetail = RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE.replace(
+      ":id",
+      "tao-moi"
+    );
+    navigate(routeDetail);
+  };
   const setPage = pageIndex => {
     tableRef?.current?.setPage(pageIndex);
   };
@@ -153,6 +160,9 @@ const RutKinhNghiem = props => {
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Rút kinh nghiệm"></TitleCustom>
+            <Button type="primary" onClick={navigateToNew}>
+              Thêm mới
+            </Button>
           </Row>
           <TableCustom
             ref={tableRef}

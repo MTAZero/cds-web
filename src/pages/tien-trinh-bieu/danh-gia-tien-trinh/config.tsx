@@ -1,7 +1,7 @@
 import {fieldType} from "types";
 import {randomId} from "utils";
 
-const {COMBO_BOX, INPUT} = fieldType;
+const {COMBO_BOX, INPUT, INPUT_NUMBER} = fieldType;
 const listChucVu = ["SQCNTT", "SQCH", "NVCNTT"];
 const columns: any = [
   {
@@ -56,8 +56,8 @@ const fields = [
   },
   {
     label: "Thời gian HLTT",
-    type: INPUT,
-    name: "time",
+    type: INPUT_NUMBER,
+    name: "time_train_actual",
   },
 ];
 const mockData = [
