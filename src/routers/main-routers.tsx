@@ -19,12 +19,12 @@ import DetailRutKinhNghiem from "pages/rut-kinh-nghiem/chi-tiet-rut-kinh-nghiem"
 import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
-import VanKien from "pages/VanKien";
+import VanKien from "pages/van-kien";
 import {UpdateGuardDuttyPage} from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
-import Unit from "pages/admin/Unit";
+import Unit from "pages/admin/unit";
 import {GuardDuttyUnitPage} from "pages/guard-dutty/guard-dutty-unit";
 import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
 import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
