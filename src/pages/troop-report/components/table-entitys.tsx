@@ -49,6 +49,7 @@ type TableEntityProps = {
     page: number;
   }>;
   time: number;
+  defaultPageSize?: number;
 };
 
 const columns = [
@@ -70,6 +71,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
   showButtonSave = false,
   loadEntitys,
   time,
+  defaultPageSize = 5,
 }) => {
   const filterData = [
     { value: "", text: "Tất cả trạng thái" },
@@ -88,7 +90,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
   const [textSearch, setTextSearch] = useState<string>("");
   const [total, setTotal] = useState<number>(0);
   const [pageIndex, setPageIndex] = useState<number>(1);
-  const [pageSize, setPageSize] = useState<number>(5);
+  const [pageSize, setPageSize] = useState<number>(defaultPageSize);
   const [entites, setEntites] = useState<Array<Entity>>([]);
 
   const startIndex = (pageIndex - 1) * pageSize;
@@ -137,7 +139,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
     }
   };
 
-  if (entites.length === 0 && showButtonSave) return null;
+  // if (entites.length === 0 && showButtonSave) return null;
 
   return (
     <Box sx={styles.containerStyle}>

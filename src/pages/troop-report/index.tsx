@@ -208,6 +208,7 @@ export const TroopReport: React.FC = () => {
           showButtonSave={true}
           loadEntitys={loadListUserOfUnit}
           time={date.unix() * 1000}
+          defaultPageSize={30}
         />
       </Box>
 
