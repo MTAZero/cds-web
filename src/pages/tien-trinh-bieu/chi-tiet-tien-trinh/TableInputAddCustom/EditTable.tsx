@@ -88,7 +88,6 @@ export const EditableCell: React.FC<EditableCellProps> = ({
   const listPosition = useAppSelector(state => state.catalog.listPosition);
   useEffect(() => {
     if (dataIndex === "object") {
-      console.log(listPosition);
       setNewOptions(listPosition?.map(e => ({value: e?._id, label: e?.name})));
     }
   }, [listPosition]);
@@ -153,9 +152,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
           }}
           format={formatTime.time_24h}
           disabled={disabled}
-          onChange={e => {
-            console.log(e);
-          }}
+          onChange={e => {}}
           {...restProps}
         />
       </Form.Item>

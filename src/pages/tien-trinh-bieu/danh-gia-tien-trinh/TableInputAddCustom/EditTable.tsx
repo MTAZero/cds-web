@@ -204,9 +204,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
               setOpenDropdown(true);
             }
           }}
-          onChange={e => {
-            console.log(form.getFieldsValue());
-          }}
+          onChange={e => {}}
           placeholder={disabled ? "--" : "Chọn"}
           options={newOptions}
           disabled={disabled}
@@ -216,7 +214,6 @@ export const EditableCell: React.FC<EditableCellProps> = ({
       </Form.Item>
     );
   }
-  console.log(record);
   // console.log(listPosition);
   // if (
   //   listPosition.some(position => position?._id === record?.full_name) &&

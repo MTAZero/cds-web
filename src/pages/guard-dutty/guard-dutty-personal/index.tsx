@@ -9,19 +9,19 @@ import {
 } from "@mui/material";
 
 import * as styles from "./index.styles";
-import { DatePicker } from "@mui/x-date-pickers";
-import { useEffect, useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { APIServices, NotificationService } from "utils";
-import { useAppSelector } from "hooks";
-import { MAX_ENTITY_REQUEST } from "const";
+import {DatePicker} from "@mui/x-date-pickers";
+import {useEffect, useState} from "react";
+import dayjs, {Dayjs} from "dayjs";
+import {APIServices, NotificationService} from "utils";
+import {useAppSelector} from "hooks";
+import {MAX_ENTITY_REQUEST} from "const";
 
 export const GuardDuttyPersonalPage = () => {
   const [currentSelectDay, setCurrentDay] = useState<any>(null);
 
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [dataPending, setDataPending] = useState<Array<any>>([]);
-  const userId = useAppSelector((state) => state.auth.info._id);
+  const userId = useAppSelector(state => state.auth.info._id);
 
   useEffect(() => {
     if (!dataPending) return;
@@ -30,7 +30,7 @@ export const GuardDuttyPersonalPage = () => {
     for (let index = 0; index < dataPending?.length; index++) {
       const dataTemp = dataPending[index];
       const day = dataTemp?.days?.find(
-        (i) => i?.title === currentSelectDay?.title
+        i => i?.title === currentSelectDay?.title
       );
       if (day) currentNew = day;
     }
@@ -56,11 +56,8 @@ export const GuardDuttyPersonalPage = () => {
   const renderDayItem = (dayItem: any) => {
     if (dayItem?.isEmpty) return <Box sx={styles.timePanelCellEmptyStyle} />;
 
-    const { title, items } = dayItem;
+    const {title, items} = dayItem;
     const day = title?.split("/")[0];
-
-    console.log({ items });
-
     return (
       <Box
         sx={styles.timePanelCellStyle}
@@ -96,7 +93,7 @@ export const GuardDuttyPersonalPage = () => {
             views={["month", "year"]}
             format="MM/YYYY"
             value={date}
-            onChange={(value) => {
+            onChange={value => {
               setDate(value);
             }}
           />

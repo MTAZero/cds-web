@@ -55,7 +55,6 @@ const SoSach = prop => {
       try {
         setLoading(true);
         const res = await APIServices.SoSachHuanLuyen.getSoSachOfHuanLuyen(id);
-        console.log(res);
         setData(res);
         setLoading(false);
       } catch (error) {
@@ -69,16 +68,20 @@ const SoSach = prop => {
   }, [id]);
   const submit = async () => {
     try {
-      const values = {
+      const valuesCreate = {
         type: "Sổ tay",
         training: id,
         note: dataEditor,
       };
+      const valuesUpdate = {note: dataEditor};
       setLoading(true);
       if (data?.created) {
-        await APIServices.SoSachHuanLuyen.updateSoSachOfHuanLuyen(values, id);
+        await APIServices.SoSachHuanLuyen.updateSoSachOfHuanLuyen(
+          valuesUpdate,
+          data?._id
+        );
       } else {
-        await APIServices.SoSachHuanLuyen.createSoSachOfHuanLuyen(values);
+        await APIServices.SoSachHuanLuyen.createSoSachOfHuanLuyen(valuesCreate);
       }
       setLoading(false);
       NotificationService.success("Lưu thông tin thành công");
@@ -117,7 +120,6 @@ const SoSach = prop => {
               }}
               onChange={(event, editor: any) => {
                 const _data = editor?.getData();
-                console.log(_data);
                 setDataEditor(_data);
               }}
               onBlur={(event, editor) => {}}

@@ -45,7 +45,7 @@ const Permission = () => {
     try {
       const res = await APIServices.QuanTri.getListRole({
         pageIndex: 1,
-        pageSize: 20,
+        pageSize: 100,
       });
       setListRole(res?.items);
     } catch (error) {}
@@ -95,7 +95,6 @@ const Permission = () => {
     modalRef?.current?.openModal();
   };
   const search = () => {
-    console.log(form.getFieldValue("keyword"));
     setParams({
       ...params,
       keyword: form.getFieldValue("keyword"),
@@ -130,7 +129,6 @@ const Permission = () => {
                   placeholder="Nhập"
                   allowClear
                   onSearch={(value, event) => {
-                    console.log(value);
                     search();
                   }}
                   onChange={search}
@@ -149,7 +147,6 @@ const Permission = () => {
             onChangePagination={onChangePagination}
             isLoading={isLoading}
             onDoubleClick={(record, rowIndex) => {
-              console.log(record);
               openUpdateModal(record?._id);
             }}
             listActionButton={listActionButton}

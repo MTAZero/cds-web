@@ -126,4 +126,31 @@ const columns = [
     key: "action",
   },
 ];
-export {fields1, fields2, columns};
+const columnsGiaoAn = (renderButton, renderGiaoAn, renderAction) => {
+  return [
+    {
+      title: "Chọn giáo án",
+      key: "button",
+      dataIndex: "button",
+      render: (value, record, index) => {
+        return <>{renderButton}</>;
+      },
+    },
+    {
+      title: "Trạng thái",
+      key: "giaoAn",
+      dataIndex: "giaoAn",
+      render: (value, record, index) => {
+        return <>{renderGiaoAn}</>;
+      },
+    },
+    {
+      key: "action",
+      render: (value, record, index) => {
+        return <>{renderAction}</>;
+      },
+      title: "Thao tác",
+    },
+  ];
+};
+export {fields1, fields2, columns, columnsGiaoAn};

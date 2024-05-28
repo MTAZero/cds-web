@@ -36,7 +36,6 @@ const Modal = forwardRef((props: any, ref) => {
       setData(null);
     }
   }, [id]);
-  console.log(listUnit);
   fields.find(e => e?.name === "unit").options = listUnit?.map(e => ({
     value: e?._id,
     label: e?.name,

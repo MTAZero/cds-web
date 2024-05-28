@@ -41,6 +41,38 @@ const convertDateStringToDateObject = (dateString: string | null) => {
 const toNumber = value => {
   return !isNaN(value) ? Number(value) : 0;
 };
+const convertBase64ToFile = (
+  base64,
+  name = "file",
+  type = "application/pdf"
+) => {
+  const file = new File(
+    [Uint8Array.from(atob(base64), m => m.codePointAt(0))],
+    name,
+    {type: type}
+  );
+  return file;
+};
+const convertFileToBase64 = file => {
+  return new Promise<void>((resolve, reject) => {
+    var filereader = new FileReader();
+    let base64;
+    filereader.readAsDataURL(file);
+    filereader.onload = function (evt) {
+      var result = evt.target.result;
+      console.log(result);
+      base64 = result?.toString().replace("data:application/pdf;base64,", "");
+      resolve(base64);
+    };
+  });
+};
+const convertObjectToFormData = object => {
+  let formData = new FormData();
+  for (const key in object) {
+    formData.append(key, object[key]);
+  }
+  return formData;
+};
 export {
   serialize,
   parseJson,
@@ -48,4 +80,7 @@ export {
   formatDateToString,
   convertDateStringToDateObject,
   toNumber,
+  convertBase64ToFile,
+  convertFileToBase64,
+  convertObjectToFormData,
 };

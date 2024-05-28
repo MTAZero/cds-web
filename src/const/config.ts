@@ -12,7 +12,6 @@ export const SSOConfigs = {
   clientSecret: "gSffrp7c3hfLOlCejzRJjZRgevca",
   scope: "openid profile",
   callbackLoginUrl: `${process.env.REACT_APP_CALLBACK_URL}/xac-thuc`,
-  urlBeSSO: "http://172.16.200.13:6868/",
   grantType: "authorization_code",
   callbackLogoutUrl: `${process.env.REACT_APP_CALLBACK_URL}/login`,
 };

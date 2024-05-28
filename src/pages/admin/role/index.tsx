@@ -68,7 +68,6 @@ const Role = () => {
     modalRef?.current?.openModal();
   };
   const search = () => {
-    console.log(form.getFieldValue("keyword"));
     setParams({
       ...params,
       keyword: form.getFieldValue("keyword"),
@@ -103,7 +102,6 @@ const Role = () => {
                   placeholder="Nhập"
                   allowClear
                   onSearch={(value, event) => {
-                    console.log(value);
                     search();
                   }}
                   onChange={search}
@@ -122,7 +120,6 @@ const Role = () => {
             onChangePagination={onChangePagination}
             isLoading={isLoading}
             onDoubleClick={(record, rowIndex) => {
-              console.log(record);
               openUpdateModal(record?._id);
             }}
             listActionButton={listActionButton}

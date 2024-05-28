@@ -32,7 +32,7 @@ const ListThongKe = () => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 100,
         });
         setListUnit(res?.items);
       } catch (error) {

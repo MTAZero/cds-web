@@ -1,12 +1,17 @@
-@import "assets/styles/_variables.scss";
-.print-tien-trinh {
+@import "assests/styles/_variables.scss";
+.print-rut-kinh-nghiem {
   @include font-print;
-  //   @include table-print;
-  @include page-a3;
+  @include page-a4-landscape;
   div,
   span,
   article,
   h1 {
     font-size: $sizeXL;
+  }
+  span.label {
+    font-weight: $weightLarge;
+  }
+  .header {
+    margin-bottom: 22px;
   }
 }

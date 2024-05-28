@@ -1,6 +1,5 @@
 import {SSOConfigs} from "const";
 import {useAppDispatch, useAppSelector} from "hooks";
-import {useEffect} from "react";
 import {Navigate, useSearchParams} from "react-router-dom";
 import {
   loginSuccess,
@@ -24,17 +23,19 @@ const XacThucSSO = () => {
     client_secret: SSOConfigs.clientSecret,
   };
   const {isLogin} = useAppSelector(state => state.auth);
-  console.log(code);
   const getTokenFromCode = async code => {
     try {
       const res = await APIServices.SSO.getTokenFromCode(dataGetToken);
       if (res?.access_token) {
         handleLogin(res);
       } else {
-        handleLogout();
+        NotificationService.error(
+          "Tài khoản mail của đồng chí chưa được cấp quyền sử dụng hệ thống. Vui lòng đăng xuất khỏi hệ thống"
+        );
+        setTimeout(() => {
+          handleLogout(res?.id_token);
+        }, 5000);
       }
-
-      console.log(res);
     } catch (error) {}
   };
   getTokenFromCode(code);
@@ -57,9 +58,16 @@ const XacThucSSO = () => {
     } catch {}
   };
 
-  const handleLogout = () => {
+  const handleLogout = async id_token => {
     dispatch(logout());
-    NotificationService.error("Đăng nhập không thành công");
+    const dataLogout = {
+      id_token_hint: id_token,
+      post_logout_redirect_uri: SSOConfigs.callbackLogoutUrl,
+    };
+    const urlLogout = `${SSOConfigs.urlSSO}/oidc/logout?${serialize(
+      dataLogout
+    )}`;
+    window.location.replace(urlLogout);
   };
   const handleLogin = props => {
     const {access_token, id_token, user} = props;

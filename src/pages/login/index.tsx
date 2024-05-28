@@ -76,7 +76,6 @@ export const LoginPage: FC = () => {
 
       NotificationService.success("Đăng nhập thành công");
     } catch (ex) {
-      console.log(ex);
       NotificationService.error("Đăng nhập thất bại");
     }
   };
@@ -88,7 +87,6 @@ export const LoginPage: FC = () => {
       [name]: value,
     }));
   };
-  console.log(isLogin);
   if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
   const directToSSO = () => {
     const ssoConfig = {

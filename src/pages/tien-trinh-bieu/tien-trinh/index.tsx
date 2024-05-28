@@ -1,8 +1,6 @@
 import {useEffect, useRef, useState} from "react";
-
 import {columns as columnsInit, fields as fieldsInit, mockData} from "./config";
 import {useNavigate} from "react-router-dom";
-
 import {Button, Row, Space} from "antd";
 import PrintTienTrinh from "./print-tien-trinh";
 import ReactToPrint from "react-to-print";
@@ -14,7 +12,6 @@ import {
   toArray,
 } from "utils";
 import dayjs from "dayjs";
-import ModalGiaoAn from "./ModalGiaoAn/ModalGiaoAn";
 import {
   ExpandSearch,
   ListActionButton,
@@ -23,11 +20,10 @@ import {
   TitleCustom,
 } from "components";
 
-import {parseJson} from "utils";
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
 import useTienTrinhBieu from "hooks/fetch/useTienTrinhBieu";
-import {useAppDispatch} from "hooks";
+import ModalPdf from "../modal-pdf";
 const TienTrinh = (props: any) => {
   const printRef = useRef<any>();
   const nameObjectLocal = "tienTrinhBieuSearch";
@@ -39,14 +35,15 @@ const TienTrinh = (props: any) => {
   const [params, setParams] = useState(null);
   const navigate = useNavigate();
   const expandRef = useRef<any>();
-  const giaoAnRef = useRef<any>();
+  const modalPdfRef = useRef(null);
+  const [base64, setBase64] = useState(null);
   const {data, isLoading, error, mutate} = useTienTrinhBieu(params);
   useEffect(() => {
     const getListUnit = async () => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 40,
+          pageSize: 100,
         });
         setListUnit(toArray(res?.items));
       } catch (error) {
@@ -67,6 +64,20 @@ const TienTrinh = (props: any) => {
 
     setFields([...fieldsInit]);
   };
+  const getFile = async idTienTrinh => {
+    try {
+      const _base64 = await APIServices.TienTrinhBieu.getDetailFile(
+        idTienTrinh
+      );
+      setBase64(_base64);
+    } catch (error) {
+      console.log(error);
+      setBase64(null);
+    }
+  };
+  useEffect(() => {
+    console.log(base64);
+  }, [base64]);
   const listActionButton = (value: any, record: any, index: any) => {
     return (
       <ListActionButton
@@ -76,9 +87,10 @@ const TienTrinh = (props: any) => {
         checkFunction={() => {
           navigateToRollcall(record, index);
         }}
-        // viewFunction={() => {
-        //   giaoAnRef?.current?.openModal();
-        // }}
+        viewFunction={() => {
+          getFile(record?._id);
+          modalPdfRef?.current?.openModal();
+        }}
         toolTips={{edit: "Chỉnh sửa", check: "Đánh giá", view: "Xem giáo án"}}
       ></ListActionButton>
     );
@@ -87,14 +99,12 @@ const TienTrinh = (props: any) => {
   useEffect(() => {
     const formatThoiGianHL = (time_train_detail: any) => {
       let time: any;
-
       toArray(time_train_detail).forEach(e => {
         time = {
           ...time,
-          [e?.object]: e?.time?.[0],
+          [e?.object]: e?.time,
         };
       });
-      console.log(time);
       return time;
     };
     const _setColumns = (thanh_phan: any) => {
@@ -105,6 +115,15 @@ const TienTrinh = (props: any) => {
         dataIndex: e,
         key: e,
         align: "center",
+        render: (value, record, index) => {
+          return (
+            <div>
+              {value?.map(time => (
+                <div>{time}</div>
+              ))}
+            </div>
+          );
+        },
       }));
       setColumns(columnsInit);
     };
@@ -115,7 +134,6 @@ const TienTrinh = (props: any) => {
       }));
       setDataSource(data);
     };
-    console.log(data);
     _setDataSource(data?.items);
     _setColumns(data?.items?.[data?.items?.length - 1]?.allElements);
   }, [data]);
@@ -135,7 +153,6 @@ const TienTrinh = (props: any) => {
       expandRef.current?.setFieldValue("unit", tienTrinhBieuSearch?.unit);
     };
     setDefaultValues();
-
     onClickSearch();
   }, []);
   const navigateToNew = () => {
@@ -230,10 +247,10 @@ const TienTrinh = (props: any) => {
             ></PrintTienTrinh>
           </div>
         </div>
-        <ModalCustom ref={giaoAnRef}>
-          <ModalGiaoAn></ModalGiaoAn>
-        </ModalCustom>
       </div>
+      <ModalCustom ref={modalPdfRef}>
+        <ModalPdf base64={base64}></ModalPdf>
+      </ModalCustom>
     </div>
   );
 };

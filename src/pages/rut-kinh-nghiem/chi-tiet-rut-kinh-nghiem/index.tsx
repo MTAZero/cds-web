@@ -58,7 +58,7 @@ const DetailRutKinhNghiem = props => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 100,
         });
         setListUnit(res?.items);
       } catch (error) {
@@ -71,7 +71,6 @@ const DetailRutKinhNghiem = props => {
   const submit = async () => {
     try {
       const formValues = await form.validateFields();
-      console.log(formValues);
       let data = {
         ...formValues,
         year: formatDateToString(formValues?.date, "YYYY"),

@@ -65,7 +65,6 @@ const Unit = () => {
     modalRef?.current?.openModal();
   };
   const search = () => {
-    console.log(form.getFieldValue("keyword"));
     setParams({...params, keyword: form.getFieldValue("keyword")});
   };
   const deleteRecord = async id => {
@@ -91,7 +90,6 @@ const Unit = () => {
                   placeholder="Nhập"
                   allowClear
                   onSearch={(value, event) => {
-                    console.log(value);
                     search();
                   }}
                 />
@@ -109,7 +107,6 @@ const Unit = () => {
             onChangePagination={onChangePagination}
             isLoading={isLoading}
             onDoubleClick={(record, rowIndex) => {
-              console.log(record);
               openUpdateModal(record?._id);
             }}
             listActionButton={listActionButton}

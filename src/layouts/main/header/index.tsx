@@ -8,11 +8,10 @@ import {useState} from "react";
 import {FaLock, FaSignOutAlt} from "react-icons/fa";
 import {NotificationService, serialize} from "../../../utils";
 import {SSOConfigs} from "const";
-import staticMethods from "antd/es/message";
-
+import {useNavigate} from "react-router-dom";
 export const Header = () => {
   const dispatch = useAppDispatch();
-
+  const navigate = useNavigate();
   const info = useAppSelector(state => state.auth.info);
   const id_token = useAppSelector(state => state.auth.id_token);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -29,9 +28,10 @@ export const Header = () => {
         paramsLogout
       )}`;
       window.location.replace(urlLogout);
+    } else {
+      navigate("/login");
     }
   };
-
   const handleClickAvatar = (event: React.MouseEvent<HTMLElement>) => {
     setOpenMenu(true);
     setAnchorEl(event.currentTarget);
@@ -52,7 +52,6 @@ export const Header = () => {
       </Box>
     );
   };
-
   return (
     <Box sx={styles.containStyle}>
       <Box sx={styles.appNameStyle}>CDS</Box>

@@ -1,12 +1,10 @@
-import {ParamSearch} from "../../types";
-import createApiServices from "./make-api-request-sso";
-
+import createApiServices from "./make-api-request";
 const api = createApiServices();
-const getTokenFromCode = async (data) => {
+const getTokenFromCode = async data => {
   const res = await api.makeRequest({
     url: `/authentication/login-sso`,
     method: "POST",
-    data:data
+    data: data,
   });
   return res?.data;
 };
@@ -17,10 +15,17 @@ const getUserInfo = async (id: any) => {
   });
   return res?.data;
 };
-
+const logOutSSO = async data => {
+  const res = await api.makeAuthRequest({
+    url: `/oidc/logout`,
+    method: "POST",
+    data: data,
+  });
+  return res?.data;
+};
 
 export const SSO = {
   getTokenFromCode,
-  getUserInfo
- 
+  getUserInfo,
+  logOutSSO,
 };
