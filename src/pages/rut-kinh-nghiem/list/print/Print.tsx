@@ -1,25 +1,25 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import "./Print.scss";
 import {Row, Space} from "antd";
+import {TableCustom} from "components";
 import {formatDateToString} from "utils";
 import {formatTime} from "types";
-import {TableCustom} from "components";
-const PrintTienTrinh = props => {
-  const {dataSource, columns} = props;
-  const [checker, setChecker] = useState();
+const Print = props => {
+  const {dataSource, listUnit} = props;
   const [signer, setSigner] = useState();
   const [sample, setSample] = useState<any>();
   useEffect(() => {
-    console.log(dataSource);
+    console.log(dataSource?.[0]);
     setSample(dataSource?.[0]);
   }, [dataSource]);
   useEffect(() => {
     const _setCheckerAndSigner = donVi => {
-      let _checker;
       let _signer;
-
-      switch (donVi) {
-        case "Trung tâm":
+      const nameDonVi = listUnit?.find(e => e?._id == donVi)?.name;
+      console.log(listUnit);
+      console.log(nameDonVi);
+      switch (nameDonVi) {
+        case "Trung tâm 1":
           _signer = "chỉ huy trưởng";
           break;
         case "Phòng Chính trị":
@@ -36,102 +36,90 @@ const PrintTienTrinh = props => {
           _signer = "Cụm trưởng";
           break;
       }
-      if (donVi?.includes("Đội")) {
-        _checker = "cụm trưởng";
+      if (nameDonVi?.includes("Đội")) {
         _signer = "đội trưởng";
-      } else {
-        _checker = "chỉ huy trưởng";
       }
-      setChecker(_checker);
       setSigner(_signer);
     };
-    _setCheckerAndSigner(sample?.don_vi);
+    _setCheckerAndSigner(sample?.unit);
   }, [sample]);
   return (
-    <div className="print-tien-trinh container ">
-      <table>
-        <thead style={{height: "20mm"}}></thead>
-        <tbody>
+    // <div className="print-rut-kinh-nghiem">123</div>
+    <>
+      {dataSource &&
+        dataSource?.map(item => (
           <div
-            className="header"
-            style={{
-              display: "-webkit-box",
-              position: "relative",
-              flexDirection: "row",
-            }}
+            className="print-rut-kinh-nghiem"
+            style={{pageBreakAfter: "always"}}
           >
-            <div className="left">
-              <Space align="center" direction="vertical">
-                <div style={{fontSize: "26pt"}}>PHÊ DUYỆT</div>
-                <div style={{fontSize: 28, fontStyle: "italic"}}>
-                  {" "}
-                  Ngày ... tháng ... năm 20...
+            <table>
+              <thead style={{height: "24mm"}}></thead>
+              <tbody>
+                <div className="header">
+                  <div>
+                    <Space direction="vertical" align="center">
+                      <div style={{fontSize: "18pt"}}>
+                        RÚT KINH NGHIỆM CÔNG TÁC HUẤN LUYỆN TUẦN{" "}
+                        {sample?.week ?? "..."} THÁNG {sample?.month ?? "..."}
+                      </div>
+                    </Space>
+                  </div>
                 </div>
-                <div style={{fontSize: "26pt", textTransform: "uppercase"}}>
-                  {checker}
-                </div>
-                <br />
-                <br />
-                <br />
-                ......................................
-              </Space>
-            </div>
-            <div
-              className="center"
-              style={{
-                position: "absolute",
-                left: "50%",
-                transform: "translateX(-50%)",
-              }}
-            >
-              <Space direction="vertical" align="center">
-                <div style={{fontSize: "30pt"}}>TIẾN TRÌNH BIỂU</div>
-                <div style={{fontSize: "26pt"}}>
-                  Huấn luyện chiến đấu tuần {sample?.tuan ?? "..."} tháng{" "}
-                  {sample?.thang ?? "..."}
-                </div>
-                <div style={{fontSize: "26pt"}}>
-                  (Từ ngày{" "}
-                  {formatDateToString(sample?.tu_ngay, formatTime.dayMonth) ??
-                    "..."}{" "}
-                  đến ngày{" "}
-                  {formatDateToString(sample?.den_ngay, formatTime.dayMonth) ??
-                    "..."}{" "}
-                  )
-                </div>
-              </Space>
-            </div>
+
+                <Space direction="vertical" size={24} className="content">
+                  <div>
+                    <span className="label">I. Thời gian: </span>
+                    <span className="value">
+                      {" "}
+                      {formatDateToString(
+                        item?.time,
+                        formatTime.time_24h
+                      )} ngày{" "}
+                      {formatDateToString(item?.time, formatTime.dayFull)}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="label">II. Tham gia:</span>
+                    <span className="value">{item?.join}</span>
+                  </div>
+                  <div>
+                    <span className="label">III. Kết quả huấn luyện:</span>
+                    <span className="value">{item?.resultTraining}</span>
+                  </div>
+                  <div>
+                    <span className="label">IV. Ưu, khuyết điểm:</span>
+                    <span className="value">{item?.evaluation}</span>
+                  </div>
+                  <div>
+                    <span className="label">
+                      V. Nhiệm vụ huấn luyện tuần sau:
+                    </span>
+                    <span className="value">{item?.dutyNextWeek}</span>
+                  </div>
+                </Space>
+                <Row justify={"end"} style={{marginTop: 30}}>
+                  <Space align="center" direction="vertical">
+                    <div
+                      style={{
+                        fontSize: "18pt",
+                        textTransform: "uppercase",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {signer}
+                    </div>
+                    <br />
+                    <br />
+                    <br />
+                    ......................................
+                  </Space>
+                </Row>
+              </tbody>
+              <tfoot style={{height: "20mm"}}></tfoot>
+            </table>
           </div>
-          <TableCustom
-            className={["table-print"]}
-            id="table-print"
-            dataSource={dataSource}
-            pagination={false}
-            columns={columns}
-            hideCheckboxCol={true}
-          ></TableCustom>
-          <Row justify={"end"} style={{marginTop: 30}}>
-            <Space align="center" direction="vertical">
-              <div style={{fontSize: 28}}> Ngày ... tháng ... năm 20...</div>
-              <div
-                style={{
-                  fontSize: "26pt",
-                  textTransform: "uppercase",
-                  fontWeight: "bold",
-                }}
-              >
-                {signer}
-              </div>
-              <br />
-              <br />
-              <br />
-              ......................................
-            </Space>
-          </Row>
-        </tbody>
-        <tfoot style={{height: "20mm"}}></tfoot>
-      </table>
-    </div>
+        ))}
+    </>
   );
 };
-export default PrintTienTrinh;
+export default Print;

@@ -24,7 +24,7 @@ const getThanhPhanTienTrinhBieu = async (id: any) => {
   });
   return res?.data;
 };
-const createTienTrinhBieu = async (data: any) => {
+const createTienTrinhBieu = async (data: any, id = null) => {
   const res = await api.makeAuthRequest({
     url: `/progresses`,
     method: "POST",
@@ -32,9 +32,9 @@ const createTienTrinhBieu = async (data: any) => {
   });
   return res?.data;
 };
-const updateTienTrinhBieu = async data => {
+const updateTienTrinhBieu = async (data, id) => {
   const res = await api.makeAuthRequest({
-    url: `/progresses/${data?._id}`,
+    url: `/progresses/${id}`,
     method: "PUT",
     data: data,
   });
@@ -55,6 +55,14 @@ const deleteTienTrinhBieu = async (id: any) => {
   });
   return res?.data;
 };
+const getDetailFile = async (id: any) => {
+  const res = await api.makeAuthRequest({
+    url: `/progresses/file/${id}`,
+    method: "GET",
+    config: {responseType: "blob"},
+  });
+  return res?.data;
+};
 export const TienTrinhBieu = {
   getListTienTrinhBieu,
   getThanhPhanTienTrinhBieu,
@@ -63,4 +71,5 @@ export const TienTrinhBieu = {
   updateTienTrinhBieu,
   deleteTienTrinhBieu,
   danhGiaHuanLuyen,
+  getDetailFile,
 };

@@ -112,7 +112,6 @@ const FormItem = (props: any) => {
             onChange={onChange}
             autoComplete="new-password"
             onFocus={e => {
-              console.log(e);
               e?.preventDefault();
             }}
             {...rest}
@@ -169,7 +168,6 @@ const FormItem = (props: any) => {
               }
 
               setIsOpen(false);
-              console.log("change");
             }}
             open={isOpen}
             onFocus={() => {
@@ -183,11 +181,9 @@ const FormItem = (props: any) => {
                 setIsOpen(true);
               }
               // setIsOpen(true);
-              console.log("click");
             }}
             onSelect={() => {
               setIsOpen(false);
-              console.log("select");
             }}
             {...rest}
           />

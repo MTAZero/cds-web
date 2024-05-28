@@ -47,7 +47,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:internet": "env-cmd -f .env.internet npm run-script start",
     "build": "react-scripts build",
+    "build:internet": "env-cmd -f .env.internet npm run-script build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -70,6 +72,7 @@
     ]
   },
   "devDependencies": {
-    "@types/node-sass": "^4.11.7"
+    "@types/node-sass": "^4.11.7",
+    "env-cmd": "^10.1.0"
   }
 }

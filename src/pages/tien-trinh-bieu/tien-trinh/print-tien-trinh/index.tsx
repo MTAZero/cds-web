@@ -10,7 +10,6 @@ const PrintTienTrinh = (props: any) => {
   const [signer, setSigner] = useState<any>();
   const [sample, setSample] = useState<any>();
   useEffect(() => {
-    console.log(dataSource);
     setSample(dataSource?.[0]);
   }, [dataSource]);
   useEffect(() => {

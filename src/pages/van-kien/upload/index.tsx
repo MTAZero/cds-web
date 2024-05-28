@@ -1,9 +1,9 @@
-import {Button, Col, Form, List, Row, Space, Spin, Upload} from "antd";
+import {Button, Col, Form, Row, Space, Spin, Upload} from "antd";
 import Icons from "assests/icons";
 import {InputFields} from "components";
 import React, {forwardRef, useImperativeHandle, useState} from "react";
 import {fieldType} from "types";
-import {APIServices, NotificationService, getItemLocalStorage} from "utils";
+import {APIServices, NotificationService} from "utils";
 const UploadFile = forwardRef((props: any, ref) => {
   const {getListFile, closeModal} = props;
   const [loading, setLoading] = useState(false);
@@ -27,11 +27,6 @@ const UploadFile = forwardRef((props: any, ref) => {
   const handleChooseFile = options => {
     const file = options?.file;
     setSelectedFile(file);
-    // if (file.size <= 5000000) {
-    //   setSelectedFile(file);
-    // } else {
-    //   Notification("warning", "Kích thước file vượt quá giới hạn (2MB)");
-    // }
   };
   const uploadFile = async () => {
     try {

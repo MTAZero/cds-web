@@ -86,3 +86,7 @@ $border: 1px solid rgb(212, 212, 212);
   width: 210mm;
   padding: 0cm 2.5cm 2cm 2.5cm;
 }
+@mixin page-a4-landscape {
+  width: 240mm;
+  padding: 0cm 2.5cm 2cm 2.5cm !important;
+}

@@ -1,4 +1,3 @@
-import {ParamSearch} from "../../types";
 import createApiServices from "./make-api-request";
 
 const api = createApiServices();

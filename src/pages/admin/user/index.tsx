@@ -44,7 +44,6 @@ const User = () => {
       setIsLoading(true);
       const res = await APIServices.QuanTri.getListUser(params);
       setIsLoading(false);
-      console.log(res);
       setData(res?.items);
       setTotal(res?.total);
     } catch (error) {
@@ -56,7 +55,7 @@ const User = () => {
       try {
         const res = await APIServices.QuanTri.getListRole({
           pageIndex: 1,
-          pageSize: 50,
+          pageSize: 100,
         });
         setListRole(res?.items);
       } catch (error) {}
@@ -68,7 +67,7 @@ const User = () => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 50,
+          pageSize: 100,
         });
         setListUnit(res?.items);
       } catch (error) {}
@@ -80,7 +79,7 @@ const User = () => {
       try {
         const res = await APIServices.QuanTri.getListPosition({
           pageIndex: 1,
-          pageSize: 50,
+          pageSize: 100,
         });
         setListPosition(res?.items);
       } catch (error) {}
@@ -105,7 +104,6 @@ const User = () => {
     modalRef?.current?.openModal();
   };
   const search = () => {
-    console.log(form.getFieldValue("keyword"));
     setParams({
       ...params,
       keyword: form.getFieldValue("keyword"),
@@ -165,7 +163,6 @@ const User = () => {
                   placeholder="Nhập"
                   allowClear
                   onSearch={(value, event) => {
-                    console.log(value);
                     search();
                   }}
                   onChange={search}
@@ -184,7 +181,6 @@ const User = () => {
             onChangePagination={onChangePagination}
             isLoading={isLoading}
             onDoubleClick={(record, rowIndex) => {
-              console.log(record);
               openUpdateModal(record?._id);
             }}
             listActionButton={listActionButton}
@@ -195,7 +191,6 @@ const User = () => {
             setId(null);
           }}
           onOpenModal={() => {
-            console.log(id);
             if (!isValuable(id)) {
               modalChildRef?.current?.resetFields();
             }

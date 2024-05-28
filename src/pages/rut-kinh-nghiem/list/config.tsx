@@ -36,14 +36,7 @@ const columns: any = [
     align: "center",
   },
 ];
-const mockData = [
-  {
-    _id: "1",
-    date: "8/4",
-    content: "Huấn luyện cài đặt Máy chủ",
-    sum_time_train: 2,
-  },
-];
+
 const fields: any = [
   {
     type: DATE,
@@ -75,4 +68,4 @@ const fields: any = [
   },
 ];
 
-export {columns, fields, mockData};
+export {columns, fields};

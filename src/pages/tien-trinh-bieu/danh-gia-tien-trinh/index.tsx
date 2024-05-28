@@ -64,7 +64,7 @@ const StatisticTienTrinh = () => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 100,
         });
         setListUnit(res?.items);
       } catch (error) {
@@ -117,7 +117,6 @@ const StatisticTienTrinh = () => {
   useEffect(() => {
     const setFieldsValue = () => {
       const dataConvert = convertDataSource(dataSource);
-      console.log(dataConvert);
       form.setFieldValue("list", dataConvert);
     };
     setFieldsValue();
@@ -128,7 +127,6 @@ const StatisticTienTrinh = () => {
   }, [dataTTB]);
   useEffect(() => {
     const _setSelectedRowKeys = () => {
-      console.log(dataSource);
       let listPeople = [];
       let _selectedRowKeys = [];
 
@@ -176,10 +174,7 @@ const StatisticTienTrinh = () => {
     onChange: (_selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(_selectedRowKeys);
     },
-    onSelect: (record, selected, selectedRows) => {
-      console.log(record);
-      console.log(selectedRows);
-    },
+    onSelect: (record, selected, selectedRows) => {},
     onSelectAll: (selected, selectedRows, changeRows) => {},
     getCheckboxProps: (record: any) => ({
       disabled:
@@ -195,7 +190,6 @@ const StatisticTienTrinh = () => {
 
   const submit = async () => {
     const tableValues = form.getFieldValue("list");
-    console.log(tableValues);
     const listThanhVienOfTable = tableValues
       .filter(
         e =>
@@ -208,14 +202,12 @@ const StatisticTienTrinh = () => {
         ...e,
         joined: selectedRowKeys.includes(e?.key) ? 1 : e?.joined == -1 ? -1 : 0,
       }));
-    console.log(listThanhVienOfTable);
     const listThanhPhanFormat = listThanhPhan?.map(thanhPhan => ({
       ...thanhPhan,
       list_people: listThanhVienOfTable.filter(
         thanhVien => thanhVien?.object == thanhPhan?.object
       ),
     }));
-    console.log(listThanhPhanFormat);
     const data = {
       element_join: listThanhPhanFormat,
       evaluation: form.getFieldValue("evaluation"),

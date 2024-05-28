@@ -13,9 +13,7 @@ const Modal = props => {
     label: e?.name,
     value: e?._id,
   }));
-  useEffect(() => {
-    console.log(listRole);
-  }, [listRole]);
+
   useEffect(() => {
     const getDetailPermission = async id => {
       try {

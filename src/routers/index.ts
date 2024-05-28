@@ -10,7 +10,6 @@ const ThemeRoutes = () => {
   const finalRouter = (routes: Array<any>): Array<RouteObject> => {
     const items = routes.map(i => getPermisisonRouter(permission, i));
     const ans: Array<RouteObject> = items.map((i: any) => i);
-
     return ans;
   };
 

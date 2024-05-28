@@ -1,8 +1,8 @@
-import axios, { AxiosInstance } from "axios";
-import { getAuthToken } from "../store";
-import { AppConfigs, SSOConfigs } from "../../const";
+import axios, {AxiosInstance} from "axios";
+import {getAuthToken} from "../store";
+import {AppConfigs, SSOConfigs} from "../../const";
 
-const serverUrl = SSOConfigs.urlBeSSO;
+const serverUrl = SSOConfigs.urlSSO;
 
 const _makeRequest = (instantAxios: AxiosInstance) => async (args: any) => {
   const _headers = args.headers ? args.headers : {};

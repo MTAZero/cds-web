@@ -1,7 +1,6 @@
 import React from "react";
 import {fieldType, formatTime} from "types";
 import {formatDateToString} from "utils";
-const {INPUT, DATE} = fieldType;
 const columns: any = [
   {
     key: "thu",

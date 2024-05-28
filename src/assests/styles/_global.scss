@@ -170,9 +170,8 @@ button.custom-btn {
 }
 
 //css cho modal
-.modal {
+.ant-modal-wrap {
   .ant-modal-content {
-    padding: 0 !important;
     .ant-modal-close {
       top: 16px !important;
       right: 16px !important;
@@ -187,27 +186,8 @@ button.custom-btn {
       }
     }
     .ant-modal-body {
-      .table {
-        padding: 16px;
-        table {
-          thead {
-            tr {
-              th:last-child {
-                text-align: center;
-                padding: 10px;
-              }
-            }
-          }
-          tbody {
-            tr {
-              td:last-child {
-                text-align: center;
-                padding: 10px;
-              }
-            }
-          }
-        }
-      }
+      overflow: scroll;
+      max-height: calc(100vh - 50px);
     }
   }
 

@@ -3,7 +3,6 @@ import {DescriptionsItem} from "./DescriptionsItemCustom";
 import "./DescriptionsCustom.scss";
 const Descriptions = props => {
   const {children} = props;
-  console.log(children);
   return (
     <Row gutter={[4, 4]} className="descriptions-custom">
       {children

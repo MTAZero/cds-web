@@ -34,6 +34,9 @@ const columns: any = [
     key: "time_train_detail",
     dataIndex: "time_train_detail",
     title: "Thời gian HL từng phân đội",
+    render: (value, record, index) => {
+      return <></>;
+    },
     children: [
       {
         title: "SQCH",

@@ -1,17 +1,11 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useAppDispatch} from "hooks";
 
-import {
-  columns,
-  columns as columnsInit,
-  fields as fieldsInit,
-  mockData,
-} from "./config";
+import {columns, columns as columnsInit, fields as fieldsInit} from "./config";
 import {useNavigate} from "react-router-dom";
 import {
   ExpandSearch,
   ListActionButton,
-  ModalCustom,
   TableCustom,
   TitleCustom,
 } from "components";
@@ -27,9 +21,10 @@ import {
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
 import dayjs from "dayjs";
+import Print from "./print/Print";
 const RutKinhNghiem = props => {
   const dispatch = useAppDispatch();
-  const [params, setParams] = useState({});
+  const [params, setParams] = useState<any>({});
   const nameObjectLocal = "rutKinhNghiemSearch";
   const rutKinhNghiemSearch = getItemLocalStorage(nameObjectLocal);
   const [fields, setFields] = useState(fieldsInit);
@@ -56,7 +51,7 @@ const RutKinhNghiem = props => {
       try {
         const res = await APIServices.QuanTri.getListUnit({
           pageIndex: 1,
-          pageSize: 20,
+          pageSize: 100,
         });
         setListUnit(res?.items);
       } catch (error) {
@@ -160,9 +155,27 @@ const RutKinhNghiem = props => {
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Rút kinh nghiệm"></TitleCustom>
-            <Button type="primary" onClick={navigateToNew}>
-              Thêm mới
-            </Button>
+            <Space>
+              <ReactToPrint
+                documentTitle={`Rút kinh nghiệm tháng ${
+                  params?.month ?? "..."
+                } năm ${
+                  formatDateToString(params?.year, formatTime.year) ?? "..."
+                }  `}
+                trigger={() => {
+                  return (
+                    <Button style={{marginBottom: 4}} type="primary">
+                      Xuất file
+                    </Button>
+                  );
+                }}
+                content={() => printRef.current}
+                bodyClass="print-rut-kinh-nghiem"
+              />
+              <Button type="primary" onClick={navigateToNew}>
+                Thêm mới
+              </Button>
+            </Space>
           </Row>
           <TableCustom
             ref={tableRef}
@@ -175,6 +188,12 @@ const RutKinhNghiem = props => {
             listActionButton={listActionButton}
             onDoubleClick={navigateToDetail}
           ></TableCustom>
+        </div>
+      </div>
+      {/* style={{display: "none"}} */}
+      <div id="print" style={{display: "none"}}>
+        <div ref={printRef}>
+          <Print dataSource={data} params={params} listUnit={listUnit}></Print>
         </div>
       </div>
     </div>
