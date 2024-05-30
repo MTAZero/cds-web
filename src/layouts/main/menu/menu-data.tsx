@@ -1,5 +1,5 @@
-import { RouterLink } from "../../../routers/routers";
-import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
+import {RouterLink} from "../../../routers/routers";
+import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
 
 import {
   FaCalendar,
@@ -10,7 +10,7 @@ import {
   FaUserFriends,
   FaWrench,
 } from "react-icons/fa";
-import { IoIosList, IoIosPeople, IoIosSettings } from "react-icons/io";
+import {IoIosList, IoIosPeople, IoIosSettings} from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
   // {
@@ -176,12 +176,29 @@ export const mainMenu: Array<SideMenuItem> = [
         key: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
         icon: <FaWrench />,
         children: [],
-        text: "Thống kê huấn luyện cá nhân",
+        text: "Sổ học tập chuyên ngành",
         module: SystemFeatures.ManagerPersonalDiarys,
         action: [SystemAction.View, SystemAction.Edit],
       },
     ],
   },
+  // {
+  //   url: RouterLink.GUARD_MENU,
+  //   key: RouterLink.GUARD_MENU,
+  //   icon: <FaCalendar />,
+  //   text: "Quản lý xăng dầu",
+  //   children: [
+  //     {
+  //       url: RouterLink.QUAN_LY_XE_ROUTE,
+  //       key: RouterLink.QUAN_LY_XE_ROUTE,
+  //       icon: <FaWrench />,
+  //       children: [],
+  //       text: "Quản lý xe",
+  //       // module: SystemFeatures.ManagerPersonalDiarys,
+  //       // action: [SystemAction.View, SystemAction.Edit],
+  //     },
+  //   ],
+  // },
   {
     url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
     key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
@@ -235,6 +252,7 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
+
   // {
   //   url: RouterLink.CONTACT,
   //   key: RouterLink.CONTACT,

@@ -2,18 +2,34 @@ import {Button, Col, Row} from "antd";
 import {ModalCustom, TableCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 
-import {columns} from "./config";
+import {columns, fileInfo} from "./config";
 import Icons from "assests/icons";
 import UploadFile from "./upload";
 import PdfViewer from "components/pdf-viewer";
-import {APIServices, randomId, toArray} from "utils";
+import {APIServices, NotificationService, randomId, toArray} from "utils";
 const VanKien = props => {
   const modalRef = useRef(null);
   const uploadRef = useRef(null);
   const [listFile, setListFile] = useState<any[]>();
   const [blob, setBlob] = useState<any>();
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
+  columns.find(e => e?.key === "name").render = (value, record, index) => {
+    return (
+      <>
+        {fileInfo(record, () => {
+          deleteVanKien(record?._id);
+        })}
+      </>
+    );
+  };
+  const deleteVanKien = async id => {
+    try {
+      await APIServices.VanKien.deleteVanKien(id);
+      await getListFile();
+    } catch (error) {
+      NotificationService.error("Có lỗi khi xóa văn kiện");
+    }
+  };
   const getListFile = async () => {
     try {
       const res = await APIServices.VanKien.getListVanKien();

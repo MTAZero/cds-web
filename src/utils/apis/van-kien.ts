@@ -26,9 +26,16 @@ const uploadVanKien = async (formData: any) => {
   });
   return res?.data;
 };
-
+const deleteVanKien = async (id: any) => {
+  const res = await api.makeAuthRequest({
+    url: `/document/${id}`,
+    method: "DELETE",
+  });
+  return res?.data;
+};
 export const VanKien = {
   getListVanKien,
   getDetailVanKien,
   uploadVanKien,
+  deleteVanKien,
 };

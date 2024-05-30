@@ -2,32 +2,56 @@ import {fieldType, formatTime} from "types";
 import "./VanKien.scss";
 import dayjs from "dayjs";
 import {formatDateToString} from "utils";
+import {Button, Col, Divider, Popconfirm, Row} from "antd";
+import Icons from "assests/icons";
+import {RecycleSVG} from "assests/svg";
 const {COMBO_BOX} = fieldType;
-const fileInfo = record => {
+const fileInfo = (record, onDelete) => {
   return (
     <div className="file-info">
-      <div className="title">{record?.name}</div>
-      <div className="time">
-        {" "}
-        <span className="bold">Cập nhật: </span>
-        {formatDateToString(dayjs(record?.update_at), formatTime.dateTime)}
+      <div>
+        <Row>
+          <Col flex={1}>
+            <div className="title">{record?.name}</div>
+            <div className="time">
+              {" "}
+              <span className="bold">Cập nhật: </span>
+              {formatDateToString(
+                dayjs(record?.update_at),
+                formatTime.dateTime
+              )}
+            </div>
+          </Col>
+          <Divider type="vertical"></Divider>
+          <Col flex={"50px"}>
+            <div className="center">
+              <Popconfirm
+                className="danger-confirm"
+                title="Bạn muốn xóa?"
+                onConfirm={onDelete}
+              >
+                <Button
+                  type="text"
+                  danger
+                  icon={<RecycleSVG></RecycleSVG>}
+                ></Button>
+              </Popconfirm>
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   );
 };
 
-const columns = [
+const columns: any = [
   {
     key: "name",
     dataIndex: "name",
     title: "Danh sách văn kiện",
     align: "left",
-    render: (v, r, i) => {
-      return <div>{fileInfo(r)}</div>;
-    },
   },
 ];
-const mockData = [{ten_van_kien: "Lịch tuần cụm 13", updateAt: dayjs()}];
 const fields = [
   {
     type: COMBO_BOX,
@@ -41,4 +65,4 @@ const fields = [
     ],
   },
 ];
-export {columns, fields, mockData};
+export {columns, fields, fileInfo};

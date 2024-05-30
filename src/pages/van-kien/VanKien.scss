@@ -6,11 +6,20 @@
       cursor: pointer;
     }
     .title {
-      font-weight: $weightMedium;
+      font-weight: $weightLarge;
       color: $colorDanger;
     }
     .bold {
       font-weight: $weightMedium;
     }
+    .center {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .ant-divider {
+    height: 4em;
   }
 }
