@@ -453,7 +453,7 @@ const FormItem = (props: any) => {
             <Typography.Text
               className="form-item-text"
               style={{
-                whiteSpace: "pre-wrap",
+                // whiteSpace: "pre-wrap",
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 marginRight: "2px",

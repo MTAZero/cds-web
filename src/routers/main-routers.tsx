@@ -30,6 +30,7 @@ import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
 import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
 import {UserCalendarPage} from "pages/work-calendar/user-calendar";
 import XacThucSSO from "pages/xac-thuc-sso";
+import QuanLyXe from "pages/quan-ly-xe/list";
 
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
@@ -191,6 +192,10 @@ const MainRoutes = [
             element: <Unit />,
             module: SystemFeatures.ManagerUnits,
             action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.QUAN_LY_XE_ROUTE,
+            element: <QuanLyXe />,
           },
         ],
       },
