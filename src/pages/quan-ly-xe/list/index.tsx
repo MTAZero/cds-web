@@ -14,10 +14,8 @@ import ReactToPrint from "react-to-print";
 import {
   APIServices,
   NotificationService,
-  convertDateStringToDateObject,
   formatDateToString,
-  getItemLocalStorage,
-  setItemLocalStorage,
+  randomId,
 } from "utils";
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
@@ -34,19 +32,7 @@ const QuanLyXe = props => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
-  const [listUnit, setListUnit] = useState<any[]>();
   const [data, setData] = useState<any[]>([]);
-  const [total, setTotal] = useState();
-  const listActionButton = (value, record, index) => {
-    return (
-      <ListActionButton
-        editFunction={() => {
-          navigateToDetail(record, index);
-        }}
-        toolTips={{edit: "Chỉnh sửa"}}
-      ></ListActionButton>
-    );
-  };
 
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
@@ -55,14 +41,6 @@ const QuanLyXe = props => {
       year: formatDateToString(searchFields?.year, formatTime.year),
     });
     setPage(1);
-  };
-
-  const navigateToDetail = (record: {_id: any}, rowIndex: any) => {
-    const routeRollcall = RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE.replace(
-      ":id",
-      record?._id
-    );
-    navigate(routeRollcall);
   };
 
   const setPage = pageIndex => {
@@ -74,7 +52,9 @@ const QuanLyXe = props => {
       if (!formValues) {
         return;
       }
-      // const res = await APIServices.QuanLyXe.updateListXe(formValues);
+      const data = {listVehicle: formValues};
+      const res = await APIServices.QuanLyXe.updateListXe(data);
+      setData(res?.items?.map(e => ({...e, key: randomId()})));
       NotificationService.success("Lưu thông tin xe thành công");
     } catch (error) {
       NotificationService.error("Đã có lỗi");
@@ -82,8 +62,8 @@ const QuanLyXe = props => {
   };
   const getFormValues = async () => {
     try {
-      const formValues = await form.validateFields();
-      console.log(formValues);
+      await form.validateFields();
+      const formValues = form.getFieldValue("listVehicle");
       return formValues;
     } catch (error) {
       return null;
@@ -95,15 +75,18 @@ const QuanLyXe = props => {
         setIsLoading(true);
         const res = await APIServices.QuanLyXe.getListXe();
         setIsLoading(false);
-        setData(res?.items);
+        setData(res?.items?.map(e => ({...e, key: randomId()})));
       } catch (error) {
         setIsLoading(false);
       }
     };
     getData(params);
   }, [params]);
+  useEffect(() => {
+    form.setFieldValue("listVehicle", data);
+  }, [data]);
   return (
-    <div className="page">
+    <div className="page quan-ly-xe">
       <div className="main">
         <div className="container">
           <ExpandSearch
@@ -120,20 +103,22 @@ const QuanLyXe = props => {
               Lưu
             </Button>
           </Row>
-          <TableInputAdd
-            data={data}
-            setData={setData}
-            name="listVehicle"
-            form={form}
-            columns={columns}
-            pagination={false}
-          ></TableInputAdd>
+          <Form form={form}>
+            <TableInputAdd
+              data={data}
+              setData={setData}
+              name="listVehicle"
+              form={form}
+              columns={columns}
+              pagination={false}
+            ></TableInputAdd>
+          </Form>
         </div>
       </div>
       {/* style={{display: "none"}} */}
       <div id="print" style={{display: "none"}}>
         <div ref={printRef}>
-          <Print dataSource={data} params={params} listUnit={listUnit}></Print>
+          <Print dataSource={data} params={params}></Print>
         </div>
       </div>
     </div>

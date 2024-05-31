@@ -3,8 +3,14 @@ import {months, weeks} from "const";
 import {fieldType, formatTime} from "types";
 import {formatDateToString} from "utils";
 
-const {COMBO_BOX, DATE, INPUT} = fieldType;
+const {INPUT} = fieldType;
 const columns: any = [
+  {
+    title: "STT",
+    key: "index",
+    dataIndex: "index",
+  },
+
   {
     type: INPUT,
     title: "Tên xe",
@@ -39,32 +45,24 @@ const columns: any = [
 
 const fields: any = [
   {
-    type: DATE,
-    label: "Năm",
+    type: INPUT,
+    label: "Tên xe",
     name: "year",
-    picker: "year",
-    optionsTime: {format: "YYYY"},
-    allowClear: false,
   },
   {
-    type: COMBO_BOX,
-    label: "Tháng",
-    options: months.map(e => ({value: e, label: e})),
-    name: "month",
-    allowClear: false,
+    type: INPUT,
+    label: "Biển số",
+    name: "year",
   },
   {
-    type: COMBO_BOX,
-    label: "Tuần",
-    name: "week",
-    options: weeks.map((e: any) => ({value: e, label: e})),
-    allowClear: false,
+    type: INPUT,
+    label: "Định mức",
+    name: "year",
   },
   {
-    type: COMBO_BOX,
-    label: "Đơn vị",
-    name: "unit",
-    allowClear: false,
+    type: INPUT,
+    label: "Họ tên lái xe",
+    name: "year",
   },
 ];
 

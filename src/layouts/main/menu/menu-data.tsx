@@ -182,23 +182,23 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
-  // {
-  //   url: RouterLink.GUARD_MENU,
-  //   key: RouterLink.GUARD_MENU,
-  //   icon: <FaCalendar />,
-  //   text: "Quản lý xăng dầu",
-  //   children: [
-  //     {
-  //       url: RouterLink.QUAN_LY_XE_ROUTE,
-  //       key: RouterLink.QUAN_LY_XE_ROUTE,
-  //       icon: <FaWrench />,
-  //       children: [],
-  //       text: "Quản lý xe",
-  //       // module: SystemFeatures.ManagerPersonalDiarys,
-  //       // action: [SystemAction.View, SystemAction.Edit],
-  //     },
-  //   ],
-  // },
+  {
+    url: RouterLink.GUARD_MENU,
+    key: RouterLink.GUARD_MENU,
+    icon: <FaCalendar />,
+    text: "Quản lý xăng dầu",
+    children: [
+      {
+        url: RouterLink.QUAN_LY_XE_ROUTE,
+        key: RouterLink.QUAN_LY_XE_ROUTE,
+        icon: <FaWrench />,
+        children: [],
+        text: "Quản lý xe",
+        // module: SystemFeatures.ManagerPersonalDiarys,
+        // action: [SystemAction.View, SystemAction.Edit],
+      },
+    ],
+  },
   {
     url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
     key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,

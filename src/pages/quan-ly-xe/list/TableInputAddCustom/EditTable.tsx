@@ -41,6 +41,7 @@ export type EditableCellProps = {
   hidden?: boolean;
   autoFocus?: boolean;
   form?: any;
+  show?: boolean;
 };
 
 export const EditableContext = React.createContext<FormInstance<any> | null>(
@@ -74,6 +75,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
   form,
   autoFocus,
   rules,
+  show,
   ...restProps
 }) => {
   const [newOptions, setNewOptions] = useState(options);
@@ -85,12 +87,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
   const getFieldValue = (dataIndex: string) => {
     return form?.getFieldValue([name, index, dataIndex]);
   };
-  const listPosition = useAppSelector(state => state.catalog.listPosition);
-  useEffect(() => {
-    if (dataIndex === "object") {
-      setNewOptions(listPosition?.map(e => ({value: e?._id, label: e?.name})));
-    }
-  }, [listPosition]);
+
   let childNode = children;
   if (type == INPUT) {
     childNode = (
@@ -98,6 +95,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
         name={[name, index, dataIndex]}
         initialValue={getFieldValue(dataIndex) ?? null}
         rules={rules}
+        // style={{display: `${show == false ? "none" : "default"}`}}
       >
         <Input
           placeholder={disabled ? "--" : "Nhập"}
@@ -201,15 +199,5 @@ export const EditableCell: React.FC<EditableCellProps> = ({
     );
   }
 
-  return (
-    <td
-      {...restProps}
-      style={{
-        // fontWeight: `${list_doi_tuong?.includes(childNode?.[1]) ? "bold" : ""}`,
-        textAlign: "left",
-      }}
-    >
-      {childNode}
-    </td>
-  );
+  return <td {...restProps}>{childNode}</td>;
 };
