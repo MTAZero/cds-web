@@ -9,15 +9,13 @@ const Print = props => {
   const [signer, setSigner] = useState();
   const [sample, setSample] = useState<any>();
   useEffect(() => {
-    console.log(dataSource?.[0]);
     setSample(dataSource?.[0]);
   }, [dataSource]);
   useEffect(() => {
     const _setCheckerAndSigner = donVi => {
       let _signer;
       const nameDonVi = listUnit?.find(e => e?._id == donVi)?.name;
-      console.log(listUnit);
-      console.log(nameDonVi);
+
       switch (nameDonVi) {
         case "Trung tâm 1":
           _signer = "chỉ huy trưởng";

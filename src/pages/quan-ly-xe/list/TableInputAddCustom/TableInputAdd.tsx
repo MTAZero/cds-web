@@ -1,5 +1,4 @@
 import {Button, Table, Typography, Form, Space, Row} from "antd";
-import React, {SetStateAction, useEffect, useState} from "react";
 import {EditableCell, EditableRow} from "./EditTable";
 import Icons from "assests/icons";
 import "./TableInputAdd.scss";
@@ -86,7 +85,7 @@ const TableInputAdd = ({
     };
   });
   return (
-    <div className="table-prescription">
+    <div className="table-input-add">
       <TableCustom
         {...rest}
         rowKey={record => record.key}
