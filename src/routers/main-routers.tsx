@@ -31,6 +31,8 @@ import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
 import {UserCalendarPage} from "pages/work-calendar/user-calendar";
 import XacThucSSO from "pages/xac-thuc-sso";
 import QuanLyXe from "pages/quan-ly-xe/list";
+import KeHoachXe from "pages/ke-hoach-xe/list";
+import DetailKeHoachXe from "pages/ke-hoach-xe/detail";
 
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
@@ -196,6 +198,14 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_XE_ROUTE,
             element: <QuanLyXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+            element: <KeHoachXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE,
+            element: <DetailKeHoachXe />,
           },
         ],
       },
