@@ -94,14 +94,14 @@ const TongHopXe = props => {
     setItemLocalStorage(nameObjectLocal, valuesLocal);
   };
   const navigateToDetail = (record: {_id: any}, rowIndex: any) => {
-    const routeRollcall = RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE.replace(
+    const routeRollcall = RouterLink.QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE.replace(
       ":id",
       record?._id
     );
     navigate(routeRollcall);
   };
   const navigateToNew = () => {
-    const routeDetail = RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE.replace(
+    const routeDetail = RouterLink.QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE.replace(
       ":id",
       "tao-moi"
     );
@@ -147,7 +147,7 @@ const TongHopXe = props => {
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Đăng kí xe"></TitleCustom>
             <Space>
-              <ReactToPrint
+              {/* <ReactToPrint
                 documentTitle={`Đăng kí xe tháng ${
                   params?.month ?? "..."
                 } năm ${
@@ -162,7 +162,7 @@ const TongHopXe = props => {
                 }}
                 content={() => printRef.current}
                 bodyClass="print-rut-kinh-nghiem"
-              />
+              /> */}
               <Button type="primary" onClick={navigateToNew}>
                 Thêm mới
               </Button>

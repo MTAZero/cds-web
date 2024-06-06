@@ -208,6 +208,13 @@ export const mainMenu: Array<SideMenuItem> = [
         // action: [SystemAction.View, SystemAction.Edit],
       },
       {
+        url: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+        key: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+        icon: <CarSVG />,
+        children: [],
+        text: "Đăng kí xe",
+      },
+      {
         url: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
         key: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
         icon: <CarSVG />,
@@ -215,13 +222,6 @@ export const mainMenu: Array<SideMenuItem> = [
         text: "Kế hoạch xe",
         // module: SystemFeatures.ManagerPersonalDiarys,
         // action: [SystemAction.View, SystemAction.Edit],
-      },
-      {
-        url: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
-        key: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
-        icon: <CarSVG />,
-        children: [],
-        text: "Tổng hợp xe",
       },
     ],
   },

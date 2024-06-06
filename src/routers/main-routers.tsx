@@ -33,6 +33,8 @@ import XacThucSSO from "pages/xac-thuc-sso";
 import QuanLyXe from "pages/quan-ly-xe/list";
 import KeHoachXe from "pages/ke-hoach-xe/list";
 import DetailKeHoachXe from "pages/ke-hoach-xe/detail";
+import TongHopXe from "pages/tong-hop-xe/list";
+import DetailTongHopXe from "pages/tong-hop-xe/detail";
 
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
@@ -206,6 +208,14 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE,
             element: <DetailKeHoachXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+            element: <TongHopXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE,
+            element: <DetailTongHopXe />,
           },
         ],
       },

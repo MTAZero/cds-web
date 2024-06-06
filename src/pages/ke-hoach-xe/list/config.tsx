@@ -51,6 +51,18 @@ const columns: any = [
     title: "Quãng đường",
     align: "center",
   },
+  {
+    key: "driver",
+    dataIndex: "driver",
+    title: "Lái xe",
+    align: "center",
+  },
+  {
+    key: "license",
+    dataIndex: "license",
+    title: "Số xe",
+    align: "center",
+  },
 
   {
     key: "action",

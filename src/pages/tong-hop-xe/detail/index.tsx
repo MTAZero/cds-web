@@ -14,7 +14,7 @@ import {
 import {InputFields, TitleCustom} from "components";
 import {formatTime} from "types";
 
-const DetailKeHoachXe = props => {
+const DetailTongHopXe = props => {
   const {id} = useParams();
   const [fields, setFields] = useState<any>(fieldInit);
   const [form] = Form.useForm();
@@ -107,7 +107,7 @@ const DetailKeHoachXe = props => {
         <div className="container">
           <Spin spinning={loading}>
             <Form form={form}>
-              <TitleCustom text="Kế hoạch xe"></TitleCustom>
+              <TitleCustom text="Đăng ki xe"></TitleCustom>
               <Row gutter={[4, 4]}>
                 <InputFields data={fields}></InputFields>
               </Row>
@@ -123,4 +123,4 @@ const DetailKeHoachXe = props => {
     </div>
   );
 };
-export default DetailKeHoachXe;
+export default DetailTongHopXe;

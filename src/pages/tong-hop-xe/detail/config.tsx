@@ -25,16 +25,10 @@ const fields1: any[] = [
     rules: [{required: true, message: "Chưa nhập địa điểm"}],
     css: css,
   },
-  {
-    type: INPUT,
-    label: "Khoảng cách",
-    name: "distance",
-    rules: [{required: true, message: "Chưa nhập địa điểm"}],
-    css: css,
-  },
+
   {
     type: DATE,
-    label: "Xuất phát",
+    label: "Thời gian đi",
     name: "fromDateTime",
     optionsTime: {format: formatTime.dateTime},
     css: css,
@@ -48,20 +42,20 @@ const fields1: any[] = [
     css: css,
     disableDate: false,
   },
-  {
-    type: COMBO_BOX,
-    label: "Lái xe",
-    name: "driver",
-    optionsTime: {format: formatTime},
-    css: css,
-  },
-  {
-    type: INPUT,
-    label: "Bằng xe",
-    name: "license",
-    optionsTime: {format: formatTime},
-    css: css,
-  },
+  // {
+  //   type: COMBO_BOX,
+  //   label: "Lái xe",
+  //   name: "driver",
+  //   optionsTime: {format: formatTime},
+  //   css: css,
+  // },
+  // {
+  //   type: INPUT,
+  //   label: "Bằng xe",
+  //   name: "license",
+  //   optionsTime: {format: formatTime},
+  //   css: css,
+  // },
 ];
 
 export {fields1};

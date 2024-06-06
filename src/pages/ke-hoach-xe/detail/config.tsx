@@ -48,20 +48,19 @@ const fields1: any[] = [
     css: css,
     disableDate: false,
   },
-  // {
-  //   type: COMBO_BOX,
-  //   label: "Lái xe",
-  //   name: "driver",
-  //   optionsTime: {format: formatTime},
-  //   css: css,
-  // },
-  // {
-  //   type: INPUT,
-  //   label: "Bằng xe",
-  //   name: "license",
-  //   optionsTime: {format: formatTime},
-  //   css: css,
-  // },
+  {
+    type: COMBO_BOX,
+    label: "Lái xe",
+    name: "driver",
+    optionsTime: {format: formatTime},
+    css: css,
+  },
+  {
+    type: INPUT,
+    label: "Số xe",
+    name: "license",
+    optionsTime: {format: formatTime},
+    css: css,
+  },
 ];
-
 export {fields1};

@@ -8,7 +8,6 @@ const columns: any = [
   {
     title: "STT",
     key: "index",
-    dataIndex: "index",
   },
 
   {
@@ -16,6 +15,13 @@ const columns: any = [
     title: "Tên xe",
     key: "name",
     dataIndex: "name",
+    rules: [{required: true, message: "Chưa nhập tên xe"}],
+  },
+  {
+    type: INPUT,
+    title: "Loại xe",
+    key: "typeVehicle",
+    dataIndex: "typeVehicle",
     rules: [{required: true, message: "Chưa nhập tên xe"}],
   },
   {
@@ -37,9 +43,11 @@ const columns: any = [
     key: "driver",
     dataIndex: "driver",
   },
+
   {
     key: "action",
     dataIndex: "action",
+    width: 60,
   },
 ];
 
@@ -65,5 +73,4 @@ const fields: any = [
     name: "year",
   },
 ];
-
 export {columns, fields};

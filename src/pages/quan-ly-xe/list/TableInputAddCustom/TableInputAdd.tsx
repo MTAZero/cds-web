@@ -19,6 +19,8 @@ const TableInputAdd = ({
     };
 
     setData([...data, newData]);
+    console.log([...data]);
+    console.log(form.getFieldValue(name));
   };
   columns.some((item: any) => {
     if (item.key == "action") {

@@ -30,7 +30,7 @@ const columns: any = [
   {
     key: "fromDateTime",
     dataIndex: "fromDateTime",
-    title: "Ngày đi",
+    title: "Thời gian đi",
     align: "center",
     render: (value, record, index) => {
       return <>{formatDateToString(value, formatTime.dateTime)}</>;
@@ -39,17 +39,11 @@ const columns: any = [
   {
     key: "toDateTime",
     dataIndex: "toDateTime",
-    title: "Ngày về",
+    title: "Thời gian về",
     align: "center",
     render: (value, record, index) => {
       return <>{formatDateToString(value, formatTime.dateTime)}</>;
     },
-  },
-  {
-    key: "distance",
-    dataIndex: "distance",
-    title: "Quãng đường",
-    align: "center",
   },
 
   {
