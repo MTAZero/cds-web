@@ -1,5 +1,15 @@
-import { RouterLink } from "../../../routers/routers";
-import { SideMenuItem, SystemAction, SystemFeatures } from "../../../types";
+import {
+  AdminSVG,
+  BookSVG,
+  CarSVG,
+  DocumentSVG,
+  DocumentTextSVG,
+  NotebookSVG,
+  OilSVG,
+  UserSVG,
+} from "assests/svg";
+import {RouterLink} from "../../../routers/routers";
+import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
 
 import {
   FaCalendar,
@@ -10,7 +20,7 @@ import {
   FaUserFriends,
   FaWrench,
 } from "react-icons/fa";
-import { IoIosList, IoIosPeople, IoIosSettings } from "react-icons/io";
+import {IoIosList, IoIosPeople, IoIosSettings} from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
   // {
@@ -139,13 +149,13 @@ export const mainMenu: Array<SideMenuItem> = [
   {
     url: RouterLink.TIEN_TRINH_BIEU_ROUTE,
     key: RouterLink.TIEN_TRINH_BIEU_ROUTE,
-    icon: <FaCalendar />,
+    icon: <BookSVG />,
     text: "Huấn luyện chiến đấu",
     children: [
       {
         url: RouterLink.VAN_KIEN_ROUTE,
         key: RouterLink.VAN_KIEN_ROUTE,
-        icon: <FaWrench />,
+        icon: <DocumentTextSVG />,
         children: [],
         text: "Văn kiện, mẫu biểu",
         module: SystemFeatures.ManagerDocuments,
@@ -154,7 +164,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.TIEN_TRINH_BIEU_ROUTE,
         key: RouterLink.TIEN_TRINH_BIEU_ROUTE,
-        icon: <FaWrench />,
+        icon: <DocumentTextSVG />,
         children: [],
         text: "Tiến trình biểu",
         module: SystemFeatures.ManagerProgresses,
@@ -163,7 +173,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
         key: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
-        icon: <FaWrench />,
+        icon: <DocumentTextSVG />,
         children: [],
         text: "Thống kê huấn luyện",
         module: SystemFeatures.ManagerTrainnings,
@@ -172,7 +182,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.RUT_KINH_NGHIEM_ROUTE,
         key: RouterLink.RUT_KINH_NGHIEM_ROUTE,
-        icon: <FaWrench />,
+        icon: <DocumentTextSVG />,
         children: [],
         text: "Rút kinh nghiệm huấn luyện",
         module: SystemFeatures.ManagerExperiences,
@@ -183,30 +193,63 @@ export const mainMenu: Array<SideMenuItem> = [
   {
     url: RouterLink.GUARD_MENU,
     key: RouterLink.GUARD_MENU,
-    icon: <FaCalendar />,
+    icon: <NotebookSVG />,
     text: "Sổ sách cá nhân",
     children: [
       {
         url: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
         key: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
-        icon: <FaWrench />,
+        icon: <NotebookSVG />,
         children: [],
-        text: "Thống kê huấn luyện cá nhân",
+        text: "Sổ học tập chuyên ngành",
         module: SystemFeatures.ManagerPersonalDiarys,
         action: [SystemAction.View, SystemAction.Edit],
       },
     ],
   },
   {
+    url: RouterLink.GUARD_MENU,
+    key: RouterLink.GUARD_MENU,
+    icon: <OilSVG />,
+    text: "Quản lý xăng dầu",
+    children: [
+      {
+        url: RouterLink.QUAN_LY_XE_ROUTE,
+        key: RouterLink.QUAN_LY_XE_ROUTE,
+        icon: <CarSVG />,
+        children: [],
+        text: "Quản lý xe",
+        // module: SystemFeatures.ManagerPersonalDiarys,
+        // action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+        key: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+        icon: <CarSVG />,
+        children: [],
+        text: "Đăng kí xe",
+      },
+      {
+        url: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+        key: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+        icon: <CarSVG />,
+        children: [],
+        text: "Kế hoạch xe",
+        // module: SystemFeatures.ManagerPersonalDiarys,
+        // action: [SystemAction.View, SystemAction.Edit],
+      },
+    ],
+  },
+  {
     url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
     key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
-    icon: <FaCalendar />,
+    icon: <AdminSVG />,
     text: "Quản trị",
     children: [
       {
         url: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
         key: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
-        icon: <FaWrench />,
+        icon: <UserSVG />,
         children: [],
         text: "Người dùng",
         module: SystemFeatures.ManagerUsers,
@@ -250,6 +293,7 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
+
   // {
   //   url: RouterLink.CONTACT,
   //   key: RouterLink.CONTACT,

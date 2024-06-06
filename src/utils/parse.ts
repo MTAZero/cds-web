@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import {formatTime} from "types";
 const serialize = (obj: any) => {
   let str = [];
   for (let p in obj)
@@ -24,19 +25,27 @@ const toArray = (data: any) => {
 };
 const formatDateToString = (
   date: Object | string | null,
-  format: string | null = null,
-  unix: boolean = false
+  format: formatTime | string | null = null
 ) => {
   const validDate = dayjs(date?.toString())?.isValid();
   return date && validDate
     ? format
-      ? dayjs(date?.toString()).format(format as any)
+      ? format == formatTime.unix
+        ? dayjs(date?.toString()).unix()
+        : dayjs(date?.toString()).format(format as any)
       : dayjs(date?.toString()).format()
     : null;
 };
 
-const convertDateStringToDateObject = (dateString: string | null) => {
-  return dateString && dayjs(dateString)?.isValid() ? dayjs(dateString) : null;
+const convertDateStringToDateObject = (
+  dateString: string | null,
+  unix = false
+) => {
+  return dateString && dayjs(dateString)?.isValid()
+    ? unix
+      ? dayjs.unix(toNumber(dateString))
+      : dayjs(dateString)
+    : null;
 };
 const toNumber = value => {
   return !isNaN(value) ? Number(value) : 0;

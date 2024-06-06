@@ -178,7 +178,6 @@ button.custom-btn {
       color: $colorWhite;
     }
     .ant-modal-header {
-      background-color: $colorDark;
       padding: 16px !important;
       margin: 0;
       .ant-modal-title {
@@ -253,7 +252,7 @@ button.custom-btn {
 .ant-table-cell {
   .ant-form-item-control-input-content {
     input {
-      border: none;
+      // border: none;
       border-radius: 0;
       &:focus {
         border: none !important;

@@ -2,7 +2,7 @@ export const RouterLink = {
   LOGIN: "/login",
   HOME: "/home",
   CONTACT: "/contact",
-  XAC_THUC_SSO:'/xac-thuc',
+  XAC_THUC_SSO: "/xac-thuc",
 
   // báo quân số
   TROOP: 'troop',
@@ -43,6 +43,14 @@ export const RouterLink = {
   // Thống kê huấn luyện cá nhân
   THONG_KE_HUAN_LUYEN_CA_NHAN: "/thong-ke-huan-luyen-ca-nhan",
   SO_SACH_CA_NHAN_DETAIL_ROUTE: "/thong-ke-huan-luyen-ca-nhan/:id",
+
+  // Quản trị xăng dầu,xe
+  QUAN_LY_XE_ROUTE: "/quan-ly-xang-dau/xe",
+  QUAN_LY_KE_HOACH_XE_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe",
+  QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe/:id",
+
+  QUAN_LY_TONG_HOP_XE_ROUTE: "/quan-ly-xang-dau/tong-hop-xe",
+  QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/tong-hop-xe/:id",
 
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",

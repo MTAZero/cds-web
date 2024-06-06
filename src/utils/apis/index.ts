@@ -9,4 +9,6 @@ export * from "./users";
 export * from "./so-rut-kinh-nghiem";
 export * from "./so-sach-ca-nhan";
 export * from "./van-kien";
-export * from './sso';
+export * from "./sso";
+export * from "./xe";
+export * from "./dang-ki-xe";

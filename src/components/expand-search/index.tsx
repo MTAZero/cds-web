@@ -78,18 +78,6 @@ const ExpandSearch = forwardRef((props: PropsType, ref) => {
   };
 
   useEffect(() => {
-    form.setFieldsValue({
-      ngayTaoTu: initialValues?.ngayTaoTu,
-      ngayTaoDen: initialValues?.ngayTaoDen,
-      ngayBatDau: initialValues?.ngayBatDau,
-      ngayKetThuc: initialValues?.ngayKetThuc,
-      start: initialValues?.start,
-      end: initialValues?.end,
-      ngayBan: initialValues?.ngayBan,
-    });
-  }, [initialValues]);
-
-  useEffect(() => {
     if (defaultFieldsValue) {
       defaultFieldsValue.forEach(field => {
         form.setFieldsValue({
