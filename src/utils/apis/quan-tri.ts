@@ -72,7 +72,7 @@ const getListDescendantsUnit = async (id: string) => {
   });
   return res?.data;
 };
-const createUnit = async (data: any) => {
+const createUnit = async (data: any, id = null) => {
   const res = await api.makeAuthRequest({
     url: `/units`,
     method: "POST",
@@ -80,9 +80,9 @@ const createUnit = async (data: any) => {
   });
   return res?.data;
 };
-const updateUnit = async (data: any) => {
+const updateUnit = async (data: any, id) => {
   const res = await api.makeAuthRequest({
-    url: `/units/${data?._id}`,
+    url: `/units/${id}`,
     method: "PUT",
     data: data,
   });

@@ -16,6 +16,7 @@ import {
   NotificationService,
   formatDateToString,
   randomId,
+  toArray,
 } from "utils";
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
@@ -75,16 +76,16 @@ const QuanLyXe = props => {
         setIsLoading(true);
         const res = await APIServices.QuanLyXe.getListXe();
         setIsLoading(false);
-        setData(res?.items?.map(e => ({...e, key: randomId()})));
+        const data = toArray(res?.items)?.map(e => ({...e, key: randomId()}));
+        setData(data);
+        form.setFieldValue("listVehicle", data);
       } catch (error) {
         setIsLoading(false);
       }
     };
     getData(params);
   }, [params]);
-  useEffect(() => {
-    form.setFieldValue("listVehicle", data);
-  }, [data]);
+
   return (
     <div className="page quan-ly-xe">
       <div className="main">

@@ -10,5 +10,6 @@ enum formatTime {
   time_24h_mili = "HH:mm:ss",
   hour = "HH",
   year = "YYYY",
+  unix = "unix",
 }
 export {formatTime};

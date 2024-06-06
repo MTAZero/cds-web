@@ -44,8 +44,11 @@ export const RouterLink = {
 
   // Quản trị xăng dầu,xe
   QUAN_LY_XE_ROUTE: "/quan-ly-xang-dau/xe",
-  QUAN_LY_DANG_KI_XE_ROUTE: "/quan-ly-xang-dau/dang-ki-xe",
   QUAN_LY_KE_HOACH_XE_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe",
+  QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe/:id",
+
+  QUAN_LY_TONG_HOP_XE_ROUTE: "/quan-ly-xang-dau/tong-hop-xe",
+  QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/tong-hop-xe/:id",
 
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",
