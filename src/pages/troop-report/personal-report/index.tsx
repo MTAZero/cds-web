@@ -6,14 +6,18 @@ import { useAppSelector } from "hooks";
 import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { APIServices } from "utils";
-import { selectTroopData } from "types";
+import { TroopStatus, getTextByStatus, selectTroopData } from "types";
 
 export const PersonalReport: React.FC = () => {
   const [currentSelectDay, setCurrentDay] = useState<any>(null);
 
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [dataPending, setDataPending] = useState<Array<any>>([]);
-  const unitId = useAppSelector((state) => state.auth.info.unit);
+
+  const [dateReport, setDateReport] = useState<Dayjs>(dayjs());
+  const [statusReport, setStatusReport] = useState<TroopStatus>(
+    TroopStatus.CoMat
+  );
 
   useEffect(() => {
     if (!dataPending) return;
@@ -33,10 +37,7 @@ export const PersonalReport: React.FC = () => {
     const time = date.unix() * 1000;
 
     try {
-      const ans = await APIServices.GuardDutty.getUnitRootGuardDutty(
-        unitId,
-        time
-      );
+      const ans = await APIServices.TroopReport.getPersonalReportByMonth(time);
       setDataPending(ans);
     } catch {}
   };
@@ -44,6 +45,15 @@ export const PersonalReport: React.FC = () => {
   useEffect(() => {
     loadDataPending();
   }, [date]);
+
+  const handleReport = async () => {
+    try {
+      const time = dateReport.unix() * 1000;
+      await APIServices.TroopReport.personalReport(time, statusReport);
+
+      loadDataPending();
+    } catch {}
+  };
 
   const renderDayItem = (dayItem: any) => {
     if (dayItem?.isEmpty) return <Box sx={styles.timePanelCellEmptyStyle} />;
@@ -55,6 +65,8 @@ export const PersonalReport: React.FC = () => {
         ? styles.timePanelCellSelectStyle
         : styles.timePanelCellStyle;
 
+    const { items } = dayItem;
+
     return (
       <Box
         sx={_class}
@@ -64,17 +76,22 @@ export const PersonalReport: React.FC = () => {
       >
         <Box sx={styles.timePanelTitleStyle}>{day}</Box>
         <Box sx={styles.timePanelBodyStyle}>
-          {day % 7 === 1 || day % 7 == 2 ? (
-            <Box
-              sx={{ ...styles.positionItemStyle, ...{ background: "orange" } }}
-            >
-              <Box>Nghỉ cuối tuần</Box>
-            </Box>
-          ) : (
-            <Box sx={styles.positionItemStyle}>
-              <Box>Có mặt</Box>
-            </Box>
-          )}
+          {items.map((item, index) => {
+            let color = "#98e698";
+            if (item.status !== TroopStatus.CoMat) color = "#ff9966";
+
+            return (
+              <Box
+                sx={{
+                  ...styles.positionItemStyle,
+                  ...{ background: color },
+                }}
+                key={index}
+              >
+                {getTextByStatus(item?.status)}
+              </Box>
+            );
+          })}
         </Box>
       </Box>
     );
@@ -90,21 +107,18 @@ export const PersonalReport: React.FC = () => {
             fontWeight: "bold",
           }}
           label={"Chọn ngày"}
-          // views={["month", "year"]}
           format="DD/MM/YYYY"
-          // value={date}
-          // onChange={(value) => {
-          //   setDate(value);
-          // }}
+          value={dateReport}
+          onChange={(value) => {
+            setDateReport(value);
+          }}
         />
         <Box>
           <Select
             size={"small"}
-            // value={item.status ? item.status : TroopStatus.CoMat}
+            value={statusReport}
             sx={styles.selectStatusStyle}
-            // onChange={(e) =>
-            //   _updateStatus(item._id, e.target.value as TroopStatus)
-            // }
+            onChange={(e) => setStatusReport(e.target.value as TroopStatus)}
           >
             {selectTroopData.map((item, index) => {
               return (
@@ -116,7 +130,13 @@ export const PersonalReport: React.FC = () => {
           </Select>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button sx={styles.personaleReportButtonStyle}>Cập nhật</Button>
+          <Button
+            disabled={!dateReport || !statusReport}
+            sx={styles.personaleReportButtonStyle}
+            onClick={handleReport}
+          >
+            Cập nhật
+          </Button>
         </Box>
       </Box>
       <Box sx={styles.mainContentStyle}>

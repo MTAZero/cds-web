@@ -1,3 +1,4 @@
+import { TroopStatus } from "types";
 import createApiServices from "./make-api-request";
 
 const api = createApiServices();
@@ -83,10 +84,32 @@ const getTroopInfo = async (unitId: string, time: number) => {
   return res?.data?.text;
 };
 
+const personalReport = async (time: number, status: TroopStatus) => {
+  const res = await api.makeAuthRequest({
+    url: `/troop-report/personal-report`,
+    method: "POST",
+    data: {
+      time,
+      status,
+    },
+  });
+  return res?.data;
+};
+
+const getPersonalReportByMonth = async (time: number) => {
+  const res = await api.makeAuthRequest({
+    url: `/troop-report/list-personal-report?time=${time}`,
+    method: "GET",
+  });
+  return res?.data;
+};
+
 export const TroopReport = {
   loadUnitChildStatusReport,
   loadListUserTroopStatusOfUnit,
   getListUserTroopStatusOfUnitTree,
   reportTroop,
   getTroopInfo,
+  personalReport,
+  getPersonalReportByMonth,
 };

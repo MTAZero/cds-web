@@ -217,7 +217,7 @@ export const personaleReportButtonStyle = {
   cursor: "pointer",
   borderRadius: "5px",
   textTransform: "none",
-  width: "120px",
+  width: "170px",
 
   "&:hover": {
     opacity: "0.9",

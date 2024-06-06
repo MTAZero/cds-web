@@ -85,3 +85,8 @@ export const selectTroopData = [
     text: "Khác",
   },
 ];
+
+export const getTextByStatus = (status: TroopStatus) => {
+  const ans = selectTroopData.find((i) => i.value === status);
+  return ans ? ans.text : "";
+};
