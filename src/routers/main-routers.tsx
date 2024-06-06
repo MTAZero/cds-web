@@ -1,15 +1,15 @@
-import {Navigate} from "react-router-dom";
-import {LoginPage} from "../pages/login";
-import {RouterLink} from "./routers";
-import {ContactPage} from "../pages/contact";
+import { Navigate } from "react-router-dom";
+import { LoginPage } from "../pages/login";
+import { RouterLink } from "./routers";
+import { ContactPage } from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import {HomePage} from "../pages/home";
-import {MainLayout} from "../layouts";
-import {TroopReport} from "../pages/troop-report";
-import {LeaveApprove} from "../pages/leave-approve";
-import {LeaveRegister} from "../pages/leave-register";
-import {GuardSetting} from "../pages/guard-dutty/guard-dutty-manager";
-import {SystemFeatures, SystemAction} from "../types";
+import { HomePage } from "../pages/home";
+import { MainLayout } from "../layouts";
+import { TroopReport } from "../pages/troop-report";
+import { LeaveApprove } from "../pages/leave-approve";
+import { LeaveRegister } from "../pages/leave-register";
+import { GuardSetting } from "../pages/guard-dutty/guard-dutty-manager";
+import { SystemFeatures, SystemAction } from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -20,19 +20,20 @@ import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
 import VanKien from "pages/van-kien";
-import {UpdateGuardDuttyPage} from "pages/guard-dutty/update-guard-dutty";
+import { UpdateGuardDuttyPage } from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
 import Unit from "pages/admin/unit";
-import {GuardDuttyUnitPage} from "pages/guard-dutty/guard-dutty-unit";
-import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
-import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
-import {UserCalendarPage} from "pages/work-calendar/user-calendar";
+import { GuardDuttyUnitPage } from "pages/guard-dutty/guard-dutty-unit";
+import { GuardDuttyPersonalPage } from "pages/guard-dutty/guard-dutty-personal";
+import { UnitCalendarPage } from "pages/work-calendar/unit-calendar";
+import { UserCalendarPage } from "pages/work-calendar/user-calendar";
 import XacThucSSO from "pages/xac-thuc-sso";
+import { PersonalReport } from "pages/troop-report/personal-report";
 
 const MainRoutes = [
-  {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
+  { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
   {
     path: RouterLink.XAC_THUC_SSO,
     element: <XacThucSSO />,
@@ -63,6 +64,10 @@ const MainRoutes = [
             element: <TroopReport />,
             module: SystemFeatures.TroopReports,
             action: [SystemAction.View, SystemAction.Report],
+          },
+          {
+            path: RouterLink.PERSONAL_REPORT,
+            element: <PersonalReport />,
           },
           {
             path: RouterLink.LEAVE_APPROVE,

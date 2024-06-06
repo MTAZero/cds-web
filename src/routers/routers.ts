@@ -5,7 +5,9 @@ export const RouterLink = {
   XAC_THUC_SSO:'/xac-thuc',
 
   // báo quân số
+  TROOP: 'troop',
   TROOP_REPORT: "/troop-report",
+  PERSONAL_REPORT: "/personal-report",
 
   // Nghỉ phép
   LEAVE_MENU: "leave",
