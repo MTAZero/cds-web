@@ -9,6 +9,14 @@ const getListDangKi = async params => {
   });
   return res?.data;
 };
+const getListKeHoach = async params => {
+  const res = await api.makeAuthRequest({
+    url: `/register-vehicle/plan`,
+    method: "GET",
+    params: params,
+  });
+  return res?.data;
+};
 const getDetailDangKi = async id => {
   const res = await api.makeAuthRequest({
     url: `/register-vehicle/${id}`,
@@ -43,6 +51,7 @@ const deleteDangKi = async data => {
 
 export const DangKiXe = {
   getListDangKi,
+  getListKeHoach,
   getDetailDangKi,
   createDangKi,
   updateDangKi,

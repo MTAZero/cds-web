@@ -30,7 +30,7 @@ const formatDateToString = (
   const validDate = dayjs(date?.toString())?.isValid();
   return date && validDate
     ? format
-      ? format == formatTime.unix
+      ? format === formatTime.unix
         ? dayjs(date?.toString()).unix()
         : dayjs(date?.toString()).format(format as any)
       : dayjs(date?.toString()).format()

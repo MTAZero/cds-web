@@ -121,7 +121,7 @@ const KeHoachXe = props => {
     const getData = async params => {
       try {
         setIsLoading(true);
-        const res = await APIServices.DangKiXe.getListDangKi(params);
+        const res = await APIServices.DangKiXe.getListKeHoach(params);
         setIsLoading(false);
         setData(res);
         setTotal(res?.length);
@@ -145,7 +145,7 @@ const KeHoachXe = props => {
         </div>
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Đăng kí xe"></TitleCustom>
+            <TitleCustom text="Kế hoạch xe"></TitleCustom>
             <Space>
               <ReactToPrint
                 documentTitle={`Đăng kí xe tháng ${

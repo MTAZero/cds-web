@@ -1,4 +1,5 @@
 import {SystemAction, SystemFeatures, fieldType} from "types";
+import {randomId} from "utils";
 
 const {INPUT, COMBO_BOX} = fieldType;
 const css = {xs: 24, sm: 24, md: 24, lg: 24, xl: 24};
@@ -17,65 +18,11 @@ const fields = [
     name: "module",
     type: COMBO_BOX,
     label: "Module",
-    options: [
-      {
-        value: SystemFeatures.ManagerUsers,
-        label: SystemFeatures.ManagerUsers,
-      },
-      {
-        value: SystemFeatures.ManagerRoles,
-        label: SystemFeatures.ManagerRoles,
-      },
-      {
-        value: SystemFeatures.ManagerUnits,
-        label: SystemFeatures.ManagerUnits,
-      },
-      {
-        value: SystemFeatures.ManagerPermission,
-        label: SystemFeatures.ManagerPermission,
-      },
-      {
-        value: SystemFeatures.TroopReports,
-        label: SystemFeatures.TroopReports,
-      },
-      {
-        value: SystemFeatures.ManagerRegisterLeave,
-        label: SystemFeatures.ManagerRegisterLeave,
-      },
-      {
-        value: SystemFeatures.ManagerGuardDutty,
-        label: SystemFeatures.ManagerGuardDutty,
-      },
-      {
-        value: SystemFeatures.ManagerDuttySetting,
-        label: SystemFeatures.ManagerDuttySetting,
-      },
-      {
-        value: SystemFeatures.ManagerPositions,
-        label: SystemFeatures.ManagerPositions,
-      },
-
-      {
-        value: SystemFeatures.ManagerProgresses,
-        label: SystemFeatures.ManagerProgresses,
-      },
-      {
-        value: SystemFeatures.ManagerDocuments,
-        label: SystemFeatures.ManagerDocuments,
-      },
-      {
-        value: SystemFeatures.ManagerTrainnings,
-        label: SystemFeatures.ManagerTrainnings,
-      },
-      {
-        value: SystemFeatures.ManagerExperiences,
-        label: SystemFeatures.ManagerExperiences,
-      },
-      {
-        value: SystemFeatures.ManagerPersonalDiarys,
-        label: SystemFeatures.ManagerPersonalDiarys,
-      },
-    ],
+    options: Object.values(SystemFeatures)?.map(e => ({
+      label: e,
+      value: e,
+      key: randomId(),
+    })),
     rules: [{required: true, message: "Bắt buộc chọn module"}],
     css: css,
   },
@@ -96,3 +43,60 @@ const fields = [
   },
 ];
 export {fields};
+// {
+//         value: SystemFeatures.ManagerUsers,
+//         label: SystemFeatures.ManagerUsers,
+//       },
+//       {
+//         value: SystemFeatures.ManagerRoles,
+//         label: SystemFeatures.ManagerRoles,
+//       },
+//       {
+//         value: SystemFeatures.ManagerUnits,
+//         label: SystemFeatures.ManagerUnits,
+//       },
+//       {
+//         value: SystemFeatures.ManagerPermission,
+//         label: SystemFeatures.ManagerPermission,
+//       },
+//       {
+//         value: SystemFeatures.TroopReports,
+//         label: SystemFeatures.TroopReports,
+//       },
+//       {
+//         value: SystemFeatures.ManagerRegisterLeave,
+//         label: SystemFeatures.ManagerRegisterLeave,
+//       },
+//       {
+//         value: SystemFeatures.ManagerGuardDutty,
+//         label: SystemFeatures.ManagerGuardDutty,
+//       },
+//       {
+//         value: SystemFeatures.ManagerDuttySetting,
+//         label: SystemFeatures.ManagerDuttySetting,
+//       },
+//       {
+//         value: SystemFeatures.ManagerPositions,
+//         label: SystemFeatures.ManagerPositions,
+//       },
+
+//       {
+//         value: SystemFeatures.ManagerProgresses,
+//         label: SystemFeatures.ManagerProgresses,
+//       },
+//       {
+//         value: SystemFeatures.ManagerDocuments,
+//         label: SystemFeatures.ManagerDocuments,
+//       },
+//       {
+//         value: SystemFeatures.ManagerTrainnings,
+//         label: SystemFeatures.ManagerTrainnings,
+//       },
+//       {
+//         value: SystemFeatures.ManagerExperiences,
+//         label: SystemFeatures.ManagerExperiences,
+//       },
+//       {
+//         value: SystemFeatures.ManagerPersonalDiarys,
+//         label: SystemFeatures.ManagerPersonalDiarys,
+//       },

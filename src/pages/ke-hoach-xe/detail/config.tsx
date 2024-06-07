@@ -49,17 +49,15 @@ const fields1: any[] = [
     disableDate: false,
   },
   {
-    type: COMBO_BOX,
+    type: INPUT,
     label: "Lái xe",
     name: "driver",
-    optionsTime: {format: formatTime},
     css: css,
   },
   {
     type: INPUT,
     label: "Số xe",
     name: "license",
-    optionsTime: {format: formatTime},
     css: css,
   },
 ];
