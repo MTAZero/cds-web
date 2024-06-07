@@ -38,6 +38,7 @@ const TongHopXe = props => {
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
+        deleteFunction={() => {}}
         editFunction={() => {
           navigateToDetail(record, index);
         }}
@@ -145,7 +146,7 @@ const TongHopXe = props => {
         </div>
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Đăng kí xe"></TitleCustom>
+            <TitleCustom text="Tổng hợp xe"></TitleCustom>
             <Space>
               {/* <ReactToPrint
                 documentTitle={`Đăng kí xe tháng ${

@@ -1,6 +1,6 @@
 import {months, weeks} from "const";
 import {fieldType, formatTime} from "types";
-import {formatDateToString} from "utils";
+import {convertDateStringToDateObject, formatDateToString} from "utils";
 
 const {COMBO_BOX, DATE} = fieldType;
 const columns: any = [
@@ -33,7 +33,14 @@ const columns: any = [
     title: "Thời gian đi",
     align: "center",
     render: (value, record, index) => {
-      return <>{formatDateToString(value, formatTime.dateTime)}</>;
+      return (
+        <>
+          {formatDateToString(
+            convertDateStringToDateObject(value, true),
+            formatTime.dateTime
+          )}
+        </>
+      );
     },
   },
   {
@@ -42,7 +49,14 @@ const columns: any = [
     title: "Thời gian về",
     align: "center",
     render: (value, record, index) => {
-      return <>{formatDateToString(value, formatTime.dateTime)}</>;
+      return (
+        <>
+          {formatDateToString(
+            convertDateStringToDateObject(value, true),
+            formatTime.dateTime
+          )}
+        </>
+      );
     },
   },
 
