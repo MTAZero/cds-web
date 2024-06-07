@@ -35,7 +35,7 @@ const changeMyPassword = (old_password = "", new_password = "") => {
     url: "/authentication/change-my-password",
     method: "PUT",
     data: {
-      old_password,
+      password: old_password,
       new_password,
     },
   });

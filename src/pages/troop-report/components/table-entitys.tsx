@@ -340,7 +340,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
             }}
             sx={styles.buttonSaveStyle}
           >
-            Cập nhật tình hình quân số
+            Phê duyệt và báo cáo
           </Button>
         </Box>
       )}

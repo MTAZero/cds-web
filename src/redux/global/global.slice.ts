@@ -1,30 +1,27 @@
-import {createSlice} from "@reduxjs/toolkit";
-import type {PayloadAction} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface GlobalState {
-  number: number;
+  modalChangePasswordState: boolean;
 }
 
 const initialState: GlobalState = {
-  number: 0,
+  modalChangePasswordState: false,
 };
 
 export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    setNumber: (state: GlobalState, action: PayloadAction<number>) => {
-      state.number = action.payload;
-    },
-    incNumber: (state: GlobalState) => {
-      state.number = state.number + 1;
-    },
-    decNumber: (state: GlobalState) => {
-      state.number = state.number - 1;
+    setModalChangePasswordState: (
+      state: GlobalState,
+      action: PayloadAction<boolean>
+    ) => {
+      state.modalChangePasswordState = action.payload;
     },
   },
 });
 
-export const {setNumber, incNumber, decNumber} = globalSlice.actions;
+export const { setModalChangePasswordState } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -3,8 +3,19 @@ import { Outlet } from "react-router-dom";
 
 import { Header } from "./header";
 import { Menu } from "./menu";
+import { ModalChangePassword } from "./modal-change-password";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { setModalChangePasswordState } from "../../redux/global/global.slice";
 
 export const MainLayout = () => {
+  const modalChangePasswordState = useAppSelector(
+    (state) => state.global.modalChangePasswordState
+  );
+
+  console.log(modalChangePasswordState);
+
+  const dispatch = useAppDispatch();
+
   return (
     <Box
       sx={{
@@ -36,6 +47,13 @@ export const MainLayout = () => {
           <Outlet />
         </Box>
       </Box>
+
+      <ModalChangePassword
+        visible={modalChangePasswordState}
+        onClose={() => {
+          dispatch(setModalChangePasswordState(false));
+        }}
+      />
     </Box>
   );
 };

@@ -1,15 +1,14 @@
-import {combineReducers, configureStore} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import globalInfoSliceReducer from "./global/global.slice";
+import globalSliceReducer from "./global/global.slice";
 import authSliceReducer from "./auth/auth.slice";
 
 import { persistStore, persistReducer } from "redux-persist";
-import storage from 'redux-persist/lib/storage'
+import storage from "redux-persist/lib/storage";
 import catalogSliceReducer from "./catalog/catalog.slice";
 
-
 const rootReducer = combineReducers({
-  global: globalInfoSliceReducer,
+  global: globalSliceReducer,
   auth: authSliceReducer,
   catalog: catalogSliceReducer,
 });

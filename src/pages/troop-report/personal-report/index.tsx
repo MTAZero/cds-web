@@ -2,15 +2,11 @@ import { Box, Button, MenuItem, Select } from "@mui/material";
 import * as styles from "./index.styles";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs, { Dayjs } from "dayjs";
-import { useAppSelector } from "hooks";
 import { useState, useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
 import { APIServices } from "utils";
 import { TroopStatus, getTextByStatus, selectTroopData } from "types";
 
 export const PersonalReport: React.FC = () => {
-  const [currentSelectDay, setCurrentDay] = useState<any>(null);
-
   const [date, setDate] = useState<Dayjs>(dayjs());
   const [dataPending, setDataPending] = useState<Array<any>>([]);
 
@@ -18,20 +14,6 @@ export const PersonalReport: React.FC = () => {
   const [statusReport, setStatusReport] = useState<TroopStatus>(
     TroopStatus.CoMat
   );
-
-  useEffect(() => {
-    if (!dataPending) return;
-    let currentNew = null;
-
-    for (let index = 0; index < dataPending?.length; index++) {
-      const dataTemp = dataPending[index];
-      const day = dataTemp?.days?.find(
-        (i) => i?.title === currentSelectDay?.title
-      );
-      if (day) currentNew = day;
-    }
-    setCurrentDay(currentNew);
-  }, [dataPending]);
 
   const loadDataPending = async () => {
     const time = date.unix() * 1000;
@@ -60,20 +42,12 @@ export const PersonalReport: React.FC = () => {
 
     const { title } = dayItem;
     const day = title?.split("/")[0];
-    let _class =
-      dayItem === currentSelectDay
-        ? styles.timePanelCellSelectStyle
-        : styles.timePanelCellStyle;
+    let _class = styles.timePanelCellStyle;
 
     const { items } = dayItem;
 
     return (
-      <Box
-        sx={_class}
-        onClick={() => {
-          setCurrentDay(dayItem);
-        }}
-      >
+      <Box sx={_class}>
         <Box sx={styles.timePanelTitleStyle}>{day}</Box>
         <Box sx={styles.timePanelBodyStyle}>
           {items.map((item, index) => {
