@@ -11,9 +11,7 @@ export const PersonalReport: React.FC = () => {
   const [dataPending, setDataPending] = useState<Array<any>>([]);
 
   const [dateReport, setDateReport] = useState<Dayjs>(dayjs());
-  const [statusReport, setStatusReport] = useState<TroopStatus>(
-    TroopStatus.CoMat
-  );
+  const [statusReport, setStatusReport] = useState<TroopStatus>(null);
 
   const loadDataPending = async () => {
     const time = date.unix() * 1000;
@@ -45,9 +43,22 @@ export const PersonalReport: React.FC = () => {
     let _class = styles.timePanelCellStyle;
 
     const { items } = dayItem;
-
     return (
-      <Box sx={_class}>
+      <Box
+        sx={_class}
+        onClick={() => {
+          if (title) {
+            const [day, month, year] = title.split("/").map(Number);
+            const dt = dayjs(new Date(year, month - 1, day));
+
+            setDateReport(dt);
+
+            if (dayItem?.items[0]) {
+              setStatusReport(dayItem?.items[0]?.status);
+            } else setStatusReport(null);
+          }
+        }}
+      >
         <Box sx={styles.timePanelTitleStyle}>{day}</Box>
         <Box sx={styles.timePanelBodyStyle}>
           {items.map((item, index) => {

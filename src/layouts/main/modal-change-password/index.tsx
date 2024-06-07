@@ -65,17 +65,6 @@ export const ModalChangePassword: FC<modalChangePasswordProps> = ({
     } catch {
       NotificationService.error("Đổi mật khẩu thất bại");
     }
-
-    // onSave({
-    //   _id: entity?._id,
-    //   name: formData.name,
-    //   description: formData.description,
-    //   rate: formData.rate,
-    //   unit: formData.unit,
-    //   is_generate: formData.is_generate,
-    //   number: parseInt(formData.number.toString()),
-    //   priority_display: parseInt(formData.priority_display.toString()),
-    // });
   };
 
   return (
