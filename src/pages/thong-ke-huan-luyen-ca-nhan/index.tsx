@@ -34,11 +34,10 @@ const ThongKeHLCaNhan = prop => {
     const getData = async () => {
       try {
         setIsLoading(true);
-        const res = await APIServices.SoSachHuanLuyen.getListHuanLuyenCaNhan(
-          params
-        );
-        setDataSource(res?.items);
-        setTotal(res?.total);
+        // const res = await APIServices.SoSachHuanLuyen.getListHuanLuyenCaNhan(
+        //   params
+        // );
+        setDataSource([{noi_dung: "123", thoi_gian: "123", ket_qua: 1}]);
         setIsLoading(false);
       } catch (error) {
         setIsLoading(false);

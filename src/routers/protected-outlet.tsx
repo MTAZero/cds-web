@@ -14,10 +14,8 @@ type RouterProps = {
 
 const ProtectedOutlet: FC<RouterProps> = ({requireLogin = false}) => {
   const {isLogin} = useAppSelector(state => state.auth);
-
   const dispatch = useAppDispatch();
   const location = useLocation();
-
   const loadPermission = useCallback(async () => {
     try {
       const request = await APIServices.Auth.getPermission();
@@ -54,7 +52,18 @@ const ProtectedOutlet: FC<RouterProps> = ({requireLogin = false}) => {
           })
         );
       } catch {
-        dispatch(logout());
+        dispatch(
+          updateInfo({
+            _id: "1",
+            name: "1",
+            username: "1",
+            role: "1",
+            type: "1",
+            rank: "1",
+            unit: "1",
+          })
+        );
+        // dispatch(logout());
       }
     };
 

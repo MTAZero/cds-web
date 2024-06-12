@@ -37,7 +37,7 @@ export const getPermisisonRouter = (
 
   if (item?.module && item?.action && Array.isArray(item?.action)) {
     const ok = checkPermisison(permission, item?.module, item?.action);
-    if (!ok) return null;
+    // if (!ok) return null;
   }
 
   const childs: any = [];

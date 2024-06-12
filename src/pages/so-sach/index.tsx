@@ -50,22 +50,22 @@ const SoSach = prop => {
   const [data, setData] = useState<any>();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const getData = async id => {
-      try {
-        setLoading(true);
-        const res = await APIServices.SoSachHuanLuyen.getSoSachOfHuanLuyen(id);
-        setData(res);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        setData(null);
-      }
-    };
-    if (isValuable(id)) {
-      getData(id);
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   const getData = async id => {
+  //     try {
+  //       setLoading(true);
+  //       const res = await APIServices.SoSachHuanLuyen.getSoSachOfHuanLuyen(id);
+  //       setData(res);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       setLoading(false);
+  //       setData(null);
+  //     }
+  //   };
+  //   if (isValuable(id)) {
+  //     getData(id);
+  //   }
+  // }, [id]);
   const submit = async () => {
     try {
       const valuesCreate = {
@@ -92,48 +92,46 @@ const SoSach = prop => {
   };
   useEffect(() => {}, [data]);
   return (
-    <Spin spinning={loading}>
-      <div className="page">
-        <div className="main">
-          <div className="container">
-            <TitleCustom text="Thông tin huấn luyện"></TitleCustom>
+    <div className="page so-sach-ca-nhan">
+      <div className="main">
+        <div className="container">
+          <TitleCustom text="Thông tin huấn luyện"></TitleCustom>
 
-            <Descriptions>
-              {info?.map(e => (
-                <DescriptionsItem label={e?.label} span={e?.span}>
-                  {e?.name == "date"
-                    ? formatDateToString(data?.[e?.name], formatTime.dateTime)
-                    : data?.[e?.name]}
-                </DescriptionsItem>
-              ))}
-            </Descriptions>
-          </div>
-          <div className="container" style={{width: 1200}}>
-            <TitleCustom text="Nội dung ghi chép"></TitleCustom>
+          <Descriptions>
+            {info?.map(e => (
+              <DescriptionsItem label={e?.label} span={e?.span}>
+                {e?.name == "date"
+                  ? formatDateToString(data?.[e?.name], formatTime.dateTime)
+                  : data?.[e?.name]}
+              </DescriptionsItem>
+            ))}
+          </Descriptions>
+        </div>
+        <div className="container">
+          <TitleCustom text="Nội dung ghi chép"></TitleCustom>
 
-            <CKEditor
-              editor={Editor as any}
-              // config={}editorConfiguration
-              data={data?.note}
-              onReady={event => {
-                // You can store the "editor" and use when it is needed.
-              }}
-              onChange={(event, editor: any) => {
-                const _data = editor?.getData();
-                setDataEditor(_data);
-              }}
-              onBlur={(event, editor) => {}}
-              onFocus={(event, editor) => {}}
-            />
-            <Row justify={"end"} style={{marginTop: 8}}>
-              <Button type="primary" onClick={submit}>
-                Lưu lại
-              </Button>
-            </Row>
-          </div>
+          <CKEditor
+            editor={Editor as any}
+            // config={}editorConfiguration
+            data={data?.note}
+            onReady={event => {
+              // You can store the "editor" and use when it is needed.
+            }}
+            onChange={(event, editor: any) => {
+              const _data = editor?.getData();
+              setDataEditor(_data);
+            }}
+            onBlur={(event, editor) => {}}
+            onFocus={(event, editor) => {}}
+          />
+          <Row justify={"end"} style={{marginTop: 8}}>
+            <Button type="primary" onClick={submit}>
+              Lưu lại
+            </Button>
+          </Row>
         </div>
       </div>
-    </Spin>
+    </div>
   );
 };
 export default SoSach;

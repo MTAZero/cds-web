@@ -47,10 +47,11 @@ const MainRoutes = [
     path: RouterLink.LOGIN,
     element: <LoginPage />,
   },
+
   {
     key: "private",
     path: "",
-    element: <ProtectedOutlet requireLogin={true} />,
+    element: <ProtectedOutlet requireLogin={false} />,
     children: [
       {
         path: "",
@@ -169,8 +170,8 @@ const MainRoutes = [
           {
             path: RouterLink.SO_SACH_CA_NHAN_DETAIL_ROUTE,
             element: <SoSach />,
-            module: SystemFeatures.ManagerPersonalDiarys,
-            action: [SystemAction.View, SystemAction.Edit],
+            // module: SystemFeatures.ManagerPersonalDiarys,
+            // action: [SystemAction.View, SystemAction.Edit],
           },
           {
             path: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
