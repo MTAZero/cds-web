@@ -76,6 +76,7 @@ const fields2: any[] = [
     name: "day_of_week",
     css: css,
     disabled: true,
+    placeholder: "",
     rules: [{required: true, message: "Chưa nhập thứ thực hiện"}],
   },
   {
@@ -84,6 +85,7 @@ const fields2: any[] = [
     name: "sum_time_train",
     rules: [{required: true, message: "Chưa nhập tổng thời gian"}],
     css: css,
+    addonAfter: "giờ",
   },
 
   {

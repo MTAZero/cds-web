@@ -9,6 +9,7 @@ import {
   convertDateStringToDateObject,
   formatDateToString,
   getItemLocalStorage,
+  randomId,
   toArray,
 } from "utils";
 import dayjs from "dayjs";
@@ -60,6 +61,7 @@ const TienTrinh = (props: any) => {
       listUnit?.map((e: {_id: any; name: any}) => ({
         value: e?._id,
         label: e?.name,
+        key: randomId(),
       }));
 
     setFields([...fieldsInit]);
