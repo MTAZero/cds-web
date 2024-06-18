@@ -1,0 +1,17 @@
+@import "assests/styles/_color.scss";
+.header-receipt {
+  .ant-divider {
+    border-block-start: 0.8px solid black !important;
+    color: $color-black !important;
+    margin: 2px;
+  }
+  * {
+    font-size: 13pt !important;
+  }
+  table {
+    width: 100%;
+  }
+  thead {
+    width: 100%;
+  }
+}

@@ -1,0 +1,11 @@
+.form-item-receipt {
+  .ant-form-item-control {
+    width: 30px;
+  }
+  .ant-form-item-control-input-content {
+    width: 90px !important;
+  }
+  input {
+    padding: 0;
+  }
+}
