@@ -5,6 +5,9 @@ const isValuable = (value: any) => {
     return true;
   }
 };
+const isValuableString = value => {
+  return typeof value == "string" && value?.trim()?.length != 0;
+};
 const checkEmptyObj = (obj): boolean => {
   let isEmpty = true;
   if (!obj) {
@@ -22,4 +25,4 @@ const checkEmptyObj = (obj): boolean => {
   }
   return isEmpty;
 };
-export {isValuable, checkEmptyObj};
+export {isValuable, checkEmptyObj, isValuableString};

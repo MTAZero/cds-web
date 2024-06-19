@@ -1,0 +1,23 @@
+.fill-text-receipt {
+  .line-dot {
+    max-width: 80em;
+    padding: 0;
+    overflow-x: hidden;
+    list-style: none;
+  }
+  .line-dot span:not(.addonAfter):before {
+    float: left;
+    width: 0;
+    white-space: nowrap;
+    content: "...........................................................................................................................................";
+  }
+  .line-dot span:first-child {
+    padding-right: 0.33em;
+    background: white;
+  }
+  .line-dot span + span {
+    float: right;
+    padding-left: 0.33em;
+    background: white;
+  }
+}

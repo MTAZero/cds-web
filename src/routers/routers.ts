@@ -5,7 +5,7 @@ export const RouterLink = {
   XAC_THUC_SSO: "/xac-thuc",
 
   // báo quân số
-  TROOP: 'troop',
+  TROOP: "troop",
   TROOP_REPORT: "/troop-report",
   PERSONAL_REPORT: "/personal-report",
 
@@ -51,7 +51,7 @@ export const RouterLink = {
 
   QUAN_LY_TONG_HOP_XE_ROUTE: "/quan-ly-xang-dau/tong-hop-xe",
   QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/tong-hop-xe/:id",
-
+  QUAN_LY_LENH_XE_ROUTE: "/quan-ly-xang-dau/lenh-xe",
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",
   QUAN_TRI_PERMISSION_ROUTE: "/quan-tri/permission",

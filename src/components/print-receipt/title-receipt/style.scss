@@ -1,0 +1,15 @@
+@import "assests/styles/_color.scss";
+.title-receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  * {
+    font-size: 14pt !important;
+  }
+  .ant-divider-horizontal {
+    border-block-start: 0.8px solid black !important;
+    color: $color-black !important;
+    margin: 2px !important;
+  }
+}
