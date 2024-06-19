@@ -1,12 +1,11 @@
 @import "assests/styles/_variables.scss";
 .so-sach-ca-nhan {
-  background-color: red;
   //   width: 100%;
   .ck {
     height: 100%;
   }
   .ck-editor {
-    // width: 100% !important;
+    width: 100% !important;
     .ck-content {
       height: 70vh;
       font-size: $sizeMedium;
