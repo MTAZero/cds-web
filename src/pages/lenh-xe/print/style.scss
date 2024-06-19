@@ -1,0 +1,32 @@
+@import "assests/styles/_variables.scss";
+.lenh-xe {
+  width: 210mm;
+  .print {
+    @include page-a4;
+    @include font-print;
+
+    * {
+      font-size: 13pt;
+    }
+    .main-content {
+      .ant-row {
+        margin-bottom: 14px;
+      }
+      .table {
+        @include table-print;
+      }
+    }
+    .footer-section {
+      margin-top: 30px;
+    }
+  }
+  .button-section {
+    width: calc(100% - 30px);
+    position: absolute;
+    height: 30px;
+    bottom: 12px;
+    background-color: $color-background-white;
+    // right: 10px;
+    z-index: 100000;
+  }
+}

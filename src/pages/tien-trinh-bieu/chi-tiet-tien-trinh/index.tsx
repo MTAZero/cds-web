@@ -103,6 +103,7 @@ const DetailTienTrinh = props => {
         listUnit?.map((e: {_id: any; name: any}) => ({
           value: e?._id,
           label: e?.name,
+          key: randomId(),
         }));
       setFields2([...fields2]);
     };

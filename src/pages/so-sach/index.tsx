@@ -92,8 +92,8 @@ const SoSach = prop => {
   };
   useEffect(() => {}, [data]);
   return (
-    <Spin spinning={loading}>
-      <div className="page">
+    <div className="page so-sach-ca-nhan">
+      <Spin spinning={loading}>
         <div className="main">
           <div className="container">
             <TitleCustom text="Thông tin huấn luyện"></TitleCustom>
@@ -108,7 +108,7 @@ const SoSach = prop => {
               ))}
             </Descriptions>
           </div>
-          <div className="container" style={{width: 1200}}>
+          <div className="container">
             <TitleCustom text="Nội dung ghi chép"></TitleCustom>
 
             <CKEditor
@@ -132,8 +132,8 @@ const SoSach = prop => {
             </Row>
           </div>
         </div>
-      </div>
-    </Spin>
+      </Spin>
+    </div>
   );
 };
 export default SoSach;

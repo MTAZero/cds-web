@@ -24,7 +24,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #7c7b7b;
 }
-
+* {
+  box-sizing: border-box;
+}
 body {
   width: 100%;
   overflow-x: hidden;
@@ -37,6 +39,7 @@ a {
 
 .main {
   width: 100%;
+  font-size: 16px !important;
 }
 
 div[tabIndex="0"],
@@ -168,10 +171,15 @@ button.custom-btn {
   border-radius: 8px;
   margin-bottom: 8px;
 }
-
+.page {
+  .main {
+    width: 100%;
+  }
+}
 //css cho modal
 .ant-modal-wrap {
   .ant-modal-content {
+    position: relative;
     .ant-modal-close {
       top: 16px !important;
       right: 16px !important;

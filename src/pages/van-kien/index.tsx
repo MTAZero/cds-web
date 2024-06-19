@@ -47,6 +47,8 @@ const VanKien = props => {
   useEffect(() => {
     if (toArray(listFile)?.length > 0) {
       onClick(listFile?.[0]);
+    } else {
+      setBlob(null);
     }
   }, [listFile]);
   const onClick = record => {

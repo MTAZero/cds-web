@@ -16,9 +16,9 @@ const PrintTienTrinh = (props: any) => {
     const _setCheckerAndSigner = (unit: any) => {
       let _checker;
       let _signer;
-
+      console.log(unit);
       switch (unit) {
-        case "Trung tâm":
+        case "Trung tâm 1":
           _signer = "chỉ huy trưởng";
           break;
         case "Phòng Chính trị":
@@ -32,7 +32,8 @@ const PrintTienTrinh = (props: any) => {
           break;
 
         default:
-          _signer = "Cụm trưởng";
+          _signer = "........................";
+          _checker = "........................";
           break;
       }
       if (unit?.includes("Đội")) {
