@@ -24,13 +24,11 @@ import dayjs from "dayjs";
 import Print from "./print/Print";
 import TableInputAdd from "./TableInputAddCustom/TableInputAdd";
 const QuanLyXe = props => {
-  const dispatch = useAppDispatch();
   const [params, setParams] = useState<any>({});
   const [fields, setFields] = useState(fieldsInit);
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
   const printRef = useRef<any>();
-  const navigate = useNavigate();
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any[]>([]);

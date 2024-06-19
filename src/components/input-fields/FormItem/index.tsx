@@ -314,7 +314,7 @@ const FormItem = (props: any) => {
         return (
           <Radio.Group
             defaultValue={defaultValue}
-            value={true}
+            // value={true}
             disabled={disable}
             onChange={onChange}
           >

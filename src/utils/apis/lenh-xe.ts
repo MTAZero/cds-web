@@ -26,17 +26,16 @@ const createLenhXe = async (data: any) => {
 };
 const updateLenhXe = async (data: any) => {
   const res = await api.makeAuthRequest({
-    url: `/vehicle-command/${data?._id}`,
+    url: `/vehicle-command/${data?.id}`,
     method: "PUT",
     data: data,
   });
   return res?.data;
 };
-const deleteLenhXe = async (data: any) => {
+const deleteLenhXe = async (id: any) => {
   const res = await api.makeAuthRequest({
-    url: `/vehicle-command/${data?._id}`,
+    url: `/vehicle-command/${id}`,
     method: "DELETE",
-    data: data,
   });
   return res?.data;
 };

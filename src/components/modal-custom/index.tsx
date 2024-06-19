@@ -1,9 +1,12 @@
 import React, {useEffect, useImperativeHandle, useRef, useState} from "react";
 import {Modal, Space, Row, Col} from "antd";
 import "./ModalCustom.scss";
+import {useAppDispatch} from "hooks";
+import {setIsOpenModalRedux} from "../../redux/global/global.slice";
 const ModalCustom = React.forwardRef((props: any, ref) => {
   const {onCloseModal, onOpenModal} = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
   useImperativeHandle(ref, () => ({
     openModal: () => {
       openModal();
@@ -21,6 +24,7 @@ const ModalCustom = React.forwardRef((props: any, ref) => {
     setIsModalOpen(false);
   };
   useEffect(() => {
+    dispatch(setIsOpenModalRedux(isModalOpen));
     if (isModalOpen && onOpenModal) {
       onOpenModal();
     }

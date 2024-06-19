@@ -12,7 +12,7 @@ const FillTextReceipt = (props: Props) => {
     <div className="fill-text-receipt">
       <div className={`${isValuableString(value) ? "line" : "line-dot"}`}>
         <span>{label}</span>
-        <span>{value}</span>
+        <span> &nbsp;{value}</span>
         {isValuableString(addonAfter) && (
           <span className="addonAfter">{addonAfter}</span>
         )}

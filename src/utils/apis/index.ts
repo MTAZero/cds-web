@@ -12,3 +12,4 @@ export * from "./van-kien";
 export * from "./sso";
 export * from "./xe";
 export * from "./dang-ki-xe";
+export * from "./lenh-xe";

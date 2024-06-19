@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit";
+import {APIServices, toArray} from "utils";
 
 export interface CatalogState {
   listPosition: any[];
@@ -31,12 +32,29 @@ export const catalogSlice = createSlice({
 
 export const {setListPosition, setListUnit, setListVehicle} =
   catalogSlice.actions;
-export const getListDoiTuongAPI = () => {
+export const getListVehicleAPI = () => {
   return async dispatch => {
     try {
-      // const listDoiTuongKCB = (await catalogService.getListDoiTuongKCB()) || [];
-      // dispatch(setListDoiTuongKCB(listDoiTuongKCB));
-    } catch (error) {}
+      const res = await APIServices.QuanLyXe.getListXe();
+      const listVehicle = toArray(res?.items);
+      dispatch(setListVehicle(listVehicle));
+    } catch (error) {
+      dispatch(setListVehicle([]));
+    }
+  };
+};
+export const getListUnitAPI = () => {
+  return async dispatch => {
+    try {
+      const res = await APIServices.QuanTri.getListUnit({
+        pageIndex: 1,
+        pageSize: 50,
+      });
+      const listUnit = toArray(res?.items);
+      dispatch(setListUnit(listUnit));
+    } catch (error) {
+      dispatch(setListUnit([]));
+    }
   };
 };
 
