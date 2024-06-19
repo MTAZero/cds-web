@@ -238,6 +238,15 @@ export const mainMenu: Array<SideMenuItem> = [
         // module: SystemFeatures.ManagerPersonalDiarys,
         // action: [SystemAction.View, SystemAction.Edit],
       },
+      {
+        url: RouterLink.QUAN_LY_LENH_XE_ROUTE,
+        key: RouterLink.QUAN_LY_LENH_XE_ROUTE,
+        icon: <CarSVG />,
+        children: [],
+        text: "Lệnh điều phương tiện",
+        // module: SystemFeatures.ManagerPersonalDiarys,
+        // action: [SystemAction.View, SystemAction.Edit],
+      },
     ],
   },
   {

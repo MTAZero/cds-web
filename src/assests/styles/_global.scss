@@ -24,6 +24,9 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #7c7b7b;
 }
+* {
+  box-sizing: border-box;
+}
 
 body {
   width: 100%;
@@ -173,6 +176,7 @@ button.custom-btn {
 //css cho modal
 .ant-modal-wrap {
   .ant-modal-content {
+    position: relative;
     .ant-modal-close {
       top: 16px !important;
       right: 16px !important;
@@ -188,6 +192,7 @@ button.custom-btn {
     .ant-modal-body {
       overflow: scroll;
       max-height: calc(100vh - 50px);
+      // position: relative;
     }
   }
 

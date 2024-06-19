@@ -9,12 +9,10 @@ import {
 } from "antd";
 import {FormInstance} from "antd/lib/form/Form";
 import React, {useEffect, useRef, useState} from "react";
-import type {InputRef} from "antd";
 import dayjs from "dayjs";
 
 import {Rule} from "antd/es/form";
 import {fieldType, formatTime} from "types";
-import {useAppSelector} from "hooks";
 type EditableRowProps = {
   index: number;
 };
