@@ -1,0 +1,45 @@
+@import "assests/styles/_variables.scss";
+.table-input-add-custom {
+  .editable-cell {
+    position: relative;
+  }
+  td {
+    text-align: center !important;
+  }
+  .ant-table-cell .ant-form-item-control-input-content input.ant-input {
+    // border: 1px solid #d9d9d9 !important;
+    // border-radius: 8px !important;
+    overflow: hidden;
+  }
+  .ant-input-number {
+    width: 100%;
+    border-radius: 0px !important;
+  }
+  input.ant-input-number-input {
+    text-align: end !important;
+  }
+  .ant-input-number-group-addon {
+    border-radius: 0px;
+  }
+  .editable-cell-value-wrap {
+    cursor: pointer;
+    height: 30px;
+  }
+
+  .editable-row:hover .editable-cell-value-wrap {
+    // border-radius: 2px;
+  }
+  .editable-row-2 {
+    .ant-form-item-control-input-content {
+      input {
+        height: 30px !important;
+      }
+    }
+  }
+  td.bold {
+    font-weight: $weightMedium;
+  }
+  .btn-add-sub {
+    border: none;
+  }
+}

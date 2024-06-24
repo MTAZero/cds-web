@@ -16,5 +16,6 @@ enum fieldType {
   TIME_RANGE = "TIME_RANGE",
   BUTTON = "BUTTON",
   PASSWORD = "PASSWORD",
+  CURRENCY = "CURRENCY",
 }
 export {fieldType};

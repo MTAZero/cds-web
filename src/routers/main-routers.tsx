@@ -37,6 +37,7 @@ import DetailKeHoachXe from "pages/ke-hoach-xe/detail";
 import TongHopXe from "pages/tong-hop-xe/list";
 import DetailTongHopXe from "pages/tong-hop-xe/detail";
 import LenhXe from "pages/lenh-xe";
+import PhieuXuat from "pages/phieu-xuat-xang";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -225,6 +226,10 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_LENH_XE_ROUTE,
             element: <LenhXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+            element: <PhieuXuat />,
           },
         ],
       },

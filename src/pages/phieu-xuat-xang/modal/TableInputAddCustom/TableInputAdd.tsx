@@ -1,9 +1,11 @@
 import {Button, Table, Typography, Form, Space, Row} from "antd";
+import React, {SetStateAction, useEffect, useState} from "react";
 import {EditableCell, EditableRow} from "./EditTable";
 import Icons from "assests/icons";
 import "./TableInputAdd.scss";
-import {TableCustom} from "components";
 import {randomId} from "utils";
+import {TableCustom} from "components";
+
 const TableInputAdd = ({
   data,
   columns,
@@ -11,6 +13,7 @@ const TableInputAdd = ({
   disabled,
   name,
   form,
+  setTong,
   ...rest
 }: any): JSX.Element => {
   const addRowTb1 = () => {
@@ -33,14 +36,22 @@ const TableInputAdd = ({
       );
       item.fixed = "right";
       item.render = (_: any, record: {key: string}, index: number) => (
-        <Button
-          disabled={disabled}
-          type="primary"
-          danger
-          onClick={() => removeRowTb1(record?.key)}
-          icon={<Icons.sub />}
-          size="small"
-        />
+        <div style={{textAlign: "center"}}>
+          {" "}
+          <Button
+            disabled={disabled}
+            type="primary"
+            danger
+            onClick={() => removeRowTb1(record?.key)}
+            icon={<Icons.sub />}
+            size="small"
+          />
+        </div>
+      );
+    }
+    if (item.key == "index") {
+      item.render = (_: any, record: {key: string}, index: number) => (
+        <div style={{textAlign: "center", display: "flex"}}> {index + 1}</div>
       );
     }
   });
@@ -54,6 +65,7 @@ const TableInputAdd = ({
     form.setFieldValue([name], afterFormList);
     const newData = data.filter((item: any) => item.key != key);
     setData([...newData]);
+    setTong();
   };
 
   const components = {
@@ -62,11 +74,10 @@ const TableInputAdd = ({
       cell: EditableCell,
     },
   };
-  const columnsRender = columns.map((col: any) => {
-    return {
+  const mapColumns = col => {
+    const newCol = {
       ...col,
-      onCell: (record: any, index: number) => ({
-        ...col,
+      onCell: (record, index) => ({
         record: data[index],
         dataIndex: col.dataIndex,
         title: col.title,
@@ -81,11 +92,20 @@ const TableInputAdd = ({
         rules: col.rules,
         autoFocus: col.autoFocus,
         fields: col.fields,
+        setTong,
       }),
     };
+    if (col.children) {
+      newCol.children = col.children.map(mapColumns);
+    }
+    return newCol;
+  };
+  const columnsRender = columns.map(e => {
+    return mapColumns(e);
   });
+
   return (
-    <div className="table-input-add">
+    <div className="table-input-add-custom">
       <TableCustom
         {...rest}
         rowKey={record => record.key}

@@ -1,4 +1,4 @@
-import { SystemFeatures, SystemAction } from "../types";
+import {SystemFeatures, SystemAction} from "../types";
 
 export const MAIN_MESSAGE = process.env.REACT_APP_MESSAGE
   ? process.env.REACT_APP_MESSAGE
@@ -20,6 +20,7 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.ManagerProgresses,
   SystemFeatures.ManagerDocuments,
   SystemFeatures.ManagerTrainnings,
+  SystemFeatures.VehicleCommand,
 ];
 
 export const ACTIONS_SYSTEM = [

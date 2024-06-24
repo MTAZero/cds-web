@@ -52,6 +52,7 @@ export const RouterLink = {
   QUAN_LY_TONG_HOP_XE_ROUTE: "/quan-ly-xang-dau/tong-hop-xe",
   QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/tong-hop-xe/:id",
   QUAN_LY_LENH_XE_ROUTE: "/quan-ly-xang-dau/lenh-xe",
+  QUAN_LY_PHIEU_XUAT_XANG_ROUTE: "/quan-ly-xang-dau/phieu_xuat_xang",
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",
   QUAN_TRI_PERMISSION_ROUTE: "/quan-tri/permission",

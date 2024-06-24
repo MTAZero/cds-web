@@ -1,15 +1,16 @@
 export const mainContainerStyle = {
-  width: "320px",
+  width: "300px",
   background: "white",
   display: "flex",
   flexDirection: "column",
   position: "fixed",
   height: "100%",
-  overflow: "auto",
+  // overflow: "auto",
 };
 
 export const menuContainerStyle = {
   padding: "10px",
+  overflow: "auto",
 };
 
 export const menuItemBaseStyle = {

@@ -247,6 +247,15 @@ export const mainMenu: Array<SideMenuItem> = [
         // module: SystemFeatures.ManagerPersonalDiarys,
         // action: [SystemAction.View, SystemAction.Edit],
       },
+      {
+        url: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+        key: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+        icon: <OilSVG />,
+        children: [],
+        text: "Phiếu xuất xăng dầu",
+        // module: SystemFeatures.ManagerPersonalDiarys,
+        // action: [SystemAction.View, SystemAction.Edit],
+      },
     ],
   },
   {

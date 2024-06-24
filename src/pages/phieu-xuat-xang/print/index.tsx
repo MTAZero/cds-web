@@ -11,7 +11,7 @@ import {Button, Col, Form, Row, Table} from "antd";
 import ReactToPrint from "react-to-print";
 import {columns} from "./config";
 import {APIServices, convertDateStringToDateObject, isValuable} from "utils";
-const ModalLenhXe = forwardRef((props: any, ref) => {
+const ModalPhieuXuat = forwardRef((props: any, ref) => {
   const {closeModal, id} = props;
   const printRef = useRef<any>(null);
   const [data, setData] = useState<any>();
@@ -23,12 +23,12 @@ const ModalLenhXe = forwardRef((props: any, ref) => {
   }, [id]);
   useEffect(() => {
     const getData = async id => {
-      try {
-        const res = await APIServices.LenhXe.getDetailLenhXe(id);
-        setData(res);
-      } catch (error) {
-        setData(null);
-      }
+      // try {
+      //   const res = await APIServices.LenhXe.getDetailPhieuXuat(id);
+      //   setData(res);
+      // } catch (error) {
+      //   setData(null);
+      // }
     };
     if (isValuable(id)) {
       getData(id);
@@ -396,4 +396,4 @@ const ModalLenhXe = forwardRef((props: any, ref) => {
     </div>
   );
 });
-export default ModalLenhXe;
+export default ModalPhieuXuat;

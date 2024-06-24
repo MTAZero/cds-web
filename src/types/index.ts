@@ -4,6 +4,7 @@ export * from "./param-search.type";
 export * from "./format-time.enum";
 export * from "./field-type.enum";
 export * from "./catalog.enum";
+export * from "./currency.enum";
 export enum SystemFeatures {
   ManagerUsers = "ManagerUsers",
   ManagerRoles = "ManagerRoles",
@@ -22,6 +23,7 @@ export enum SystemFeatures {
   WorkCalendar = "WorkCalendar",
   ManagerVehicle = "ManagerVehicle",
   RegisterVehicle = "RegisterVehicle",
+  VehicleCommand = "VehicleCommand",
 }
 
 export enum SystemAction {
@@ -89,6 +91,6 @@ export const selectTroopData = [
 ];
 
 export const getTextByStatus = (status: TroopStatus) => {
-  const ans = selectTroopData.find((i) => i.value === status);
+  const ans = selectTroopData.find(i => i.value === status);
   return ans ? ans.text : "";
 };

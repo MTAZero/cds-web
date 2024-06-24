@@ -9,15 +9,8 @@ import {
   TitleCustom,
 } from "components";
 import {Button, Col, Form, Row, Space, Table} from "antd";
-import {
-  APIServices,
-  NotificationService,
-  formatDateToString,
-  getItemLocalStorage,
-  setItemLocalStorage,
-} from "utils";
+import {APIServices, NotificationService, formatDateToString} from "utils";
 import {formatTime} from "types";
-import ModalLenhXe from "./print";
 import Modal from "./modal";
 import "./style.scss";
 import {useAppDispatch} from "hooks";
@@ -25,11 +18,11 @@ import {
   getListUnitAPI,
   getListVehicleAPI,
 } from "../../redux/catalog/catalog.slice";
-const LenhXe = props => {
+import ModalPhieuXuat from "./print";
+const PhieuXuat = () => {
   const [params, setParams] = useState<any>({});
-  const nameObjectLocal = "LenhXeSearch";
   const [fields, setFields] = useState(fieldsInit);
-  const modalLenhXeRef = useRef<any>(null);
+  const modalPhieuXuatRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
@@ -48,7 +41,7 @@ const LenhXe = props => {
         }}
         viewFunction={() => {
           setId(record?._id);
-          modalLenhXeRef?.current?.openModal();
+          modalPhieuXuatRef?.current?.openModal();
         }}
         deleteFunction={() => {
           handleDelete(record?._id);
@@ -61,32 +54,6 @@ const LenhXe = props => {
     dispatch(getListVehicleAPI());
     dispatch(getListUnitAPI());
   }, []);
-  useEffect(() => {
-    const getListUnit = async () => {
-      try {
-        const res = await APIServices.QuanTri.getListUnit({
-          pageIndex: 1,
-          pageSize: 100,
-        });
-        setListUnit(res?.items);
-      } catch (error) {
-        setListUnit([]);
-      }
-    };
-    getListUnit();
-  }, []);
-  useEffect(() => {
-    const setOptionsDonVi = async listUnit => {
-      fields.find((e: {name: string}) => e?.name === "unit").options =
-        listUnit?.map((e: {_id: any; name: any}) => ({
-          value: e?._id,
-          label: e?.name,
-        }));
-
-      setFields([...fields]);
-    };
-    setOptionsDonVi(listUnit);
-  }, [listUnit]);
 
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
@@ -100,13 +67,6 @@ const LenhXe = props => {
     });
     setPage(1);
   };
-  const onFieldsChange = (changedFields, allFields) => {
-    const searchFields = expandRef.current?.getFieldsValue();
-    const valuesLocal = {
-      ...searchFields,
-    };
-    setItemLocalStorage(nameObjectLocal, valuesLocal);
-  };
 
   const setPage = pageIndex => {
     tableRef?.current?.setPage(pageIndex);
@@ -116,9 +76,9 @@ const LenhXe = props => {
   };
   const handleDelete = async id => {
     try {
-      await APIServices.LenhXe.deleteLenhXe(id);
-      NotificationService.success("Đã xóa lệnh điều phương tiện");
-      recallTable();
+      // await APIServices.PhieuXuat.deletePhieuXuat(id);
+      // NotificationService.success("Đã xóa lệnh điều phương tiện");
+      // recallTable();
     } catch (error) {
       NotificationService.error(error?.response?.data ?? "Đã xảy ra lỗi");
     }
@@ -131,11 +91,11 @@ const LenhXe = props => {
   useEffect(() => {
     const getData = async params => {
       try {
-        setIsLoading(true);
-        const res = await APIServices.LenhXe.getListLenhXe(params);
-        setIsLoading(false);
-        setData(res);
-        setTotal(res?.total);
+        // setIsLoading(true);
+        // const res = await APIServices.PhieuXuat.getListPhieuXuat(params);
+        // setIsLoading(false);
+        // setData(res);
+        // setTotal(res?.total);
       } catch (error) {
         setIsLoading(false);
       }
@@ -152,12 +112,11 @@ const LenhXe = props => {
             fields={fields}
             isSearchExpend={false}
             onClickSearch={onClickSearch}
-            onFieldsChange={onFieldsChange}
           ></ExpandSearch>
         </div>
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Lệnh điều phương tiện"></TitleCustom>
+            <TitleCustom text="Phiếu xuất xăng dầu"></TitleCustom>
             <Space>
               <Button
                 type="primary"
@@ -189,20 +148,20 @@ const LenhXe = props => {
       </div>
 
       <ModalCustom
-        title="Lệnh điều phương tiện"
-        ref={modalLenhXeRef}
+        title="Phiếu xuất xăng dầu"
+        ref={modalPhieuXuatRef}
         width={"220mm"}
       >
-        <ModalLenhXe id={id}></ModalLenhXe>
+        <ModalPhieuXuat id={id}></ModalPhieuXuat>
       </ModalCustom>
       <ModalCustom
         width={1500}
         ref={modalRef}
-        title={`${id ? "Sửa thông tin" : "Thêm"} lệnh điều phương tiện`}
+        title={`${id ? "Sửa thông tin" : "Thêm"} phiếu xuất xăng dầu`}
       >
         <Modal id={id} recallTable={recallTable}></Modal>
       </ModalCustom>
     </div>
   );
 };
-export default LenhXe;
+export default PhieuXuat;

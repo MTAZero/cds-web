@@ -28,7 +28,6 @@ const DetailKeHoachXe = props => {
         const res = await APIServices.DangKiXe.getDetailDangKi(id);
         setLoading(false);
         setData(res);
-        console.log(res);
       } catch (error) {
         setLoading(false);
       }
@@ -75,7 +74,6 @@ const DetailKeHoachXe = props => {
         ),
         toDateTime: formatDateToString(formValues?.toDateTime, formatTime.unix),
       };
-      console.log(data);
       setLoading(true);
       const callApi =
         id == "tao-moi"
