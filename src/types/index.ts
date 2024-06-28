@@ -5,6 +5,7 @@ export * from "./format-time.enum";
 export * from "./field-type.enum";
 export * from "./catalog.enum";
 export * from "./currency.enum";
+export * from "./type-meeting-book.enum";
 export enum SystemFeatures {
   ManagerUsers = "ManagerUsers",
   ManagerRoles = "ManagerRoles",
@@ -24,6 +25,8 @@ export enum SystemFeatures {
   ManagerVehicle = "ManagerVehicle",
   RegisterVehicle = "RegisterVehicle",
   VehicleCommand = "VehicleCommand",
+  DeliveryBill = "DeliveryBill",
+  MeetingBook = "MeetingBook",
 }
 
 export enum SystemAction {

@@ -46,8 +46,9 @@ const App = () => {
             <ConfigProvider
               theme={{
                 token: {
-                  fontFamily: "Montserrat default",
+                  fontFamily: "Inter",
                   colorPrimary: "#177DB8",
+                  fontSize: 16,
                 },
               }}
               locale={viVn}

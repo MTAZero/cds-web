@@ -12,6 +12,14 @@ const fields: any[] = [
     css: css,
   },
   {
+    key: "belongCommandID",
+    name: "belongCommandID",
+    label: "ID lệnh điều",
+    type: INPUT,
+    css: css,
+    hide: true,
+  },
+  {
     key: "date",
     name: "date",
     label: "Ngày",
@@ -48,11 +56,12 @@ const fields: any[] = [
     css: css,
   },
   {
-    key: "belongCommandID",
-    name: "belongCommandID",
+    key: "commandNumber",
+    name: "commandNumber",
     label: "Theo lệnh số",
     type: INPUT,
     css: css,
+    disabled: true,
   },
 
   {
@@ -74,7 +83,7 @@ const fields: any[] = [
   {
     key: "designCapacity",
     name: "designCapacity",
-    label: "Dung tích thiết kê",
+    label: "Dung tích thiết kế",
     type: INPUT,
     css: css,
   },
@@ -92,13 +101,7 @@ const fields: any[] = [
     type: INPUT,
     css: css,
   },
-  {
-    key: "license",
-    name: "license",
-    label: "Dung tích",
-    type: INPUT,
-    css: css,
-  },
+
   {
     key: "numberOfPackages",
     name: "numberOfPackages",
@@ -270,4 +273,4 @@ const columns = [
   },
   {key: "action", show: true, width: 60, align: "center"},
 ];
-export {fields, columns};
+export {fields, fields2, columns};

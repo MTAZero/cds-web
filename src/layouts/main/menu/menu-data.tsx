@@ -9,7 +9,12 @@ import {
   UserSVG,
 } from "assests/svg";
 import {RouterLink} from "../../../routers/routers";
-import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
+import {
+  SideMenuItem,
+  SystemAction,
+  SystemFeatures,
+  typeMeetingBook,
+} from "../../../types";
 
 import {
   FaCalendar,
@@ -187,6 +192,13 @@ export const mainMenu: Array<SideMenuItem> = [
         text: "Rút kinh nghiệm huấn luyện",
         module: SystemFeatures.ManagerExperiences,
         action: [SystemAction.View, SystemAction.Edit],
+      },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
+        key: RouterLink.SO_GIAO_BAN_ROUTE,
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban",
       },
     ],
   },

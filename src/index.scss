@@ -18,6 +18,11 @@ iframe#webpack-dev-server-client-overlay {
   src: url("./assests//fonts/montserrat/Montserrat-Regular.ttf")
     format("truetype");
 }
+@font-face {
+  font-family: "Inter";
+  font-display: swap;
+  src: url("./assests/fonts/Inter/Inter-V.ttf") format("truetype");
+}
 @import "assests/styles/variables";
 @import "assests/styles/color";
 @import "assests/styles/global";

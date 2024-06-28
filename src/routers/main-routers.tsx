@@ -38,6 +38,8 @@ import TongHopXe from "pages/tong-hop-xe/list";
 import DetailTongHopXe from "pages/tong-hop-xe/detail";
 import LenhXe from "pages/lenh-xe";
 import PhieuXuat from "pages/phieu-xuat-xang";
+import SoGiaoBan from "pages/so-giao-ban/list";
+import DetailSoGiaoBan from "pages/so-giao-ban/detail";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -159,6 +161,14 @@ const MainRoutes = [
             element: <DetailRutKinhNghiem />,
             module: SystemFeatures.ManagerExperiences,
             action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.SO_GIAO_BAN_ROUTE,
+            element: <SoGiaoBan />,
+          },
+          {
+            path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
+            element: <DetailSoGiaoBan />,
           },
 
           {

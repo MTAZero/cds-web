@@ -40,6 +40,10 @@ export const RouterLink = {
   RUT_KINH_NGHIEM_ROUTE: "/rut-kinh-nghiem",
   RUT_KINH_NGHIEM_DETAIL_ROUTE: "/rut-kinh-nghiem/:id",
 
+  // Sổ giao ban
+  SO_GIAO_BAN_ROUTE: "/so-giao-ban",
+  SO_GIAO_BAN_DETAIL_ROUTE: "/so-giao-ban/:type/:id",
+
   // Thống kê huấn luyện cá nhân
   THONG_KE_HUAN_LUYEN_CA_NHAN: "/thong-ke-huan-luyen-ca-nhan",
   SO_SACH_CA_NHAN_DETAIL_ROUTE: "/thong-ke-huan-luyen-ca-nhan/:id",

@@ -25,12 +25,15 @@ import {
   getListUnitAPI,
   getListVehicleAPI,
 } from "../../redux/catalog/catalog.slice";
+import ModalPhieuXuatXang from "pages/phieu-xuat-xang/modal";
 const LenhXe = props => {
   const [params, setParams] = useState<any>({});
   const nameObjectLocal = "LenhXeSearch";
   const [fields, setFields] = useState(fieldsInit);
   const modalLenhXeRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
+  const modalPhieuXuatXangRef = useRef<any>(null);
+  const modalPhieuXuatXangChildRef = useRef<any>(null);
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +42,8 @@ const LenhXe = props => {
   const [total, setTotal] = useState();
   const [id, setId] = useState<any>();
   const dispatch = useAppDispatch();
+  const [commandNumber, setCommandNumber] = useState<any>();
+  const [belongCommandID, setBelongCommandID] = useState<any>();
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
@@ -46,14 +51,23 @@ const LenhXe = props => {
           setId(record?._id);
           modalRef?.current?.openModal();
         }}
-        viewFunction={() => {
+        printFunction={() => {
           setId(record?._id);
           modalLenhXeRef?.current?.openModal();
+        }}
+        addFunction={() => {
+          modalPhieuXuatXangRef?.current?.openModal();
+          setCommandNumber(record?.orderNumber);
+          setBelongCommandID(record?._id);
         }}
         deleteFunction={() => {
           handleDelete(record?._id);
         }}
-        toolTips={{edit: "Chỉnh sửa", view: "Xem phiếu"}}
+        toolTips={{
+          edit: "Chỉnh sửa",
+          print: "In phiếu",
+          add: "Tạo phiếu xuất xăng dầu",
+        }}
       ></ListActionButton>
     );
   };
@@ -201,6 +215,20 @@ const LenhXe = props => {
         title={`${id ? "Sửa thông tin" : "Thêm"} lệnh điều phương tiện`}
       >
         <Modal id={id} recallTable={recallTable}></Modal>
+      </ModalCustom>
+      <ModalCustom
+        width={1500}
+        ref={modalPhieuXuatXangRef}
+        onOk={() => {
+          modalPhieuXuatXangChildRef?.current?.submit();
+        }}
+        title={"Tạo phiếu xuất xăng dầu"}
+      >
+        <ModalPhieuXuatXang
+          ref={modalPhieuXuatXangChildRef}
+          belongCommandID={belongCommandID}
+          commandNumber={commandNumber}
+        ></ModalPhieuXuatXang>
       </ModalCustom>
     </div>
   );

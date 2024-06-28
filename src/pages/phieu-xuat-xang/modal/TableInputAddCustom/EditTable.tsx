@@ -90,8 +90,8 @@ export const EditableCell: React.FC<EditableCellProps> = ({
   };
   const setSoLuongXuatThucTe = () => {
     const soLuongXuat15 = toNumber(getFieldValue("actualExport"));
-    const heSoVcf = toNumber(getFieldValue("factorVcf"));
-    const soLuongXuatThucTe = heSoVcf > 0 ? soLuongXuat15 / heSoVcf : 0;
+    const heSoVcf = toNumber(getFieldValue("factorVcf"), 4);
+    const soLuongXuatThucTe = toNumber(soLuongXuat15 / heSoVcf, 0);
     setFieldValue("export", soLuongXuatThucTe);
   };
   if (type == INPUT) {
@@ -132,8 +132,8 @@ export const EditableCell: React.FC<EditableCellProps> = ({
               setSoLuongXuatThucTe();
             }
           }}
-          // formatter={value => formatToCurrencyTypeToFixed(value)}
-          parser={value => toNumber(value, 4)}
+          // formatter={value => toNumber(value, 4).toString()}
+          // parser={value => toNumber(value!.replace(/\$\s?|(.*)/g, ""), 4)}
           onClick={e => {}}
           placeholder={disabled ? "--" : "Nhập"}
           max={max}

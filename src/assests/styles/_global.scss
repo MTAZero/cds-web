@@ -40,6 +40,9 @@ a {
 .main {
   width: 100%;
   font-size: 16px !important;
+  * {
+    font-family: "Inter";
+  }
 }
 
 div[tabIndex="0"],

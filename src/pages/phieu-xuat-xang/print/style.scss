@@ -1,32 +1,25 @@
 @import "assests/styles/_variables.scss";
-.lenh-xe {
-  width: 210mm;
+.phieu-xuat-xang {
   .print {
-    @include page-a4;
+    @include page-a4-landscape;
     @include font-print;
 
-    * {
-      font-size: 13pt;
+    table {
+      width: 100%;
     }
-    .main-content {
-      .ant-row {
-        margin-bottom: 14px;
-      }
-      .table {
-        @include table-print;
-      }
+
+    font-size: 13pt;
+
+    .border {
+      border: $border-black;
+      width: fit-content;
+      padding: 2px 12px 2px 12px;
     }
-    .footer-section {
-      margin-top: 30px;
+    .receipt-dto {
+      margin-top: 12px;
     }
-  }
-  .button-section {
-    width: calc(100% - 30px);
-    position: absolute;
-    height: 30px;
-    bottom: 12px;
-    background-color: $color-background-white;
-    // right: 10px;
-    z-index: 100000;
+    .footer {
+      margin-top: 20px;
+    }
   }
 }

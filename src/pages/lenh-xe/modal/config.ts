@@ -6,7 +6,7 @@ const fields: any[] = [
   {
     key: "orderNumber",
     name: "orderNumber",
-    label: "Số phiếu",
+    label: "Số lệnh",
     type: INPUT,
     css: css,
   },

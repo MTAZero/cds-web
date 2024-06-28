@@ -11,7 +11,7 @@ import {
 import {Button, Col, Form, Row, Space, Table} from "antd";
 import {APIServices, NotificationService, formatDateToString} from "utils";
 import {formatTime} from "types";
-import Modal from "./modal";
+import ModalPhieuXuatXang from "./modal";
 import "./style.scss";
 import {useAppDispatch} from "hooks";
 import {
@@ -20,7 +20,7 @@ import {
 } from "../../redux/catalog/catalog.slice";
 import ModalPhieuXuat from "./print";
 const PhieuXuat = () => {
-  const [params, setParams] = useState<any>({});
+  const [params, setParams] = useState<any>({pageSize: 10, pageIndex: 1});
   const [fields, setFields] = useState(fieldsInit);
   const modalPhieuXuatRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
@@ -32,6 +32,7 @@ const PhieuXuat = () => {
   const [total, setTotal] = useState();
   const [id, setId] = useState<any>();
   const dispatch = useAppDispatch();
+  const modalPhieuXuatChildRef = useRef<any>();
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
@@ -91,11 +92,13 @@ const PhieuXuat = () => {
   useEffect(() => {
     const getData = async params => {
       try {
-        // setIsLoading(true);
-        // const res = await APIServices.PhieuXuat.getListPhieuXuat(params);
-        // setIsLoading(false);
-        // setData(res);
-        // setTotal(res?.total);
+        setIsLoading(true);
+        const res = await APIServices.PhieuXuatXang.getListPhieuXuatXang(
+          params
+        );
+        setIsLoading(false);
+        setData(res?.items);
+        setTotal(res?.total);
       } catch (error) {
         setIsLoading(false);
       }
@@ -117,7 +120,7 @@ const PhieuXuat = () => {
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Phiếu xuất xăng dầu"></TitleCustom>
-            <Space>
+            {/* <Space>
               <Button
                 type="primary"
                 onClick={() => {
@@ -127,7 +130,7 @@ const PhieuXuat = () => {
               >
                 Thêm mới
               </Button>
-            </Space>
+            </Space> */}
           </Row>
           <TableCustom
             ref={tableRef}
@@ -150,7 +153,7 @@ const PhieuXuat = () => {
       <ModalCustom
         title="Phiếu xuất xăng dầu"
         ref={modalPhieuXuatRef}
-        width={"220mm"}
+        width={"310mm"}
       >
         <ModalPhieuXuat id={id}></ModalPhieuXuat>
       </ModalCustom>
@@ -158,8 +161,15 @@ const PhieuXuat = () => {
         width={1500}
         ref={modalRef}
         title={`${id ? "Sửa thông tin" : "Thêm"} phiếu xuất xăng dầu`}
+        onOk={() => {
+          modalPhieuXuatChildRef?.current?.submit();
+        }}
       >
-        <Modal id={id} recallTable={recallTable}></Modal>
+        <ModalPhieuXuatXang
+          ref={modalPhieuXuatChildRef}
+          id={id}
+          recallTable={recallTable}
+        ></ModalPhieuXuatXang>
       </ModalCustom>
     </div>
   );

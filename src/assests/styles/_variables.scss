@@ -10,22 +10,22 @@ $sizeXL: 22px;
 $sizeXXL: 30px;
 $size3XL: 32px;
 $border: 1px solid rgb(212, 212, 212);
-
+$border-black: 1.5px solid black;
 @mixin table-print {
   th,
   td {
     border-radius: 0px !important;
     background: none !important;
-    border: 1.5px solid black;
+    border: $border-black;
     border-inline-end: none !important;
     border-bottom: none !important;
   }
   tr:last-child > td {
-    border-bottom: 1.5px solid black !important;
+    border-bottom: $border-black !important;
   }
   th:last-child,
   td:last-child {
-    border-inline-end: 1.5px solid black !important;
+    border-inline-end: $border-black !important;
   }
   thead {
     tr {
@@ -87,6 +87,6 @@ $border: 1px solid rgb(212, 212, 212);
   padding: 0cm 2.5cm 2cm 2.5cm;
 }
 @mixin page-a4-landscape {
-  width: 240mm;
+  width: 297mm;
   padding: 0cm 2.5cm 2cm 2.5cm !important;
 }
