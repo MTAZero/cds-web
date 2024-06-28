@@ -14,7 +14,7 @@ import {InputFields, TitleCustom} from "components";
 import {formatTime, selectTroopData} from "types";
 import dayjs from "dayjs";
 
-const DetailSoGiaoBan = () => {
+const DetailSoGiaoBanDoi = () => {
   const {id, type} = useParams();
   const [fields, setFields] = useState<any>(fieldInit);
   const [form] = Form.useForm();
@@ -206,4 +206,4 @@ const DetailSoGiaoBan = () => {
     </div>
   );
 };
-export default DetailSoGiaoBan;
+export default DetailSoGiaoBanDoi;

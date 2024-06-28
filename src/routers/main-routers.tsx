@@ -9,7 +9,7 @@ import {TroopReport} from "../pages/troop-report";
 import {LeaveApprove} from "../pages/leave-approve";
 import {LeaveRegister} from "../pages/leave-register";
 import {GuardSetting} from "../pages/guard-dutty/guard-dutty-manager";
-import {SystemFeatures, SystemAction} from "../types";
+import {SystemFeatures, SystemAction, typeMeetingBook} from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -38,8 +38,12 @@ import TongHopXe from "pages/tong-hop-xe/list";
 import DetailTongHopXe from "pages/tong-hop-xe/detail";
 import LenhXe from "pages/lenh-xe";
 import PhieuXuat from "pages/phieu-xuat-xang";
-import SoGiaoBan from "pages/so-giao-ban/list";
-import DetailSoGiaoBan from "pages/so-giao-ban/detail";
+import SoGiaoBanCum from "../pages/so-giao-ban-cum/list";
+import DetailSoGiaoBanCum from "pages/so-giao-ban-cum/detail";
+import SoGiaoBanDoi from "pages/so-giao-ban-doi/list";
+import DetailSoGiaoBanDoi from "pages/so-giao-ban-doi/detail";
+import SoGiaoBanTrungTam from "pages/so-giao-ban-trung-tam/list";
+import DetailSoGiaoBanTrungTam from "pages/so-giao-ban-trung-tam/detail";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -164,13 +168,40 @@ const MainRoutes = [
           },
           {
             path: RouterLink.SO_GIAO_BAN_ROUTE,
-            element: <SoGiaoBan />,
+            element: <SoGiaoBanCum />,
           },
           {
             path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
-            element: <DetailSoGiaoBan />,
+            element: <DetailSoGiaoBanCum />,
           },
-
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.CUM
+          //   ),
+          //   element: <SoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.CUM
+          //   ),
+          //   element: <DetailSoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.DOI
+          //   ),
+          //   element: <SoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.DOI
+          //   ),
+          //   element: <DetailSoGiaoBanCum />,
+          // },
           {
             path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
             element: <ThongKeHLCaNhan />,

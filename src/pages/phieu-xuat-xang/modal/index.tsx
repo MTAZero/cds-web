@@ -172,7 +172,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
                   <Typography.Text strong>* Tổng cộng: </Typography.Text>
                 </Col>
                 <Col flex={1}>
-                  {" "}
                   {capitalizeFirstLetter(
                     convertNumberToWords(soKhoan, "khoản")
                   )}

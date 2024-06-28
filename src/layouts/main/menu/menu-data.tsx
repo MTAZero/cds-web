@@ -194,11 +194,31 @@ export const mainMenu: Array<SideMenuItem> = [
         action: [SystemAction.View, SystemAction.Edit],
       },
       {
-        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
-        key: RouterLink.SO_GIAO_BAN_ROUTE,
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          ":type",
+          typeMeetingBook.TRUNG_TAM
+        ),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          ":type",
+          typeMeetingBook.TRUNG_TAM
+        ),
         icon: <DocumentTextSVG />,
         children: [],
-        text: "Sổ giao ban",
+        text: "Sổ giao ban trung tâm",
+      },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban cụm",
+      },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.DOI),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.DOI),
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban đội",
       },
     ],
   },

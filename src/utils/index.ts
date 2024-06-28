@@ -7,6 +7,7 @@ export * as NotificationService from "./notification";
 export * from "./parse";
 export * from "./check";
 export * from "./common";
+export * from "./meetingBook";
 export const checkPermisison = (
   permission: Array<Permission>,
   module: SystemFeatures,

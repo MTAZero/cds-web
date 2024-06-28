@@ -1,6 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import {useAppDispatch} from "hooks";
-
 import {columns, columns as columnsInit, fields as fieldsInit} from "./config";
 import {useNavigate, useParams} from "react-router-dom";
 import {
@@ -9,11 +7,10 @@ import {
   TableCustom,
   TitleCustom,
 } from "components";
-import {Button, Col, Form, Row, Space} from "antd";
+import {Button, Row, Space} from "antd";
 import ReactToPrint from "react-to-print";
 import {
   APIServices,
-  convertDateStringToDateObject,
   formatDateToString,
   getItemLocalStorage,
   setItemLocalStorage,
@@ -21,7 +18,7 @@ import {
 import {formatTime, typeMeetingBook} from "types";
 import {RouterLink} from "routers/routers";
 import Print from "./print/Print";
-const SoGiaoBan = () => {
+const SoGiaoBanDoi = () => {
   const [params, setParams] = useState<any>({});
   const nameObjectLocal = "soGiaoBanSearch";
   const soGiaoBanSearch = getItemLocalStorage(nameObjectLocal);
@@ -34,7 +31,7 @@ const SoGiaoBan = () => {
   const [listUnit, setListUnit] = useState<any[]>();
   const [data, setData] = useState<any[]>();
   const [total, setTotal] = useState();
-  const type = typeMeetingBook.CUM;
+  const {type} = useParams();
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
@@ -188,4 +185,4 @@ const SoGiaoBan = () => {
     </div>
   );
 };
-export default SoGiaoBan;
+export default SoGiaoBanDoi;

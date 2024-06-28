@@ -3,4 +3,9 @@ enum typeMeetingBook {
   CUM = "02",
   TRUNG_TAM = "03",
 }
-export {typeMeetingBook};
+enum typeMeetingBookText {
+  DOI = "đội",
+  CUM = "cụm",
+  TRUNG_TAM = "trung tâm",
+}
+export {typeMeetingBook, typeMeetingBookText};
