@@ -19,11 +19,8 @@ import {
   toArray,
 } from "utils";
 import {formatTime} from "types";
-import {RouterLink} from "routers/routers";
-import dayjs from "dayjs";
-import Print from "./print/Print";
 import TableInputAdd from "./TableInputAddCustom/TableInputAdd";
-const QuanLyXe = props => {
+const QuanLyNhienLieu = props => {
   const [params, setParams] = useState<any>({});
   const [fields, setFields] = useState(fieldsInit);
   const expandRef = useRef<any>();
@@ -51,10 +48,10 @@ const QuanLyXe = props => {
       if (!formValues) {
         return;
       }
-      const data = {listVehicle: formValues};
-      const res = await APIServices.QuanLyXe.updateListXe(data);
+      const data = {listFuel: formValues};
+      const res = await APIServices.QuanLyNhienLieu.updateListNhienLieu(data);
       setData(res?.items?.map(e => ({...e, key: randomId()})));
-      NotificationService.success("Lưu thông tin xe thành công");
+      NotificationService.success("Lưu thông tin nhiên liệu thành công");
     } catch (error) {
       NotificationService.error("Đã có lỗi");
     }
@@ -62,7 +59,7 @@ const QuanLyXe = props => {
   const getFormValues = async () => {
     try {
       await form.validateFields();
-      const formValues = form.getFieldValue("listVehicle");
+      const formValues = form.getFieldValue("listFuel");
       return formValues;
     } catch (error) {
       return null;
@@ -72,11 +69,11 @@ const QuanLyXe = props => {
     const getData = async params => {
       try {
         setIsLoading(true);
-        const res = await APIServices.QuanLyXe.getListXe();
+        const res = await APIServices.QuanLyNhienLieu.getListNhienLieu();
         setIsLoading(false);
         const data = toArray(res?.items)?.map(e => ({...e, key: randomId()}));
         setData(data);
-        form.setFieldValue("listVehicle", data);
+        form.setFieldValue("listFuel", data);
       } catch (error) {
         setIsLoading(false);
       }
@@ -88,26 +85,17 @@ const QuanLyXe = props => {
     <div className="page quan-ly-xe">
       <div className="main">
         <div className="container">
-          <ExpandSearch
-            ref={expandRef}
-            fields={fields}
-            isSearchExpend={false}
-            onClickSearch={onClickSearch}
-          ></ExpandSearch>
-        </div>
-        <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Danh sách xe"></TitleCustom>
+            <TitleCustom text="Danh sách nhiên liệu"></TitleCustom>
             <Button type="primary" onClick={updateData}>
               Lưu
             </Button>
           </Row>
           <Form form={form}>
             <TableInputAdd
-              isLoading={isLoading}
               data={data}
               setData={setData}
-              name="listVehicle"
+              name="listFuel"
               form={form}
               columns={columns}
               pagination={false}
@@ -116,12 +104,7 @@ const QuanLyXe = props => {
         </div>
       </div>
       {/* style={{display: "none"}} */}
-      <div id="print" style={{display: "none"}}>
-        <div ref={printRef}>
-          <Print dataSource={data} params={params}></Print>
-        </div>
-      </div>
     </div>
   );
 };
-export default QuanLyXe;
+export default QuanLyNhienLieu;

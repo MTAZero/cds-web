@@ -27,6 +27,9 @@ export enum SystemFeatures {
   VehicleCommand = "VehicleCommand",
   DeliveryBill = "DeliveryBill",
   MeetingBook = "MeetingBook",
+  ManagerFuel = "ManagerFuel",
+  ManagerTask = "ManagerTask",
+  ManagerWorkAddress = "ManagerWorkAddress",
 }
 
 export enum SystemAction {

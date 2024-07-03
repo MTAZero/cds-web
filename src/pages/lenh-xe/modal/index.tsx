@@ -31,6 +31,7 @@ const Modal = forwardRef((props: any, ref) => {
     label: e?.name,
     value: e?.name,
   }));
+
   useEffect(() => {
     if (!isValuable(id)) {
       setData(null);

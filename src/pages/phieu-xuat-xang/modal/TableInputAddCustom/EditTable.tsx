@@ -5,6 +5,7 @@ import React, {useState} from "react";
 import {Rule} from "antd/es/form";
 import {fieldType, formatTime} from "types";
 import {formatToCurrencyTypeToFixed, toNumber} from "utils";
+import dayjs from "dayjs";
 type EditableRowProps = {
   index: number;
 };
@@ -94,6 +95,18 @@ export const EditableCell: React.FC<EditableCellProps> = ({
     const soLuongXuatThucTe = toNumber(soLuongXuat15 / heSoVcf, 0);
     setFieldValue("export", soLuongXuatThucTe);
   };
+  const setFactorVcf = name => {
+    const currentMonth = dayjs().month() + 1;
+    const typeMonth = currentMonth >= 5 && currentMonth <= 10 ? 1 : 2;
+    if (name?.toString()?.toLowerCase()?.includes("xăng")) {
+      setFieldValue("factorVcf", typeMonth == 1 ? 0.9928 : 0.9926);
+    } else if (name?.toString()?.toLowerCase()?.includes("diesel")) {
+      setFieldValue("factorVcf", typeMonth == 1 ? 0.9873 : 0.9949);
+    } else {
+      setFieldValue("factorVcf", 1);
+    }
+    setSoLuongXuatThucTe();
+  };
   if (type == INPUT) {
     childNode = (
       <Form.Item
@@ -105,11 +118,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
           placeholder={disabled ? "--" : "Nhập"}
           disabled={disabled}
           onClick={() => {}}
-          onChange={async e => {
-            if (dataIndex == "name") {
-              setTong();
-            }
-          }}
+          onChange={async e => {}}
         ></Input>
       </Form.Item>
     );
@@ -182,8 +191,15 @@ export const EditableCell: React.FC<EditableCellProps> = ({
           }}
           options={newOptions}
           disabled={disabled}
-          onClear={() => {}}
-          onChange={async e => {}}
+          onClear={() => {
+            setFactorVcf("");
+          }}
+          onChange={async e => {
+            if (dataIndex == "name") {
+              setTong();
+              setFactorVcf(e);
+            }
+          }}
           {...restProps}
         ></AutoComplete>
       </Form.Item>

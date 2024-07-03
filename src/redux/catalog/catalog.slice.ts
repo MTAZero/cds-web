@@ -6,12 +6,16 @@ export interface CatalogState {
   listPosition: any[];
   listUnit: any[];
   listVehicle: any[];
+  listTask: any[];
+  listFuel: any[];
 }
 
 const initialState: CatalogState = {
   listPosition: [],
   listUnit: [],
   listVehicle: [],
+  listTask: [],
+  listFuel: [],
 };
 
 export const catalogSlice = createSlice({
@@ -27,11 +31,22 @@ export const catalogSlice = createSlice({
     setListVehicle: (state: CatalogState, action: PayloadAction<any>) => {
       state.listVehicle = action.payload;
     },
+    setListTask: (state: CatalogState, action: PayloadAction<any>) => {
+      state.listTask = action.payload;
+    },
+    setListFuel: (state: CatalogState, action: PayloadAction<any>) => {
+      state.listFuel = action.payload;
+    },
   },
 });
 
-export const {setListPosition, setListUnit, setListVehicle} =
-  catalogSlice.actions;
+export const {
+  setListPosition,
+  setListUnit,
+  setListVehicle,
+  setListTask,
+  setListFuel,
+} = catalogSlice.actions;
 export const getListVehicleAPI = () => {
   return async dispatch => {
     try {
@@ -40,6 +55,28 @@ export const getListVehicleAPI = () => {
       dispatch(setListVehicle(listVehicle));
     } catch (error) {
       dispatch(setListVehicle([]));
+    }
+  };
+};
+export const getListTaskAPI = () => {
+  return async dispatch => {
+    try {
+      const res = await APIServices.QuanLyNhiemVu.getListNhiemVu();
+      const listTask = toArray(res?.items);
+      dispatch(setListTask(listTask));
+    } catch (error) {
+      dispatch(setListTask([]));
+    }
+  };
+};
+export const getListFuelAPI = () => {
+  return async dispatch => {
+    try {
+      const res = await APIServices.QuanLyNhienLieu.getListNhienLieu();
+      const listFuel = toArray(res?.items);
+      dispatch(setListFuel(listFuel));
+    } catch (error) {
+      dispatch(setListFuel([]));
     }
   };
 };

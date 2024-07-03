@@ -1,7 +1,8 @@
-import {fieldType, formatTime} from "types";
+import {quanlityType} from "const";
+import {fieldType} from "types";
 import {randomId} from "utils";
 
-const {INPUT, CURRENCY, DATE, NUMBER} = fieldType;
+const {INPUT, CURRENCY, DATE, NUMBER, AUTO_COMPLETE} = fieldType;
 const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
 const fields: any[] = [
   {
@@ -154,7 +155,7 @@ const fields2: any[] = [
     css: css,
   },
 ];
-const columns = [
+const columns: any[] = [
   {
     key: "index",
     title: "STT",
@@ -174,15 +175,18 @@ const columns = [
     key: "name",
     title: "Tên xăng dầu",
     dataIndex: "name",
-    type: INPUT,
+    type: AUTO_COMPLETE,
     show: true,
+    width: 120,
   },
   {
     key: "quality",
     title: "Chất lượng",
     dataIndex: "quality",
-    type: INPUT,
+    type: AUTO_COMPLETE,
     show: true,
+    options: quanlityType.map(e => ({key: randomId(), value: e, label: e})),
+    width: 120,
   },
   {
     key: "thoiGian",
@@ -241,6 +245,7 @@ const columns = [
         align: "center",
         type: NUMBER,
         show: true,
+        defaultValue: 1,
       },
       {
         key: randomId(),
@@ -270,6 +275,7 @@ const columns = [
     dataIndex: "sumMoney",
     type: CURRENCY,
     show: true,
+    width: 200,
   },
   {key: "action", show: true, width: 60, align: "center"},
 ];

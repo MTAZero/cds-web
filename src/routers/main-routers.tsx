@@ -40,10 +40,10 @@ import LenhXe from "pages/lenh-xe";
 import PhieuXuat from "pages/phieu-xuat-xang";
 import SoGiaoBanCum from "../pages/so-giao-ban-cum/list";
 import DetailSoGiaoBanCum from "pages/so-giao-ban-cum/detail";
-import SoGiaoBanDoi from "pages/so-giao-ban-doi/list";
-import DetailSoGiaoBanDoi from "pages/so-giao-ban-doi/detail";
-import SoGiaoBanTrungTam from "pages/so-giao-ban-trung-tam/list";
-import DetailSoGiaoBanTrungTam from "pages/so-giao-ban-trung-tam/detail";
+
+import QuanLyNhienLieu from "pages/quan-ly-nhien-lieu";
+import QuanLyDauMoi from "pages/quan-ly-dau-moi";
+import QuanLyNhiemVu from "pages/quan-ly-nhiem-vu";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -247,6 +247,18 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_XE_ROUTE,
             element: <QuanLyXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
+            element: <QuanLyNhienLieu />,
+          },
+          {
+            path: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
+            element: <QuanLyDauMoi />,
+          },
+          {
+            path: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
+            element: <QuanLyNhiemVu />,
           },
           {
             path: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,

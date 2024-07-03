@@ -15,6 +15,7 @@ import ModalPhieuXuatXang from "./modal";
 import "./style.scss";
 import {useAppDispatch} from "hooks";
 import {
+  getListFuelAPI,
   getListUnitAPI,
   getListVehicleAPI,
 } from "../../redux/catalog/catalog.slice";
@@ -54,6 +55,7 @@ const PhieuXuat = () => {
   useEffect(() => {
     dispatch(getListVehicleAPI());
     dispatch(getListUnitAPI());
+    dispatch(getListFuelAPI());
   }, []);
 
   const onClickSearch = () => {

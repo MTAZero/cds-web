@@ -13,7 +13,6 @@ import {
   APIServices,
   NotificationService,
   formatDateToString,
-  getItemLocalStorage,
   setItemLocalStorage,
 } from "utils";
 import {formatTime} from "types";
@@ -22,6 +21,8 @@ import Modal from "./modal";
 import "./style.scss";
 import {useAppDispatch} from "hooks";
 import {
+  getListFuelAPI,
+  getListTaskAPI,
   getListUnitAPI,
   getListVehicleAPI,
 } from "../../redux/catalog/catalog.slice";
@@ -74,6 +75,7 @@ const LenhXe = props => {
   useEffect(() => {
     dispatch(getListVehicleAPI());
     dispatch(getListUnitAPI());
+    dispatch(getListFuelAPI());
   }, []);
   useEffect(() => {
     const getListUnit = async () => {

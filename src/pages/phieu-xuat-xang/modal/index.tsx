@@ -27,11 +27,16 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any>();
-  const {listVehicle, listUnit} = useAppSelector(state => state.catalog);
+  const {listVehicle, listFuel} = useAppSelector(state => state.catalog);
   const [dataTable, setDataTable] = useState<any[]>([{}]);
   const [soKhoan, setSoKhoan] = useState<any>(0);
   const [soLuong, setSoLuong] = useState<any>(0);
   const [thanhTien, setThanhTien] = useState<any>(0);
+  columns.find(e => e.dataIndex == "name").options = listFuel.map(e => ({
+    key: randomId(),
+    label: e.fuelName,
+    value: e.fuelName,
+  }));
   useImperativeHandle(ref, () => ({
     submit: () => {
       submit();
@@ -43,6 +48,7 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
     } else {
     }
   }, [id, isModalOpen]);
+
   useEffect(() => {
     console.log(data);
     if (data) {
@@ -75,7 +81,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
       _soLuong += toNumber(e?.actualExport);
       _thanhTien += toNumber(e?.sumMoney);
     });
-    console.log(_soLuong);
 
     setSoKhoan(_soKhoan);
     setSoLuong(_soLuong);
