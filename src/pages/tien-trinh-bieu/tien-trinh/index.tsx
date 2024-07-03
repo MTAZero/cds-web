@@ -77,9 +77,7 @@ const TienTrinh = (props: any) => {
       setBase64(null);
     }
   };
-  useEffect(() => {
-    console.log(base64);
-  }, [base64]);
+
   const listActionButton = (value: any, record: any, index: any) => {
     return (
       <ListActionButton

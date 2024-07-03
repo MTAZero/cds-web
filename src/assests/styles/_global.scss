@@ -40,6 +40,9 @@ a {
 .main {
   width: 100%;
   font-size: 16px !important;
+  * {
+    font-family: "Inter";
+  }
 }
 
 div[tabIndex="0"],
@@ -194,13 +197,12 @@ button.custom-btn {
     }
     .ant-modal-body {
       overflow: scroll;
-      max-height: calc(100vh - 50px);
+      max-height: calc(100vh - 100px);
     }
   }
 
   .modal-print-form {
     padding: 10px;
-
     .ant-modal {
       width: 1100px !important;
       position: relative;

@@ -10,6 +10,13 @@ const columns: any = [
     width: 60,
   },
   {
+    key: "orderNumber",
+    dataIndex: "orderNumber",
+    title: "Số lệnh",
+    align: "center",
+    width: 180,
+  },
+  {
     key: "mission",
     dataIndex: "mission",
     title: "Nhiệm vụ",
@@ -31,6 +38,7 @@ const columns: any = [
     align: "center",
     width: 180,
   },
+
   {
     key: "created_date",
     dataIndex: "commandDateCreated",
@@ -91,7 +99,7 @@ const columns: any = [
     title: "Thao tác",
     align: "center",
     fixed: "right",
-    width: 120,
+    width: 180,
   },
 ];
 

@@ -288,7 +288,6 @@ const DetailTienTrinh = props => {
   useEffect(() => {
     const _convertFileToBase64 = async () => {
       if (selectedFile) {
-        console.log(selectedFile);
         const _base64 = await convertFileToBase64(selectedFile);
         setBase64(_base64);
         console.log(_base64);

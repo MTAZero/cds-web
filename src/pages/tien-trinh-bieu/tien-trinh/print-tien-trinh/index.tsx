@@ -16,7 +16,6 @@ const PrintTienTrinh = (props: any) => {
     const _setCheckerAndSigner = (unit: any) => {
       let _checker;
       let _signer;
-      console.log(unit);
       switch (unit) {
         case "Trung tâm 1":
           _signer = "chỉ huy trưởng";

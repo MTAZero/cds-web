@@ -31,9 +31,12 @@ const Modal = forwardRef((props: any, ref) => {
     label: e?.name,
     value: e?.name,
   }));
+
   useEffect(() => {
-    if (!isValuable(id) && isModalOpen) {
+    if (!isValuable(id)) {
       setData(null);
+      form.resetFields();
+      form.setFieldValue("state", 0);
     } else {
     }
   }, [id, isModalOpen]);
@@ -83,7 +86,6 @@ const Modal = forwardRef((props: any, ref) => {
         return;
       }
       let body = {...data, ...formValues, id: id ? id : null};
-      console.log(body);
       setIsLoading(true);
       const callApi = id
         ? APIServices.LenhXe.updateLenhXe

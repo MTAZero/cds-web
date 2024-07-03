@@ -12,8 +12,6 @@ export const MainLayout = () => {
     state => state.global.modalChangePasswordState
   );
 
-  console.log(modalChangePasswordState);
-
   const dispatch = useAppDispatch();
 
   return (
@@ -38,7 +36,7 @@ export const MainLayout = () => {
         <Menu />
         <Box
           sx={{
-            paddingLeft: "320px",
+            paddingLeft: "300px",
             display: "flex",
             flex: 1,
             height: "100%",

@@ -5,9 +5,7 @@ import {APIServices} from "utils";
 const ModalPdf = props => {
   const [loading, setLoading] = useState(false);
   const {base64} = props;
-  useEffect(() => {
-    console.log(base64);
-  }, [base64]);
+  useEffect(() => {}, [base64]);
   return (
     <div style={{height: "100%"}}>
       <Spin spinning={loading}>

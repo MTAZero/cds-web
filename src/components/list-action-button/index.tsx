@@ -39,22 +39,25 @@ const ListActionButton: React.FC<Props> = ({
   reportFunction,
   checkFunction,
   children,
-  toolTipSave,
   toolTips,
 }) => {
   return (
     <Space style={{}} size="small">
       {addFunction !== undefined ? (
-        <Button
-          style={{position: "relative", bottom: "4px"}}
-          onClick={addFunction}
-          icon={<Icon.add></Icon.add>}
-        ></Button>
+        <Tooltip title={toolTips.add}>
+          <Button
+            style={{position: "relative"}}
+            onClick={addFunction}
+            icon={<Icon.add></Icon.add>}
+          ></Button>
+        </Tooltip>
       ) : (
         <></>
       )}
       {printFunction !== undefined ? (
-        <Button onClick={printFunction} icon={<PrinterSVG />} />
+        <Tooltip title={toolTips.print}>
+          <Button onClick={printFunction} icon={<PrinterSVG />} />
+        </Tooltip>
       ) : (
         <></>
       )}
@@ -89,7 +92,7 @@ const ListActionButton: React.FC<Props> = ({
         <></>
       )}
       {saveFunction !== undefined ? (
-        <Tooltip title={toolTipSave}>
+        <Tooltip title={toolTips?.save}>
           <Button
             onClick={saveFunction}
             icon={<SaveIconSVG></SaveIconSVG>}

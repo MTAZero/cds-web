@@ -1,12 +1,12 @@
-import { FC, useMemo, useState } from "react";
-import { SideMenuItem } from "../../../types";
+import {FC, useMemo, useState} from "react";
+import {SideMenuItem} from "../../../types";
 
 import * as styles from "./styles";
-import { Box, Collapse } from "@mui/material";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../../hooks";
-import { checkPermisison } from "../../../utils";
+import {Box, Collapse} from "@mui/material";
+import {FaAngleDown, FaAngleUp} from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
+import {useAppSelector} from "../../../hooks";
+import {checkPermisison} from "../../../utils";
 
 type MenuItemProps = {
   item: SideMenuItem;
@@ -14,13 +14,13 @@ type MenuItemProps = {
   level: number;
 };
 
-export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
+export const MenuItemView: FC<MenuItemProps> = ({item, keyRender, level}) => {
   const navigate = useNavigate();
   const [collapse, setCollapse] = useState<boolean>(
     window.location.href.includes(item.key)
   );
 
-  const { permission } = useAppSelector((state) => state.auth);
+  const {permission} = useAppSelector(state => state.auth);
 
   const _style = window.location.href.includes(item.key)
     ? styles.selectedItem
@@ -62,7 +62,7 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
 
       return item.text;
     })
-    .filter((i) => i);
+    .filter(i => i);
 
   if (checkChild && Array.isArray(checkChild) && checkChild.length === 0)
     return null;
@@ -80,10 +80,10 @@ export const MenuItemView: FC<MenuItemProps> = ({ item, keyRender, level }) => {
         onClick={() => setCollapse(!collapse)}
       >
         {item.icon}
-        <Box sx={{ display: "flex", flex: 1 }}> {item.text}</Box>
+        <Box sx={{display: "flex", flex: 1}}> {item.text}</Box>
         {collapse === false ? <FaAngleDown /> : <FaAngleUp />}
       </Box>
-      <Box sx={{ marginLeft: "20px" }}>
+      <Box sx={{marginLeft: "20px"}}>
         <Collapse in={collapse}>
           {item.children.map((item: SideMenuItem, i: number) => {
             return (

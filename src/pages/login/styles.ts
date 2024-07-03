@@ -25,12 +25,11 @@ export const loginPanelStyle = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "400px",
+  width: "450px",
   backgroundColor: "#002D56",
   boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   padding: "40px",
   borderRadius: "10px",
-
   display: "flex",
   flexDirection: "column",
   gap: "10px",
@@ -57,7 +56,6 @@ export const textInputStyle = {
   fontSize: "14px",
   fontStyle: "normal",
   fontWeight: "600",
-
   "&:focus": {
     outline: "none",
     borderBottom: "none",
@@ -111,7 +109,6 @@ export const buttonSSOStyle = {
   lineHeight: "20px",
   letterSpacing: "0.5px",
   minWidth: "100px",
-
   "&:hover": {
     opacity: "0.9",
   },

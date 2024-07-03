@@ -30,7 +30,6 @@ const PdfViewer = (props: Props) => {
   };
 
   useEffect(() => {
-    console.log(base64);
     if (!base64) {
       setUrl(URL.createObjectURL(base64toBlob(base64OfBlank)));
     } else {

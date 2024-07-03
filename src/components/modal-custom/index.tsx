@@ -1,10 +1,10 @@
 import React, {useEffect, useImperativeHandle, useRef, useState} from "react";
-import {Modal, Space, Row, Col} from "antd";
+import {Modal, Space, Row, Col, Button} from "antd";
 import "./ModalCustom.scss";
 import {useAppDispatch} from "hooks";
 import {setIsOpenModalRedux} from "../../redux/global/global.slice";
 const ModalCustom = React.forwardRef((props: any, ref) => {
-  const {onCloseModal, onOpenModal} = props;
+  const {onCloseModal, onOpenModal, onOk} = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useAppDispatch();
   useImperativeHandle(ref, () => ({
@@ -32,6 +32,19 @@ const ModalCustom = React.forwardRef((props: any, ref) => {
       onCloseModal();
     }
   }, [isModalOpen]);
+  const footer = (
+    <div className="modal-footer">
+      <Row justify={"end"} style={{marginTop: 4}}>
+        <Space>
+          <Button onClick={closeModal}>Hủy</Button>
+          <Button type="primary" onClick={onOk}>
+            Lưu
+          </Button>
+        </Space>
+      </Row>
+    </div>
+  );
+  console.log(onOk);
   return (
     <div className="modal">
       <Modal
@@ -39,7 +52,7 @@ const ModalCustom = React.forwardRef((props: any, ref) => {
         centered
         open={isModalOpen}
         onCancel={closeModal}
-        footer={null}
+        footer={onOk ? footer : null}
         width={"80%"}
         {...props}
       >

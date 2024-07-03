@@ -13,3 +13,8 @@ export * from "./sso";
 export * from "./xe";
 export * from "./dang-ki-xe";
 export * from "./lenh-xe";
+export * from "./phieu-xuat-xang";
+export * from "./so-giao-ban";
+export * from "./nhien-lieu";
+export * from "./nhiem-vu";
+export * from "./dau-moi";

@@ -28,7 +28,6 @@ const DetailTongHopXe = props => {
         const res = await APIServices.DangKiXe.getDetailDangKi(id);
         setLoading(false);
         setData(res);
-        console.log(res);
       } catch (error) {
         setLoading(false);
       }

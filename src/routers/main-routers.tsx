@@ -9,7 +9,7 @@ import {TroopReport} from "../pages/troop-report";
 import {LeaveApprove} from "../pages/leave-approve";
 import {LeaveRegister} from "../pages/leave-register";
 import {GuardSetting} from "../pages/guard-dutty/guard-dutty-manager";
-import {SystemFeatures, SystemAction} from "../types";
+import {SystemFeatures, SystemAction, typeMeetingBook} from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -37,6 +37,13 @@ import DetailKeHoachXe from "pages/ke-hoach-xe/detail";
 import TongHopXe from "pages/tong-hop-xe/list";
 import DetailTongHopXe from "pages/tong-hop-xe/detail";
 import LenhXe from "pages/lenh-xe";
+import PhieuXuat from "pages/phieu-xuat-xang";
+import SoGiaoBanCum from "../pages/so-giao-ban-cum/list";
+import DetailSoGiaoBanCum from "pages/so-giao-ban-cum/detail";
+
+import QuanLyNhienLieu from "pages/quan-ly-nhien-lieu";
+import QuanLyDauMoi from "pages/quan-ly-dau-moi";
+import QuanLyNhiemVu from "pages/quan-ly-nhiem-vu";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -159,7 +166,42 @@ const MainRoutes = [
             module: SystemFeatures.ManagerExperiences,
             action: [SystemAction.View, SystemAction.Edit],
           },
-
+          {
+            path: RouterLink.SO_GIAO_BAN_ROUTE,
+            element: <SoGiaoBanCum />,
+          },
+          {
+            path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
+            element: <DetailSoGiaoBanCum />,
+          },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.CUM
+          //   ),
+          //   element: <SoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.CUM
+          //   ),
+          //   element: <DetailSoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.DOI
+          //   ),
+          //   element: <SoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
+          //     ":type",
+          //     typeMeetingBook.DOI
+          //   ),
+          //   element: <DetailSoGiaoBanCum />,
+          // },
           {
             path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
             element: <ThongKeHLCaNhan />,
@@ -207,6 +249,18 @@ const MainRoutes = [
             element: <QuanLyXe />,
           },
           {
+            path: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
+            element: <QuanLyNhienLieu />,
+          },
+          {
+            path: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
+            element: <QuanLyDauMoi />,
+          },
+          {
+            path: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
+            element: <QuanLyNhiemVu />,
+          },
+          {
             path: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
             element: <KeHoachXe />,
           },
@@ -225,6 +279,10 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_LENH_XE_ROUTE,
             element: <LenhXe />,
+          },
+          {
+            path: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+            element: <PhieuXuat />,
           },
         ],
       },

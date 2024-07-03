@@ -40,18 +40,26 @@ export const RouterLink = {
   RUT_KINH_NGHIEM_ROUTE: "/rut-kinh-nghiem",
   RUT_KINH_NGHIEM_DETAIL_ROUTE: "/rut-kinh-nghiem/:id",
 
+  // Sổ giao ban
+  SO_GIAO_BAN_ROUTE: "/so-giao-ban/:type",
+  SO_GIAO_BAN_DETAIL_ROUTE: "/so-giao-ban/:type/:id",
+
   // Thống kê huấn luyện cá nhân
   THONG_KE_HUAN_LUYEN_CA_NHAN: "/thong-ke-huan-luyen-ca-nhan",
   SO_SACH_CA_NHAN_DETAIL_ROUTE: "/thong-ke-huan-luyen-ca-nhan/:id",
 
   // Quản trị xăng dầu,xe
   QUAN_LY_XE_ROUTE: "/quan-ly-xang-dau/xe",
+  QUAN_LY_NHIEN_LIEU_ROUTE: "/quan-ly-xang-dau/nhien-lieu",
+  QUAN_LY_NHIEM_VU_ROUTE: "/quan-ly-xang-dau/nhiem-vu",
+  QUAN_LY_DAU_MOI_ROUTE: "/quan-ly-xang-dau/dau-moi",
   QUAN_LY_KE_HOACH_XE_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe",
   QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/ke-hoach-xe/:id",
 
   QUAN_LY_TONG_HOP_XE_ROUTE: "/quan-ly-xang-dau/tong-hop-xe",
   QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE: "/quan-ly-xang-dau/tong-hop-xe/:id",
   QUAN_LY_LENH_XE_ROUTE: "/quan-ly-xang-dau/lenh-xe",
+  QUAN_LY_PHIEU_XUAT_XANG_ROUTE: "/quan-ly-xang-dau/phieu_xuat_xang",
   // Quản trị
   QUAN_TRI_NGUOI_DUNG_ROUTE: "/quan-tri/nguoi-dung",
   QUAN_TRI_PERMISSION_ROUTE: "/quan-tri/permission",

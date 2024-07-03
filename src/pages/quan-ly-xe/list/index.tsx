@@ -104,6 +104,7 @@ const QuanLyXe = props => {
           </Row>
           <Form form={form}>
             <TableInputAdd
+              isLoading={isLoading}
               data={data}
               setData={setData}
               name="listVehicle"

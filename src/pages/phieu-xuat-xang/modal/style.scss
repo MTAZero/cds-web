@@ -1,0 +1,10 @@
+@import "assests/styles/_color.scss";
+
+.ant-modal-body:has(.modal-phieu-xuat-xang) {
+  background-color: $colorGrayLight3;
+
+  //   .modal-custom-footer {
+  //     position: fixed;
+  //     bottom: 0;
+  //   }
+}

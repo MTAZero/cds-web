@@ -34,7 +34,6 @@ const ModalLenhXe = forwardRef((props: any, ref) => {
       getData(id);
     }
   }, [id]);
-  console.log(data);
   return (
     <div className="lenh-xe">
       <div className="print" ref={printRef}>

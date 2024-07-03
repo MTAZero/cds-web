@@ -9,7 +9,12 @@ import {
   UserSVG,
 } from "assests/svg";
 import {RouterLink} from "../../../routers/routers";
-import {SideMenuItem, SystemAction, SystemFeatures} from "../../../types";
+import {
+  SideMenuItem,
+  SystemAction,
+  SystemFeatures,
+  typeMeetingBook,
+} from "../../../types";
 
 import {
   FaCalendar,
@@ -188,6 +193,33 @@ export const mainMenu: Array<SideMenuItem> = [
         module: SystemFeatures.ManagerExperiences,
         action: [SystemAction.View, SystemAction.Edit],
       },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          ":type",
+          typeMeetingBook.TRUNG_TAM
+        ),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(
+          ":type",
+          typeMeetingBook.TRUNG_TAM
+        ),
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban trung tâm",
+      },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.CUM),
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban cụm",
+      },
+      {
+        url: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.DOI),
+        key: RouterLink.SO_GIAO_BAN_ROUTE.replace(":type", typeMeetingBook.DOI),
+        icon: <DocumentTextSVG />,
+        children: [],
+        text: "Sổ giao ban đội",
+      },
     ],
   },
   {
@@ -217,8 +249,37 @@ export const mainMenu: Array<SideMenuItem> = [
         url: RouterLink.QUAN_LY_XE_ROUTE,
         key: RouterLink.QUAN_LY_XE_ROUTE,
         icon: <CarSVG />,
-        children: [],
-        text: "Quản lý xe",
+        children: [
+          {
+            url: RouterLink.QUAN_LY_XE_ROUTE,
+            key: RouterLink.QUAN_LY_XE_ROUTE,
+            icon: null,
+            children: [],
+            text: "Danh mục xe",
+          },
+          {
+            url: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
+            key: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
+            icon: null,
+            children: [],
+            text: "Danh mục nhiên liệu",
+          },
+          {
+            url: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
+            key: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
+            icon: null,
+            children: [],
+            text: "Danh mục nhiệm vụ",
+          },
+          {
+            url: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
+            key: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
+            icon: null,
+            children: [],
+            text: "Danh mục đầu mối",
+          },
+        ],
+        text: "Quản lý danh mục",
         // module: SystemFeatures.ManagerPersonalDiarys,
         // action: [SystemAction.View, SystemAction.Edit],
       },
@@ -226,26 +287,43 @@ export const mainMenu: Array<SideMenuItem> = [
         url: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
         key: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
         icon: <CarSVG />,
-        children: [],
-        text: "Đăng kí xe",
-      },
-      {
-        url: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
-        key: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
-        icon: <CarSVG />,
-        children: [],
-        text: "Kế hoạch xe",
-        // module: SystemFeatures.ManagerPersonalDiarys,
-        // action: [SystemAction.View, SystemAction.Edit],
-      },
-      {
-        url: RouterLink.QUAN_LY_LENH_XE_ROUTE,
-        key: RouterLink.QUAN_LY_LENH_XE_ROUTE,
-        icon: <CarSVG />,
-        children: [],
-        text: "Lệnh điều phương tiện",
-        // module: SystemFeatures.ManagerPersonalDiarys,
-        // action: [SystemAction.View, SystemAction.Edit],
+        children: [
+          {
+            url: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+            key: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+            icon: null,
+            children: [],
+            text: "Đăng kí xe",
+          },
+          {
+            url: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+            key: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+            icon: null,
+            children: [],
+            text: "Kế hoạch xe",
+            // module: SystemFeatures.ManagerPersonalDiarys,
+            // action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            url: RouterLink.QUAN_LY_LENH_XE_ROUTE,
+            key: RouterLink.QUAN_LY_LENH_XE_ROUTE,
+            icon: null,
+            children: [],
+            text: "Lệnh điều phương tiện",
+            // module: SystemFeatures.ManagerPersonalDiarys,
+            // action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            url: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+            key: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+            icon: null,
+            children: [],
+            text: "Phiếu xuất xăng dầu",
+            // module: SystemFeatures.ManagerPersonalDiarys,
+            // action: [SystemAction.View, SystemAction.Edit],
+          },
+        ],
+        text: "Quản lý nhập/xuất",
       },
     ],
   },

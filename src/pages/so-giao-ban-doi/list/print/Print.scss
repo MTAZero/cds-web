@@ -1,0 +1,69 @@
+@import "assests/styles/_variables.scss";
+.print-so-giao-ban {
+  @include font-print;
+  @include page-a4-landscape;
+  padding: 0cm 1.5cm 1cm 1.5cm !important;
+
+  .page-1 {
+    height: 175mm;
+    break-after: always;
+    display: flex;
+    flex-direction: column;
+  }
+  .page-2 {
+    height: 190mm;
+  }
+  table {
+    width: 100%;
+  }
+  .header {
+  }
+  div,
+  span,
+  article,
+  h1 {
+    font-size: 14pt;
+  }
+  span.label {
+    font-weight: $weightLarge;
+  }
+  .strong {
+    font-weight: $weightLarge;
+    text-align: left;
+  }
+  .table {
+    height: 100%;
+    .col {
+      padding: 6px;
+      flex-basis: 1;
+      border: 1.5px solid black;
+    }
+    .col-2 {
+      border-left: none;
+      flex-basis: 1;
+    }
+  }
+  .line-dot {
+    padding: 0;
+    overflow-x: hidden;
+    text-wrap: wrap;
+    word-wrap: wrap;
+  }
+  div {
+    margin-bottom: 3px;
+  }
+  .dot {
+    height: 30px;
+  }
+  .dot:after {
+    width: 100%;
+    height: 40px;
+    // overflow-x: auto;
+    text-wrap: wrap;
+    word-wrap: wrap;
+
+    content: " ........................................................................................................................................................................................................................";
+    // position: absolute;
+    // max-width: 100%;
+  }
+}

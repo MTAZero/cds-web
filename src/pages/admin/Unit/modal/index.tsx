@@ -75,7 +75,6 @@ const Modal = props => {
       try {
         setIsLoading(true);
         const res = await APIServices.QuanTri.getListDescendantsUnit(id);
-        console.log(res);
         setListDescendantsChild(res);
 
         setIsLoading(false);
