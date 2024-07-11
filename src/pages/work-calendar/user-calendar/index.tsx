@@ -16,9 +16,9 @@ import Table from "@mui/joy/Table";
 export const UserCalendarPage = () => {
   return (
     <Box sx={styles.containerStyle}>
-      <Box sx={styles.labelStyle}>
+      {/* <Box sx={styles.labelStyle}>
         Lịch công tác tuần 20 (13/5/2024 - 19/5/2024)
-      </Box>
+      </Box> */}
       <TableContainer>
         <Table borderAxis="both">
           <TableHead>

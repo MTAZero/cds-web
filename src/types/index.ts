@@ -51,6 +51,7 @@ export enum TroopStatus {
   ChinhSach = "ChinhSach",
   DiHoc = "DiHoc",
   Khac = "Khac",
+  TangCuong = "TangCuong",
 }
 
 export const selectTroopData = [
@@ -59,16 +60,16 @@ export const selectTroopData = [
     text: "Có mặt",
   },
   {
+    value: TroopStatus.CongTac,
+    text: "Công tác",
+  },
+  {
+    value: TroopStatus.TangCuong,
+    text: "Tăng cường",
+  },
+  {
     value: TroopStatus.NghiPhep,
     text: "Nghỉ phép",
-  },
-  {
-    value: TroopStatus.NghiOm,
-    text: "Nghỉ ốm",
-  },
-  {
-    value: TroopStatus.DiVien,
-    text: "Đi viện",
   },
   {
     value: TroopStatus.TranhThu,
@@ -79,12 +80,12 @@ export const selectTroopData = [
     text: "Nghỉ cuối tuần",
   },
   {
-    value: TroopStatus.CongTac,
-    text: "Công tác",
+    value: TroopStatus.NghiOm,
+    text: "Nghỉ ốm",
   },
   {
-    value: TroopStatus.ChinhSach,
-    text: "Chính sách",
+    value: TroopStatus.DiVien,
+    text: "Đi viện",
   },
   {
     value: TroopStatus.DiHoc,
@@ -94,9 +95,14 @@ export const selectTroopData = [
     value: TroopStatus.Khac,
     text: "Khác",
   },
+
+  // {
+  //   value: TroopStatus.ChinhSach,
+  //   text: "Chính sách",
+  // },
 ];
 
 export const getTextByStatus = (status: TroopStatus) => {
-  const ans = selectTroopData.find(i => i.value === status);
+  const ans = selectTroopData.find((i) => i.value === status);
   return ans ? ans.text : "";
 };

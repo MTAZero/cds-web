@@ -25,6 +25,7 @@ export const RouterLink = {
   WORK_CALENDAR: "work-calendar",
   UNIT_WORK_CALENDAR: "/work-calendar-unit",
   USER_WORK_CALENDAR: "/work-calendar-user",
+  MANAGER_CALENDAR: "/work-calendar-manager",
 
   // Văn kiện
   VAN_KIEN_ROUTE: "/van-kien",

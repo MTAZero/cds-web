@@ -25,7 +25,7 @@ import {
   FaUserFriends,
   FaWrench,
 } from "react-icons/fa";
-import {IoIosList, IoIosPeople, IoIosSettings} from "react-icons/io";
+import {IoIosArchive, IoIosBook, IoIosList, IoIosPeople, IoIosSettings} from "react-icons/io";
 
 export const mainMenu: Array<SideMenuItem> = [
   // {
@@ -130,6 +130,15 @@ export const mainMenu: Array<SideMenuItem> = [
     icon: <FaCalendar />,
     text: "Lịch công tác",
     children: [
+      {
+        url: RouterLink.MANAGER_CALENDAR,
+        key: RouterLink.MANAGER_CALENDAR,
+        icon: <IoIosBook />,
+        children: [],
+        text: "Quản lý lịch công tác",
+        module: SystemFeatures.WorkCalendar,
+        action: [SystemAction.View, SystemAction.Edit],
+      },
       {
         url: RouterLink.UNIT_WORK_CALENDAR,
         key: RouterLink.UNIT_WORK_CALENDAR,
