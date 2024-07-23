@@ -8,6 +8,7 @@ export interface CatalogState {
   listVehicle: any[];
   listTask: any[];
   listFuel: any[];
+  listPerson: any[];
 }
 
 const initialState: CatalogState = {
@@ -16,6 +17,7 @@ const initialState: CatalogState = {
   listVehicle: [],
   listTask: [],
   listFuel: [],
+  listPerson: [],
 };
 
 export const catalogSlice = createSlice({
@@ -37,6 +39,9 @@ export const catalogSlice = createSlice({
     setListFuel: (state: CatalogState, action: PayloadAction<any>) => {
       state.listFuel = action.payload;
     },
+    setListPerson: (state: CatalogState, action: PayloadAction<any>) => {
+      state.listPerson = action.payload;
+    },
   },
 });
 
@@ -46,6 +51,7 @@ export const {
   setListVehicle,
   setListTask,
   setListFuel,
+  setListPerson,
 } = catalogSlice.actions;
 export const getListVehicleAPI = () => {
   return async dispatch => {
@@ -91,6 +97,20 @@ export const getListUnitAPI = () => {
       dispatch(setListUnit(listUnit));
     } catch (error) {
       dispatch(setListUnit([]));
+    }
+  };
+};
+export const getListPersonAPI = (pageIndex = 1, pageSize = 200) => {
+  return async dispatch => {
+    try {
+      const res = await APIServices.QuanTri.getListUser({
+        pageIndex: pageIndex,
+        pageSize: pageSize,
+      });
+      const listPerson = toArray(res?.items)?.filter(e => e?.isPersonal);
+      dispatch(setListPerson(listPerson));
+    } catch (error) {
+      dispatch(setListPerson([]));
     }
   };
 };

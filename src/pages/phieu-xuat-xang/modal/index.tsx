@@ -45,6 +45,7 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
   useEffect(() => {
     console.log(id);
     if (!isValuable(id)) {
+      setData(null);
     } else {
     }
   }, [id, isModalOpen]);

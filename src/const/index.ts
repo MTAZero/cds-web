@@ -21,6 +21,15 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.ManagerDocuments,
   SystemFeatures.ManagerTrainnings,
   SystemFeatures.VehicleCommand,
+  SystemFeatures.DeliveryBill,
+  SystemFeatures.MeetingBook,
+  SystemFeatures.ManagerFuel,
+  SystemFeatures.ManagerTask,
+  SystemFeatures.ManagerWorkAddress,
+  SystemFeatures.ManagerTrackDiscipline,
+  SystemFeatures.StatisticDocument,
+  SystemFeatures.ManagerTrackWork,
+  SystemFeatures.AccessControl,
 ];
 
 export const ACTIONS_SYSTEM = [

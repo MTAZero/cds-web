@@ -6,7 +6,7 @@
 
   .ant-table-cell .ant-form-item-control-input-content input.ant-input {
     // border: 1px solid #d9d9d9 !important;
-    border-radius: 8px !important;
+    border-radius: 2px !important;
     overflow: hidden;
   }
   .ant-input-number {
@@ -14,7 +14,7 @@
   }
   .editable-cell-value-wrap {
     cursor: pointer;
-    height: 30px;
+    // height: 30px;
   }
 
   .editable-row:hover .editable-cell-value-wrap {
@@ -23,7 +23,7 @@
   .editable-row-2 {
     .ant-form-item-control-input-content {
       input {
-        height: 30px !important;
+        // height: 30px !important;
       }
     }
   }

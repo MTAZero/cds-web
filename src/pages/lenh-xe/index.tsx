@@ -75,7 +75,7 @@ const LenhXe = props => {
   useEffect(() => {
     dispatch(getListVehicleAPI());
     dispatch(getListUnitAPI());
-    dispatch(getListFuelAPI());
+    dispatch(getListTaskAPI());
   }, []);
   useEffect(() => {
     const getListUnit = async () => {

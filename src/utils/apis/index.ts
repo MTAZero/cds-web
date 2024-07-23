@@ -18,3 +18,8 @@ export * from "./so-giao-ban";
 export * from "./nhien-lieu";
 export * from "./nhiem-vu";
 export * from "./dau-moi";
+export * from "./so-theo-doi-cong-tac";
+export * from "./so-theo-doi-ky-luat";
+export * from "./so-thong-ke-tai-lieu";
+export * from "./so-thong-ke-ra-vao";
+export * from "./thong-ke-ctt";

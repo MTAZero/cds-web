@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from "axios";
-import { getAuthToken } from "../store";
-import { AppConfigs } from "../../const";
+import axios, {AxiosInstance} from "axios";
+import {getAuthToken} from "../store";
+import {AppConfigs} from "../../const";
 
 const serverUrl = AppConfigs.serverUrl;
 
@@ -55,7 +55,7 @@ const _makeAuthRequest = (instantAxios: AxiosInstance) => async (args: any) => {
 
 const request = (options: any = {}) => {
   let BaseURL = serverUrl;
-
+  console.log(options);
   if (options.BaseURL) BaseURL = options.BaseURL;
 
   const instance: AxiosInstance = axios.create({

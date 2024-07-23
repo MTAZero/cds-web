@@ -123,7 +123,13 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
-
+  {
+    url: RouterLink.THONG_KE_CTT,
+    key: RouterLink.THONG_KE_CTT,
+    icon: <AdminSVG />,
+    text: "Thống kê cổng thông tin",
+    children: [],
+  },
   {
     url: RouterLink.WORK_CALENDAR,
     key: RouterLink.WORK_CALENDAR,
@@ -222,6 +228,43 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
+  {
+    url: RouterLink.GUARD_MENU,
+    key: RouterLink.GUARD_MENU,
+    icon: <NotebookSVG />,
+    text: "Sổ theo dõi và thống kê",
+    children: [
+      {
+        url: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+        key: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ theo dõi đi công tác",
+      },
+      {
+        url: RouterLink.SO_THEO_DOI_KY_LUAT,
+        key: RouterLink.SO_THEO_DOI_KY_LUAT,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ theo dõi quản lý kỷ luật",
+      },
+      {
+        url: RouterLink.SO_THONG_KE_TAI_LIEU,
+        key: RouterLink.SO_THONG_KE_TAI_LIEU,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ thống kê tài liệu",
+      },
+      {
+        url: RouterLink.SO_THONG_KE_RA_VAO,
+        key: RouterLink.SO_THONG_KE_RA_VAO,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ thống kê ra vào",
+      },
+    ],
+  },
+
   {
     url: RouterLink.GUARD_MENU,
     key: RouterLink.GUARD_MENU,
