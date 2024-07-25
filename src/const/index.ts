@@ -30,6 +30,7 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.StatisticDocument,
   SystemFeatures.ManagerTrackWork,
   SystemFeatures.AccessControl,
+  SystemFeatures.ViewStatisticPage,
 ];
 
 export const ACTIONS_SYSTEM = [

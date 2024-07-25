@@ -119,7 +119,7 @@ const SoThongKeRaVao = () => {
         </div>
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Sổ thống kê ra vào"></TitleCustom>
+            <TitleCustom text="Sổ thống kê vào ra"></TitleCustom>
             <Space>
               <Button
                 type="primary"
@@ -151,7 +151,7 @@ const SoThongKeRaVao = () => {
       </div>
 
       <ModalCustom
-        title="Thống kê ra vào"
+        title="Thống kê vào ra"
         ref={modalThongKeRaVaoPrintRef}
         width={"310mm"}
       >
@@ -160,7 +160,7 @@ const SoThongKeRaVao = () => {
       <ModalCustom
         width={1500}
         ref={modalRef}
-        title={`${id ? "Sửa thông tin" : "Thêm"} thông tin ra vào
+        title={`${id ? "Sửa" : "Thêm"} thông tin vào ra
         `}
         onOk={() => {
           modalThongKeRaVaoChildRef?.current?.submit();

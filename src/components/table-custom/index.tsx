@@ -53,6 +53,7 @@ const TableCustom = forwardRef((props: Props & any, ref) => {
       setPage(pageIndex);
     },
   }));
+
   return (
     <Table
       {...rest}

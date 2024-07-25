@@ -42,7 +42,6 @@ const Print = props => {
     _setCheckerAndSigner(sample?.unit);
   }, [sample]);
   return (
-    // <div className="print-rut-kinh-nghiem">123</div>
     <>
       {dataSource &&
         dataSource?.map(item => (
@@ -50,7 +49,7 @@ const Print = props => {
             className="print-rut-kinh-nghiem"
             style={{pageBreakAfter: "always"}}
           >
-            <table>
+            <table style={{width: "100%"}}>
               <thead style={{height: "24mm"}}></thead>
               <tbody>
                 <div className="header">

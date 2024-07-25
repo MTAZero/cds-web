@@ -1,6 +1,6 @@
 import {fieldType, formatTime} from "types";
 import React from "react";
-import {formatDateToString} from "utils";
+import {convertDateStringToDateObject, formatDateToString} from "utils";
 const {COMBO_BOX, DATE} = fieldType;
 const columns: any = [
   {
@@ -50,7 +50,14 @@ const columns: any = [
     align: "center",
     width: 200,
     render: (value, record, index) => {
-      return <>{formatDateToString(value, formatTime.dayFull)}</>;
+      return (
+        <>
+          {formatDateToString(
+            convertDateStringToDateObject(value, true),
+            formatTime.dayFull
+          )}
+        </>
+      );
     },
   },
   {
@@ -67,7 +74,14 @@ const columns: any = [
     align: "center",
     width: 180,
     render: (value, record, index) => {
-      return <>{formatDateToString(value, formatTime.dayFull)}</>;
+      return (
+        <>
+          {formatDateToString(
+            convertDateStringToDateObject(value, true),
+            formatTime.dayFull
+          )}
+        </>
+      );
     },
   },
   {

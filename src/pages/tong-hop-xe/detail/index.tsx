@@ -106,7 +106,7 @@ const DetailTongHopXe = props => {
         <div className="container">
           <Spin spinning={loading}>
             <Form form={form}>
-              <TitleCustom text="Đăng ki xe"></TitleCustom>
+              <TitleCustom text="Đăng kí xe"></TitleCustom>
               <Row gutter={[4, 4]}>
                 <InputFields data={fields}></InputFields>
               </Row>

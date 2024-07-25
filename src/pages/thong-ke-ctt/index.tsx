@@ -1,7 +1,11 @@
 import {InputFields, TableCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 import {fields} from "./config";
-import {APIServices, formatDateToString} from "utils";
+import {
+  APIServices,
+  convertDateStringToDateObject,
+  formatDateToString,
+} from "utils";
 import {
   Button,
   Col,
@@ -172,6 +176,16 @@ const ThongKeCtt = () => {
       align: "center",
       ...getColumnSearchProps("user_login"),
       width: 250,
+    },
+    {
+      key: "post_date",
+      dataIndex: "post_date",
+      title: "Thời gian đăng",
+      align: "center",
+      width: 180,
+      render: (value, record, index) => {
+        return <>{formatDateToString(value, formatTime.dateTime)}</>;
+      },
     },
   ];
   return (

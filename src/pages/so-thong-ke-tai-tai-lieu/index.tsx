@@ -22,12 +22,13 @@ import {
   getListPersonAPI,
   getListUnitAPI,
 } from "../../redux/catalog/catalog.slice";
-import ModalThongKeTaiLieuPrint from "./print";
 import ModalEdit from "./modal";
+import ReactToPrint from "react-to-print";
+import Print from "./print/Print";
 const SoThongKeTaiLieu = () => {
   const [params, setParams] = useState<any>({pageSize: 10, pageIndex: 1});
   const [fields, setFields] = useState(fieldsInit);
-  const modalThongKeTaiLieuPrintRef = useRef<any>(null);
+  const printRef = useRef<any>();
   const modalRef = useRef<any>(null);
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
@@ -121,6 +122,18 @@ const SoThongKeTaiLieu = () => {
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Sổ thống kê tài liệu"></TitleCustom>
             <Space>
+              <ReactToPrint
+                documentTitle={` `}
+                trigger={() => {
+                  return (
+                    <Button style={{marginBottom: 4}} type="primary">
+                      Xuất file
+                    </Button>
+                  );
+                }}
+                content={() => printRef.current}
+                bodyClass="print-statistic-document"
+              />
               <Button
                 type="primary"
                 onClick={() => {
@@ -150,13 +163,11 @@ const SoThongKeTaiLieu = () => {
         </div>
       </div>
 
-      <ModalCustom
-        title="Thống kê tài liệu"
-        ref={modalThongKeTaiLieuPrintRef}
-        width={"310mm"}
-      >
-        <ModalThongKeTaiLieuPrint id={id}></ModalThongKeTaiLieuPrint>
-      </ModalCustom>
+      <div id="print" style={{display: "none"}}>
+        <div ref={printRef} style={{width: "fit-content"}}>
+          <Print dataSource={data}></Print>
+        </div>
+      </div>
       <ModalCustom
         width={1500}
         ref={modalRef}

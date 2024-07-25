@@ -34,6 +34,7 @@ export enum SystemFeatures {
   StatisticDocument = "StatisticDocument",
   ManagerTrackWork = "ManagerTrackWork",
   AccessControl = "AccessControl",
+  ViewStatisticPage = "ViewStatisticPage",
 }
 
 export enum SystemAction {

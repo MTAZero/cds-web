@@ -87,6 +87,8 @@ $border-black: 1.5px solid black;
   padding: 0cm 2.5cm 2cm 2.5cm;
 }
 @mixin page-a4-landscape {
+  box-sizing: border-box !important;
   width: 297mm;
-  padding: 0cm 2.5cm 2cm 2.5cm !important;
+  padding: 0cm 1.5cm 2cm 0cm !important;
+  margin-left: 1cm;
 }

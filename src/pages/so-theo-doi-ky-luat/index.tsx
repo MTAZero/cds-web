@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {useAppDispatch, useAppSelector} from "hooks";
 import {columns, fields} from "./config";
 import {ExpandSearch, TitleCustom} from "components";
-import {Button, Col, Form, Row, Space} from "antd";
+import {Button, Form, Row, Space} from "antd";
 import {
   APIServices,
   NotificationService,
@@ -12,7 +12,6 @@ import {
   toArray,
 } from "utils";
 import {formatTime} from "types";
-
 import TableInputAdd from "./TableInputAddCustom/TableInputAdd";
 import {
   getListPersonAPI,
@@ -20,7 +19,7 @@ import {
 } from "../../redux/catalog/catalog.slice";
 import ReactToPrint from "react-to-print";
 import Print from "./print/Print";
-const SoTheoDoiKyLuat = props => {
+const SoTheoDoiKyLuat = () => {
   const [params, setParams] = useState<any>({});
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
@@ -162,7 +161,7 @@ const SoTheoDoiKyLuat = props => {
         </div>
       </div>
       {/* style={{display: "none"}} */}
-      <div id="print">
+      <div id="print" style={{display: "none"}}>
         <div ref={printRef}>
           <Print dataSource={data} params={params}></Print>
         </div>

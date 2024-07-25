@@ -11,6 +11,7 @@ const TableInputAdd = ({
   disabled,
   name,
   form,
+  total,
   ...rest
 }: any): JSX.Element => {
   const addRowTb1 = () => {
@@ -84,6 +85,7 @@ const TableInputAdd = ({
       }),
     };
   });
+  console.log(total);
   return (
     <div className="table-input-add">
       <TableCustom
@@ -93,7 +95,6 @@ const TableInputAdd = ({
         rowClassName={"editable-row-2"}
         dataSource={data}
         columns={columnsRender as any}
-        // pagination={false}
       />
     </div>
   );

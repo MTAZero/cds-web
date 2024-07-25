@@ -13,7 +13,7 @@ const HeaderReceipt = (props: Props) => {
   return (
     <div className="header-receipt">
       <Row justify={"space-between"}>
-        <Space direction="vertical" align={"center"} size={4}>
+        <Space direction="vertical" align={"center"} size={0.25}>
           <Typography.Text>BỘ TƯ LỆNH 86</Typography.Text>
           <Typography.Text strong>TRUNG TÂM 186</Typography.Text>
           <Divider type="horizontal" style={{width: 50}}></Divider>
@@ -21,16 +21,23 @@ const HeaderReceipt = (props: Props) => {
             <span>Số : {isValuableString(soPhieu) ? soPhieu : "...."} </span>
           </div>
         </Space>
-        <Space direction="vertical" align={"center"} size={4}>
+        <Space direction="vertical" align={"center"} size={0.25}>
           <Typography.Text strong>
             CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
           </Typography.Text>
           <Typography.Text strong>Độc lập - Tự do - Hạnh phúc</Typography.Text>
           <Divider type="horizontal" style={{width: 150}}></Divider>
           <div>
-            <span>Hà Nội, ngày {ngay?.date() ?? "....."} </span> <span></span>{" "}
-            <span>tháng {ngay?.month() ? ngay?.month() + 1 : "....."}</span>{" "}
-            <span>năm {ngay?.year() ?? "....."}</span>
+            <span style={{fontStyle: "italic"}}>
+              Hà Nội, ngày {ngay?.date() ?? "....."}{" "}
+            </span>{" "}
+            <span></span>{" "}
+            <span style={{fontStyle: "italic"}}>
+              tháng {ngay?.month() ? ngay?.month() + 1 : "....."}
+            </span>{" "}
+            <span style={{fontStyle: "italic"}}>
+              năm {ngay?.year() ?? "....."}
+            </span>
           </div>
         </Space>
       </Row>

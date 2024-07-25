@@ -10,7 +10,7 @@ const TitleReceipt = (props: Props) => {
   return (
     <div className="title-receipt" style={style}>
       <Typography.Text strong>{title}</Typography.Text>
-      <div style={{display: "flex", justifyContent: "center", width: "50%"}}>
+      <div style={{display: "flex", justifyContent: "center", width: "4cm"}}>
         <Divider type="horizontal"></Divider>
       </div>
     </div>

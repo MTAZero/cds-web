@@ -10,7 +10,6 @@ const QuanLyNhiemVu = () => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any[]>([]);
-
   const updateData = async () => {
     try {
       const formValues = await getFormValues();
@@ -20,6 +19,7 @@ const QuanLyNhiemVu = () => {
       const data = {listTask: formValues};
       const res = await APIServices.QuanLyNhiemVu.updateListNhiemVu(data);
       setData(res?.items?.map(e => ({...e, key: randomId()})));
+
       NotificationService.success("Lưu thông tin nhiệm vụ thành công");
     } catch (error) {
       NotificationService.error("Đã có lỗi");
@@ -42,6 +42,7 @@ const QuanLyNhiemVu = () => {
         setIsLoading(false);
         const data = toArray(res?.items)?.map(e => ({...e, key: randomId()}));
         setData(data);
+
         form.setFieldValue("listTask", data);
       } catch (error) {
         setIsLoading(false);

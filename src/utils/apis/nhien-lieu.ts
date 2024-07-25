@@ -1,10 +1,11 @@
 import createApiServices from "./make-api-request";
 
 const api = createApiServices();
-const getListNhienLieu = async () => {
+const getListNhienLieu = async (params = {pageIndex: 1, pageSize: 50}) => {
   const res = await api.makeAuthRequest({
     url: `/manager-fuel`,
     method: "GET",
+    params: params,
   });
   return res?.data;
 };
