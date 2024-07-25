@@ -19,7 +19,6 @@ import {
 } from "utils";
 import {formatTime} from "types";
 import {RouterLink} from "routers/routers";
-import dayjs from "dayjs";
 import Print from "./print/Print";
 const KeHoachXe = props => {
   const [params, setParams] = useState<any>({});
@@ -161,7 +160,7 @@ const KeHoachXe = props => {
                   );
                 }}
                 content={() => printRef.current}
-                bodyClass="print-rut-kinh-nghiem"
+                bodyClass="print-ke-hoach-xe"
               />
               <Button type="primary" onClick={navigateToNew}>
                 Thêm mới

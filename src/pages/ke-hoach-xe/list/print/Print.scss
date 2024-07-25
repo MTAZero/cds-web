@@ -1,12 +1,12 @@
 @import "assests/styles/_variables.scss";
-.print-rut-kinh-nghiem {
+.print-ke-hoach-xe {
   @include font-print;
   @include page-a4-landscape;
   div,
   span,
   article,
   h1 {
-    font-size: $sizeXL;
+    font-size: 13pt;
   }
   span.label {
     font-weight: $weightLarge;
