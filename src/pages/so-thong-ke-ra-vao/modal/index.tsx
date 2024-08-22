@@ -85,7 +85,6 @@ const ModalEdit = forwardRef((props: any, ref) => {
   const submit = async () => {
     try {
       const formValues = await getFormValues();
-      console.log(formValues);
       if (!formValues) {
         return;
       }

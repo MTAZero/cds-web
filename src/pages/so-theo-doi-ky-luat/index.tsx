@@ -73,7 +73,6 @@ const SoTheoDoiKyLuat = () => {
       setData(res?.items.map(e => ({...e, key: randomId()})));
       NotificationService.success("Lưu thông tin thành công");
     } catch (error) {
-      console.log(error);
       NotificationService.error("Đã có lỗi");
     }
   };

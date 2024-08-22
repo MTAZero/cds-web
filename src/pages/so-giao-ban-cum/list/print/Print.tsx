@@ -7,12 +7,10 @@ import {
   renderTextSoGiaoBan,
 } from "utils";
 import {formatTime, typeMeetingBook} from "types";
-import usePagination from "@mui/material/usePagination/usePagination";
 import {useParams} from "react-router-dom";
 const Print = props => {
   const {dataSource, listUnit} = props;
   const {type} = useParams();
-  console.log(dataSource?.[0]);
   return (
     // <div className="print-rut-kinh-nghiem">123</div>
     <div className="print-so-giao-ban">

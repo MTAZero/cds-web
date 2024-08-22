@@ -6,7 +6,6 @@ import {formatTime} from "types";
 import {useAppSelector} from "hooks";
 const Print = props => {
   const {dataSource} = props;
-  console.log(dataSource);
   const {listUnit, listPerson} = useAppSelector(state => state.catalog);
   const columns: any = [
     {

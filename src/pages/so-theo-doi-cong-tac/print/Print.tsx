@@ -1,4 +1,3 @@
-import {useEffect, useState} from "react";
 import "./Print.scss";
 import {Row, Space} from "antd";
 import {TableCustom} from "components";
@@ -7,7 +6,6 @@ import {formatTime} from "types";
 import {useAppSelector} from "hooks";
 const Print = props => {
   const {dataSource} = props;
-  console.log(dataSource);
   const {listUnit, listPerson} = useAppSelector(state => state.catalog);
   const columns: any = [
     {

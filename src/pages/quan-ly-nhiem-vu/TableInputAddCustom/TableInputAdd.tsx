@@ -85,7 +85,6 @@ const TableInputAdd = ({
       }),
     };
   });
-  console.log(total);
   return (
     <div className="table-input-add">
       <TableCustom

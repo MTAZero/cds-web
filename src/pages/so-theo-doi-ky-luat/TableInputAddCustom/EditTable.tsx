@@ -101,9 +101,7 @@ export const EditableCell: React.FC<EditableCellProps> = ({
           placeholder={disabled ? "--" : "Nhập"}
           disabled={disabled}
           onClick={() => {}}
-          onChange={async e => {
-            console.log(form.getFieldsValue());
-          }}
+          onChange={async e => {}}
         ></Input>
       </Form.Item>
     );
