@@ -48,6 +48,8 @@ import SoTheoDoiKyLuat from "pages/so-theo-doi-ky-luat";
 import SoThongKeTaiLieu from "pages/so-thong-ke-tai-tai-lieu";
 import SoThongKeRaVao from "pages/so-thong-ke-ra-vao";
 import ThongKeCtt from "pages/thong-ke-ctt";
+import SoDienDen from "pages/so-dien-den";
+import SoDienDi from "pages/so-dien-di";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -280,6 +282,14 @@ const MainRoutes = [
           {
             path: RouterLink.THONG_KE_CTT,
             element: <ThongKeCtt />,
+          },
+          {
+            path: RouterLink.SO_DIEN_DEN,
+            element: <SoDienDen />,
+          },
+          {
+            path: RouterLink.SO_DIEN_DI,
+            element: <SoDienDi />,
           },
         ],
       },

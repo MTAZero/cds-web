@@ -73,7 +73,6 @@ const TienTrinh = (props: any) => {
       );
       setBase64(_base64);
     } catch (error) {
-      console.log(error);
       setBase64(null);
     }
   };

@@ -32,7 +32,6 @@ const ModalPhieuXuat = forwardRef((props: any, ref) => {
     const getData = async id => {
       try {
         const res = await APIServices.PhieuXuatXang.getDetailPhieuXuatXang(id);
-        console.log(res);
         setData(res);
       } catch (error) {
         setData(null);
@@ -44,7 +43,6 @@ const ModalPhieuXuat = forwardRef((props: any, ref) => {
   }, [id]);
   const setTong = data => {
     const dataTable = data?.materials;
-    console.log(dataTable);
     let _soKhoan = 0;
     let _soLuong = 0;
     let _thanhTien = 0;
@@ -53,7 +51,6 @@ const ModalPhieuXuat = forwardRef((props: any, ref) => {
       _soLuong += toNumber(e?.actualExport);
       _thanhTien += toNumber(e?.sumMoney);
     });
-    console.log(_soLuong);
 
     setSoKhoan(_soKhoan);
     setSoLuong(_soLuong);

@@ -49,6 +49,8 @@ export const RouterLink = {
   SO_THEO_DOI_DI_CONG_TAC: "/so-theo-doi-di-cong-tac",
   SO_THONG_KE_TAI_LIEU: "/so-thong-ke-tai-lieu",
   SO_THONG_KE_RA_VAO: "/so-thong-ke-ra-vao",
+  SO_DIEN_DEN: "/so-dien-den",
+  SO_DIEN_DI: "/so-dien-di",
 
   // Thống kê huấn luyện cá nhân
   THONG_KE_HUAN_LUYEN_CA_NHAN: "/thong-ke-huan-luyen-ca-nhan",

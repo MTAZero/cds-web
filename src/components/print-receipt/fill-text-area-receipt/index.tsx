@@ -5,26 +5,25 @@ type Props = {
   label: string | ReactNode;
   value?: string | ReactNode | number;
   addonAfter?: string;
-  dot?: boolean;
 };
-const FillTextReceipt = (props: Props) => {
-  const {label, value, addonAfter, dot = false} = props;
+const FillTextAreaReceipt = (props: Props) => {
+  const {label, value, addonAfter} = props;
   return (
-    <div className="fill-text-receipt">
+    <div className="fill-text-area-receipt">
       <div
         className={`${
-          (isValuableString(value) || typeof value == "number") && !dot
+          isValuableString(value) || typeof value == "number"
             ? "line"
             : "line-dot"
         }`}
       >
         <span>{label}</span>
-        <span> {value} </span>
-        {isValuableString(addonAfter) && (
+        <span> &nbsp;{value} </span>
+        {/* {isValuableString(addonAfter) && (
           <span className="addonAfter">{addonAfter}</span>
-        )}
+        )} */}
       </div>
     </div>
   );
 };
-export {FillTextReceipt};
+export {FillTextAreaReceipt};

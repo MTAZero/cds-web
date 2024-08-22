@@ -55,7 +55,6 @@ const _makeAuthRequest = (instantAxios: AxiosInstance) => async (args: any) => {
 
 const request = (options: any = {}) => {
   let BaseURL = serverUrl;
-  console.log(options);
   if (options.BaseURL) BaseURL = options.BaseURL;
 
   const instance: AxiosInstance = axios.create({

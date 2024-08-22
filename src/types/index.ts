@@ -35,6 +35,8 @@ export enum SystemFeatures {
   ManagerTrackWork = "ManagerTrackWork",
   AccessControl = "AccessControl",
   ViewStatisticPage = "ViewStatisticPage",
+  GoingCall = "GoingCall",
+  InComingCall = "InComingCall",
 }
 
 export enum SystemAction {

@@ -269,6 +269,20 @@ export const mainMenu: Array<SideMenuItem> = [
         children: [],
         text: "Sổ thống kê vào ra",
       },
+      {
+        url: RouterLink.SO_DIEN_DEN,
+        key: RouterLink.SO_DIEN_DEN,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ điện đến",
+      },
+      {
+        url: RouterLink.SO_DIEN_DI,
+        key: RouterLink.SO_DIEN_DI,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ điện đi",
+      },
     ],
   },
 

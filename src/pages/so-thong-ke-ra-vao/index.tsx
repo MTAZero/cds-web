@@ -62,7 +62,6 @@ const SoThongKeRaVao = () => {
   }));
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
-    console.log(searchFields);
     setParams({
       ...searchFields,
     });

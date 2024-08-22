@@ -31,6 +31,8 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.ManagerTrackWork,
   SystemFeatures.AccessControl,
   SystemFeatures.ViewStatisticPage,
+  SystemFeatures.InComingCall,
+  SystemFeatures.GoingCall,
 ];
 
 export const ACTIONS_SYSTEM = [

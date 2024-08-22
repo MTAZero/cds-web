@@ -73,7 +73,6 @@ const SoTheoDoiCongTac = props => {
   const updateData = async () => {
     try {
       const formValues = await getFormValues();
-      console.log(formValues);
       if (!formValues) {
         return;
       }

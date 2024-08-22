@@ -15,7 +15,7 @@ import {
   randomId,
   toArray,
 } from "utils";
-import {fields} from "./config";
+import {fields1, fields2, fields3} from "./config";
 import {InputFields, TitleCustom} from "components";
 import "./style.scss";
 import {formatTime} from "types";
@@ -32,13 +32,40 @@ const ModalEdit = forwardRef((props: any, ref) => {
       submit();
     },
   }));
-  fields.find(e => e.name == "unitId").options = toArray(listUnit).map(e => ({
+  fields1.find(e => e.name == "unitId").options = toArray(listUnit).map(e => ({
     key: randomId(),
     value: e._id,
     label: e.name,
   }));
+  fields2.find(e => e.name == "unitIdReceived").options = toArray(listUnit).map(
+    e => ({
+      key: randomId(),
+      value: e._id,
+      label: e.name,
+    })
+  );
+  fields2.find(e => e.name == "personReceived").options = toArray(
+    listPerson
+  ).map(e => ({
+    key: randomId(),
+    value: e.full_name,
+    label: e.full_name,
+  }));
+  fields2.find(e => e.name == "idLeader").options = toArray(listPerson).map(
+    e => ({
+      key: randomId(),
+      value: e._id,
+      label: e.full_name,
+    })
+  );
+  fields2.find(e => e.name == "personSecondReceived").options = toArray(
+    listPerson
+  ).map(e => ({
+    key: randomId(),
+    value: e._id,
+    label: e.full_name,
+  }));
   useEffect(() => {
-    console.log(id);
     if (!isValuable(id)) {
       setData(null);
     } else {
@@ -52,17 +79,23 @@ const ModalEdit = forwardRef((props: any, ref) => {
       form.resetFields();
     }
   }, [data, isModalOpen]);
-  useEffect(() => {}, [isModalOpen]);
+  const getData = async id => {
+    try {
+      const res = await APIServices.SoDienDen.getDetailSoDienDen(id);
+      setData(res);
+    } catch (error) {
+      setData(null);
+    }
+  };
+  useEffect(() => {
+    if (isModalOpen) {
+      if (isValuable(id)) {
+        getData(id);
+      }
+    }
+  }, [isModalOpen]);
 
   useEffect(() => {
-    const getData = async id => {
-      try {
-        const res =
-          await APIServices.SoThongKeTaiLieu.getDetailSoThongKeTaiLieu(id);
-
-        setData(res);
-      } catch (error) {}
-    };
     if (isValuable(id)) {
       getData(id);
     }
@@ -70,8 +103,7 @@ const ModalEdit = forwardRef((props: any, ref) => {
   const setFieldsValue = data => {
     const formatData = {
       ...data,
-      receivedDate: convertDateStringToDateObject(data?.receivedDate, true),
-      paidDate: convertDateStringToDateObject(data?.paidDate, true),
+      dateRead: convertDateStringToDateObject(data?.dateRead, true),
     };
     form.setFieldsValue(formatData);
   };
@@ -85,8 +117,8 @@ const ModalEdit = forwardRef((props: any, ref) => {
       let body = {...data, ...formValues, id: id ? id : null};
       setIsLoading(true);
       const callApi = id
-        ? APIServices.SoThongKeTaiLieu.updateSoThongKeTaiLieu
-        : APIServices.SoThongKeTaiLieu.createSoThongKeTaiLieu;
+        ? APIServices.SoDienDen.updateSoDienDen
+        : APIServices.SoDienDen.createSoDienDen;
       await callApi(body);
       setIsLoading(false);
       NotificationService.success("Lưu thông tin thành công");
@@ -105,11 +137,7 @@ const ModalEdit = forwardRef((props: any, ref) => {
       const formValues = await form.validateFields();
       return {
         ...formValues,
-        receivedDate: formatDateToString(
-          formValues?.receivedDate,
-          formatTime.unix
-        ),
-        paidDate: formatDateToString(formValues?.paidDate, formatTime.unix),
+        dateRead: formatDateToString(formValues?.dateRead, formatTime.unix),
       };
     } catch (error) {
       return null;
@@ -120,8 +148,21 @@ const ModalEdit = forwardRef((props: any, ref) => {
       <Spin spinning={isLoading}>
         <Form form={form}>
           <div className="container">
+            <TitleCustom text="Thông tin người truyền điện"></TitleCustom>
             <Row gutter={[8, 8]}>
-              <InputFields data={fields}></InputFields>
+              <InputFields data={fields1}></InputFields>
+            </Row>
+          </div>
+          <div className="container">
+            <TitleCustom text="Thông tin người nhận điện"></TitleCustom>
+            <Row gutter={[8, 8]}>
+              <InputFields data={fields2}></InputFields>
+            </Row>
+          </div>
+          <div className="container">
+            <TitleCustom text="Nội dung điện"></TitleCustom>
+            <Row gutter={[8, 8]}>
+              <InputFields data={fields3}></InputFields>
             </Row>
           </div>
         </Form>

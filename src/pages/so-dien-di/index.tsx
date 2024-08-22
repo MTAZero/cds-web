@@ -1,6 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-
-import {columns, columns as columnsInit, fields as fieldsInit} from "./config";
+import {columns, fields as fieldsInit} from "./config";
 import {
   ExpandSearch,
   ListActionButton,
@@ -9,26 +8,20 @@ import {
   TitleCustom,
 } from "components";
 import {Button, Row, Space} from "antd";
-import {
-  APIServices,
-  NotificationService,
-  formatDateToString,
-  randomId,
-  toArray,
-} from "utils";
+import {APIServices, NotificationService, formatDateToString} from "utils";
 import "./style.scss";
-import {useAppDispatch, useAppSelector} from "hooks";
+import {useAppDispatch} from "hooks";
 import {
   getListPersonAPI,
   getListUnitAPI,
 } from "../../redux/catalog/catalog.slice";
 import ModalEdit from "./modal";
 import ReactToPrint from "react-to-print";
-import Print from "./print/Print";
-const SoThongKeTaiLieu = () => {
+import {formatTime} from "types";
+const SoDienDi = () => {
   const [params, setParams] = useState<any>({pageSize: 10, pageIndex: 1});
   const [fields, setFields] = useState(fieldsInit);
-  const printRef = useRef<any>();
+  const printRef = useRef<any>(null);
   const modalRef = useRef<any>(null);
   const expandRef = useRef<any>();
   const tableRef = useRef(null);
@@ -37,8 +30,8 @@ const SoThongKeTaiLieu = () => {
   const [total, setTotal] = useState();
   const [id, setId] = useState<any>();
   const dispatch = useAppDispatch();
-  const modalThongKeTaiLieuChildRef = useRef<any>();
-  const {listUnit} = useAppSelector(state => state.catalog);
+  const modalPrintChildRef = useRef<any>();
+
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton
@@ -56,15 +49,16 @@ const SoThongKeTaiLieu = () => {
     dispatch(getListUnitAPI());
     dispatch(getListPersonAPI());
   }, []);
-  fields.find(e => e.name == "unitId").options = toArray(listUnit).map(e => ({
-    key: randomId(),
-    value: e._id,
-    label: e.name,
-  }));
+
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
     setParams({
       ...searchFields,
+      fromDateTime: formatDateToString(
+        searchFields?.fromDateTime,
+        formatTime.unix
+      ),
+      toDateTime: formatDateToString(searchFields?.toDateTime, formatTime.unix),
     });
     setPage(1);
   };
@@ -72,12 +66,10 @@ const SoThongKeTaiLieu = () => {
   const setPage = pageIndex => {
     tableRef?.current?.setPage(pageIndex);
   };
-  const onChangePagination = (page, limit) => {
-    setParams({...params, page: page, limit: limit});
-  };
+
   const handleDelete = async id => {
     try {
-      await APIServices.SoThongKeTaiLieu.deleteSoThongKeTaiLieu(id);
+      await APIServices.SoDienDi.deleteSoDienDi(id);
       NotificationService.success("Đã xóa");
       recallTable();
     } catch (error) {
@@ -93,16 +85,17 @@ const SoThongKeTaiLieu = () => {
     const getData = async params => {
       try {
         setIsLoading(true);
-        const res = await APIServices.SoThongKeTaiLieu.getListSoThongKeTaiLieu(
-          params
-        );
+        const res = await APIServices.SoDienDi.getListSoDienDi(params);
         setIsLoading(false);
+        console.log(res);
         setData(res);
         setTotal(res?.total);
       } catch (error) {
         setIsLoading(false);
+        setData([]);
       }
     };
+    console.log(params);
     getData(params);
   }, [params]);
 
@@ -119,9 +112,9 @@ const SoThongKeTaiLieu = () => {
         </div>
         <div className="container">
           <Row justify={"space-between"} style={{marginBottom: 4}}>
-            <TitleCustom text="Sổ thống kê tài liệu"></TitleCustom>
+            <TitleCustom text="Sổ điện đi"></TitleCustom>
             <Space>
-              <ReactToPrint
+              {/* <ReactToPrint
                 documentTitle={` `}
                 trigger={() => {
                   return (
@@ -131,8 +124,8 @@ const SoThongKeTaiLieu = () => {
                   );
                 }}
                 content={() => printRef.current}
-                bodyClass="print-statistic-document"
-              />
+                bodyClass="so-dien"
+              /> */}
               <Button
                 type="primary"
                 onClick={() => {
@@ -147,7 +140,7 @@ const SoThongKeTaiLieu = () => {
           <TableCustom
             ref={tableRef}
             pagination={false}
-            isLoading={isLoading}
+            // isLoading={isLoading}
             dataSource={data}
             total={total}
             columns={columns}
@@ -161,23 +154,17 @@ const SoThongKeTaiLieu = () => {
           ></TableCustom>
         </div>
       </div>
-
-      <div id="print" style={{display: "none"}}>
-        <div ref={printRef} style={{width: "fit-content"}}>
-          <Print dataSource={data}></Print>
-        </div>
-      </div>
       <ModalCustom
         width={1500}
         ref={modalRef}
-        title={`${id ? "Sửa" : "Thêm"} thông tin tài liệu
+        title={`${id ? "Sửa" : "Thêm"} sổ điện đi
         `}
         onOk={() => {
-          modalThongKeTaiLieuChildRef?.current?.submit();
+          modalPrintChildRef?.current?.submit();
         }}
       >
         <ModalEdit
-          ref={modalThongKeTaiLieuChildRef}
+          ref={modalPrintChildRef}
           id={id}
           recallTable={recallTable}
         ></ModalEdit>
@@ -185,4 +172,4 @@ const SoThongKeTaiLieu = () => {
     </div>
   );
 };
-export default SoThongKeTaiLieu;
+export default SoDienDi;

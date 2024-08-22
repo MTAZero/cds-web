@@ -145,7 +145,6 @@ const ThongKeCtt = () => {
     const getData = async params => {
       try {
         const res = await APIServices.ThongKeCtt.getListBaiViet(params);
-        console.log(res);
         setData(res);
       } catch (error) {}
     };

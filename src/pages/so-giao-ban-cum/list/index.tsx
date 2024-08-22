@@ -25,7 +25,6 @@ const SoGiaoBanCum = () => {
   const [data, setData] = useState<any[]>();
   const [total, setTotal] = useState();
   const {type} = useParams();
-  console.log(type);
   const listActionButton = (value, record, index) => {
     return (
       <ListActionButton

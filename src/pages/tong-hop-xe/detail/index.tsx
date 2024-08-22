@@ -74,7 +74,6 @@ const DetailTongHopXe = props => {
         ),
         toDateTime: formatDateToString(formValues?.toDateTime, formatTime.unix),
       };
-      console.log(data);
       setLoading(true);
       const callApi =
         id == "tao-moi"

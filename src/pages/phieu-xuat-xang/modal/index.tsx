@@ -43,7 +43,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
     },
   }));
   useEffect(() => {
-    console.log(id);
     if (!isValuable(id)) {
       setData(null);
     } else {
@@ -51,7 +50,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
   }, [id, isModalOpen]);
 
   useEffect(() => {
-    console.log(data);
     if (data) {
       setFieldsValue(data);
       setTong();
@@ -63,7 +61,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
     }
   }, [data, isModalOpen]);
   useEffect(() => {
-    console.log(belongCommandID);
     if (isValuable(belongCommandID)) {
       form.setFieldValue("belongCommandID", belongCommandID);
     }
@@ -73,7 +70,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
   }, [belongCommandID, commandNumber, isModalOpen]);
   const setTong = () => {
     const dataTable = form.getFieldValue("materials");
-    console.log(dataTable);
     let _soKhoan = 0;
     let _soLuong = 0;
     let _thanhTien = 0;
@@ -113,7 +109,6 @@ const ModalPhieuXuatXang = forwardRef((props: any, ref) => {
   const submit = async () => {
     try {
       const formValues = await getFormValues();
-      console.log(formValues);
       if (!formValues) {
         return;
       }

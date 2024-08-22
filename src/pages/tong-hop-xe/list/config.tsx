@@ -15,8 +15,8 @@ const columns: any = [
     align: "center",
   },
   {
-    key: "unit",
-    dataIndex: "unit",
+    key: "unitName",
+    dataIndex: "unitName",
     title: "Đơn vị",
     align: "center",
   },
@@ -84,13 +84,6 @@ const fields: any = [
     allowClear: true,
     optionsTime: {format: formatTime.dateTime},
     disableDate: false,
-  },
-
-  {
-    type: COMBO_BOX,
-    label: "Đơn vị",
-    name: "unit",
-    allowClear: false,
   },
 ];
 

@@ -60,21 +60,7 @@ const TongHopXe = props => {
     };
     getListUnit();
   }, []);
-  useEffect(() => {
-    const setOptionsDonVi = async listUnit => {
-      fields.find((e: {name: string}) => e?.name === "unit").options =
-        listUnit?.map((e: {_id: any; name: any}) => ({
-          value: e?._id,
-          label: e?.name,
-        }));
 
-      setFields([...fields]);
-    };
-    setOptionsDonVi(listUnit);
-  }, [listUnit]);
-  columns.find(e => e?.dataIndex == "unit").render = (value, record, index) => {
-    return <>{listUnit?.find(e => e?._id == value)?.name}</>;
-  };
   const onClickSearch = () => {
     const searchFields = expandRef.current?.getFieldsValue();
     setParams({
@@ -148,22 +134,6 @@ const TongHopXe = props => {
           <Row justify={"space-between"} style={{marginBottom: 4}}>
             <TitleCustom text="Tổng hợp xe"></TitleCustom>
             <Space>
-              {/* <ReactToPrint
-                documentTitle={`Đăng kí xe tháng ${
-                  params?.month ?? "..."
-                } năm ${
-                  formatDateToString(params?.year, formatTime.year) ?? "..."
-                }  `}
-                trigger={() => {
-                  return (
-                    <Button style={{marginBottom: 4}} type="primary">
-                      Xuất file
-                    </Button>
-                  );
-                }}
-                content={() => printRef.current}
-                bodyClass="print-rut-kinh-nghiem"
-              /> */}
               <Button type="primary" onClick={navigateToNew}>
                 Thêm mới
               </Button>

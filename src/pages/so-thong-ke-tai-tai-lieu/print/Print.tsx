@@ -9,7 +9,6 @@ import {
 import {formatTime} from "types";
 const Print = props => {
   const {dataSource} = props;
-  console.log(dataSource);
   const columns: any = [
     {
       key: "index",

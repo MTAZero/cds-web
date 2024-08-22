@@ -23,3 +23,5 @@ export * from "./so-theo-doi-ky-luat";
 export * from "./so-thong-ke-tai-lieu";
 export * from "./so-thong-ke-ra-vao";
 export * from "./thong-ke-ctt";
+export * from "./so-dien-den";
+export * from "./so-dien-di";
