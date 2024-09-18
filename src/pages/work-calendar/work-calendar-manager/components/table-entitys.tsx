@@ -16,17 +16,11 @@ import React from "react";
 export type Entity = {
   _id?: string;
   name: string;
-  description?: string;
-  rate: number;
-  unit: string;
-  unit_info?: {
-    name: string;
-  };
-  is_generate: boolean;
-  number: number;
-  priority_display: number;
-  last_update?: number;
-  created_date?: number;
+  location: string;
+  lead: string;
+  time_start: number;
+  time_end: number;
+  assigns: Array<any>;
   __v?: number;
 };
 
