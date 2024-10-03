@@ -123,6 +123,7 @@ export const searchBoxStyle = {
   background: "#FFF",
   boxShadow:
     "0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(104, 113, 130, 0.16)",
+  marignBottom: "10px",
 };
 
 export const searchTextBoxStyle = {
@@ -152,5 +153,5 @@ export const selectUserStyle = {
   borderRadius: "5px",
 
   color: "white",
-  fontSize: "14px"
+  fontSize: "14px",
 };

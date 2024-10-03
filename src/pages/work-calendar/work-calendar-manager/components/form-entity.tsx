@@ -10,6 +10,8 @@ import {
   MenuItem,
   Select,
   Switch,
+  Tab,
+  Tabs,
   TextField,
   Typography,
 } from "@mui/material";
@@ -21,6 +23,7 @@ import { SimpleTreeView } from "@mui/x-tree-view";
 // import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
 import { TreeUserItem } from "./tree-user-item";
 import { FaSearch } from "react-icons/fa";
+import { TabPanel } from "components/common/tab-panel";
 
 type FormEntityProps = {
   entity: Entity | null;
@@ -46,8 +49,11 @@ export const FormEntity: FC<FormEntityProps> = ({
 
   const [selectUser, setSelectUser] = useState<any>([]);
   const [dataUsers, setDataUsers] = useState<Array<any>>(null);
+  const [dataUnits, setDataUnits] = useState<any>(null);
   const [textSearch, setTextSearch] = useState<string>("");
   const [assignUsers, setAssignUsers] = useState<Array<any>>([]);
+
+  const [tabSelect, setTabSelect] = useState<string>("tab-user");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -80,8 +86,17 @@ export const FormEntity: FC<FormEntityProps> = ({
     } catch {}
   };
 
+  const loadTreeUnit = async () => {
+    try {
+      const data = await APIServices.Unit.getFullInitTree();
+      setDataUnits(data);
+      console.log("unit data : ", data);
+    } catch {}
+  };
+
   useEffect(() => {
     loadUserAssignData();
+    loadTreeUnit();
   }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -140,6 +155,7 @@ export const FormEntity: FC<FormEntityProps> = ({
                     marginBottom: 1,
                     width: "100%",
                   }}
+                  format="DD/MM/YYYY HH:mm"
                 />
               </Box>
               <Box sx={{ ...styles.rowInfoStyle, ...{ flex: 1 } }}>
@@ -150,6 +166,7 @@ export const FormEntity: FC<FormEntityProps> = ({
                     marginBottom: 1,
                     width: "100%",
                   }}
+                  format="DD/MM/YYYY HH:mm"
                 />
               </Box>
             </Box>
@@ -169,50 +186,69 @@ export const FormEntity: FC<FormEntityProps> = ({
           </Box>
           <Box sx={styles.rightColumnStyle}>
             <Typography sx={styles.labelStyle}>Thành phần</Typography>
-            <Box sx={styles.searchBoxStyle}>
-              <FaSearch
-                onClick={() => {
-                  loadUserAssignData();
-                }}
-              />
-              <input
-                type="text"
-                placeholder="Tìm kiếm"
-                style={styles.searchTextBoxStyle}
-                value={textSearch}
-                onChange={(e) => {
-                  setTextSearch(e.target.value);
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    loadUserAssignData();
-                  }
-                }}
-              />
-            </Box>
-            <SimpleTreeView
-              expandedItems={selectUser}
-              onExpandedItemsChange={(e, ids) => setSelectUser(ids)}
+
+            <Tabs
+              value={tabSelect}
+              onChange={(_, value: string) => setTabSelect(value)}
+              aria-label="Danh sách"
             >
-              {dataUsers && (
-                <TreeUserItem
-                  onCheckUpdate={(item, value: boolean) => {
-                    if (value) {
-                      const it = assignUsers.find((i) => i._id === item?._id);
-                      if (it) return;
-                      setAssignUsers([...assignUsers, item]);
-                    } else {
-                      const temp = assignUsers.filter(
-                        (i) => i._id !== item._id
-                      );
-                      setAssignUsers(temp);
-                    }
-                  }}
-                  item={dataUsers}
-                  assignUsers={assignUsers}
-                />
-              )}
-            </SimpleTreeView>
+              <Tab value="tab-user" wrapped label="Cá nhân" />
+
+              <Tab value="tab-unit" label="Đơn vị" />
+            </Tabs>
+            <TabPanel index={"tab-user"} value={tabSelect}>
+              <>
+                <Box sx={styles.searchBoxStyle}>
+                  <FaSearch
+                    onClick={() => {
+                      loadUserAssignData();
+                    }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm"
+                    style={styles.searchTextBoxStyle}
+                    value={textSearch}
+                    onChange={(e) => {
+                      setTextSearch(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        loadUserAssignData();
+                      }
+                    }}
+                  />
+                </Box>
+                <SimpleTreeView
+                  expandedItems={selectUser}
+                  onExpandedItemsChange={(e, ids) => setSelectUser(ids)}
+                >
+                  {dataUsers && (
+                    <TreeUserItem
+                      onCheckUpdate={(item, value: boolean) => {
+                        if (value) {
+                          const it = assignUsers.find(
+                            (i) => i._id === item?._id
+                          );
+                          if (it) return;
+                          setAssignUsers([...assignUsers, item]);
+                        } else {
+                          const temp = assignUsers.filter(
+                            (i) => i._id !== item._id
+                          );
+                          setAssignUsers(temp);
+                        }
+                      }}
+                      item={dataUsers}
+                      assignUsers={assignUsers}
+                    />
+                  )}
+                </SimpleTreeView>
+              </>
+            </TabPanel>
+            <TabPanel index={"tab-unit"} value={tabSelect}>
+              Item unit
+            </TabPanel>
           </Box>
         </Box>
 
