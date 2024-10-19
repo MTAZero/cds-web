@@ -78,10 +78,10 @@ const MainRoutes = [
             module: SystemFeatures.TroopReports,
             action: [SystemAction.View, SystemAction.Report],
           },
-          {
-            path: RouterLink.PERSONAL_REPORT,
-            element: <PersonalReport />,
-          },
+          // {
+          //   path: RouterLink.PERSONAL_REPORT,
+          //   element: <PersonalReport />,
+          // },
           {
             path: RouterLink.LEAVE_APPROVE,
             element: <LeaveApprove />,
