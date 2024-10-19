@@ -1,5 +1,5 @@
 export const containerStyle = {
-  width: "500px",
+  width: "1000px",
 };
 
 export const labelStyle = {
@@ -9,8 +9,6 @@ export const labelStyle = {
   fontStyle: "normal",
   fontWeight: "400",
   lineHeight: "20px",
-  marginTop: "5px",
-  marginBottom: "5px",
 };
 
 export const textInputStyle = {
@@ -20,8 +18,6 @@ export const textInputStyle = {
   fontStyle: "normal",
   fontWeight: "400",
   lineHeight: "20px",
-  marginTop: "5px",
-  marginBottom: "15px",
 
   outline: "none",
   background: "#f2f2f2",
@@ -86,4 +82,76 @@ export const buttonCancelStyle = {
   "&:hover": {
     opacity: "0.9",
   },
+};
+
+export const rowInfoStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "2px",
+};
+
+export const formPanelStyle = {
+  display: "flex",
+  flexDirection: "row",
+  gap: "10px",
+};
+
+export const leftColumnStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "15px",
+  flex: 1,
+};
+
+export const rightColumnStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "10px",
+  flex: 1,
+
+  overflow: "scroll",
+  maxHeight: "500px",
+  padding: "10px",
+};
+
+export const searchBoxStyle = {
+  display: "flex",
+  padding: "8px 12px",
+  alignItems: "center",
+  gap: "8px",
+  borderRadius: "6px",
+  background: "#FFF",
+  boxShadow:
+    "0px 1px 2px 0px rgba(0, 0, 0, 0.06), 0px 0px 0px 1px rgba(104, 113, 130, 0.16)",
+  marignBottom: "10px",
+};
+
+export const searchTextBoxStyle = {
+  display: "flex",
+  width: "100%",
+  alignItems: "center",
+  border: "none",
+
+  color: "black",
+  fontFamily: "Inter",
+  fontSize: "14px",
+  fontStyle: "normal",
+  fontWeight: "400",
+  lineHeight: "20px",
+  outline: "none",
+};
+
+export const listUserSelectStyle = {
+  display: "flex",
+  gap: "10px",
+  flexWrap: "wrap",
+};
+
+export const selectUserStyle = {
+  padding: "10px",
+  background: "#187DB8",
+  borderRadius: "5px",
+
+  color: "white",
+  fontSize: "14px",
 };

@@ -18,7 +18,7 @@ export const UnitCalendarPage = () => {
   return (
     <Box sx={styles.containerStyle}>
       <Box sx={styles.labelStyle}>
-        Lịch công tác tuần 20 (13/5/2024 - 19/5/2024)
+        Lịch công tác tuần 35 (16/9/2024 - 22/9/2024)
       </Box>
       <TableContainer>
         <Table borderAxis="both">

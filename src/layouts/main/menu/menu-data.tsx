@@ -41,13 +41,13 @@ export const mainMenu: Array<SideMenuItem> = [
     icon: <FaUserFriends />,
     text: "Quân số",
     children: [
-      {
-        url: RouterLink.PERSONAL_REPORT,
-        key: RouterLink.PERSONAL_REPORT,
-        icon: <FaUserFriends />,
-        children: [],
-        text: "Cá nhân dự kiến",
-      },
+      // {
+      //   url: RouterLink.PERSONAL_REPORT,
+      //   key: RouterLink.PERSONAL_REPORT,
+      //   icon: <FaUserFriends />,
+      //   children: [],
+      //   text: "Cá nhân dự kiến",
+      // },
       {
         url: RouterLink.TROOP_REPORT,
         key: RouterLink.TROOP_REPORT,

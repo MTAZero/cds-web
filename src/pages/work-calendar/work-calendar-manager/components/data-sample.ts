@@ -1,6 +1,6 @@
 export const data = [
   {
-    title: "Thứ 2 (8/7)",
+    title: "Thứ 2 (16/9)",
     calendars: [
       {
         time: "07h30",
@@ -19,7 +19,7 @@ export const data = [
     ],
   },
   {
-    title: "Thứ 3 (9/7)",
+    title: "Thứ 3 (17/9)",
     calendars: [
       {
         time: "07h30",
@@ -39,7 +39,7 @@ export const data = [
     ],
   },
   {
-    title: "Thứ 4 (10/7)",
+    title: "Thứ 4 (18/9)",
     calendars: [
       {
         time: "07h30",
@@ -58,7 +58,7 @@ export const data = [
     ],
   },
   {
-    title: "Thứ 5 (11/7)",
+    title: "Thứ 5 (19/9)",
     calendars: [
       {
         time: "07h30",
@@ -78,7 +78,7 @@ export const data = [
     ],
   },
   {
-    title: "Thứ 6 (12/7)",
+    title: "Thứ 6 (20/9)",
     calendars: [
       {
         time: "07h30",
@@ -97,11 +97,11 @@ export const data = [
     ],
   },
   {
-    title: "Thứ 7 (13/7)",
+    title: "Thứ 7 (21/9)",
     calendars: [],
   },
   {
-    title: "Chủ nhật(14/7)",
+    title: "Chủ nhật(22/9)",
     calendars: [],
   },
 ];

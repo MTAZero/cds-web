@@ -176,7 +176,7 @@ export const WorkCalendarManagerPage: React.FC = () => {
 
       <ModalComponent
         visible={modalState}
-        title={"Chi tiết vị trí trực"}
+        title={"Chi tiết lịch công tác"}
         onClose={() => {
           setModalState(false);
         }}

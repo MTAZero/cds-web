@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import * as styles from "./form-entity.styles";
 import {
   Autocomplete,
@@ -10,10 +10,20 @@ import {
   MenuItem,
   Select,
   Switch,
+  Tab,
+  Tabs,
   TextField,
   Typography,
 } from "@mui/material";
 import { Entity } from "./table-entitys";
+import { DatePicker, DateTimePicker, TimePicker } from "@mui/x-date-pickers";
+import { MAX_ENTITY_REQUEST } from "const";
+import { APIServices } from "utils";
+import { SimpleTreeView } from "@mui/x-tree-view";
+// import { SimpleTreeView } from '@mui/x-tree-view/SimpleTreeView';
+import { TreeUserItem } from "./tree-user-item";
+import { FaSearch } from "react-icons/fa";
+import { TabPanel } from "components/common/tab-panel";
 
 type FormEntityProps = {
   entity: Entity | null;
@@ -30,13 +40,20 @@ export const FormEntity: FC<FormEntityProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     name: entity ? entity.name : "",
-    description: entity ? entity.description : "",
-    number: entity ? entity.number : 1,
-    is_generate: entity ? entity.is_generate : false,
-    unit: entity ? entity.unit : null,
-    rate: entity ? entity.rate : 1,
-    priority_display: entity ? entity.priority_display : 1,
+    assignUsers: [],
+    location: entity?.location ? entity.location : "",
+    lead: entity?.lead ? entity.lead : "",
+    time_start: entity?.time_start ? entity.time_start : new Date().getTime(),
+    time_end: entity?.time_start ? entity.time_start : new Date().getTime(),
   });
+
+  const [selectUser, setSelectUser] = useState<any>([]);
+  const [dataUsers, setDataUsers] = useState<Array<any>>(null);
+  const [dataUnits, setDataUnits] = useState<any>(null);
+  const [textSearch, setTextSearch] = useState<string>("");
+  const [assignUsers, setAssignUsers] = useState<Array<any>>([]);
+
+  const [tabSelect, setTabSelect] = useState<string>("tab-user");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -46,10 +63,41 @@ export const FormEntity: FC<FormEntityProps> = ({
     }));
   };
 
-  const handleSwitchChange = (e) => {
-    const { name, checked } = e.target;
-    setFormData({ ...formData, [name]: checked });
+  const getIdsOfTree = (data) => {
+    let ans = [];
+    ans.push(data._id);
+    if (data?.users && data?.users.length) {
+      for (let index = 0; index < data.users?.length; index++)
+        ans.push(data.users[index]._id);
+    }
+
+    for (let index = 0; index < data?.childs.length; index++)
+      ans = [...ans, ...getIdsOfTree(data?.childs[index])];
+
+    return ans;
   };
+
+  const loadUserAssignData = async () => {
+    try {
+      const data = await APIServices.WorlCalendar.findUserFromTree(textSearch);
+      setDataUsers(data);
+      const allNodeIds = getIdsOfTree(data);
+      setSelectUser(allNodeIds);
+    } catch {}
+  };
+
+  const loadTreeUnit = async () => {
+    try {
+      const data = await APIServices.Unit.getFullInitTree();
+      setDataUnits(data);
+      console.log("unit data : ", data);
+    } catch {}
+  };
+
+  useEffect(() => {
+    loadUserAssignData();
+    loadTreeUnit();
+  }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -57,99 +105,153 @@ export const FormEntity: FC<FormEntityProps> = ({
     onSave({
       _id: entity?._id,
       name: formData.name,
-      description: formData.description,
-      rate: formData.rate,
-      unit: formData.unit,
-      is_generate: formData.is_generate,
-      number: parseInt(formData.number.toString()),
-      priority_display: parseInt(formData.priority_display.toString()),
+      location: formData.location,
+      lead: formData.lead,
+      time_start: formData.time_start,
+      time_end: formData.time_end,
+      assigns: assignUsers,
     });
   };
 
   return (
     <Box sx={styles.containerStyle}>
-      <form onSubmit={handleSubmit}>
-        <Box>
-          <Typography sx={styles.labelStyle}>Tên</Typography>
-          <TextField
-            sx={styles.textInputStyle}
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            fullWidth
-            margin="normal"
-          />
+      <form
+        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
+      >
+        <Box sx={styles.formPanelStyle}>
+          <Box sx={styles.leftColumnStyle}>
+            <Box sx={styles.rowInfoStyle}>
+              <Typography sx={styles.labelStyle}>Nội dung công việc</Typography>
+              <TextField
+                sx={{ ...styles.textInputStyle, ...{ height: "80px" } }}
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                fullWidth
+                multiline
+                margin="normal"
+              />
+            </Box>
+            <Box sx={styles.rowInfoStyle}>
+              <Typography sx={styles.labelStyle}>Chủ trì</Typography>
+              <TextField
+                sx={styles.textInputStyle}
+                name="lead"
+                value={formData.lead}
+                onChange={handleChange}
+                required
+                fullWidth
+                margin="normal"
+              />
+            </Box>
+            <Box sx={{ display: "flex", gap: "10px" }}>
+              <Box sx={{ ...styles.rowInfoStyle, ...{ flex: 1 } }}>
+                <Typography sx={styles.labelStyle}>Bắt đầu</Typography>
+                <DateTimePicker
+                  name="start_time"
+                  sx={{
+                    marginBottom: 1,
+                    width: "100%",
+                  }}
+                  format="DD/MM/YYYY HH:mm"
+                />
+              </Box>
+              <Box sx={{ ...styles.rowInfoStyle, ...{ flex: 1 } }}>
+                <Typography sx={styles.labelStyle}>Kết thúc</Typography>
+                <DateTimePicker
+                  name="end_time"
+                  sx={{
+                    marginBottom: 1,
+                    width: "100%",
+                  }}
+                  format="DD/MM/YYYY HH:mm"
+                />
+              </Box>
+            </Box>
+            <Box>
+              <Typography sx={styles.labelStyle}>Thành phần</Typography>
+              <Box sx={styles.listUserSelectStyle}>
+                {assignUsers?.map((user, i) => {
+                  return (
+                    <Box sx={styles.selectUserStyle} key={`user-${i}`}>
+                      {user?.rank ? user?.rank + " " : ""}
+                      {user?.full_name}
+                    </Box>
+                  );
+                })}
+              </Box>
+            </Box>
+          </Box>
+          <Box sx={styles.rightColumnStyle}>
+            <Typography sx={styles.labelStyle}>Thành phần</Typography>
+
+            <Tabs
+              value={tabSelect}
+              onChange={(_, value: string) => setTabSelect(value)}
+              aria-label="Danh sách"
+            >
+              <Tab value="tab-user" wrapped label="Cá nhân" />
+
+              <Tab value="tab-unit" label="Đơn vị" />
+            </Tabs>
+            <TabPanel index={"tab-user"} value={tabSelect}>
+              <>
+                <Box sx={styles.searchBoxStyle}>
+                  <FaSearch
+                    onClick={() => {
+                      loadUserAssignData();
+                    }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm"
+                    style={styles.searchTextBoxStyle}
+                    value={textSearch}
+                    onChange={(e) => {
+                      setTextSearch(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        loadUserAssignData();
+                      }
+                    }}
+                  />
+                </Box>
+                <SimpleTreeView
+                  expandedItems={selectUser}
+                  onExpandedItemsChange={(e, ids) => setSelectUser(ids)}
+                >
+                  {dataUsers && (
+                    <TreeUserItem
+                      onCheckUpdate={(item, value: boolean) => {
+                        if (value) {
+                          const it = assignUsers.find(
+                            (i) => i._id === item?._id
+                          );
+                          if (it) return;
+                          setAssignUsers([...assignUsers, item]);
+                        } else {
+                          const temp = assignUsers.filter(
+                            (i) => i._id !== item._id
+                          );
+                          setAssignUsers(temp);
+                        }
+                      }}
+                      item={dataUsers}
+                      assignUsers={assignUsers}
+                    />
+                  )}
+                </SimpleTreeView>
+              </>
+            </TabPanel>
+            <TabPanel index={"tab-unit"} value={tabSelect}>
+              Item unit
+            </TabPanel>
+          </Box>
         </Box>
-        <FormControl fullWidth>
-          <InputLabel>Đơn vị</InputLabel>
-          <Select name="unit" value={formData.unit} onChange={handleChange}>
-            {units.map((item) => {
-              return (
-                <MenuItem key={item._id} value={item._id}>
-                  {item.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-        {/* <Autocomplete
-          fullWidth
-          // value={formData.unit}
-          onChange={(event, newValue) => {
-            setFormData({ ...formData, unit: newValue });
-          }}
-          options={units}
-          getOptionLabel={(option) => option.name}
-          getOptionSelected={(option, value) => option._id === value._id}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Unit"
-              name="unit"
-              onChange={handleChange}
-            />
-          )}
-        /> */}
-        <Box>
-          <Typography sx={styles.labelStyle}>Mô tả</Typography>
-          <TextField
-            sx={{ ...styles.textInputStyle, ...{ height: 80 } }}
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            fullWidth
-            multiline
-            margin="normal"
-          />
-        </Box>
-        <TextField
-          fullWidth
-          label="Số lượng"
-          name="number"
-          type="number"
-          value={formData.number}
-          onChange={handleChange}
-          sx={{ marginBottom: "20px" }}
-        />
-        <TextField
-          fullWidth
-          label="Ưu tiên hiển thị"
-          name="priority_display"
-          type="number"
-          value={formData.priority_display}
-          onChange={handleChange}
-        />
-        <FormControlLabel
-          control={
-            <Switch
-              name="is_generate"
-              checked={formData.is_generate}
-              onChange={handleSwitchChange}
-            />
-          }
-          label="Tự động sinh lịch trực"
-        />
+
         <Box sx={styles.buttonPanelStyle}>
           <Button sx={styles.buttonSaveStyle} type="submit">
             Lưu

@@ -48,6 +48,15 @@ const getUnitChild = async (unitId: string) => {
   return res?.data;
 };
 
+const getFullInitTree = async () => {
+  const res = await api.makeAuthRequest({
+    url: `/units/descendants`,
+    method: "GET",
+  });
+
+  return res?.data;
+};
+
 export const Unit = {
   getListEntity,
   getDetailEntity,
@@ -55,4 +64,5 @@ export const Unit = {
   updateEntity,
   removeEntity,
   getUnitChild,
+  getFullInitTree,
 };
