@@ -1,0 +1,24 @@
+@import "assests/styles/_variables.scss";
+.so-dien {
+  @include page-a4-landscape;
+  @include font-print;
+
+  table {
+    width: 100%;
+  }
+  * {
+    font-size: 14pt;
+  }
+
+  .border {
+    border: $border-black;
+    width: fit-content;
+    padding: 2px 12px 2px 12px;
+  }
+  .receipt-dto {
+    margin-top: 12px;
+  }
+  .footer {
+    margin-top: 20px;
+  }
+}

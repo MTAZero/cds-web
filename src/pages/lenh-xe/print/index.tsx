@@ -189,7 +189,13 @@ const ModalLenhXe = forwardRef((props: any, ref) => {
                   style={{marginTop: 24, marginBottom: 24}}
                   title="NHẬN XÉT CỦA ĐƠN VỊ SỬ DỤNG PHƯƠNG TIỆN"
                 ></TitleReceipt>
-                <div style={{display: "flex", justifyContent: "center"}}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontStyle: "italic",
+                  }}
+                >
                   {" "}
                   <Row justify={"space-between"} style={{width: 300}}>
                     <Col span={10}>

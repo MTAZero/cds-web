@@ -1,6 +1,6 @@
 import {fieldType, formatTime} from "types";
 
-const {INPUT, RADIO_VN, DATE, COMBO_BOX} = fieldType;
+const {INPUT, RADIO_VN, DATE, COMBO_BOX, AUTO_COMPLETE} = fieldType;
 const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
 const fields: any[] = [
   {
@@ -38,7 +38,7 @@ const fields: any[] = [
     key: "mission",
     name: "mission",
     label: "Nhiệm vụ",
-    type: INPUT,
+    type: AUTO_COMPLETE,
     css: css,
   },
   {

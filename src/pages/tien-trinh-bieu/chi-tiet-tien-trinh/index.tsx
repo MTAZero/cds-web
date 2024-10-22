@@ -290,7 +290,6 @@ const DetailTienTrinh = props => {
       if (selectedFile) {
         const _base64 = await convertFileToBase64(selectedFile);
         setBase64(_base64);
-        console.log(_base64);
       }
     };
     _convertFileToBase64();

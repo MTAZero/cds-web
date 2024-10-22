@@ -45,6 +45,14 @@ export const RouterLink = {
   SO_GIAO_BAN_ROUTE: "/so-giao-ban/:type",
   SO_GIAO_BAN_DETAIL_ROUTE: "/so-giao-ban/:type/:id",
 
+  // Sổ theo dõi/thống kê
+  SO_THEO_DOI_KY_LUAT: "/so-theo-doi-ky-luat",
+  SO_THEO_DOI_DI_CONG_TAC: "/so-theo-doi-di-cong-tac",
+  SO_THONG_KE_TAI_LIEU: "/so-thong-ke-tai-lieu",
+  SO_THONG_KE_RA_VAO: "/so-thong-ke-ra-vao",
+  SO_DIEN_DEN: "/so-dien-den",
+  SO_DIEN_DI: "/so-dien-di",
+
   // Thống kê huấn luyện cá nhân
   THONG_KE_HUAN_LUYEN_CA_NHAN: "/thong-ke-huan-luyen-ca-nhan",
   SO_SACH_CA_NHAN_DETAIL_ROUTE: "/thong-ke-huan-luyen-ca-nhan/:id",
@@ -67,4 +75,7 @@ export const RouterLink = {
   QUAN_TRI_CHUC_DANH_ROUTE: "/quan-tri/chuc-danh",
   QUAN_TRI_ROLE_ROUTE: "/quan-tri/role",
   QUAN_TRI_DON_VI_ROUTE: "/quan-tri/don-vi",
+
+  // Thống kê trang cổng
+  THONG_KE_CTT: "/thong-ke-ctt",
 };

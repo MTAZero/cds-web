@@ -18,7 +18,9 @@ const Modal = forwardRef((props: any, ref) => {
   const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<any>();
-  const {listVehicle, listUnit} = useAppSelector(state => state.catalog);
+  const {listVehicle, listUnit, listTask} = useAppSelector(
+    state => state.catalog
+  );
   fields.find(e => e?.name == "vehicle").options = listVehicle?.map(e => ({
     label: `${e?.name}-${e?.typeVehicle} (${e?.license})`,
     value: e?._id,
@@ -30,6 +32,10 @@ const Modal = forwardRef((props: any, ref) => {
   fields.find(e => e?.name == "unitWorkBack").options = listUnit?.map(e => ({
     label: e?.name,
     value: e?.name,
+  }));
+  fields.find(e => e?.name == "mission").options = listTask?.map(e => ({
+    label: e?.taskName,
+    value: e?.taskName,
   }));
 
   useEffect(() => {

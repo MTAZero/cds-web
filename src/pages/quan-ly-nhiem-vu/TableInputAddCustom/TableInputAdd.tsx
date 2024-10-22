@@ -11,6 +11,7 @@ const TableInputAdd = ({
   disabled,
   name,
   form,
+  total,
   ...rest
 }: any): JSX.Element => {
   const addRowTb1 = () => {
@@ -93,7 +94,6 @@ const TableInputAdd = ({
         rowClassName={"editable-row-2"}
         dataSource={data}
         columns={columnsRender as any}
-        // pagination={false}
       />
     </div>
   );

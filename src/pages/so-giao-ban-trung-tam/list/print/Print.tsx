@@ -6,7 +6,6 @@ import {convertDateStringToDateObject, formatDateToString} from "utils";
 import {formatTime} from "types";
 const Print = props => {
   const {dataSource, listUnit} = props;
-  console.log(dataSource?.[0]);
   return (
     // <div className="print-rut-kinh-nghiem">123</div>
     <div className="print-so-giao-ban">

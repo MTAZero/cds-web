@@ -1,15 +1,15 @@
-import { Navigate } from "react-router-dom";
-import { LoginPage } from "../pages/login";
-import { RouterLink } from "./routers";
-import { ContactPage } from "../pages/contact";
+import {Navigate} from "react-router-dom";
+import {LoginPage} from "../pages/login";
+import {RouterLink} from "./routers";
+import {ContactPage} from "../pages/contact";
 import ProtectedOutlet from "./protected-outlet";
-import { HomePage } from "../pages/home";
-import { MainLayout } from "../layouts";
-import { TroopReport } from "../pages/troop-report";
-import { LeaveApprove } from "../pages/leave-approve";
-import { LeaveRegister } from "../pages/leave-register";
-import { GuardSetting } from "../pages/guard-dutty/guard-dutty-manager";
-import { SystemFeatures, SystemAction, typeMeetingBook } from "../types";
+import {HomePage} from "../pages/home";
+import {MainLayout} from "../layouts";
+import {TroopReport} from "../pages/troop-report";
+import {LeaveApprove} from "../pages/leave-approve";
+import {LeaveRegister} from "../pages/leave-register";
+import {GuardSetting} from "../pages/guard-dutty/guard-dutty-manager";
+import {SystemFeatures, SystemAction, typeMeetingBook} from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -20,17 +20,17 @@ import ThongKeHLCaNhan from "pages/thong-ke-huan-luyen-ca-nhan";
 import SoSach from "pages/so-sach";
 import StatisticTienTrinh from "pages/tien-trinh-bieu/danh-gia-tien-trinh";
 import VanKien from "pages/van-kien";
-import { UpdateGuardDuttyPage } from "pages/guard-dutty/update-guard-dutty";
+import {UpdateGuardDuttyPage} from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
 import Unit from "pages/admin/unit";
-import { GuardDuttyUnitPage } from "pages/guard-dutty/guard-dutty-unit";
-import { GuardDuttyPersonalPage } from "pages/guard-dutty/guard-dutty-personal";
-import { UnitCalendarPage } from "pages/work-calendar/unit-calendar";
-import { UserCalendarPage } from "pages/work-calendar/user-calendar";
+import {GuardDuttyUnitPage} from "pages/guard-dutty/guard-dutty-unit";
+import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
+import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
+import {UserCalendarPage} from "pages/work-calendar/user-calendar";
 import XacThucSSO from "pages/xac-thuc-sso";
-import { PersonalReport } from "pages/troop-report/personal-report";
+import {PersonalReport} from "pages/troop-report/personal-report";
 import QuanLyXe from "pages/quan-ly-xe/list";
 import KeHoachXe from "pages/ke-hoach-xe/list";
 import DetailKeHoachXe from "pages/ke-hoach-xe/detail";
@@ -40,13 +40,19 @@ import LenhXe from "pages/lenh-xe";
 import PhieuXuat from "pages/phieu-xuat-xang";
 import SoGiaoBanCum from "../pages/so-giao-ban-cum/list";
 import DetailSoGiaoBanCum from "pages/so-giao-ban-cum/detail";
-
 import QuanLyNhienLieu from "pages/quan-ly-nhien-lieu";
 import QuanLyDauMoi from "pages/quan-ly-dau-moi";
 import QuanLyNhiemVu from "pages/quan-ly-nhiem-vu";
-import { WorkCalendarManagerPage } from "pages/work-calendar/work-calendar-manager";
+import SoTheoDoiCongTac from "pages/so-theo-doi-cong-tac";
+import SoTheoDoiKyLuat from "pages/so-theo-doi-ky-luat";
+import SoThongKeTaiLieu from "pages/so-thong-ke-tai-tai-lieu";
+import SoThongKeRaVao from "pages/so-thong-ke-ra-vao";
+import ThongKeCtt from "pages/thong-ke-ctt";
+import SoDienDen from "pages/so-dien-den";
+import SoDienDi from "pages/so-dien-di";
+import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager";
 const MainRoutes = [
-  { path: "*", element: <Navigate to={RouterLink.LOGIN} replace /> },
+  {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
     path: RouterLink.XAC_THUC_SSO,
     element: <XacThucSSO />,
@@ -55,6 +61,7 @@ const MainRoutes = [
     path: RouterLink.LOGIN,
     element: <LoginPage />,
   },
+
   {
     key: "private",
     path: "",
@@ -181,34 +188,22 @@ const MainRoutes = [
             path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
             element: <DetailSoGiaoBanCum />,
           },
-          // {
-          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
-          //     ":type",
-          //     typeMeetingBook.CUM
-          //   ),
-          //   element: <SoGiaoBanCum />,
-          // },
-          // {
-          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
-          //     ":type",
-          //     typeMeetingBook.CUM
-          //   ),
-          //   element: <DetailSoGiaoBanCum />,
-          // },
-          // {
-          //   path: RouterLink.SO_GIAO_BAN_ROUTE.replace(
-          //     ":type",
-          //     typeMeetingBook.DOI
-          //   ),
-          //   element: <SoGiaoBanCum />,
-          // },
-          // {
-          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE.replace(
-          //     ":type",
-          //     typeMeetingBook.DOI
-          //   ),
-          //   element: <DetailSoGiaoBanCum />,
-          // },
+          {
+            path: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+            element: <SoTheoDoiCongTac />,
+          },
+          {
+            path: RouterLink.SO_THEO_DOI_KY_LUAT,
+            element: <SoTheoDoiKyLuat />,
+          },
+          {
+            path: RouterLink.SO_THONG_KE_TAI_LIEU,
+            element: <SoThongKeTaiLieu />,
+          },
+          {
+            path: RouterLink.SO_THONG_KE_RA_VAO,
+            element: <SoThongKeRaVao />,
+          },
           {
             path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
             element: <ThongKeHLCaNhan />,
@@ -290,6 +285,18 @@ const MainRoutes = [
           {
             path: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
             element: <PhieuXuat />,
+          },
+          {
+            path: RouterLink.THONG_KE_CTT,
+            element: <ThongKeCtt />,
+          },
+          {
+            path: RouterLink.SO_DIEN_DEN,
+            element: <SoDienDen />,
+          },
+          {
+            path: RouterLink.SO_DIEN_DI,
+            element: <SoDienDi />,
           },
         ],
       },

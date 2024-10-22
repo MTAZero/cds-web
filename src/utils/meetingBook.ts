@@ -1,7 +1,6 @@
 import {typeMeetingBook, typeMeetingBookText} from "types";
 
 const renderTextSoGiaoBan = (type: string) => {
-  console.log(type);
   let text = "";
   switch (type) {
     case typeMeetingBook.DOI:
@@ -16,7 +15,6 @@ const renderTextSoGiaoBan = (type: string) => {
     default:
       text = "";
   }
-  console.log(text);
   return text;
 };
 export {renderTextSoGiaoBan};

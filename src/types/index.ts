@@ -30,6 +30,13 @@ export enum SystemFeatures {
   ManagerFuel = "ManagerFuel",
   ManagerTask = "ManagerTask",
   ManagerWorkAddress = "ManagerWorkAddress",
+  ManagerTrackDiscipline = "ManagerTrackDiscipline",
+  StatisticDocument = "StatisticDocument",
+  ManagerTrackWork = "ManagerTrackWork",
+  AccessControl = "AccessControl",
+  ViewStatisticPage = "ViewStatisticPage",
+  GoingCall = "GoingCall",
+  InComingCall = "InComingCall",
 }
 
 export enum SystemAction {

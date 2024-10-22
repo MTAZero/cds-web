@@ -12,9 +12,9 @@ import {
   TableRow,
 } from "@mui/material";
 import * as styles from "./table-entity.styles";
-import { TroopStatus, selectTroopData } from "../../../types";
-import { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import {TroopStatus, selectTroopData} from "../../../types";
+import {useEffect, useState} from "react";
+import {FaSearch} from "react-icons/fa";
 
 export type Entity = {
   _id?: string;
@@ -33,7 +33,7 @@ export type Entity = {
 
 type TableEntityProps = {
   handleTroopReport: (
-    absentTroops: Array<{ user: string; reason: string }>
+    absentTroops: Array<{user: string; reason: string}>
   ) => void;
   showButtonSave?: boolean;
   loadEntitys: (
@@ -57,13 +57,13 @@ const columns = [
     name: "STT",
     width: "60px",
   },
-  { name: "Họ và tên", width: "300px" },
-  { name: "Loại", width: "full" },
+  {name: "Họ và tên", width: "300px"},
+  {name: "Loại", width: "full"},
   {
     name: "Đơn vị",
     with: "200px",
   },
-  { name: "Trạng thái", width: "250px" },
+  {name: "Trạng thái", width: "250px"},
 ];
 
 export const TableEntity: React.FC<TableEntityProps> = ({
@@ -74,15 +74,15 @@ export const TableEntity: React.FC<TableEntityProps> = ({
   defaultPageSize = 5,
 }) => {
   const filterData = [
-    { value: "", text: "Tất cả trạng thái" },
+    {value: "", text: "Tất cả trạng thái"},
     ...selectTroopData,
   ];
   const filterTypes = [
-    { value: "", text: "Tất cả loại" },
-    { value: "SQ", text: "Sĩ quan" },
-    { value: "QNCN", text: "Quân nhân CN" },
-    { value: "CCQP", text: "CCQP" },
-    { value: "HSQCS", text: "HSQCS" },
+    {value: "", text: "Tất cả loại"},
+    {value: "SQ", text: "Sĩ quan"},
+    {value: "QNCN", text: "Quân nhân CN"},
+    {value: "CCQP", text: "CCQP"},
+    {value: "HSQCS", text: "HSQCS"},
   ];
 
   const [filterType, setFilterType] = useState<string>("");
@@ -129,14 +129,12 @@ export const TableEntity: React.FC<TableEntityProps> = ({
       const data = await loadEntitys(_size, _page, _textSearch, _status, _type);
       if (!data) return;
 
-      const { items, total, size, page } = data;
+      const {items, total, size, page} = data;
       setEntites(items);
       setTotal(total);
       if (page !== pageIndex) setPageIndex(page);
       if (size !== pageSize) setPageSize(size);
-    } catch (ex) {
-      console.log("error : ", ex);
-    }
+    } catch (ex) {}
   };
 
   // if (entites.length === 0 && showButtonSave) return null;
@@ -233,10 +231,10 @@ export const TableEntity: React.FC<TableEntityProps> = ({
             placeholder="Tìm kiếm"
             style={styles.searchTextBoxStyle}
             value={textSearch}
-            onChange={(e) => {
+            onChange={e => {
               setTextSearch(e.target.value);
             }}
-            onKeyDown={(e) => {
+            onKeyDown={e => {
               if (e.key === "Enter") {
                 handleLoadEntitys(pageSize, 1);
               }
@@ -288,7 +286,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                       size={"small"}
                       value={item.status ? item.status : TroopStatus.CoMat}
                       sx={styles.selectStatusStyle}
-                      onChange={(e) =>
+                      onChange={e =>
                         _updateStatus(item._id, e.target.value as TroopStatus)
                       }
                     >
@@ -323,7 +321,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
         rowsPerPageOptions={[1, 2, 5, 10, 20, 50, 100, 500]}
       />
       {showButtonSave && (
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box sx={{display: "flex", justifyContent: "flex-end"}}>
           <Button
             onClick={() => {
               const _items = entites.map((item, i) => {
@@ -336,7 +334,7 @@ export const TableEntity: React.FC<TableEntityProps> = ({
                 };
               });
 
-              handleTroopReport(_items.filter((i) => i));
+              handleTroopReport(_items.filter(i => i));
             }}
             sx={styles.buttonSaveStyle}
           >

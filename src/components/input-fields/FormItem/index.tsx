@@ -249,7 +249,7 @@ const FormItem = (props: any) => {
             style={{
               width: "100%",
             }}
-            placeholder={placeholder ?? optionsTime.format}
+            placeholder={placeholder ?? "Chọn ngày, giờ"}
             disabled={disable}
             format={optionsTime.format ?? formatTime.time_24h}
             {...rest}

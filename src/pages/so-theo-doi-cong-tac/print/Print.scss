@@ -1,0 +1,17 @@
+@import "assests/styles/_variables.scss";
+.print-track-work {
+  @include font-print;
+  @include page-a4;
+  div,
+  span,
+  article,
+  h1 {
+    font-size: 13pt;
+  }
+  span.label {
+    font-weight: $weightLarge;
+  }
+  .header {
+    margin-bottom: 22px;
+  }
+}

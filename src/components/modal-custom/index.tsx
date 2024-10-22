@@ -44,7 +44,6 @@ const ModalCustom = React.forwardRef((props: any, ref) => {
       </Row>
     </div>
   );
-  console.log(onOk);
   return (
     <div className="modal">
       <Modal

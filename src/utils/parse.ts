@@ -81,7 +81,6 @@ const convertFileToBase64 = file => {
     filereader.readAsDataURL(file);
     filereader.onload = function (evt) {
       var result = evt.target.result;
-      console.log(result);
       base64 = result?.toString().replace("data:application/pdf;base64,", "");
       resolve(base64);
     };

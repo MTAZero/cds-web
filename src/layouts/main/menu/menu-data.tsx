@@ -123,7 +123,15 @@ export const mainMenu: Array<SideMenuItem> = [
       },
     ],
   },
-
+  {
+    url: RouterLink.THONG_KE_CTT,
+    key: RouterLink.THONG_KE_CTT,
+    icon: <AdminSVG />,
+    text: "Thống kê cổng thông tin",
+    children: [],
+    module: SystemFeatures.ViewStatisticPage,
+    action: [SystemAction.View],
+  },
   {
     url: RouterLink.WORK_CALENDAR,
     key: RouterLink.WORK_CALENDAR,
@@ -165,6 +173,9 @@ export const mainMenu: Array<SideMenuItem> = [
     key: RouterLink.TIEN_TRINH_BIEU_ROUTE,
     icon: <BookSVG />,
     text: "Huấn luyện chiến đấu",
+    module: SystemFeatures.ManagerProgresses,
+    action: [SystemAction.View, SystemAction.Edit],
+
     children: [
       {
         url: RouterLink.VAN_KIEN_ROUTE,
@@ -235,7 +246,62 @@ export const mainMenu: Array<SideMenuItem> = [
     url: RouterLink.GUARD_MENU,
     key: RouterLink.GUARD_MENU,
     icon: <NotebookSVG />,
+    text: "Sổ theo dõi và thống kê",
+    module: SystemFeatures.ManagerTrackWork,
+    action: [SystemAction.View, SystemAction.Edit],
+    children: [
+      {
+        url: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+        key: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ theo dõi đi công tác",
+      },
+      {
+        url: RouterLink.SO_THEO_DOI_KY_LUAT,
+        key: RouterLink.SO_THEO_DOI_KY_LUAT,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ theo dõi quản lý kỷ luật",
+      },
+      {
+        url: RouterLink.SO_THONG_KE_TAI_LIEU,
+        key: RouterLink.SO_THONG_KE_TAI_LIEU,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ thống kê tài liệu",
+      },
+      {
+        url: RouterLink.SO_THONG_KE_RA_VAO,
+        key: RouterLink.SO_THONG_KE_RA_VAO,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ thống kê vào ra",
+      },
+      {
+        url: RouterLink.SO_DIEN_DEN,
+        key: RouterLink.SO_DIEN_DEN,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ điện đến",
+      },
+      {
+        url: RouterLink.SO_DIEN_DI,
+        key: RouterLink.SO_DIEN_DI,
+        icon: <NotebookSVG />,
+        children: [],
+        text: "Sổ điện đi",
+      },
+    ],
+  },
+
+  {
+    url: RouterLink.GUARD_MENU,
+    key: RouterLink.GUARD_MENU,
+    icon: <NotebookSVG />,
     text: "Sổ sách cá nhân",
+    module: SystemFeatures.ManagerPersonalDiarys,
+    action: [SystemAction.View, SystemAction.Edit],
     children: [
       {
         url: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
@@ -253,6 +319,8 @@ export const mainMenu: Array<SideMenuItem> = [
     key: RouterLink.GUARD_MENU,
     icon: <OilSVG />,
     text: "Quản lý xăng dầu",
+    module: SystemFeatures.ManagerFuel,
+    action: [SystemAction.View, SystemAction.Edit],
     children: [
       {
         url: RouterLink.QUAN_LY_XE_ROUTE,
