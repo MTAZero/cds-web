@@ -95,6 +95,12 @@ export const EditableCell: React.FC<EditableCellProps> = ({
     const soLuongXuatThucTe = toNumber(soLuongXuat15 / heSoVcf, 0);
     setFieldValue("export", soLuongXuatThucTe);
   };
+  const setSoLuongXuat15Do = () => {
+    const soLuongXuatThuc = toNumber(getFieldValue("export"));
+    const heSoVcf = toNumber(getFieldValue("factorVcf"), 4);
+    const soLuongXuat15Do = toNumber(soLuongXuatThuc * heSoVcf, 0);
+    setFieldValue("actualExport", soLuongXuat15Do);
+  };
   const setFactorVcf = name => {
     const currentMonth = dayjs().month() + 1;
     const typeMonth = currentMonth >= 5 && currentMonth <= 10 ? 1 : 2;
@@ -134,11 +140,16 @@ export const EditableCell: React.FC<EditableCellProps> = ({
         <InputNumber
           disabled={disabled}
           onChange={e => {
+            if (dataIndex == "export") {
+              setSoLuongXuat15Do();
+            }
             if (dataIndex == "actualExport") {
+              setSoLuongXuatThucTe();
               setThanhTien();
             }
-            if (dataIndex == "factorVcf" || dataIndex == "actualExport") {
+            if (dataIndex == "factorVcf") {
               setSoLuongXuatThucTe();
+              setSoLuongXuat15Do();
             }
           }}
           // formatter={value => toNumber(value, 4).toString()}

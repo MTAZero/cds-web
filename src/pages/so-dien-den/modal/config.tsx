@@ -61,13 +61,13 @@ const fields2: any[] = [
     css: css,
   },
 
-  {
-    key: "unitIdReceived",
-    name: "unitIdReceived",
-    label: "Đơn vị",
-    type: COMBO_BOX,
-    css: css,
-  },
+  // {
+  //   key: "unitIdReceived",
+  //   name: "unitIdReceived",
+  //   label: "Đơn vị",
+  //   type: COMBO_BOX,
+  //   css: css,
+  // },
   {
     key: "personSecondReceived",
     name: "personSecondReceived",

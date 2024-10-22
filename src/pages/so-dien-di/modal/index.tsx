@@ -46,13 +46,7 @@ const ModalEdit = forwardRef((props: any, ref) => {
       label: e.name,
     })
   );
-  fields2.find(e => e.name == "personTransfer").options = toArray(
-    listPerson
-  ).map(e => ({
-    key: randomId(),
-    value: e.full_name,
-    label: e.full_name,
-  }));
+
   fields2.find(e => e.name == "idLeader").options = toArray(listPerson).map(
     e => ({
       key: randomId(),
