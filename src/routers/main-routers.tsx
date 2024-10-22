@@ -9,7 +9,7 @@ import {TroopReport} from "../pages/troop-report";
 import {LeaveApprove} from "../pages/leave-approve";
 import {LeaveRegister} from "../pages/leave-register";
 import {GuardSetting} from "../pages/guard-dutty/guard-dutty-manager";
-import {SystemFeatures, SystemAction} from "../types";
+import {SystemFeatures, SystemAction, typeMeetingBook} from "../types";
 import TienTrinh from "pages/tien-trinh-bieu/tien-trinh";
 import User from "pages/admin/user";
 import DetailTienTrinh from "pages/tien-trinh-bieu/chi-tiet-tien-trinh";
@@ -50,6 +50,7 @@ import SoThongKeRaVao from "pages/so-thong-ke-ra-vao";
 import ThongKeCtt from "pages/thong-ke-ctt";
 import SoDienDen from "pages/so-dien-den";
 import SoDienDi from "pages/so-dien-di";
+import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -84,10 +85,10 @@ const MainRoutes = [
             module: SystemFeatures.TroopReports,
             action: [SystemAction.View, SystemAction.Report],
           },
-          {
-            path: RouterLink.PERSONAL_REPORT,
-            element: <PersonalReport />,
-          },
+          // {
+          //   path: RouterLink.PERSONAL_REPORT,
+          //   element: <PersonalReport />,
+          // },
           {
             path: RouterLink.LEAVE_APPROVE,
             element: <LeaveApprove />,
@@ -119,6 +120,12 @@ const MainRoutes = [
             element: <GuardDuttyPersonalPage />,
           },
           // lịch công tác
+          {
+            path: RouterLink.MANAGER_CALENDAR,
+            element: <WorkCalendarManagerPage />,
+            module: SystemFeatures.WorkCalendar,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
           {
             path: RouterLink.UNIT_WORK_CALENDAR,
             element: <UnitCalendarPage />,
