@@ -78,4 +78,8 @@ export const RouterLink = {
 
   // Thống kê trang cổng
   THONG_KE_CTT: "/thong-ke-ctt",
+
+  // Quản lý bếp
+  NGUYEN_LIEU: "/material",
+  THUC_DON: "/menu",
 };
