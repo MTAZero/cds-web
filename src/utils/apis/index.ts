@@ -26,3 +26,4 @@ export * from "./thong-ke-ctt";
 export * from "./so-dien-den";
 export * from "./so-dien-di";
 export * from "./work-calendar";
+export * from "./quan-ly-bep";

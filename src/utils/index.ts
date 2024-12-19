@@ -18,7 +18,7 @@ export const checkPermisison = (
   for (let index = 0; index < action.length; index++) {
     const _action = action[index];
     if (
-      permission.find(
+      permission?.find(
         (i: Permission) => i.module === module && i.action === _action
       )
     ) {

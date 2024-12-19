@@ -50,6 +50,8 @@ import SoThongKeRaVao from "pages/so-thong-ke-ra-vao";
 import ThongKeCtt from "pages/thong-ke-ctt";
 import SoDienDen from "pages/so-dien-den";
 import SoDienDi from "pages/so-dien-di";
+import NguyenLieu from "pages/quan-ly-bep/nguyen-lieu";
+import ThucDon from "pages/quan-ly-bep/thuc-don";
 import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
@@ -297,6 +299,14 @@ const MainRoutes = [
           {
             path: RouterLink.SO_DIEN_DI,
             element: <SoDienDi />,
+          },
+          {
+            path: RouterLink.NGUYEN_LIEU,
+            element: <NguyenLieu />,
+          },
+          {
+            path: RouterLink.THUC_DON,
+            element: <ThucDon />,
           },
         ],
       },
