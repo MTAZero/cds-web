@@ -24,7 +24,6 @@ import {UpdateGuardDuttyPage} from "pages/guard-dutty/update-guard-dutty";
 import Permission from "pages/admin/permission";
 import Position from "pages/admin/position";
 import Role from "pages/admin/role";
-import Unit from "pages/admin/unit";
 import {GuardDuttyUnitPage} from "pages/guard-dutty/guard-dutty-unit";
 import {GuardDuttyPersonalPage} from "pages/guard-dutty/guard-dutty-personal";
 import {UnitCalendarPage} from "pages/work-calendar/unit-calendar";
@@ -53,6 +52,7 @@ import SoDienDi from "pages/so-dien-di";
 import NguyenLieu from "pages/quan-ly-bep/nguyen-lieu";
 import ThucDon from "pages/quan-ly-bep/thuc-don";
 import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager";
+import Unit from "../pages/admin/Unit";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -81,232 +81,368 @@ const MainRoutes = [
             path: RouterLink.CONTACT,
             element: <ContactPage />,
           },
-          {
-            path: RouterLink.TROOP_REPORT,
-            element: <TroopReport />,
-            module: SystemFeatures.TroopReports,
-            action: [SystemAction.View, SystemAction.Report],
-          },
           // {
-          //   path: RouterLink.PERSONAL_REPORT,
-          //   element: <PersonalReport />,
+          //   path: RouterLink.TROOP_REPORT,
+          //   element: <TroopReport />,
+          //   module: SystemFeatures.TroopReports,
+          //   action: [SystemAction.View, SystemAction.Report],
+          // },
+          // // {
+          // //   path: RouterLink.PERSONAL_REPORT,
+          // //   element: <PersonalReport />,
+          // // },
+          // {
+          //   path: RouterLink.LEAVE_APPROVE,
+          //   element: <LeaveApprove />,
+          //   module: SystemFeatures.ManagerRegisterLeave,
+          //   action: [SystemAction.Approve, SystemAction.UnitApprove],
+          // },
+          // {
+          //   path: RouterLink.LEAVE_REGISTER,
+          //   element: <LeaveRegister />,
+          // },
+          // {
+          //   path: RouterLink.GUARD_DUTTY_UNIT,
+          //   element: <GuardDuttyUnitPage />,
+          // },
+          // {
+          //   path: RouterLink.UPDATE_GUARD_DUTTY,
+          //   element: <UpdateGuardDuttyPage />,
+          //   module: SystemFeatures.ManagerGuardDutty,
+          //   action: [SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.MANAGER_GUARD_SETTING,
+          //   element: <GuardSetting />,
+          //   module: SystemFeatures.ManagerGuardDutty,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.PERSONAL_GUARD_SCHEDULE,
+          //   element: <GuardDuttyPersonalPage />,
+          // },
+          // // lịch công tác
+          // {
+          //   path: RouterLink.MANAGER_CALENDAR,
+          //   element: <WorkCalendarManagerPage />,
+          //   module: SystemFeatures.WorkCalendar,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.UNIT_WORK_CALENDAR,
+          //   element: <UnitCalendarPage />,
+          //   module: SystemFeatures.WorkCalendar,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.USER_WORK_CALENDAR,
+          //   element: <UserCalendarPage />,
+          //   module: SystemFeatures.WorkCalendar,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.VAN_KIEN_ROUTE,
+          //   element: <VanKien />,
+          //   module: SystemFeatures.ManagerDocuments,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+          //   element: <TienTrinh />,
+          //   module: SystemFeatures.ManagerProgresses,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.TIEN_TRINH_BIEU_DETAIL_ROUTE,
+          //   element: <DetailTienTrinh />,
+          //   module: SystemFeatures.ManagerProgresses,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.TIEN_TRINH_BIEU_CHECK_ROUTE,
+          //   element: <StatisticTienTrinh />,
+          //   module: SystemFeatures.ManagerProgresses,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
+          //   element: <ListThongKe />,
+          //   module: SystemFeatures.ManagerTrainnings,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.RUT_KINH_NGHIEM_ROUTE,
+          //   element: <RutKinhNghiem />,
+          //   module: SystemFeatures.ManagerExperiences,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE,
+          //   element: <DetailRutKinhNghiem />,
+          //   module: SystemFeatures.ManagerExperiences,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_ROUTE,
+          //   element: <SoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
+          //   element: <DetailSoGiaoBanCum />,
+          // },
+          // {
+          //   path: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
+          //   element: <SoTheoDoiCongTac />,
+          // },
+          // {
+          //   path: RouterLink.SO_THEO_DOI_KY_LUAT,
+          //   element: <SoTheoDoiKyLuat />,
+          // },
+          // {
+          //   path: RouterLink.SO_THONG_KE_TAI_LIEU,
+          //   element: <SoThongKeTaiLieu />,
+          // },
+          // {
+          //   path: RouterLink.SO_THONG_KE_RA_VAO,
+          //   element: <SoThongKeRaVao />,
+          // },
+          // {
+          //   path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
+          //   element: <ThongKeHLCaNhan />,
+          //   module: SystemFeatures.ManagerPersonalDiarys,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.SO_SACH_CA_NHAN_DETAIL_ROUTE,
+          //   element: <SoSach />,
+          //   module: SystemFeatures.ManagerPersonalDiarys,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
+          //   element: <User />,
+          //   module: SystemFeatures.ManagerUsers,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_TRI_PERMISSION_ROUTE,
+          //   element: <Permission />,
+          //   module: SystemFeatures.ManagerPermission,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_TRI_CHUC_DANH_ROUTE,
+          //   element: <Position />,
+          //   module: SystemFeatures.ManagerPermission,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_TRI_ROLE_ROUTE,
+          //   element: <Role />,
+          //   module: SystemFeatures.ManagerRoles,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_TRI_DON_VI_ROUTE,
+          //   element: <Unit />,
+          //   module: SystemFeatures.ManagerUnits,
+          //   action: [SystemAction.View, SystemAction.Edit],
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_XE_ROUTE,
+          //   element: <QuanLyXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
+          //   element: <QuanLyNhienLieu />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
+          //   element: <QuanLyDauMoi />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
+          //   element: <QuanLyNhiemVu />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
+          //   element: <KeHoachXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE,
+          //   element: <DetailKeHoachXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
+          //   element: <TongHopXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE,
+          //   element: <DetailTongHopXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_LENH_XE_ROUTE,
+          //   element: <LenhXe />,
+          // },
+          // {
+          //   path: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
+          //   element: <PhieuXuat />,
+          // },
+          // {
+          //   path: RouterLink.THONG_KE_CTT,
+          //   element: <ThongKeCtt />,
+          // },
+          // {
+          //   path: RouterLink.SO_DIEN_DEN,
+          //   element: <SoDienDen />,
+          // },
+          // {
+          //   path: RouterLink.SO_DIEN_DI,
+          //   element: <SoDienDi />,
+          // },
+          // {
+          //   path: RouterLink.NGUYEN_LIEU,
+          //   element: <NguyenLieu />,
+          // },
+          // {
+          //   path: RouterLink.THUC_DON,
+          //   element: <ThucDon />,
           // },
           {
-            path: RouterLink.LEAVE_APPROVE,
-            element: <LeaveApprove />,
-            module: SystemFeatures.ManagerRegisterLeave,
-            action: [SystemAction.Approve, SystemAction.UnitApprove],
+            path: RouterLink.TRAINING, // Công tác tham mưu huấn luyện
+            element: <Navigate to={RouterLink.PLAN} replace />,
           },
           {
-            path: RouterLink.LEAVE_REGISTER,
-            element: <LeaveRegister />,
-          },
-          {
-            path: RouterLink.GUARD_DUTTY_UNIT,
-            element: <GuardDuttyUnitPage />,
-          },
-          {
-            path: RouterLink.UPDATE_GUARD_DUTTY,
-            element: <UpdateGuardDuttyPage />,
-            module: SystemFeatures.ManagerGuardDutty,
-            action: [SystemAction.Edit],
-          },
-          {
-            path: RouterLink.MANAGER_GUARD_SETTING,
-            element: <GuardSetting />,
-            module: SystemFeatures.ManagerGuardDutty,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.PERSONAL_GUARD_SCHEDULE,
-            element: <GuardDuttyPersonalPage />,
-          },
-          // lịch công tác
-          {
-            path: RouterLink.MANAGER_CALENDAR,
-            element: <WorkCalendarManagerPage />,
-            module: SystemFeatures.WorkCalendar,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.UNIT_WORK_CALENDAR,
-            element: <UnitCalendarPage />,
-            module: SystemFeatures.WorkCalendar,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.USER_WORK_CALENDAR,
-            element: <UserCalendarPage />,
-            module: SystemFeatures.WorkCalendar,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.VAN_KIEN_ROUTE,
-            element: <VanKien />,
-            module: SystemFeatures.ManagerDocuments,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.TIEN_TRINH_BIEU_ROUTE,
+            path: RouterLink.PLAN, // Kế hoạch, tiến trình biểu
             element: <TienTrinh />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.TIEN_TRINH_BIEU_DETAIL_ROUTE,
+            path: RouterLink.PLAN_YEAR, // Kế hoạch huấn luyện năm
             element: <DetailTienTrinh />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.TIEN_TRINH_BIEU_CHECK_ROUTE,
+            path: RouterLink.PLAN_PHASE1, // Kế hoạch huấn luyện giai đoạn 1
+            element: <DetailTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.PLAN_PHASE2, // Kế hoạch huấn luyện giai đoạn 2
+            element: <DetailTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.PLAN_MONTH, // Kế hoạch huấn luyện tháng
             element: <StatisticTienTrinh />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.THONG_KE_HUAN_LUYEN_ROUTE,
+            path: RouterLink.PLAN_WEEK, // Tiến trình biểu huấn luyện tuần
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.ORDER, // Mệnh lệnh, hướng dẫn
+            element: <Navigate to={RouterLink.ORDER_YEAR} replace />,
+          },
+          {
+            path: RouterLink.ORDER_YEAR, // Mệnh lệnh huấn luyện năm
+            element: <DetailTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.EXEC_YEAR, // Hướng dẫn thực hiện kế hoạch năm
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.EXEC_PHASE1, // Hướng dẫn thực hiện kế hoạch giai đoạn 1
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.EXEC_PHASE2, // Hướng dẫn thực hiện kế hoạch giai đoạn 2
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.STATS, // Thống kê huấn luyện
             element: <ListThongKe />,
             module: SystemFeatures.ManagerTrainnings,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.RUT_KINH_NGHIEM_ROUTE,
-            element: <RutKinhNghiem />,
-            module: SystemFeatures.ManagerExperiences,
+            path: RouterLink.REPORTS, // Báo cáo huấn luyện
+            element: <Navigate to={RouterLink.REPORT_WEEK} replace />,
+          },
+          {
+            path: RouterLink.REPORT_WEEK, // Báo cáo huấn luyện tuần
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.RUT_KINH_NGHIEM_DETAIL_ROUTE,
-            element: <DetailRutKinhNghiem />,
-            module: SystemFeatures.ManagerExperiences,
+            path: RouterLink.REPORT_MONTH, // Báo cáo huấn luyện tháng
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.SO_GIAO_BAN_ROUTE,
-            element: <SoGiaoBanCum />,
+            path: RouterLink.REPORT_QUARTER, // Báo cáo huấn luyện quý
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.SO_GIAO_BAN_DETAIL_ROUTE,
-            element: <DetailSoGiaoBanCum />,
+            path: RouterLink.REPORT_6MONTH, // Báo cáo huấn luyện 6 tháng
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.SO_THEO_DOI_DI_CONG_TAC,
-            element: <SoTheoDoiCongTac />,
+            path: RouterLink.REPORT_9MONTH, // Báo cáo huấn luyện 9 tháng
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.SO_THEO_DOI_KY_LUAT,
-            element: <SoTheoDoiKyLuat />,
+            path: RouterLink.REPORT_YEAR, // Báo cáo huấn luyện năm
+            element: <ListThongKe />,
+            module: SystemFeatures.ManagerTrainnings,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.SO_THONG_KE_TAI_LIEU,
-            element: <SoThongKeTaiLieu />,
+            path: RouterLink.DOCS, // Giáo án, thông qua giáo án
+            element: <Navigate to={RouterLink.DOCS_APPROVE} replace />,
           },
           {
-            path: RouterLink.SO_THONG_KE_RA_VAO,
-            element: <SoThongKeRaVao />,
+            path: RouterLink.DOCS_APPROVE, // Thông qua giáo án
+            element: <VanKien />,
+            module: SystemFeatures.ManagerDocuments,
+            action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN,
+            path: RouterLink.DOCS_TRAIN, // Giáo án huấn luyện
+            element: <VanKien />,
+            module: SystemFeatures.ManagerDocuments,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.PERSONAL_LOG, // Sổ học tập cá nhân
             element: <ThongKeHLCaNhan />,
             module: SystemFeatures.ManagerPersonalDiarys,
             action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.SO_SACH_CA_NHAN_DETAIL_ROUTE,
-            element: <SoSach />,
-            module: SystemFeatures.ManagerPersonalDiarys,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_TRI_NGUOI_DUNG_ROUTE,
-            element: <User />,
-            module: SystemFeatures.ManagerUsers,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_TRI_PERMISSION_ROUTE,
-            element: <Permission />,
-            module: SystemFeatures.ManagerPermission,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_TRI_CHUC_DANH_ROUTE,
-            element: <Position />,
-            module: SystemFeatures.ManagerPermission,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_TRI_ROLE_ROUTE,
-            element: <Role />,
-            module: SystemFeatures.ManagerRoles,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_TRI_DON_VI_ROUTE,
-            element: <Unit />,
-            module: SystemFeatures.ManagerUnits,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.QUAN_LY_XE_ROUTE,
-            element: <QuanLyXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_NHIEN_LIEU_ROUTE,
-            element: <QuanLyNhienLieu />,
-          },
-          {
-            path: RouterLink.QUAN_LY_DAU_MOI_ROUTE,
-            element: <QuanLyDauMoi />,
-          },
-          {
-            path: RouterLink.QUAN_LY_NHIEM_VU_ROUTE,
-            element: <QuanLyNhiemVu />,
-          },
-          {
-            path: RouterLink.QUAN_LY_KE_HOACH_XE_ROUTE,
-            element: <KeHoachXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_KE_HOACH_XE_DETAIL_ROUTE,
-            element: <DetailKeHoachXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_TONG_HOP_XE_ROUTE,
-            element: <TongHopXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_TONG_HOP_XE_DETAIL_ROUTE,
-            element: <DetailTongHopXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_LENH_XE_ROUTE,
-            element: <LenhXe />,
-          },
-          {
-            path: RouterLink.QUAN_LY_PHIEU_XUAT_XANG_ROUTE,
-            element: <PhieuXuat />,
-          },
-          {
-            path: RouterLink.THONG_KE_CTT,
-            element: <ThongKeCtt />,
-          },
-          {
-            path: RouterLink.SO_DIEN_DEN,
-            element: <SoDienDen />,
-          },
-          {
-            path: RouterLink.SO_DIEN_DI,
-            element: <SoDienDi />,
-          },
-          {
-            path: RouterLink.NGUYEN_LIEU,
-            element: <NguyenLieu />,
-          },
-          {
-            path: RouterLink.THUC_DON,
-            element: <ThucDon />,
           },
         ],
       },
