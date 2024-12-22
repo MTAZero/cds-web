@@ -26,7 +26,7 @@ const UploadFile = props => {
       await APIServices.VanKien.deleteVanKien(id);
       await getListFile();
     } catch (error) {
-      NotificationService.error("Có lỗi khi xóa văn kiện");
+      NotificationService.error("Có lỗi khi xóa kế hoạch");
     }
   };
   const getListFile = async () => {

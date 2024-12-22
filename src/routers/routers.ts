@@ -83,4 +83,35 @@ export const RouterLink = {
   // Quản lý bếp
   NGUYEN_LIEU: "/material",
   THUC_DON: "/menu",
+  
+  // Công tác tham mưu huấn luyện
+  TRAINING: "/training", // Công tác tham mưu huấn luyện
+  PLAN: "/training/plan", // Kế hoạch, tiến trình biểu
+  PLAN_YEAR: "/training/plan/year", // Kế hoạch huấn luyện năm
+  PLAN_PHASE1: "/training/plan/phase1", // Kế hoạch huấn luyện giai đoạn 1
+  PLAN_PHASE2: "/training/plan/phase2", // Kế hoạch huấn luyện giai đoạn 2
+  PLAN_MONTH: "/training/plan/month", // Kế hoạch huấn luyện tháng
+  PLAN_WEEK: "/training/plan/week", // Tiến trình biểu huấn luyện tuần
+  
+  ORDER: "/training/order", // Mệnh lệnh, hướng dẫn
+  ORDER_YEAR: "/training/order/year", // Mệnh lệnh huấn luyện năm
+  EXEC_YEAR: "/training/order/exec-year", // Hướng dẫn thực hiện kế hoạch năm
+  EXEC_PHASE1: "/training/order/exec-phase1", // Hướng dẫn thực hiện kế hoạch giai đoạn 1
+  EXEC_PHASE2: "/training/order/exec-phase2", // Hướng dẫn thực hiện kế hoạch giai đoạn 2
+  
+  STATS: "/training/stats", // Thống kê huấn luyện
+  
+  REPORTS: "/training/reports", // Báo cáo huấn luyện
+  REPORT_WEEK: "/training/reports/week", // Báo cáo huấn luyện tuần
+  REPORT_MONTH: "/training/reports/month", // Báo cáo huấn luyện tháng
+  REPORT_QUARTER: "/training/reports/quarter", // Báo cáo huấn luyện quý
+  REPORT_6MONTH: "/training/reports/6month", // Báo cáo huấn luyện 6 tháng
+  REPORT_9MONTH: "/training/reports/9month", // Báo cáo huấn luyện 9 tháng
+  REPORT_YEAR: "/training/reports/year", // Báo cáo huấn luyện năm
+  
+  DOCS: "/training/docs", // Giáo án, thông qua giáo án
+  DOCS_APPROVE: "/training/docs/approve", // Thông qua giáo án
+  DOCS_TRAIN: "/training/docs/train", // Giáo án huấn luyện
+  
+  PERSONAL_LOG: "/training/personal-log", // Sổ học tập cá nhân
 };

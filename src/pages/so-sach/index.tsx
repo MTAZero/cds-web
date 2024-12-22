@@ -1,7 +1,7 @@
-import {Button, Row, Spin} from "antd";
+import {Button, Row, Space, Spin} from "antd";
 import {Descriptions, DescriptionsItem, TitleCustom} from "components";
 import {data as dataInit} from "./config";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useAppDispatch} from "hooks";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
@@ -14,8 +14,10 @@ import {
   isValuable,
 } from "utils";
 import {formatTime} from "types";
+import ReactToPrint from "react-to-print";
+import Print from "./print/Print";
 const SoSach = prop => {
-  const dispatch = useAppDispatch();
+  const printRef = useRef<any>(null);
   const path = window.location.pathname;
   const [dataEditor, setDataEditor] = useState<any>();
   const {id} = useParams();
@@ -126,13 +128,34 @@ const SoSach = prop => {
               onFocus={(event, editor) => {}}
             />
             <Row justify={"end"} style={{marginTop: 8}}>
-              <Button type="primary" onClick={submit}>
-                Lưu lại
-              </Button>
+              <Space>
+                {" "}
+                <ReactToPrint
+                  documentTitle={` `}
+                  trigger={() => {
+                    return (
+                      <Button style={{marginBottom: 4}} type="primary">
+                        Xuất file
+                      </Button>
+                    );
+                  }}
+                  content={() => printRef.current}
+                  bodyClass="print-so-sach-ca-nhan"
+                />
+                <Button type="primary" onClick={submit}>
+                  Lưu lại
+                </Button>
+              </Space>
             </Row>
           </div>
         </div>
       </Spin>
+      {/*  */}
+      <div id="print" style={{display: "none"}}>
+        <div ref={printRef}>
+          <Print data={data}></Print>
+        </div>
+      </div>
     </div>
   );
 };

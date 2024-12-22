@@ -46,7 +46,7 @@ const TienTrinh = (props: any) => {
           pageIndex: 1,
           pageSize: 100,
         });
-        setListUnit(toArray(res?.items));
+        setListUnit(toArray(res?.items).filter(e => e?.name?.includes("Đội")));
       } catch (error) {
         setListUnit([]);
       }
