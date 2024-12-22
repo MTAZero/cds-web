@@ -88,7 +88,7 @@ const XacThucSSO = () => {
     NotificationService.success("Đăng nhập thành công");
   };
 
-  if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
+  if (isLogin) return <Navigate to={RouterLink.TRAINING} />;
   return <div></div>;
 };
 export default XacThucSSO;

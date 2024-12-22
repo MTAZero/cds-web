@@ -87,7 +87,7 @@ export const LoginPage: FC = () => {
       [name]: value,
     }));
   };
-  if (isLogin) return <Navigate to={RouterLink.PERSONAL_GUARD_SCHEDULE} />;
+  if (isLogin) return <Navigate to={RouterLink.TRAINING} />;
   const directToSSO = () => {
     const ssoConfig = {
       response_type: SSOConfigs.responseType,
