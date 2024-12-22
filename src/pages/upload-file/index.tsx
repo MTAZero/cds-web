@@ -1,0 +1,112 @@
+import {Button, Col, Row} from "antd";
+import {ModalCustom, TableCustom} from "components";
+import React, {useEffect, useRef, useState} from "react";
+import {columns, fileInfo} from "./config";
+import Icons from "assests/icons";
+import ModalUpload from "./modalUpload";
+import PdfViewer from "components/pdf-viewer";
+import {APIServices, NotificationService, randomId, toArray} from "utils";
+const UploadFile = props => {
+  const modalRef = useRef(null);
+  const uploadRef = useRef(null);
+  const [listFile, setListFile] = useState<any[]>();
+  const [blob, setBlob] = useState<any>();
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
+  columns.find(e => e?.key === "name").render = (value, record, index) => {
+    return (
+      <>
+        {fileInfo(record, () => {
+          deleteVanKien(record?._id);
+        })}
+      </>
+    );
+  };
+  const deleteVanKien = async id => {
+    try {
+      await APIServices.VanKien.deleteVanKien(id);
+      await getListFile();
+    } catch (error) {
+      NotificationService.error("Có lỗi khi xóa văn kiện");
+    }
+  };
+  const getListFile = async () => {
+    try {
+      const res = await APIServices.VanKien.getListVanKien();
+      setListFile(
+        toArray(res)
+          ?.sort((a, b) => b?.update_at - a?.update_at)
+          ?.map(e => ({...e, key: randomId()}))
+      );
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getListFile();
+  }, []);
+
+  useEffect(() => {
+    if (toArray(listFile)?.length > 0) {
+      onClick(listFile?.[0]);
+    } else {
+      setBlob(null);
+    }
+  }, [listFile]);
+  const onClick = record => {
+    setSelectedRowKeys([record?.key]);
+    getFile(record?._id);
+  };
+  const getFile = async id => {
+    try {
+      const res = await APIServices.VanKien.getDetailVanKien(id);
+      setBlob(res as Blob);
+    } catch (error) {}
+  };
+
+  return (
+    <div className="page upload-file">
+      <div className="main">
+        <Row gutter={[4, 4]} className="container">
+          <Col xs={24} sm={24} md={6} lg={6} xl={6}>
+            {/* <Row style={{width: "100%", marginBottom: 6}}>
+              <InputFields data={fields} x></InputFields>
+            </Row> */}
+            <Button
+              style={{marginBottom: 6}}
+              type="primary"
+              icon={<Icons.upload></Icons.upload>}
+              onClick={() => {
+                modalRef?.current?.openModal();
+              }}
+            >
+              Tải văn kiện
+            </Button>
+            <TableCustom
+              dataSource={listFile}
+              columns={columns}
+              pagination={false}
+              onClick={onClick}
+              hideCheckboxCol={true}
+              rowSelection={{selectedRowKeys}}
+            ></TableCustom>
+          </Col>
+          <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+            <div className="">
+              <PdfViewer base64={blob}></PdfViewer>
+            </div>
+          </Col>
+        </Row>
+      </div>
+      <ModalCustom
+        onOpenModal={() => {
+          uploadRef?.current?.resetFields();
+        }}
+        centerd
+        width={700}
+        ref={modalRef}
+        title="Tải văn kiện"
+      >
+        <ModalUpload ref={uploadRef} getListFile={getListFile}></ModalUpload>
+      </ModalCustom>
+    </div>
+  );
+};
+export default UploadFile;

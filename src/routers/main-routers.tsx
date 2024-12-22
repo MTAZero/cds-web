@@ -53,6 +53,7 @@ import SoDienDi from "pages/so-dien-di";
 import NguyenLieu from "pages/quan-ly-bep/nguyen-lieu";
 import ThucDon from "pages/quan-ly-bep/thuc-don";
 import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager";
+import UploadFile from "pages/upload-file";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -307,6 +308,10 @@ const MainRoutes = [
           {
             path: RouterLink.THUC_DON,
             element: <ThucDon />,
+          },
+          {
+            path: RouterLink.UPLOAD_TAI_LIEU,
+            element: <UploadFile />,
           },
         ],
       },

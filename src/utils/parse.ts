@@ -105,8 +105,8 @@ const convertNumberDecimalToWords = (number, addonAfter = "") => {
 
   const words =
     `${convertNumberToWords(firstBlock)}` +
-      `${toNumber(secondBlock) > 0 ? `phẩy ${secondBlockWords}` : ""}` +
-      addonAfter ?? "";
+    `${toNumber(secondBlock) > 0 ? `phẩy ${secondBlockWords}` : ""}` +
+    addonAfter;
   return words;
 };
 const convertNumberToWords = (number, addonAfter = "") => {
