@@ -1,37 +1,9 @@
-import {
-  AdminSVG,
-  BookSVG,
-  CarSVG,
-  DocumentSVG,
-  DocumentTextSVG,
-  NotebookSVG,
-  OilSVG,
-  UserSVG,
-} from "assests/svg";
 import {RouterLink} from "../../../routers/routers";
-import {
-  SideMenuItem,
-  SystemAction,
-  SystemFeatures,
-  typeMeetingBook,
-} from "../../../types";
-
-import {
-  FaCalendar,
-  FaCalendarCheck,
-  FaChalkboardTeacher,
-  FaHome,
-  FaUserClock,
-  FaUserFriends,
-  FaWrench,
-} from "react-icons/fa";
-import {
-  IoIosArchive,
-  IoIosBook, IoIosCalendar, IoIosCheckmark, IoIosClipboard, IoIosJournal,
-  IoIosList, IoIosPaper,
-  IoIosPeople, IoIosSchool,
-  IoIosSettings, IoIosStats,
-} from "react-icons/io";
+import {SideMenuItem,} from "../../../types";
+import { FaChalkboardTeacher, FaClipboardList, FaTasks, FaClipboardCheck, FaBookOpen } from "react-icons/fa";
+import { MdOutlineFactCheck, MdOutlineAssignment, MdOutlineLibraryBooks, MdOutlinePersonOutline } from "react-icons/md";
+import { IoMdStats, IoMdListBox } from "react-icons/io";
+import { RiPagesLine, RiBookLine, RiFileList3Line } from "react-icons/ri";
 
 export const mainMenu: Array<SideMenuItem> = [
   // {
@@ -501,69 +473,69 @@ export const mainMenu: Array<SideMenuItem> = [
   {
     url: RouterLink.TRAINING,
     key: RouterLink.TRAINING,
-    icon: <IoIosSchool />, // Icon giáo dục, phù hợp với huấn luyện
+    icon: <FaChalkboardTeacher />, // Icon bảng giảng dạy
     text: "Công tác tham mưu huấn luyện",
     children: [
       {
         url: RouterLink.PLAN,
         key: RouterLink.PLAN,
-        icon: <IoIosCalendar />, // Icon lịch trình
+        icon: <FaClipboardList />, // Icon danh sách kế hoạch
         text: "Kế hoạch, tiến trình biểu",
         children: [
-          { url: RouterLink.PLAN_YEAR, key: RouterLink.PLAN_YEAR, icon: <IoIosCalendar />, text: "KHHLCĐ năm", children: [] },
-          { url: RouterLink.PLAN_PHASE1, key: RouterLink.PLAN_PHASE1, icon: <IoIosCalendar />, text: "KHHLCĐ giai đoạn 1", children: [] },
-          { url: RouterLink.PLAN_PHASE2, key: RouterLink.PLAN_PHASE2, icon: <IoIosCalendar />, text: "KHHLCĐ giai đoạn 2", children: [] },
-          { url: RouterLink.PLAN_MONTH, key: RouterLink.PLAN_MONTH, icon: <IoIosCalendar />, text: "KHHLCĐ tháng", children: [] },
-          { url: RouterLink.PLAN_WEEK, key: RouterLink.PLAN_WEEK, icon: <IoIosCalendar />, text: "TTB HLCĐ tuần", children: [] },
+          { url: RouterLink.PLAN_YEAR, key: RouterLink.PLAN_YEAR, icon: <FaTasks />, text: "KH HL năm", children: [] },
+          { url: RouterLink.PLAN_PHASE1, key: RouterLink.PLAN_PHASE1, icon: <MdOutlineAssignment />, text: "KH HL giai đoạn 1", children: [] },
+          { url: RouterLink.PLAN_PHASE2, key: RouterLink.PLAN_PHASE2, icon: <IoMdListBox />, text: "KH HL giai đoạn 2", children: [] },
+          { url: RouterLink.PLAN_MONTH, key: RouterLink.PLAN_MONTH, icon: <FaClipboardCheck />, text: "KH HL tháng", children: [] },
+          { url: RouterLink.PLAN_WEEK, key: RouterLink.PLAN_WEEK, icon: <RiFileList3Line />, text: "TTB HL tuần", children: [] },
         ],
       },
       {
         url: RouterLink.ORDER,
         key: RouterLink.ORDER,
-        icon: <IoIosPaper />, // Icon tài liệu, phù hợp với mệnh lệnh
+        icon: <MdOutlineFactCheck />, // Icon kiểm tra mệnh lệnh
         text: "Mệnh lệnh, HD",
         children: [
-          { url: RouterLink.ORDER_YEAR, key: RouterLink.ORDER_YEAR, icon: <IoIosPaper />, text: "ML HLCĐ năm", children: [] },
-          { url: RouterLink.EXEC_YEAR, key: RouterLink.EXEC_YEAR, icon: <IoIosPaper />, text: "HD thực hiện KHHLCĐ năm", children: [] },
-          { url: RouterLink.EXEC_PHASE1, key: RouterLink.EXEC_PHASE1, icon: <IoIosPaper />, text: "HD thực hiện KHHLCĐ GD1", children: [] },
-          { url: RouterLink.EXEC_PHASE2, key: RouterLink.EXEC_PHASE2, icon: <IoIosPaper />, text: "HD thực hiện KHHLCĐ GD2", children: [] },
+          { url: RouterLink.ORDER_YEAR, key: RouterLink.ORDER_YEAR, icon: <FaBookOpen />, text: "ML HL năm", children: [] },
+          { url: RouterLink.EXEC_YEAR, key: RouterLink.EXEC_YEAR, icon: <RiPagesLine />, text: "HD thực hiện năm", children: [] },
+          { url: RouterLink.EXEC_PHASE1, key: RouterLink.EXEC_PHASE1, icon: <IoMdStats />, text: "HD thực hiện GD1", children: [] },
+          { url: RouterLink.EXEC_PHASE2, key: RouterLink.EXEC_PHASE2, icon: <MdOutlineLibraryBooks />, text: "HD thực hiện GD2", children: [] },
         ],
       },
       {
         url: RouterLink.STATS,
         key: RouterLink.STATS,
-        icon: <IoIosStats />, // Icon thống kê
+        icon: <IoMdStats />, // Icon thống kê
         text: "Thống kê huấn luyện",
         children: [],
       },
       {
         url: RouterLink.REPORTS,
         key: RouterLink.REPORTS,
-        icon: <IoIosClipboard />, // Icon báo cáo
+        icon: <MdOutlineAssignment />, // Icon báo cáo huấn luyện
         text: "Báo cáo huấn luyện",
         children: [
-          { url: RouterLink.REPORT_WEEK, key: RouterLink.REPORT_WEEK, icon: <IoIosClipboard />, text: "Báo cáo HL tuần", children: [] },
-          { url: RouterLink.REPORT_MONTH, key: RouterLink.REPORT_MONTH, icon: <IoIosClipboard />, text: "Báo cáo HL tháng", children: [] },
-          { url: RouterLink.REPORT_QUARTER, key: RouterLink.REPORT_QUARTER, icon: <IoIosClipboard />, text: "Báo cáo HL quý", children: [] },
-          { url: RouterLink.REPORT_6MONTH, key: RouterLink.REPORT_6MONTH, icon: <IoIosClipboard />, text: "Báo cáo HL 6 tháng", children: [] },
-          { url: RouterLink.REPORT_9MONTH, key: RouterLink.REPORT_9MONTH, icon: <IoIosClipboard />, text: "Báo cáo HL 9 tháng", children: [] },
-          { url: RouterLink.REPORT_YEAR, key: RouterLink.REPORT_YEAR, icon: <IoIosClipboard />, text: "Báo cáo HL năm", children: [] },
+          { url: RouterLink.REPORT_WEEK, key: RouterLink.REPORT_WEEK, icon: <FaClipboardList />, text: "Báo cáo HL tuần", children: [] },
+          { url: RouterLink.REPORT_MONTH, key: RouterLink.REPORT_MONTH, icon: <MdOutlineAssignment />, text: "Báo cáo HL tháng", children: [] },
+          { url: RouterLink.REPORT_QUARTER, key: RouterLink.REPORT_QUARTER, icon: <IoMdListBox />, text: "Báo cáo HL quý", children: [] },
+          { url: RouterLink.REPORT_6MONTH, key: RouterLink.REPORT_6MONTH, icon: <FaClipboardCheck />, text: "Báo cáo HL 6 tháng", children: [] },
+          { url: RouterLink.REPORT_9MONTH, key: RouterLink.REPORT_9MONTH, icon: <RiFileList3Line />, text: "Báo cáo HL 9 tháng", children: [] },
+          { url: RouterLink.REPORT_YEAR, key: RouterLink.REPORT_YEAR, icon: <MdOutlineFactCheck />, text: "Báo cáo HL năm", children: [] },
         ],
       },
       {
         url: RouterLink.DOCS,
         key: RouterLink.DOCS,
-        icon: <IoIosBook />, // Icon giáo trình
+        icon: <RiBookLine />, // Icon tài liệu giáo án
         text: "Giáo án, thông qua giáo án",
         children: [
-          { url: RouterLink.DOCS_APPROVE, key: RouterLink.DOCS_APPROVE, icon: <IoIosCheckmark />, text: "Thông qua giáo án", children: [] },
-          { url: RouterLink.DOCS_TRAIN, key: RouterLink.DOCS_TRAIN, icon: <IoIosBook />, text: "Giáo án huấn luyện", children: [] },
+          { url: RouterLink.DOCS_APPROVE, key: RouterLink.DOCS_APPROVE, icon: <MdOutlineLibraryBooks />, text: "Thông qua giáo án", children: [] },
+          { url: RouterLink.DOCS_TRAIN, key: RouterLink.DOCS_TRAIN, icon: <FaBookOpen />, text: "Giáo án huấn luyện", children: [] },
         ],
       },
       {
         url: RouterLink.PERSONAL_LOG,
         key: RouterLink.PERSONAL_LOG,
-        icon: <IoIosJournal />, // Icon sổ ghi chép
+        icon: <MdOutlinePersonOutline />, // Icon sổ cá nhân
         text: "Sổ học tập cá nhân",
         children: [],
       },
