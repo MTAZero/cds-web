@@ -55,6 +55,10 @@ import {WorkCalendarManagerPage} from "pages/work-calendar/work-calendar-manager
 import UploadFile from "pages/upload-file";
 import Unit from "../pages/admin/unit";
 import PrintTienTrinh from "pages/tien-trinh-bieu/tien-trinh/print-tien-trinh";
+import KeHoachThang from "pages/ke-hoach-thang";
+import KeHoachThangDetail from "pages/ke-hoach-thang/detail";
+import GiaoAn from "pages/giao-an";
+import GiaoAnDetail from "pages/giao-an/detail";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -315,32 +319,39 @@ const MainRoutes = [
             element: <Navigate to={RouterLink.PLAN} replace />,
           },
           {
-            path: RouterLink.PLAN, // Kế hoạch, tiến trình biểu
+            path: RouterLink.TIEN_TRINH_BIEU_ROUTE, // Kế hoạch, tiến trình biểu
             element: <TienTrinh />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
           {
-            path: RouterLink.PLAN_YEAR, // Kế hoạch huấn luyện năm
+            path: RouterLink.TIEN_TRINH_BIEU_DETAIL_ROUTE,
+            element: <DetailTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.TIEN_TRINH_BIEU_CHECK_ROUTE,
+            element: <StatisticTienTrinh />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.UPLOAD_TAI_LIEU, // Kế hoạch huấn luyện năm
             element: <UploadFile />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
-          {
-            path: RouterLink.PLAN_PHASE1, // Kế hoạch huấn luyện giai đoạn 1
-            element: <DetailTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.PLAN_PHASE2, // Kế hoạch huấn luyện giai đoạn 2
-            element: <DetailTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
+
           {
             path: RouterLink.PLAN_MONTH, // Kế hoạch huấn luyện tháng
-            element: <StatisticTienTrinh />,
+            element: <KeHoachThang />,
+            module: SystemFeatures.ManagerProgresses,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.PLAN_MONTH_DETAIL, // Kế hoạch huấn luyện tháng
+            element: <KeHoachThangDetail />,
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
@@ -350,80 +361,14 @@ const MainRoutes = [
             module: SystemFeatures.ManagerProgresses,
             action: [SystemAction.View, SystemAction.Edit],
           },
-          {
-            path: RouterLink.ORDER, // Mệnh lệnh, hướng dẫn
-            element: <Navigate to={RouterLink.ORDER_YEAR} replace />,
-          },
-          {
-            path: RouterLink.ORDER_YEAR, // Mệnh lệnh huấn luyện năm
-            element: <DetailTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.EXEC_YEAR, // Hướng dẫn thực hiện kế hoạch năm
-            element: <StatisticTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.EXEC_PHASE1, // Hướng dẫn thực hiện kế hoạch giai đoạn 1
-            element: <StatisticTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.EXEC_PHASE2, // Hướng dẫn thực hiện kế hoạch giai đoạn 2
-            element: <StatisticTienTrinh />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
+
           {
             path: RouterLink.STATS, // Thống kê huấn luyện
             element: <ListThongKe />,
             module: SystemFeatures.ManagerTrainnings,
             action: [SystemAction.View, SystemAction.Edit],
           },
-          {
-            path: RouterLink.REPORTS, // Báo cáo huấn luyện
-            element: <Navigate to={RouterLink.REPORT_WEEK} replace />,
-          },
-          {
-            path: RouterLink.REPORT_WEEK, // Báo cáo huấn luyện tuần
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.REPORT_MONTH, // Báo cáo huấn luyện tháng
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.REPORT_QUARTER, // Báo cáo huấn luyện quý
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.REPORT_6MONTH, // Báo cáo huấn luyện 6 tháng
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.REPORT_9MONTH, // Báo cáo huấn luyện 9 tháng
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
-          {
-            path: RouterLink.REPORT_YEAR, // Báo cáo huấn luyện năm
-            element: <ListThongKe />,
-            module: SystemFeatures.ManagerTrainnings,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
+
           {
             path: RouterLink.DOCS, // Giáo án, thông qua giáo án
             element: <Navigate to={RouterLink.DOCS_APPROVE} replace />,
@@ -436,7 +381,13 @@ const MainRoutes = [
           },
           {
             path: RouterLink.DOCS_TRAIN, // Giáo án huấn luyện
-            element: <VanKien />,
+            element: <GiaoAn />,
+            module: SystemFeatures.ManagerDocuments,
+            action: [SystemAction.View, SystemAction.Edit],
+          },
+          {
+            path: RouterLink.DOCS_TRAIN_DETAIL, // Giáo án huấn luyện
+            element: <GiaoAnDetail />,
             module: SystemFeatures.ManagerDocuments,
             action: [SystemAction.View, SystemAction.Edit],
           },

@@ -87,7 +87,8 @@ export const LoginPage: FC = () => {
       [name]: value,
     }));
   };
-  if (isLogin) return <Navigate to={RouterLink.TRAINING} />;
+  if (isLogin)
+    return <Navigate to={RouterLink.UPLOAD_TAI_LIEU.replace(":type", "01")} />;
   const directToSSO = () => {
     const ssoConfig = {
       response_type: SSOConfigs.responseType,

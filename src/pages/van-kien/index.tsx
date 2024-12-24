@@ -32,7 +32,7 @@ const VanKien = props => {
   };
   const getListFile = async () => {
     try {
-      const res = await APIServices.VanKien.getListVanKien();
+      const res = await APIServices.VanKien.getListVanKien({});
       setListFile(
         toArray(res)
           ?.sort((a, b) => b?.update_at - a?.update_at)

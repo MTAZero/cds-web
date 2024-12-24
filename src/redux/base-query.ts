@@ -1,5 +1,6 @@
 import axios, {AxiosError} from "axios";
 import {AppConfigs} from "const";
+import {getAuthToken} from "utils/store";
 
 const serverUrl = AppConfigs.serverUrl;
 // const { BASE_URL } = ROUTER_ROUTE;
@@ -14,7 +15,7 @@ export interface CustomError {
 
 const axiosBaseQuery = (): any => async requestOpts => {
   try {
-    const token = localStorage.getItem("accessToken");
+    const token = getAuthToken();
     const result = await baseInstance({
       ...requestOpts,
       headers: {

@@ -1,11 +1,16 @@
 import {Button, Col, Form, Row, Space, Spin, Upload} from "antd";
 import Icons from "assests/icons";
 import {InputFields} from "components";
-import React, {forwardRef, useImperativeHandle, useState} from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import {fieldType} from "types";
 import {APIServices, NotificationService} from "utils";
 const ModalUpload = forwardRef((props: any, ref) => {
-  const {getListFile, closeModal} = props;
+  const {getListFile, closeModal, type, descendantTreeUnit} = props;
   const [loading, setLoading] = useState(false);
   useImperativeHandle(ref, () => ({
     resetFields: () => {
@@ -23,6 +28,14 @@ const ModalUpload = forwardRef((props: any, ref) => {
       label: "Tiêu đề",
       rules: [{required: true, message: "Chưa nhập tiêu đề"}],
     },
+    {
+      type: fieldType.TREE_SELECT,
+      name: "unit",
+      css: {xs: 24, sm: 24, md: 24, lg: 24, xl: 24},
+      label: "Đơn vị",
+      rules: [{required: true, message: "Chưa chọn đơn vị"}],
+      treeData: descendantTreeUnit,
+    },
   ];
   const handleChooseFile = options => {
     const file = options?.file;
@@ -38,7 +51,8 @@ const ModalUpload = forwardRef((props: any, ref) => {
       const formData = new FormData();
       formData.append("file", selectedFile as Blob);
       formData.append("name", values?.name);
-      formData.append("type", "Văn kiện");
+      formData.append("unit", values?.unit);
+      formData.append("type", type);
       await APIServices.VanKien.uploadVanKien(formData);
       NotificationService.success("Đã tải file thành công!");
       setLoading(false);
@@ -56,9 +70,12 @@ const ModalUpload = forwardRef((props: any, ref) => {
       // }
     }
   };
+  useEffect(() => {
+    console.log(descendantTreeUnit);
+  }, [descendantTreeUnit]);
   return (
     <Spin spinning={loading}>
-      <Space direction="vertical" size={"large"} style={{width: "100%"}}>
+      <Space direction="vertical" size={"middle"} style={{width: "100%"}}>
         <Form form={form}>
           <Row gutter={[4, 4]}>
             <InputFields data={fields}></InputFields>
@@ -73,10 +90,10 @@ const ModalUpload = forwardRef((props: any, ref) => {
         </Row>
         <Row justify={"space-between"}>
           <Col xs={10} md={8} xl={6} lg={8}>
-            File đã chọn
+            Tài liệu đã chọn
           </Col>
           <Col xs={14} md={16} xl={18} lg={16} style={{fontWeight: 700}}>
-            {selectedFile?.name ?? "Chưa chọn file"}
+            {selectedFile?.name ?? "Chưa chọn tài liệu"}
           </Col>
         </Row>
         <Row justify={"end"} style={{marginTop: 4}}>
@@ -92,7 +109,7 @@ const ModalUpload = forwardRef((props: any, ref) => {
                 className="btn-sub"
                 icon={<Icons.file></Icons.file>}
               >
-                Chọn file
+                Chọn tài liệu
               </Button>
             </Upload>
 

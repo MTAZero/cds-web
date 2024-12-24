@@ -26,7 +26,7 @@ const fileInfo = (record, onDelete) => {
             <div className="center">
               <Popconfirm
                 className="danger-confirm"
-                title="Bạn muốn xóa?"
+                title="Bạn muốn xóa tài liệu này?"
                 onConfirm={onDelete}
               >
                 <Button
@@ -47,7 +47,7 @@ const columns: any = [
   {
     key: "name",
     dataIndex: "name",
-    title: "Danh sách văn kiện",
+    title: "Danh sách tài liệu",
     align: "left",
   },
 ];
