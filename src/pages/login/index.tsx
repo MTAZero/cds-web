@@ -1,6 +1,6 @@
 import {Box, Button, FormControl} from "@mui/material";
 import * as styles from "./styles";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {APIServices, NotificationService, serialize} from "../../utils";
 import {useAppDispatch, useAppSelector} from "../../hooks";
 import {RouterLink} from "../../routers/routers";
@@ -19,7 +19,7 @@ interface LoginFormState {
 }
 
 export const LoginPage: FC = () => {
-  const [state, setState] = useState<LoginFormState>({
+  const [values, setValues] = useState<LoginFormState>({
     username: "",
     password: "",
   });
@@ -51,8 +51,8 @@ export const LoginPage: FC = () => {
 
     try {
       const request = await APIServices.Auth.login(
-        state.username,
-        state.password
+        values.username,
+        values.password
       );
 
       const data = request?.data ? request?.data : {};
@@ -82,13 +82,16 @@ export const LoginPage: FC = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
-    setState(prevState => ({
+    setValues(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
+
   if (isLogin)
     return <Navigate to={RouterLink.UPLOAD_TAI_LIEU.replace(":type", "01")} />;
+
+  // return <Navigate to={RouterLink.UPLOAD_TAI_LIEU.replace(":type", "01")} />;
   const directToSSO = () => {
     const ssoConfig = {
       response_type: SSOConfigs.responseType,
@@ -110,7 +113,7 @@ export const LoginPage: FC = () => {
           <input
             type="text"
             name="username"
-            value={state.username}
+            value={values.username}
             onChange={handleChange}
             style={styles.textInputStyle}
           />
@@ -122,7 +125,7 @@ export const LoginPage: FC = () => {
             style={styles.textInputStyle}
             type="password"
             name="password"
-            value={state.password}
+            value={values.password}
             onChange={handleChange}
           />
         </Box>
