@@ -40,7 +40,7 @@ export const planMonthApi = createApi({
 
     getPlanMonth: builder.query<any, any>({
       query: id => ({
-        url: "/monthly-plan",
+        url: `/monthly-plan/${id}`,
         method: GET,
       }),
 

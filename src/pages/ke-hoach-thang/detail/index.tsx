@@ -1,21 +1,44 @@
 import {Button, Form, Row, Space} from "antd";
-import {InputFields} from "components";
-import React, {useEffect} from "react";
+import Editor from "ckeditor5-custom-build/build/ckeditor";
+import {CKEditor} from "@ckeditor/ckeditor5-react";
+import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
 import {
+  useDeletePlanMonthMutation,
   useGetPlanMonthQuery,
   usePostPlanMonthMutation,
   usePutPlanMonthMutation,
 } from "../../../redux/apiRtk/planMonth";
 import {fieldType, typeContentHL} from "types";
-import {isValuable, NotificationService} from "utils";
+import {
+  getDescendantTreeUnit,
+  isValuable,
+  NotificationService,
+  toArray,
+} from "utils";
+import {useGetListPlanMonthDetailTableQuery} from "../../../redux/apiRtk/tablePlanMonthDetail";
+import {
+  InputFields,
+  ListActionButton,
+  ModalCustom,
+  TableCustom,
+} from "components";
+import ModalKeHoachThangDetail from "../table";
+import {useAppSelector} from "hooks";
+import {RootState} from "../../../redux/store";
 
-const {INPUT, SELECT} = fieldType;
-const KeHoachThangDetail = () => {
+const {INPUT, TREE_SELECT} = fieldType;
+const KeHoachThangDetail = props => {
+  const {unitTree} = useAppSelector(state => state.catalog);
+  const [descendantTreeUnit, setDescendantTreeUnit] = useState<any>([]);
   const {id} = useParams();
   const [form] = Form.useForm();
-
-  const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
+  const [idRecord, setIdRecord] = useState();
+  const [nhiemVu, setNhiemVu] = useState<any>();
+  const [yeuCau, setYeuCau] = useState<any>();
+  const [baoDamThucHien, setBaoDamThucHien] = useState<any>();
+  const [toChucThucHien, setToChucThucHien] = useState<any>();
+  const ref = useRef<any>(null);
   const [
     postPlanMonth,
     {isSuccess: isSuccessPost, isLoading: isLoadingPost, error: errorPost},
@@ -24,9 +47,22 @@ const KeHoachThangDetail = () => {
     putPlanMonth,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
   ] = usePutPlanMonthMutation();
-  const {data: dataGet, isSuccess: isSuccessGet} = useGetPlanMonthQuery(id, {
-    skip: id == "new",
-  });
+  const [
+    deletePlanMonth,
+    {
+      isSuccess: isSuccessDelete,
+      isLoading: isLoadingDelete,
+      error: errorDelete,
+    },
+  ] = useDeletePlanMonthMutation();
+  const {data: dataPlanMonth, isSuccess: isSuccessPlanMonth} =
+    useGetPlanMonthQuery(id);
+  const {data: dataTable, isSuccess: isSuccessDataTable} =
+    useGetListPlanMonthDetailTableQuery(id);
+  useEffect(() => {
+    const _descendantTreeUnit = getDescendantTreeUnit(unitTree);
+    setDescendantTreeUnit([_descendantTreeUnit]);
+  }, [unitTree]);
   const getFormValues = async () => {
     try {
       const formValues = await form.validateFields();
@@ -35,7 +71,15 @@ const KeHoachThangDetail = () => {
       return null;
     }
   };
-  useEffect(() => {}, [dataGet]);
+  useEffect(() => {
+    const formValues = {
+      name: dataPlanMonth?.name,
+      unit: dataPlanMonth?.unit?._id,
+      ...dataPlanMonth,
+    };
+
+    form.setFieldsValue(formValues);
+  }, [dataPlanMonth]);
   useEffect(() => {
     if (isSuccessPost) {
       NotificationService.success("Thêm dữ liệu thành công");
@@ -46,111 +90,181 @@ const KeHoachThangDetail = () => {
       NotificationService.success("Sửa dữ liệu thành công");
     }
   }, [isSuccessPut]);
+  useEffect(() => {
+    if (isSuccessDelete) {
+      NotificationService.success("Xóa dữ liệu thành công");
+    }
+  }, [isSuccessDelete]);
 
   const handleSubmit = async () => {
     const values = await getFormValues();
     if (!values) {
       return;
     }
-    const payload = {data: values, id: id};
-    const callApi = id != "new" ? putPlanMonth : postPlanMonth;
-    callApi(payload);
-  };
-  const fields = [
-    {
-      key: "stt",
-      name: "stt",
-      type: INPUT,
-      label: "Số thứ tự",
-      css: css,
-    },
-    {
-      key: "loai_noi_dung",
-      name: "loai_noi_dung",
-      type: INPUT,
-      label: "Loại nội dung",
-      css: css,
-    },
 
+    const payload = {
+      data: {
+        ...values,
+        // nhiem_vu: nhiemVu,
+        // yeu_cau: yeuCau,
+        // bao_dam_thuc_hien: baoDamThucHien,
+        // to_chuc_thuc_hien: toChucThucHien,
+      },
+      id: id,
+    };
+    putPlanMonth(payload);
+  };
+  const columns = [
+    {
+      key: "index",
+      dataIndex: "index",
+    },
     {
       key: "noi_dung",
-      name: "noi_dung",
-      type: INPUT,
-      label: "Nội dung",
-      css: css,
+      dataIndex: "noi_dung",
+      title: "Nội dung",
+      align: "center",
+      render: (value, record, index) => {
+        console.log();
+        return (
+          <>
+            {record?.stt} {value}
+          </>
+        );
+      },
     },
     {
       key: "tham_gia",
-      name: "tham_gia",
-      type: INPUT,
-      label: "Thành phần tham gia",
-      css: css,
+      dataIndex: "tham_gia",
+      title: "Thành phần tham gia",
+      align: "center",
     },
     {
       key: "cap_phu_trach",
-      name: "cap_phu_trach",
-      type: INPUT,
-      label: "Cấp phụ trách",
-      css: css,
+      dataIndex: "cap_phu_trach",
+      title: "Cấp phụ trách",
+      align: "center",
     },
     {
       key: "tong_gio",
-      name: "tong_gio",
-      type: INPUT,
-      label: "Tổng giờ",
-      css: css,
+      dataIndex: "tong_gio",
+      title: "Tổng giờ",
+      align: "center",
     },
     {
-      key: "tuan_1",
-      name: "tuan_1",
+      key: "action",
+      dataIndex: "action",
+      align: "center",
+      render: (value, record, index) => {
+        return (
+          <ListActionButton
+            deleteFunction={() => {
+              deletePlanMonth(record?.id);
+            }}
+            editFunction={() => {
+              handleOpenModal(record?.id);
+            }}
+          ></ListActionButton>
+        );
+      },
+    },
+  ];
+  const handleOpenModal = id => {
+    setIdRecord(id);
+    ref.current.openModal();
+  };
+  const data: any[] = [
+    {
       type: INPUT,
-      label: "Tuần 1",
-      css: css,
+      label: "Tên",
+      col: 1,
+      name: "name",
+      rules: [{required: true, message: "Bắt buộc nhập!"}],
     },
     {
-      key: "tuan_2",
-      name: "tuan_2",
-      type: INPUT,
-      label: "Tuần 2",
-      css: css,
-    },
-    {
-      key: "tuan_3",
-      name: "tuan_3",
-      type: INPUT,
-      label: "Tuần 3",
-      css: css,
-    },
-    {
-      key: "tuan_4",
-      name: "tuan_4",
-      type: INPUT,
-      label: "Tuần 4",
-      css: css,
-    },
-    {
-      key: "loai_noi_dung",
-      name: "loai_noi_dung",
-      type: SELECT,
-      label: "Loại dung",
-      css: css,
-      options: Object.values(typeContentHL).map(e => ({value: e, label: e})),
-    },
-    {
-      key: "bien_phap_tien_hanh",
-      name: "bien_phap_tien_hanh",
-      type: INPUT,
-      label: "Biện pháp tiến hành",
-      css: css,
+      type: TREE_SELECT,
+      label: "Đơn vị",
+      col: 1,
+      name: "unit",
+      rules: [{required: true, message: "Bắt buộc nhập!"}],
+      treeData: descendantTreeUnit,
     },
   ];
   return (
     <div className="page">
       <div className="main">
         <div className="container">
-          <Row gutter={[8, 8]}>
-            <InputFields data={fields}></InputFields>
+          <div>
+            <Form form={form}>
+              <Row gutter={[16, 8]} className="content-modal">
+                <InputFields data={data} />
+              </Row>
+            </Form>
+          </div>
+          <div>Nhiệm vụ</div>
+          <CKEditor
+            editor={Editor as any}
+            data={dataPlanMonth?.nhiem_vu}
+            onReady={event => {}}
+            onChange={(event, editor: any) => {
+              const _data = editor?.getData();
+              setNhiemVu(_data);
+            }}
+          />
+
+          <div>Yêu cầu</div>
+          <CKEditor
+            editor={Editor as any}
+            data={dataPlanMonth?.yeu_cau}
+            onReady={event => {}}
+            onChange={(event, editor: any) => {
+              const _data = editor?.getData();
+              setNhiemVu(_data);
+            }}
+          />
+          <div>Bảo đảm thực hiện</div>
+          <CKEditor
+            editor={Editor as any}
+            data={dataPlanMonth?.bao_dam_thuc_hien}
+            onReady={event => {}}
+            onChange={(event, editor: any) => {
+              const _data = editor?.getData();
+              setBaoDamThucHien(_data);
+            }}
+          />
+          <div>Tổ chức thực hiện</div>
+          <CKEditor
+            editor={Editor as any}
+            data={dataPlanMonth?.to_chuc_thuc_hien}
+            onReady={event => {}}
+            onChange={(event, editor: any) => {
+              const _data = editor?.getData();
+              setToChucThucHien(_data);
+            }}
+          />
+          <Row justify={"end"} style={{marginTop: 8}}>
+            <Button
+              type="primary"
+              onClick={() => {
+                ref.current.openModal();
+              }}
+            >
+              Thêm hàng
+            </Button>
           </Row>
+          <div style={{marginBottom: 8, marginTop: 8}}>
+            <TableCustom
+              dataSource={toArray(dataTable?.items)}
+              columns={columns}
+            ></TableCustom>
+          </div>
+
+          <ModalCustom ref={ref} title="" onOpenModal={() => {}}>
+            <ModalKeHoachThangDetail
+              idRecord={idRecord}
+            ></ModalKeHoachThangDetail>
+          </ModalCustom>
+
           <Row justify={"end"}>
             <Space>
               <Button type="primary" onClick={handleSubmit}>

@@ -1,8 +1,6 @@
 import {Button, Row, Space, Spin} from "antd";
 import {Descriptions, DescriptionsItem, TitleCustom} from "components";
-import {data as dataInit} from "./config";
 import React, {useEffect, useRef, useState} from "react";
-import {useAppDispatch} from "hooks";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import "./style.scss";
@@ -16,9 +14,8 @@ import {
 import {formatTime} from "types";
 import ReactToPrint from "react-to-print";
 import Print from "./print/Print";
-const SoSach = prop => {
+const SoSach = () => {
   const printRef = useRef<any>(null);
-  const path = window.location.pathname;
   const [dataEditor, setDataEditor] = useState<any>();
   const {id} = useParams();
   const info: any = [

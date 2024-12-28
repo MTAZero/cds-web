@@ -17,9 +17,17 @@ export const unitApi = createApi({
       }),
       transformResponse: response => response?.data,
     }),
+    getListUnit: builder.query<any, any>({
+      query: params => ({
+        url: `/units`,
+        method: GET,
+        params,
+      }),
+      transformResponse: response => response?.data,
+    }),
   }),
 });
 
 export const unitApiReducer = unitApi.reducer;
 
-export const {useGetUnitTreeQuery} = unitApi;
+export const {useGetUnitTreeQuery, useGetListUnitQuery} = unitApi;

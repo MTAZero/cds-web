@@ -15,7 +15,10 @@ import {useNavigate} from "react-router-dom";
 import {RouterLink} from "routers/routers";
 import ModalEdit from "./ModalEdit/ModalEdit";
 import {useAppSelector} from "hooks";
-import {useGetUnitTreeQuery} from "../../redux/apiRtk/unit";
+import {
+  useGetListUnitQuery,
+  useGetUnitTreeQuery,
+} from "../../redux/apiRtk/unit";
 
 const KeHoachThang = () => {
   const [record, setRecord] = useState<any>();
@@ -49,6 +52,7 @@ const KeHoachThang = () => {
   const {data: unitTree, isLoading: isLoadingUnitTree} =
     useGetUnitTreeQuery(unitOfUser);
   const [descendantTreeUnit, setDescendantTreeUnit] = useState<any>([]);
+  const {data: allUnit} = useGetListUnitQuery({pageSize: 20, pageIndex: 1});
   useEffect(() => {
     const _descendantTreeUnit = getDescendantTreeUnit(unitTree);
     setDescendantTreeUnit([_descendantTreeUnit]);
@@ -70,6 +74,9 @@ const KeHoachThang = () => {
       dataIndex: "unit",
       key: "unit",
       align: "center",
+      render: (value, record, index) => {
+        return <>{allUnit?.items?.find(e => e?._id == value)?.name}</>;
+      },
     },
 
     {
@@ -88,7 +95,7 @@ const KeHoachThang = () => {
             setParams({...params, pageIndex: 1});
           }}
           viewFunction={() => {
-            navigate(RouterLink.PLAN_MONTH_DETAIL.replace(":id", record?.id));
+            navigate(RouterLink.PLAN_MONTH_DETAIL.replace(":id", record?._id));
           }}
         ></ListActionButton>
       ),

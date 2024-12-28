@@ -339,21 +339,21 @@ const MainRoutes = [
           {
             path: RouterLink.UPLOAD_TAI_LIEU, // Kế hoạch huấn luyện năm
             element: <UploadFile />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
+            // module: SystemFeatures.ManagerProgresses,
+            // action: [SystemAction.View, SystemAction.Edit],
           },
 
           {
             path: RouterLink.PLAN_MONTH, // Kế hoạch huấn luyện tháng
             element: <KeHoachThang />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
+            // module: SystemFeatures.ManagerProgresses,
+            // action: [SystemAction.View, SystemAction.Edit],
           },
           {
             path: RouterLink.PLAN_MONTH_DETAIL, // Kế hoạch huấn luyện tháng
             element: <KeHoachThangDetail />,
-            module: SystemFeatures.ManagerProgresses,
-            action: [SystemAction.View, SystemAction.Edit],
+            // module: SystemFeatures.ManagerProgresses,
+            // action: [SystemAction.View, SystemAction.Edit],
           },
           {
             path: RouterLink.TIEN_TRINH_BIEU_ROUTE, // Tiến trình biểu huấn luyện tuần

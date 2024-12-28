@@ -44,12 +44,12 @@ const UploadFile = props => {
   const deleteVanKien = async id => {
     try {
       await APIServices.VanKien.deleteVanKien(id);
-      await getListFile(params);
+      await getListFile();
     } catch (error) {
       NotificationService.error("Có lỗi khi xóa tài liệu này");
     }
   };
-  const getListFile = async params => {
+  const getListFile = async () => {
     try {
       setLoading(true);
       const res = await APIServices.VanKien.getListVanKien(params);
@@ -64,7 +64,7 @@ const UploadFile = props => {
     }
   };
   useEffect(() => {
-    getListFile(params);
+    getListFile();
   }, [params]);
 
   useEffect(() => {

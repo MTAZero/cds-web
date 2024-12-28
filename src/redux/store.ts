@@ -18,7 +18,7 @@ import catalogSliceReducer from "./catalog/catalog.slice";
 import {uploadFileApi, uploadFileApiReducer} from "./apiRtk/uploadFile";
 import {unitApi} from "./apiRtk/unit";
 import {planMonthApi} from "./apiRtk/planMonth";
-import {planMonthDetailApi} from "./apiRtk/planMonthDetail";
+import {planMonthDetailTableApi} from "./apiRtk/tablePlanMonthDetail";
 import {syllabusApi} from "./apiRtk/syllabus";
 import {planSyllabusApi} from "./apiRtk/planSyllabus";
 
@@ -29,7 +29,7 @@ const rootStore = {
   [uploadFileApi.reducerPath]: uploadFileApi.reducer,
   [unitApi.reducerPath]: unitApi.reducer,
   [planMonthApi.reducerPath]: planMonthApi.reducer,
-  [planMonthDetailApi.reducerPath]: planMonthDetailApi.reducer,
+  [planMonthDetailTableApi.reducerPath]: planMonthDetailTableApi.reducer,
   [syllabusApi.reducerPath]: syllabusApi.reducer,
   [planSyllabusApi.reducerPath]: planSyllabusApi.reducer,
 };
@@ -57,7 +57,7 @@ export const store = configureStore({
       uploadFileApi.middleware,
       unitApi.middleware,
       planMonthApi.middleware,
-      planMonthDetailApi.middleware,
+      planMonthDetailTableApi.middleware,
       syllabusApi.middleware,
       planSyllabusApi.middleware,
     ]),
