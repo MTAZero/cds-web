@@ -16,7 +16,10 @@ import {
   NotificationService,
   toArray,
 } from "utils";
-import {useGetListPlanMonthDetailTableQuery} from "../../../redux/apiRtk/tablePlanMonthDetail";
+import {
+  useDeletePlanMonthDetailTableMutation,
+  useGetListPlanMonthDetailTableQuery,
+} from "../../../redux/apiRtk/tablePlanMonthDetail";
 import {
   InputFields,
   ListActionButton,
@@ -48,17 +51,20 @@ const KeHoachThangDetail = props => {
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
   ] = usePutPlanMonthMutation();
   const [
-    deletePlanMonth,
+    deletePlanMonthDetailTable,
     {
-      isSuccess: isSuccessDelete,
-      isLoading: isLoadingDelete,
-      error: errorDelete,
+      isSuccess: isSuccessDeletePlanMonthDetailTable,
+      isLoading: isLoadingDeletePlanMonthDetailTable,
+      error: errorDeletePlanMonthDetailTable,
     },
-  ] = useDeletePlanMonthMutation();
+  ] = useDeletePlanMonthDetailTableMutation();
   const {data: dataPlanMonth, isSuccess: isSuccessPlanMonth} =
     useGetPlanMonthQuery(id);
-  const {data: dataTable, isSuccess: isSuccessDataTable} =
-    useGetListPlanMonthDetailTableQuery(id);
+  const {
+    data: dataTable,
+    isSuccess: isSuccessDataTable,
+    isFetching: isFetchingTable,
+  } = useGetListPlanMonthDetailTableQuery(id);
   useEffect(() => {
     const _descendantTreeUnit = getDescendantTreeUnit(unitTree);
     setDescendantTreeUnit([_descendantTreeUnit]);
@@ -91,10 +97,10 @@ const KeHoachThangDetail = props => {
     }
   }, [isSuccessPut]);
   useEffect(() => {
-    if (isSuccessDelete) {
+    if (isSuccessDeletePlanMonthDetailTable) {
       NotificationService.success("Xóa dữ liệu thành công");
     }
-  }, [isSuccessDelete]);
+  }, [isSuccessDeletePlanMonthDetailTable]);
 
   const handleSubmit = async () => {
     const values = await getFormValues();
@@ -159,10 +165,10 @@ const KeHoachThangDetail = props => {
         return (
           <ListActionButton
             deleteFunction={() => {
-              deletePlanMonth(record?.id);
+              deletePlanMonthDetailTable(record?._id);
             }}
             editFunction={() => {
-              handleOpenModal(record?.id);
+              handleOpenModal(record?._id);
             }}
           ></ListActionButton>
         );
@@ -236,7 +242,6 @@ const KeHoachThangDetail = props => {
           <CKEditor
             editor={Editor as any}
             data={dataPlanMonth?.to_chuc_thuc_hien}
-            onReady={event => {}}
             onChange={(event, editor: any) => {
               const _data = editor?.getData();
               setToChucThucHien(_data);
@@ -254,6 +259,7 @@ const KeHoachThangDetail = props => {
           </Row>
           <div style={{marginBottom: 8, marginTop: 8}}>
             <TableCustom
+              isLoading={isFetchingTable}
               dataSource={toArray(dataTable?.items)}
               columns={columns}
             ></TableCustom>

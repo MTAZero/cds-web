@@ -49,7 +49,7 @@ export const planMonthDetailTableApi = createApi({
     }),
     deletePlanMonthDetailTable: builder.mutation<any, any>({
       query: id => ({
-        url: "/monthly-plan-detail",
+        url: `/monthly-plan-detail/${id}`,
         method: DELETE,
       }),
       invalidatesTags: ["Post"],

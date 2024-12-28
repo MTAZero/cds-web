@@ -7,6 +7,7 @@ import {fieldType, typeContentHL} from "types";
 import {isValuable, NotificationService} from "utils";
 import {
   useGetListPlanMonthDetailTableQuery,
+  useGetPlanMonthDetailTableQuery,
   usePostPlanMonthDetailTableMutation,
   usePutPlanMonthDetailTableMutation,
 } from "../../../redux/apiRtk/tablePlanMonthDetail";
@@ -19,15 +20,15 @@ const ModalKeHoachThangDetail = props => {
 
   const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
   const [
-    postPlanMonth,
+    postPlanMonthDetailTable,
     {isSuccess: isSuccessPost, isLoading: isLoadingPost, error: errorPost},
   ] = usePostPlanMonthDetailTableMutation();
   const [
-    putPlanMonth,
+    putPlanMonthDetailTable,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
   ] = usePutPlanMonthDetailTableMutation();
   const {data: dataGet, isSuccess: isSuccessGet} =
-    useGetListPlanMonthDetailTableQuery(idRecord, {
+    useGetPlanMonthDetailTableQuery(idRecord, {
       skip: !isValuable(idRecord),
     });
   const getFormValues = async () => {
@@ -38,7 +39,9 @@ const ModalKeHoachThangDetail = props => {
       return null;
     }
   };
-  useEffect(() => {}, [dataGet]);
+  useEffect(() => {
+    console.log(dataGet);
+  }, [dataGet]);
   useEffect(() => {
     if (isSuccessPost) {
       NotificationService.success("Thêm dữ liệu thành công");
@@ -59,9 +62,10 @@ const ModalKeHoachThangDetail = props => {
       data: {...values, ke_hoach_thang: ke_hoach_thang, thu_tu: 1},
       id: idRecord,
     };
-    // const callApi = id != "new" ? putPlanMonth : postPlanMonth;
-    // callApi(payload);
-    postPlanMonth(payload);
+    const callApi = isValuable(idRecord)
+      ? putPlanMonthDetailTable
+      : postPlanMonthDetailTable;
+    callApi(payload);
   };
   const fields = [
     {
