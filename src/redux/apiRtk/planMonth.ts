@@ -54,6 +54,15 @@ export const planMonthApi = createApi({
       invalidatesTags: ["Post"],
       transformResponse: response => response?.data,
     }),
+    getReport: builder.mutation<any, any>({
+      query: id => ({
+        url: `/monthly-plan/${id}`,
+        method: POST,
+        responseType: "blob",
+      }),
+
+      transformResponse: response => response?.data,
+    }),
   }),
 });
 
@@ -65,4 +74,5 @@ export const {
   useGetPlanMonthQuery,
   useGetListPlanMonthQuery,
   useDeletePlanMonthMutation,
+  useGetReportMutation,
 } = planMonthApi;

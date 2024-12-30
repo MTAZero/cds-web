@@ -1,10 +1,11 @@
 import {PlusOutlined} from "@ant-design/icons";
-import {Button, Form, Row, Spin, Tag} from "antd";
+import {Button, Form, Row, Spin} from "antd";
 import {ListActionButton, ModalCustom, TableCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 import {
   useDeletePlanMonthMutation,
   useGetListPlanMonthQuery,
+  useGetReportMutation,
   usePostPlanMonthMutation,
   usePutPlanMonthMutation,
 } from "../../redux/apiRtk/planMonth";
@@ -37,6 +38,14 @@ const KeHoachThang = () => {
     postPlanMonth,
     {isSuccess: isSuccessPost, isLoading: isLoadingPost, error: errorPost},
   ] = usePostPlanMonthMutation();
+  const [
+    getReport,
+    {
+      isSuccess: isSuccessGetReport,
+      isLoading: isLoadingGetReport,
+      error: errorGetReport,
+    },
+  ] = useGetReportMutation();
   const [
     putPlanMonth,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
@@ -97,6 +106,7 @@ const KeHoachThang = () => {
           viewFunction={() => {
             navigate(RouterLink.PLAN_MONTH_DETAIL.replace(":id", record?._id));
           }}
+          downloadFunction={() => {}}
         ></ListActionButton>
       ),
     },
