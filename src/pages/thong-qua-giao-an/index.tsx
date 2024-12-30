@@ -1,17 +1,14 @@
-import {CheckCircleOutlined, PlusOutlined} from "@ant-design/icons";
+import {PlusOutlined} from "@ant-design/icons";
 import {Button, Form, Popconfirm, Row, Spin, Tag} from "antd";
 import {ListActionButton, ModalCustom, TableCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 import {
   useDeleteSyllabusMutation,
   useGetListSyllabusQuery,
-  usePostSyllabusMutation,
-  usePutSyllabusMutation,
 } from "../../redux/apiRtk/syllabus";
 import {isValuable} from "utils/check";
 import {randomId} from "utils/common";
 import {getDescendantTreeUnit, NotificationService} from "utils";
-import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "hooks";
 import {
   useGetListUnitQuery,
@@ -21,7 +18,7 @@ import ModalGiaoAnDetail from "./detail";
 import SyllabusStatus from "./syllabusStatus";
 import ModalViewFile from "./modalViewFile";
 
-const GiaoAn = () => {
+const ThongQuaGiaoAn = () => {
   const [idGiaoAn, setIdGiaoAn] = useState();
   const tableRef = useRef<any>(null);
   const [fileId, setFileId] = useState();
@@ -197,4 +194,4 @@ const GiaoAn = () => {
     </div>
   );
 };
-export default GiaoAn;
+export default ThongQuaGiaoAn;

@@ -24,6 +24,7 @@ export const uploadFileApi = createApi({
         url: "/document",
         method: POST,
         data: data,
+        headers: {"Content-Type": "multipart/form-data"},
       }),
       invalidatesTags: ["Post"],
       transformResponse: response => response?.data,
@@ -31,7 +32,7 @@ export const uploadFileApi = createApi({
 
     getFile: builder.query<any, any>({
       query: id => ({
-        url: "/document",
+        url: `/document/${id}`,
         method: GET,
       }),
 

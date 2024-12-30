@@ -136,7 +136,7 @@ const ModalKeHoachThangDetail = props => {
       key: "loai_noi_dung",
       name: "loai_noi_dung",
       type: SELECT,
-      label: "Loại dung",
+      label: "Loại nội dung",
       css: css,
       options: Object.values(typeContentHL).map(e => ({value: e, label: e})),
     },

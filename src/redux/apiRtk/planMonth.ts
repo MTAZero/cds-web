@@ -3,7 +3,7 @@ import {API_METHOD} from "types/api-method.enum";
 import {baseQuery} from "../base-query";
 
 export const PLAN_MONTH_API_REDUCER_KEY = "planMonthApi";
-const {POST, GET, DELETE} = API_METHOD;
+const {POST, GET, PUT, DELETE} = API_METHOD;
 export const planMonthApi = createApi({
   reducerPath: PLAN_MONTH_API_REDUCER_KEY,
   baseQuery,
@@ -31,7 +31,7 @@ export const planMonthApi = createApi({
     putPlanMonth: builder.mutation<any, any>({
       query: data => ({
         url: `/monthly-plan/${data?.id}`,
-        method: POST,
+        method: PUT,
         data: data?.data,
       }),
       invalidatesTags: ["Post"],
@@ -48,7 +48,7 @@ export const planMonthApi = createApi({
     }),
     deletePlanMonth: builder.mutation<any, any>({
       query: id => ({
-        url: "/monthly-plan",
+        url: `/monthly-plan/${id}`,
         method: DELETE,
       }),
       invalidatesTags: ["Post"],

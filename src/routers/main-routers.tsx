@@ -59,6 +59,7 @@ import KeHoachThang from "pages/ke-hoach-thang";
 import KeHoachThangDetail from "pages/ke-hoach-thang/detail";
 import GiaoAn from "pages/giao-an";
 import GiaoAnDetail from "pages/giao-an/detail";
+import ThongQuaGiaoAn from "pages/thong-qua-giao-an";
 const MainRoutes = [
   {path: "*", element: <Navigate to={RouterLink.LOGIN} replace />},
   {
@@ -375,7 +376,7 @@ const MainRoutes = [
           },
           {
             path: RouterLink.DOCS_APPROVE, // Thông qua giáo án
-            element: <VanKien />,
+            element: <ThongQuaGiaoAn />,
             module: SystemFeatures.ManagerDocuments,
             action: [SystemAction.View, SystemAction.Edit],
           },
@@ -385,12 +386,7 @@ const MainRoutes = [
             module: SystemFeatures.ManagerDocuments,
             action: [SystemAction.View, SystemAction.Edit],
           },
-          {
-            path: RouterLink.DOCS_TRAIN_DETAIL, // Giáo án huấn luyện
-            element: <GiaoAnDetail />,
-            module: SystemFeatures.ManagerDocuments,
-            action: [SystemAction.View, SystemAction.Edit],
-          },
+
           {
             path: RouterLink.THONG_KE_HUAN_LUYEN_CA_NHAN, // Sổ học tập cá nhân
             element: <ThongKeHLCaNhan />,

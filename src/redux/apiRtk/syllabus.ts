@@ -3,7 +3,7 @@ import {API_METHOD} from "types/api-method.enum";
 import {baseQuery} from "../base-query";
 
 export const SYLLABUS_API_REDUCER_KEY = "syllabusApi";
-const {POST, GET, DELETE} = API_METHOD;
+const {POST, PUT, GET, DELETE} = API_METHOD;
 export const syllabusApi = createApi({
   reducerPath: SYLLABUS_API_REDUCER_KEY,
   baseQuery,
@@ -31,7 +31,7 @@ export const syllabusApi = createApi({
     putSyllabus: builder.mutation<any, any>({
       query: data => ({
         url: `/huan-luyen/giao-an/${data?.id}`,
-        method: POST,
+        method: PUT,
         data: data?.data,
       }),
       invalidatesTags: ["Post"],

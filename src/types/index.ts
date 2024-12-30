@@ -7,6 +7,7 @@ export * from "./catalog.enum";
 export * from "./currency.enum";
 export * from "./type-meeting-book.enum";
 export * from "./type-content-hl.enum";
+export * from "./syllabus-status.enum";
 export enum SystemFeatures {
   ManagerUsers = "ManagerUsers",
   ManagerRoles = "ManagerRoles",

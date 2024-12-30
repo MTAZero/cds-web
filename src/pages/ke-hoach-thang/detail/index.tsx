@@ -79,12 +79,13 @@ const KeHoachThangDetail = props => {
   };
   useEffect(() => {
     const formValues = {
+      ...dataPlanMonth,
       name: dataPlanMonth?.name,
       unit: dataPlanMonth?.unit?._id,
-      ...dataPlanMonth,
     };
-
+    console.log(formValues);
     form.setFieldsValue(formValues);
+    console.log(form.getFieldsValue());
   }, [dataPlanMonth]);
   useEffect(() => {
     if (isSuccessPost) {
@@ -107,14 +108,14 @@ const KeHoachThangDetail = props => {
     if (!values) {
       return;
     }
-
+    console.log(values);
     const payload = {
       data: {
         ...values,
-        // nhiem_vu: nhiemVu,
-        // yeu_cau: yeuCau,
-        // bao_dam_thuc_hien: baoDamThucHien,
-        // to_chuc_thuc_hien: toChucThucHien,
+        nhiem_vu: nhiemVu,
+        yeu_cau: yeuCau,
+        bao_dam_thuc_hien: baoDamThucHien,
+        to_chuc_thuc_hien: toChucThucHien,
       },
       id: id,
     };
@@ -225,7 +226,7 @@ const KeHoachThangDetail = props => {
             onReady={event => {}}
             onChange={(event, editor: any) => {
               const _data = editor?.getData();
-              setNhiemVu(_data);
+              setYeuCau(_data);
             }}
           />
           <div>Bảo đảm thực hiện</div>
