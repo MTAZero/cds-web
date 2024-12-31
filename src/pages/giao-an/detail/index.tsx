@@ -18,7 +18,7 @@ import {usePostFileMutation} from "../../../redux/apiRtk/uploadFile";
 import ModalViewFile from "../modalViewFile";
 const {INPUT, TREE_SELECT, DATE, SELECT} = fieldType;
 const ModalGiaoAnDetail = props => {
-  const {idGiaoAn, descendantTreeUnit} = props;
+  const {idGiaoAn, descendantTreeUnit, setPage} = props;
   const [form] = Form.useForm();
   const modalRef = useRef<any>();
   const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
@@ -73,6 +73,7 @@ const ModalGiaoAnDetail = props => {
   useEffect(() => {
     if (isSuccessPost) {
       NotificationService.success("Thêm dữ liệu thành công");
+      setPage(1);
     }
   }, [isSuccessPost]);
   useEffect(() => {

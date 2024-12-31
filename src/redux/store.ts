@@ -21,6 +21,7 @@ import {planMonthApi} from "./apiRtk/planMonth";
 import {planMonthDetailTableApi} from "./apiRtk/tablePlanMonthDetail";
 import {syllabusApi} from "./apiRtk/syllabus";
 import {planSyllabusApi} from "./apiRtk/planSyllabus";
+import {userApi} from "./apiRtk/user";
 
 const rootStore = {
   global: globalSliceReducer,
@@ -32,6 +33,7 @@ const rootStore = {
   [planMonthDetailTableApi.reducerPath]: planMonthDetailTableApi.reducer,
   [syllabusApi.reducerPath]: syllabusApi.reducer,
   [planSyllabusApi.reducerPath]: planSyllabusApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
 };
 const appReducer = combineReducers({
   ...rootStore,
@@ -60,6 +62,7 @@ export const store = configureStore({
       planMonthDetailTableApi.middleware,
       syllabusApi.middleware,
       planSyllabusApi.middleware,
+      userApi.middleware,
     ]),
   devTools: process.env.REACT_NODE_ENV !== "production",
 });

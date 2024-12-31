@@ -11,10 +11,10 @@ export const syllabusApi = createApi({
   tagTypes: ["Post"],
   endpoints: builder => ({
     getListSyllabus: builder.query<any, any>({
-      query: data => ({
+      query: params => ({
         url: "/huan-luyen/giao-an",
         method: GET,
-        data: data,
+        params: params,
       }),
       providesTags: ["Post"],
       transformResponse: response => response?.data,

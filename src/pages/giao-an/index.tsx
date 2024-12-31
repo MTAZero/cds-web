@@ -187,6 +187,7 @@ const GiaoAn = () => {
             <ModalGiaoAnDetail
               descendantTreeUnit={descendantTreeUnit}
               idGiaoAn={idGiaoAn}
+              setPage={setPage}
             ></ModalGiaoAnDetail>
           </ModalCustom>
           <ModalCustom ref={modalViewFileRef}>

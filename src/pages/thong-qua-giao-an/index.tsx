@@ -3,9 +3,9 @@ import {Button, Form, Popconfirm, Row, Spin, Tag} from "antd";
 import {ListActionButton, ModalCustom, TableCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 import {
-  useDeleteSyllabusMutation,
-  useGetListSyllabusQuery,
-} from "../../redux/apiRtk/syllabus";
+  useDeletePlanSyllabusMutation,
+  useGetListPlanSyllabusQuery,
+} from "../../redux/apiRtk/planSyllabus";
 import {isValuable} from "utils/check";
 import {randomId} from "utils/common";
 import {getDescendantTreeUnit, NotificationService} from "utils";
@@ -14,21 +14,21 @@ import {
   useGetListUnitQuery,
   useGetUnitTreeQuery,
 } from "../../redux/apiRtk/unit";
-import ModalGiaoAnDetail from "./detail";
 import SyllabusStatus from "./syllabusStatus";
+import ModalThongQuaGiaoAnDetail from "./detail";
 import ModalViewFile from "./modalViewFile";
 
 const ThongQuaGiaoAn = () => {
-  const [idGiaoAn, setIdGiaoAn] = useState();
+  const [idRecord, setIdRecord] = useState();
   const tableRef = useRef<any>(null);
   const [fileId, setFileId] = useState();
   const [displayData, setDisplayData] = useState<any[]>([]);
   const [params, setParams] = useState<any>({pageIndex: 1, pageSize: 10});
   const {
-    data: dataListSyllabus,
+    data: dataListPlanSyllabus,
     isFetching,
     isError,
-  } = useGetListSyllabusQuery(params, {
+  } = useGetListPlanSyllabusQuery(params, {
     // refetchOnFocus: true,
     refetchOnReconnect: true,
   });
@@ -36,9 +36,9 @@ const ThongQuaGiaoAn = () => {
   const modalRef = useRef<any>(null);
 
   const [
-    deleteSyllabus,
+    deletePlanSyllabus,
     {isSuccess: isSuccessDelete, isError: isErrorDelete, error: errorDelete},
-  ] = useDeleteSyllabusMutation();
+  ] = useDeletePlanSyllabusMutation();
   const unitOfUser = useAppSelector(state => state.auth.info.unit);
   const {data: unitTree, isLoading: isLoadingUnitTree} =
     useGetUnitTreeQuery(unitOfUser);
@@ -98,7 +98,7 @@ const ThongQuaGiaoAn = () => {
             handleOpenModal(record);
           }}
           deleteFunction={async () => {
-            await deleteSyllabus(record?._id);
+            await deletePlanSyllabus(record?._id);
             setPage(1);
             setParams({...params, pageIndex: 1});
           }}
@@ -132,15 +132,15 @@ const ThongQuaGiaoAn = () => {
   }, [errorDelete]);
 
   useEffect(() => {
-    if (dataListSyllabus) {
+    if (dataListPlanSyllabus) {
       setDisplayData(
-        dataListSyllabus?.items?.map(el => ({
+        dataListPlanSyllabus?.items?.map(el => ({
           key: randomId(),
           ...el,
         })) || []
       );
     }
-  }, [dataListSyllabus]);
+  }, [dataListPlanSyllabus]);
 
   const setPage = pageIndex => {
     tableRef?.current?.setPage(pageIndex);
@@ -148,7 +148,7 @@ const ThongQuaGiaoAn = () => {
 
   const handleOpenModal = (record: any | null) => {
     modalRef?.current?.openModal();
-    setIdGiaoAn(record?._id);
+    setIdRecord(record?._id);
   };
 
   return (
@@ -168,7 +168,7 @@ const ThongQuaGiaoAn = () => {
             <TableCustom
               ref={tableRef}
               isLoading={isFetching}
-              total={dataListSyllabus?.total}
+              total={dataListPlanSyllabus?.total}
               dataSource={displayData}
               columns={columns}
               onChangePagination={(page, limit) => {
@@ -179,12 +179,12 @@ const ThongQuaGiaoAn = () => {
           <ModalCustom
             width={1400}
             ref={modalRef}
-            title={`${idGiaoAn ? "Sửa thông tin" : "Thêm"}`}
+            title={`${idRecord ? "Sửa thông tin" : "Thêm"}`}
           >
-            <ModalGiaoAnDetail
+            <ModalThongQuaGiaoAnDetail
               descendantTreeUnit={descendantTreeUnit}
-              idGiaoAn={idGiaoAn}
-            ></ModalGiaoAnDetail>
+              idRecord={idRecord}
+            ></ModalThongQuaGiaoAnDetail>
           </ModalCustom>
           <ModalCustom ref={modalViewFileRef}>
             <ModalViewFile fileId={fileId}></ModalViewFile>

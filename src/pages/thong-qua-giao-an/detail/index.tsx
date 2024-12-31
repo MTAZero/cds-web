@@ -2,42 +2,49 @@ import {Button, Col, Form, Row, Space, Spin, Upload} from "antd";
 import {InputFields, ModalCustom} from "components";
 import React, {useEffect, useRef, useState} from "react";
 import {
-  useGetSyllabusQuery,
-  usePostSyllabusMutation,
-  usePutSyllabusMutation,
-} from "../../../redux/apiRtk/syllabus";
-import {fieldType, formatTime, syllabusStatus} from "types";
+  useGetPlanSyllabusQuery,
+  usePostPlanSyllabusMutation,
+  usePutPlanSyllabusMutation,
+} from "../../../redux/apiRtk/planSyllabus";
+import {fieldType, formatTime, planSyllabusStatus} from "types";
 import {
   convertDateStringToDateObject,
   formatDateToString,
   isValuable,
   NotificationService,
+  toArray,
 } from "utils";
 import Icons from "assests/icons";
+import {useGetListUserQuery} from "../../../redux/apiRtk/user";
 import {usePostFileMutation} from "../../../redux/apiRtk/uploadFile";
+import ModalListGiaoAn from "../modalListGiaoAn";
 import ModalViewFile from "../modalViewFile";
-const {INPUT, TREE_SELECT, DATE, SELECT} = fieldType;
-const ModalGiaoAnDetail = props => {
-  const {idGiaoAn, descendantTreeUnit} = props;
+const {TREE_SELECT, DATE, SELECT, INPUT} = fieldType;
+const ModalThongQuaGiaoAnDetail = props => {
+  const {id, descendantTreeUnit} = props;
   const [form] = Form.useForm();
-  const modalRef = useRef<any>();
+  const modalViewFileRef = useRef<any>();
+  const modalGiaoAnRef = useRef<any>();
   const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
   const [
-    postSyllabus,
+    postPlanSyllabus,
     {isSuccess: isSuccessPost, isLoading: isLoadingPost, error: errorPost},
-  ] = usePostSyllabusMutation();
+  ] = usePostPlanSyllabusMutation();
   const [
-    putSyllabus,
+    putPlanSyllabus,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
-  ] = usePutSyllabusMutation();
-  const {data: dataGet, isSuccess: isSuccessGet} = useGetSyllabusQuery(
-    idGiaoAn,
-    {
-      skip: !isValuable(idGiaoAn),
-    }
-  );
+  ] = usePutPlanSyllabusMutation();
+  const {data: dataGet, isSuccess: isSuccessGet} = useGetPlanSyllabusQuery(id, {
+    skip: !isValuable(id),
+  });
+  const {data: dataUsers, isSuccess: isSuccessUsers} = useGetListUserQuery({
+    pageIndex: 1,
+    pageSize: 200,
+  });
   const [postFile, {isSuccess: isSuccessUpload, data: dataUpload}] =
     usePostFileMutation();
+  const [fileId, setFileId] = useState();
+  const [giaoAnId, setGiaoAnId] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const getFormValues = async () => {
     try {
@@ -50,25 +57,11 @@ const ModalGiaoAnDetail = props => {
   useEffect(() => {
     const formatValues = {
       ...dataGet,
-      thoi_gian_bat_dau_thong_qua: convertDateStringToDateObject(
-        dataGet?.thoi_gian_bat_dau_thong_qua
-      ),
-
-      thoi_gian_ket_thuc_thong_qua: convertDateStringToDateObject(
-        dataGet?.thoi_gian_ket_thuc_thong_qua
-      ),
-      thoi_gian_bat_dau_phe_duyet: convertDateStringToDateObject(
-        dataGet?.thoi_gian_bat_dau_phe_duyet
-      ),
-      thoi_gian_ket_thuc_phe_duyet: convertDateStringToDateObject(
-        dataGet?.thoi_gian_ket_thuc_phe_duyet
-      ),
-      thoi_gian_hoan_thanh_cong_tac_chuan_bi: convertDateStringToDateObject(
-        dataGet?.thoi_gian_hoan_thanh_cong_tac_chuan_bi
-      ),
+      thoi_gian: convertDateStringToDateObject(dataGet?.thoi_gian),
     };
     form.setFieldsValue(formatValues);
     setSelectedFile(dataGet?.file);
+    setGiaoAnId(dataGet?.giao_an);
   }, [dataGet]);
   useEffect(() => {
     if (isSuccessPost) {
@@ -80,17 +73,6 @@ const ModalGiaoAnDetail = props => {
       NotificationService.success("Sửa dữ liệu thành công");
     }
   }, [isSuccessPut]);
-  // useEffect(() => {
-  //   if (isSuccessUpload) {
-  //     NotificationService.success("Sửa dữ liệu thành công");
-  //   }
-  // }, [isSuccessUpload]);
-  useEffect(() => {
-    if (dataUpload) {
-      setSelectedFile(dataUpload?._id);
-    }
-  }, [dataUpload]);
-
   const handleChooseFile = options => {
     const file = options?.file;
     setSelectedFile(file);
@@ -98,9 +80,10 @@ const ModalGiaoAnDetail = props => {
     formData.append("file", selectedFile as Blob);
     formData.append("name", form.getFieldValue("ten"));
     formData.append("unit", form.getFieldValue("don_vi"));
-    formData.append("type", "14");
+    formData.append("type", "15");
     postFile(formData);
   };
+
   const handleSubmit = async () => {
     const values = await getFormValues();
     if (!values) {
@@ -109,73 +92,48 @@ const ModalGiaoAnDetail = props => {
     const payload = {
       data: {
         ...values,
-        thoi_gian_bat_dau_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_bat_dau_thong_qua
-        ),
-
-        thoi_gian_ket_thuc_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_ket_thuc_thong_qua
-        ),
+        thoi_gian: formatDateToString(dataGet?.thoi_gian),
         thoi_gian_bat_dau_phe_duyet: formatDateToString(
           dataGet?.thoi_gian_bat_dau_phe_duyet
         ),
         thoi_gian_ket_thuc_phe_duyet: formatDateToString(
           dataGet?.thoi_gian_ket_thuc_phe_duyet
         ),
-        thoi_gian_hoan_thanh_cong_tac_chuan_bi: formatDateToString(
-          dataGet?.thoi_gian_hoan_thanh_cong_tac_chuan_bi
+        thoi_gian_bat_dau_thong_qua: formatDateToString(
+          dataGet?.thoi_gian_bat_dau_thong_qua
+        ),
+        thoi_gian_ket_thuc_thong_qua: formatDateToString(
+          dataGet?.thoi_gian_ket_thuc_thong_qua
         ),
         file: selectedFile,
+        giao_an: giaoAnId,
       },
-      id: idGiaoAn,
+      id: id,
     };
-    const callApi = isValuable(idGiaoAn) ? putSyllabus : postSyllabus;
+    const callApi = isValuable(id) ? putPlanSyllabus : postPlanSyllabus;
     callApi(payload);
   };
   const fields = [
     {
-      key: "ten",
-      name: "ten",
-      type: INPUT,
-      label: "Tên",
+      key: "nguoi_phe_duyet",
+      name: "nguoi_phe_duyet",
+      type: SELECT,
+      label: "Người phê duyệt",
       css: css,
-    },
-    {
-      key: "nguoi_xay_dung",
-      name: "nguoi_xay_dung",
-      type: INPUT,
-      label: "Người xây dựng",
-      css: css,
-    },
-    {
-      key: "nganh",
-      name: "nganh",
-      type: INPUT,
-      label: "Ngành",
-      css: css,
-    },
-    {
-      key: "thoi_gian_bat_dau_thong_qua",
-      name: "thoi_gian_bat_dau_thong_qua",
-      type: DATE,
-      optionsTime: {format: formatTime.dateTime},
-      label: "Thời gian bắt đầu thông qua",
-      css: css,
+      options: toArray(dataUsers?.items)
+        ?.filter(e => e?.isPersonal)
+        .map(e => ({
+          label: e?.full_name,
+          value: e?._id,
+        })),
     },
 
     {
-      key: "dia_diem_thong_qua",
-      name: "dia_diem_thong_qua",
-      type: INPUT,
-      label: "Địa điểm thông qua",
-      css: css,
-    },
-    {
-      key: "thoi_gian_ket_thuc_thong_qua",
-      name: "thoi_gian_ket_thuc_thong_qua",
+      key: "thoi_gian",
+      name: "thoi_gian",
       type: DATE,
       optionsTime: {format: formatTime.dateTime},
-      label: "Thời gian kết thúc thông qua",
+      label: "Thời gian",
       css: css,
     },
     {
@@ -194,11 +152,34 @@ const ModalGiaoAnDetail = props => {
       css: css,
     },
     {
-      key: "thoi_gian_ket_thuc_phe_duyet",
-      name: "thoi_gian_ket_thuc_phe_duyet",
+      key: "thoi_gian_ket_thuc_phe_duyet ",
+      name: "thoi_gian_ket_thuc_phe_duyet ",
       type: DATE,
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian kết thúc phê duyệt",
+      css: css,
+    },
+    {
+      key: "dia_diem_thong_qua",
+      name: "dia_diem_thong_qua",
+      type: INPUT,
+      label: "Địa điểm thông qua",
+      css: css,
+    },
+    {
+      key: "thoi_gian_bat_dau_thong_qua",
+      name: "thoi_gian_bat_dau_thong_qua",
+      type: DATE,
+      optionsTime: {format: formatTime.dateTime},
+      label: "Thời gian bắt đầu thông qua",
+      css: css,
+    },
+    {
+      key: "thoi_gian_ket_thuc_thong_qua ",
+      name: "thoi_gian_ket_thuc_thong_qua ",
+      type: DATE,
+      optionsTime: {format: formatTime.dateTime},
+      label: "Thời gian kết thúc thông qua",
       css: css,
     },
     {
@@ -209,74 +190,27 @@ const ModalGiaoAnDetail = props => {
       css: css,
     },
     {
-      key: "ket_luan_phe_duyet",
-      name: "ket_luan_phe_duyet",
+      key: "ket_luan",
+      name: "ket_luan",
       type: INPUT,
-      label: "Nội dung phê duyệt",
+      label: "Kết luận",
       css: css,
     },
     {
-      key: "nguoi_phe_duyet",
-      name: "nguoi_phe_duyet",
+      key: "nganh",
+      name: "nganh",
       type: INPUT,
-      label: "Người phê duyệt",
-      css: css,
-    },
-    {
-      key: "muc_dich",
-      name: "muc_dich",
-      type: INPUT,
-      label: "Mục đích",
-      css: css,
-    },
-    {
-      key: "yeu_cau",
-      name: "yeu_cau",
-      type: INPUT,
-      label: "Yêu cầu",
-      css: css,
-    },
-    {
-      key: "thoi_gian_hoan_thanh_cong_tac_chuan_bi",
-      name: "thoi_gian_hoan_thanh_cong_tac_chuan_bi",
-      type: DATE,
-      optionsTime: {format: formatTime.dateTime},
-      label: "Thời gian hoàn thành công tác chuẩn bị",
-      css: css,
-    },
-    {
-      key: "thoi_gian_len_lop_ly_thuyet",
-      name: "thoi_gian_len_lop_ly_thuyet",
-      type: INPUT,
-      label: "Thời gian lên lớp lý thuyết",
-      css: css,
-    },
-    {
-      key: "thoi_gian_len_lop_thuc_hanh",
-      name: "thoi_gian_len_lop_thuc_hanh",
-      type: INPUT,
-      label: "Thời gian lên lớp thực hành",
-      css: css,
-    },
-    {
-      key: "kiem_tra",
-      name: "kiem_tra",
-      type: INPUT,
-      label: "Kiểm tra",
-      css: css,
-    },
-    {
-      key: "tong_thoi_gian_len_lop",
-      name: "tong_thoi_gian_len_lop",
-      type: INPUT,
-      label: "Tổng thời gian lên lớp",
+      label: "Ngành",
       css: css,
     },
     {
       key: "trang_thai",
       name: "trang_thai",
       type: SELECT,
-      options: Object.values(syllabusStatus).map(e => ({value: e, label: e})),
+      options: Object.values(planSyllabusStatus).map(e => ({
+        value: e,
+        label: e,
+      })),
       label: "Trạng thái",
       css: css,
     },
@@ -302,24 +236,46 @@ const ModalGiaoAnDetail = props => {
             </Form>
             <Row justify={"space-between"} style={{marginTop: 8}}>
               <Col xs={10} md={8} xl={3} lg={3}>
-                Giáo án
+                File
               </Col>
               <Col xs={14} md={16} xl={21} lg={21} style={{fontWeight: 700}}>
                 {selectedFile ? (
                   <Button
                     type="primary"
                     onClick={() => {
-                      modalRef.current.openModal();
+                      modalViewFileRef.current.openModal();
+                      setFileId(selectedFile);
+                    }}
+                  >
+                    Xem File
+                  </Button>
+                ) : (
+                  "Chưa chọn file"
+                )}
+              </Col>
+            </Row>
+            <Row justify={"space-between"} style={{marginTop: 8}}>
+              <Col xs={10} md={8} xl={3} lg={3}>
+                Giáo án
+              </Col>
+              <Col xs={14} md={16} xl={21} lg={21} style={{fontWeight: 700}}>
+                {giaoAnId ? (
+                  <Button
+                    type="primary"
+                    onClick={() => {
+                      modalViewFileRef.current.openModal();
+                      setFileId(giaoAnId);
                     }}
                   >
                     Xem giáo án
                   </Button>
                 ) : (
-                  "Chưa chọn tài liệu"
+                  "Chưa chọn giáo án"
                 )}
               </Col>
             </Row>
-            <Row justify={"end"}>
+
+            <Row justify={"end"} style={{marginTop: 8}}>
               <Space>
                 <Upload
                   accept=".pdf"
@@ -327,26 +283,33 @@ const ModalGiaoAnDetail = props => {
                   showUploadList={false}
                   customRequest={handleChooseFile}
                 >
-                  <Button
-                    type="primary"
-                    className="btn-sub"
-                    icon={<Icons.file></Icons.file>}
-                  >
-                    Chọn tài liệu
+                  <Button type="primary" icon={<Icons.file></Icons.file>}>
+                    Chọn file
                   </Button>
                 </Upload>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    modalGiaoAnRef?.current?.openModal();
+                  }}
+                >
+                  Chọn giáo án
+                </Button>
                 <Button type="primary" onClick={handleSubmit}>
                   Lưu lại
                 </Button>
               </Space>
-              <ModalCustom ref={modalRef}>
-                <ModalViewFile fileId={selectedFile}></ModalViewFile>
-              </ModalCustom>
             </Row>
           </Spin>
+          <ModalCustom title="Danh sách giáo án" ref={modalGiaoAnRef}>
+            <ModalListGiaoAn setGiaoAnId={setGiaoAnId}></ModalListGiaoAn>
+          </ModalCustom>
+          <ModalCustom ref={modalViewFileRef}>
+            <ModalViewFile fileId={fileId}></ModalViewFile>
+          </ModalCustom>
         </div>
       </div>
     </div>
   );
 };
-export default ModalGiaoAnDetail;
+export default ModalThongQuaGiaoAnDetail;
