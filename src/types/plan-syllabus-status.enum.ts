@@ -1,7 +1,7 @@
 enum planSyllabusStatus {
-  DANG_XAY_DUNG = "Đang xây dựng",
+  DANG_XAY_DUNG = "Đang xây dựng kế hoạch",
   DA_PHE_DUYET = "Đã phê duyệt",
-  DA_XAY_DUNG = "Đã xây dựng",
+  DA_TAO = "Đã tạo kế hoạch",
   DA_THONG_QUA = "Đã thông qua",
 }
 

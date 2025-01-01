@@ -7,6 +7,7 @@ enum formatTime {
   dateTime = "HH:mm DD/MM/YYYY",
   time_mili = "hh:mm:ss",
   utc = "YYYY-MM-DDTHH:mm:ss.SSSZ",
+  iso = "YYYY-MM-DDTHH:mm:ss[Z]",
   time_24h = "HH:mm",
   time_24h_mili = "HH:mm:ss",
   hour = "HH",

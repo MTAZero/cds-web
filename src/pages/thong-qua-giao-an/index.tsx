@@ -15,8 +15,8 @@ import {
   useGetUnitTreeQuery,
 } from "../../redux/apiRtk/unit";
 import SyllabusStatus from "./syllabusStatus";
+import ModalViewFile from "./modalListGiaoAn";
 import ModalThongQuaGiaoAnDetail from "./detail";
-import ModalViewFile from "./modalViewFile";
 
 const ThongQuaGiaoAn = () => {
   const [idRecord, setIdRecord] = useState();

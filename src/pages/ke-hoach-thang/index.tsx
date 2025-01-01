@@ -5,12 +5,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {
   useDeletePlanMonthMutation,
   useGetListPlanMonthQuery,
-  useGetReportMutation,
   usePostPlanMonthMutation,
   usePutPlanMonthMutation,
 } from "../../redux/apiRtk/planMonth";
 import {isValuable} from "utils/check";
-import {randomId} from "utils/common";
+import {exportFile, randomId} from "utils/common";
 import {getDescendantTreeUnit, NotificationService} from "utils";
 import {useNavigate} from "react-router-dom";
 import {RouterLink} from "routers/routers";
@@ -20,18 +19,21 @@ import {
   useGetListUnitQuery,
   useGetUnitTreeQuery,
 } from "../../redux/apiRtk/unit";
+import {useLazyGetReportQuery} from "../../redux/apiRtk/tablePlanMonthDetail";
 
 const KeHoachThang = () => {
   const [record, setRecord] = useState<any>();
   const tableRef = useRef<any>(null);
+  const [titleReport, setTitleReport] = useState();
   const [displayData, setDisplayData] = useState<any[]>([]);
   const [params, setParams] = useState<any>({pageIndex: 1, pageSize: 10});
   const {
     data: dataPlanMonth,
-    isFetching,
+    isFetching: isFetchingPlanMonth,
     isError,
   } = useGetListPlanMonthQuery(params, {
     // refetchOnFocus: true,
+    refetchOnMountOrArgChange: true,
     refetchOnReconnect: true,
   });
   const [
@@ -41,11 +43,12 @@ const KeHoachThang = () => {
   const [
     getReport,
     {
+      data: dataReport,
       isSuccess: isSuccessGetReport,
       isLoading: isLoadingGetReport,
       error: errorGetReport,
     },
-  ] = useGetReportMutation();
+  ] = useLazyGetReportQuery();
   const [
     putPlanMonth,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
@@ -95,28 +98,38 @@ const KeHoachThang = () => {
       align: "center",
       render: (_, record) => (
         <ListActionButton
-          editFunction={() => {
-            handleOpenModal(record);
-          }}
+          // editFunction={() => {
+          //   handleOpenModal(record);
+          // }}
           deleteFunction={async () => {
             await deletePlanMonth(record?._id);
             setPage(1);
             setParams({...params, pageIndex: 1});
           }}
-          viewFunction={() => {
+          editFunction={() => {
             navigate(RouterLink.PLAN_MONTH_DETAIL.replace(":id", record?._id));
           }}
-          downloadFunction={() => {}}
+          downloadFunction={() => {
+            setTitleReport(record?.name);
+            getReport(record?._id);
+          }}
         ></ListActionButton>
       ),
     },
   ];
-
+  useEffect(() => {
+    exportFile(dataReport, `${titleReport ?? "Bao_cao_thang"}`);
+  }, [dataReport]);
   useEffect(() => {
     if (isSuccessDelete) {
       NotificationService.success("Xóa dữ liệu thành công");
     }
   }, [isSuccessDelete]);
+  useEffect(() => {
+    if (isSuccessGetReport) {
+      NotificationService.success("Đã xuất báo cáo");
+    }
+  }, [isSuccessGetReport]);
 
   useEffect(() => {
     if (isValuable(errorDelete)) {
@@ -174,6 +187,9 @@ const KeHoachThang = () => {
     const callApi = record ? putPlanMonth : postPlanMonth;
     await callApi(payload);
   };
+  useEffect(() => {
+    console.log(isFetchingPlanMonth);
+  }, [isFetchingPlanMonth]);
   return (
     <div className="page">
       <div className="main">
@@ -190,7 +206,7 @@ const KeHoachThang = () => {
           <div className="">
             <TableCustom
               ref={tableRef}
-              isLoading={isFetching}
+              isLoading={isFetchingPlanMonth}
               total={dataPlanMonth?.total}
               dataSource={displayData}
               columns={columns}
@@ -201,7 +217,7 @@ const KeHoachThang = () => {
           </div>
           <Spin spinning={isLoadingPost || isLoadingPut}>
             <ModalCustom
-              width={600}
+              width={1000}
               ref={modalRef}
               title={`${record?._id ? "Sửa thông tin" : "Thêm"}`}
               onOk={handleSubmit}

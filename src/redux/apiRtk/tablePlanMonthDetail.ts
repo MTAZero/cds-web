@@ -1,10 +1,11 @@
 import {createApi} from "@reduxjs/toolkit/query/react";
 import {API_METHOD} from "types/api-method.enum";
 import {baseQuery} from "../base-query";
+import {serialize} from "utils";
 
 export const TABLE_PLAN_MONTH_DETAIL_API_REDUCER_KEY =
   "planMonthDetailTableApi";
-const {POST, GET, DELETE} = API_METHOD;
+const {POST, GET, DELETE, PUT} = API_METHOD;
 export const planMonthDetailTableApi = createApi({
   reducerPath: TABLE_PLAN_MONTH_DETAIL_API_REDUCER_KEY,
   baseQuery,
@@ -12,10 +13,9 @@ export const planMonthDetailTableApi = createApi({
   tagTypes: ["Post"],
   endpoints: builder => ({
     getListPlanMonthDetailTable: builder.query<any, any>({
-      query: data => ({
-        url: "/monthly-plan-detail",
+      query: params => ({
+        url: `/monthly-plan-detail${serialize(params)}`,
         method: GET,
-        data: data,
       }),
       providesTags: ["Post"],
       transformResponse: response => response?.data,
@@ -32,7 +32,7 @@ export const planMonthDetailTableApi = createApi({
     putPlanMonthDetailTable: builder.mutation<any, any>({
       query: data => ({
         url: `/monthly-plan-detail/${data?.id}`,
-        method: POST,
+        method: PUT,
         data: data?.data,
       }),
       invalidatesTags: ["Post"],
@@ -41,7 +41,7 @@ export const planMonthDetailTableApi = createApi({
 
     getPlanMonthDetailTable: builder.query<any, any>({
       query: id => ({
-        url: "/monthly-plan-detail",
+        url: `/monthly-plan-detail/${id}`,
         method: GET,
       }),
 
@@ -55,6 +55,16 @@ export const planMonthDetailTableApi = createApi({
       invalidatesTags: ["Post"],
       transformResponse: response => response?.data,
     }),
+    getReport: builder.query<any, any>({
+      query: id => ({
+        url: `/monthly-plan-detail/of/${id}`,
+        method: GET,
+        responseType: "blob",
+      }),
+      keepUnusedDataFor: 0,
+
+      transformResponse: response => response,
+    }),
   }),
 });
 
@@ -66,4 +76,5 @@ export const {
   useGetPlanMonthDetailTableQuery,
   useGetListPlanMonthDetailTableQuery,
   useDeletePlanMonthDetailTableMutation,
+  useLazyGetReportQuery,
 } = planMonthDetailTableApi;

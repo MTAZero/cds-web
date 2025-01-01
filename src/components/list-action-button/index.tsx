@@ -49,6 +49,7 @@ const ListActionButton: React.FC<Props> = ({
             style={{position: "relative"}}
             onClick={addFunction}
             icon={<Icon.add></Icon.add>}
+            type="primary"
           ></Button>
         </Tooltip>
       ) : (
@@ -56,27 +57,35 @@ const ListActionButton: React.FC<Props> = ({
       )}
       {printFunction !== undefined ? (
         <Tooltip title={toolTips.print}>
-          <Button onClick={printFunction} icon={<PrinterSVG />} />
+          <Button
+            onClick={printFunction}
+            icon={<Icon.printer />}
+            type="primary"
+          />
         </Tooltip>
       ) : (
         <></>
       )}
       {editFunction !== undefined ? (
         <Tooltip title={toolTips?.edit}>
-          <Button onClick={editFunction} icon={<PenSVG />} />
+          <Button onClick={editFunction} icon={<Icon.edit />} type="primary" />
         </Tooltip>
       ) : (
         <></>
       )}
       {viewFunction !== undefined ? (
         <Tooltip title={toolTips?.view}>
-          <Button onClick={viewFunction} icon={<EyeSVG />} />
+          <Button onClick={viewFunction} icon={<Icon.eye />} type="primary" />
         </Tooltip>
       ) : (
         <></>
       )}
       {downloadFunction !== undefined ? (
-        <Button onClick={downloadFunction} icon={<DownloadOutlined />} />
+        <Button
+          onClick={downloadFunction}
+          icon={<Icon.download />}
+          type="primary"
+        />
       ) : (
         <></>
       )}
@@ -86,7 +95,7 @@ const ListActionButton: React.FC<Props> = ({
           title="Bạn muốn xóa?"
           onConfirm={deleteFunction}
         >
-          <Button icon={<RecycleSVG />} />
+          <Button icon={<Icon.remove />} type="primary" danger />
         </Popconfirm>
       ) : (
         <></>
@@ -95,7 +104,8 @@ const ListActionButton: React.FC<Props> = ({
         <Tooltip title={toolTips?.save}>
           <Button
             onClick={saveFunction}
-            icon={<SaveIconSVG></SaveIconSVG>}
+            icon={<Icon.save></Icon.save>}
+            type="primary"
           ></Button>
         </Tooltip>
       ) : (
@@ -110,7 +120,8 @@ const ListActionButton: React.FC<Props> = ({
         <Tooltip title={toolTips?.check}>
           <Button
             onClick={checkFunction}
-            icon={<CheckCircleOutlined></CheckCircleOutlined>}
+            icon={<Icon.checkFilled></Icon.checkFilled>}
+            type="primary"
           ></Button>
         </Tooltip>
       )}

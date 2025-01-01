@@ -1,10 +1,10 @@
-import {Button, Form, Row, Space} from "antd";
+import {Button, Form, Row, Space, Spin} from "antd";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
 import React, {useEffect, useRef, useState} from "react";
 import {useParams} from "react-router-dom";
+import Icon from "assests/icons";
 import {
-  useDeletePlanMonthMutation,
   useGetPlanMonthQuery,
   usePostPlanMonthMutation,
   usePutPlanMonthMutation,
@@ -34,7 +34,7 @@ const {INPUT, TREE_SELECT} = fieldType;
 const KeHoachThangDetail = props => {
   const {unitTree} = useAppSelector(state => state.catalog);
   const [descendantTreeUnit, setDescendantTreeUnit] = useState<any>([]);
-  const {id} = useParams();
+  const {id: keHoachThangId} = useParams();
   const [form] = Form.useForm();
   const [idRecord, setIdRecord] = useState();
   const [nhiemVu, setNhiemVu] = useState<any>();
@@ -59,12 +59,12 @@ const KeHoachThangDetail = props => {
     },
   ] = useDeletePlanMonthDetailTableMutation();
   const {data: dataPlanMonth, isSuccess: isSuccessPlanMonth} =
-    useGetPlanMonthQuery(id);
+    useGetPlanMonthQuery(keHoachThangId);
   const {
     data: dataTable,
     isSuccess: isSuccessDataTable,
     isFetching: isFetchingTable,
-  } = useGetListPlanMonthDetailTableQuery(id);
+  } = useGetListPlanMonthDetailTableQuery({ke_hoach_thang: keHoachThangId});
   useEffect(() => {
     const _descendantTreeUnit = getDescendantTreeUnit(unitTree);
     setDescendantTreeUnit([_descendantTreeUnit]);
@@ -117,7 +117,7 @@ const KeHoachThangDetail = props => {
         bao_dam_thuc_hien: baoDamThucHien,
         to_chuc_thuc_hien: toChucThucHien,
       },
-      id: id,
+      id: keHoachThangId,
     };
     putPlanMonth(payload);
   };
@@ -160,6 +160,7 @@ const KeHoachThangDetail = props => {
     },
     {
       key: "action",
+      title: "Thao tác",
       dataIndex: "action",
       align: "center",
       render: (value, record, index) => {
@@ -200,85 +201,97 @@ const KeHoachThangDetail = props => {
   return (
     <div className="page">
       <div className="main">
-        <div className="container">
-          <div>
-            <Form form={form}>
-              <Row gutter={[16, 8]} className="content-modal">
-                <InputFields data={data} />
+        <div className="">
+          <Spin spinning={isLoadingPost || isLoadingPut}>
+            <div className="container">
+              <Form form={form}>
+                <Row gutter={[16, 8]} className="content-modal">
+                  <InputFields data={data} />
+                </Row>
+              </Form>
+            </div>
+            <div className="container">
+              <div>Nhiệm vụ</div>
+              <CKEditor
+                editor={Editor as any}
+                data={dataPlanMonth?.nhiem_vu}
+                onReady={event => {}}
+                onChange={(event, editor: any) => {
+                  const _data = editor?.getData();
+                  setNhiemVu(_data);
+                }}
+              />
+            </div>
+            <div className="container">
+              <div>Yêu cầu</div>
+              <CKEditor
+                editor={Editor as any}
+                data={dataPlanMonth?.yeu_cau}
+                onReady={event => {}}
+                onChange={(event, editor: any) => {
+                  const _data = editor?.getData();
+                  setYeuCau(_data);
+                }}
+              />
+            </div>
+            <div className="container">
+              <div>Bảo đảm thực hiện</div>
+              <CKEditor
+                editor={Editor as any}
+                data={dataPlanMonth?.bao_dam_thuc_hien}
+                onReady={event => {}}
+                onChange={(event, editor: any) => {
+                  const _data = editor?.getData();
+                  setBaoDamThucHien(_data);
+                }}
+              />
+            </div>
+            <div className="container">
+              <div>Tổ chức thực hiện</div>
+              <CKEditor
+                editor={Editor as any}
+                data={dataPlanMonth?.to_chuc_thuc_hien}
+                onChange={(event, editor: any) => {
+                  const _data = editor?.getData();
+                  setToChucThucHien(_data);
+                }}
+              />
+            </div>
+
+            <div style={{marginBottom: 8, marginTop: 8}} className="container">
+              <Row justify={"end"} style={{marginTop: 8, marginBottom: 8}}>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    ref.current.openModal();
+                  }}
+                  icon={<Icon.add></Icon.add>}
+                >
+                  Thêm hàng
+                </Button>
               </Row>
-            </Form>
-          </div>
-          <div>Nhiệm vụ</div>
-          <CKEditor
-            editor={Editor as any}
-            data={dataPlanMonth?.nhiem_vu}
-            onReady={event => {}}
-            onChange={(event, editor: any) => {
-              const _data = editor?.getData();
-              setNhiemVu(_data);
-            }}
-          />
+              <TableCustom
+                isLoading={isFetchingTable}
+                dataSource={toArray(dataTable?.items)}
+                columns={columns}
+                pagination={false}
+              ></TableCustom>
+            </div>
 
-          <div>Yêu cầu</div>
-          <CKEditor
-            editor={Editor as any}
-            data={dataPlanMonth?.yeu_cau}
-            onReady={event => {}}
-            onChange={(event, editor: any) => {
-              const _data = editor?.getData();
-              setYeuCau(_data);
-            }}
-          />
-          <div>Bảo đảm thực hiện</div>
-          <CKEditor
-            editor={Editor as any}
-            data={dataPlanMonth?.bao_dam_thuc_hien}
-            onReady={event => {}}
-            onChange={(event, editor: any) => {
-              const _data = editor?.getData();
-              setBaoDamThucHien(_data);
-            }}
-          />
-          <div>Tổ chức thực hiện</div>
-          <CKEditor
-            editor={Editor as any}
-            data={dataPlanMonth?.to_chuc_thuc_hien}
-            onChange={(event, editor: any) => {
-              const _data = editor?.getData();
-              setToChucThucHien(_data);
-            }}
-          />
-          <Row justify={"end"} style={{marginTop: 8}}>
-            <Button
-              type="primary"
-              onClick={() => {
-                ref.current.openModal();
-              }}
-            >
-              Thêm hàng
-            </Button>
-          </Row>
-          <div style={{marginBottom: 8, marginTop: 8}}>
-            <TableCustom
-              isLoading={isFetchingTable}
-              dataSource={toArray(dataTable?.items)}
-              columns={columns}
-            ></TableCustom>
-          </div>
+            <ModalCustom ref={ref} title="" onOpenModal={() => {}}>
+              <ModalKeHoachThangDetail
+                idRecord={idRecord}
+              ></ModalKeHoachThangDetail>
+            </ModalCustom>
 
-          <ModalCustom ref={ref} title="" onOpenModal={() => {}}>
-            <ModalKeHoachThangDetail
-              idRecord={idRecord}
-            ></ModalKeHoachThangDetail>
-          </ModalCustom>
-
-          <Row justify={"end"}>
-            <Space>
-              <Button type="primary" onClick={handleSubmit}>
-                Lưu lại
-              </Button>
-            </Space>
-          </Row>
+            <Row justify={"end"} className="container">
+              <Space>
+                <Button type="primary" onClick={handleSubmit}>
+                  Lưu lại
+                </Button>
+              </Space>
+            </Row>
+          </Spin>
         </div>
       </div>
     </div>

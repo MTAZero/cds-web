@@ -7,7 +7,7 @@ import SyllabusStatus from "../syllabusStatus";
 import {Button, Row} from "antd";
 
 const ModalListGiaoAn = props => {
-  const {setGiaoAnId, closeModal} = props;
+  const {setGiaoAnId, setFileGiaoAnId, closeModal} = props;
   const [displayData, setDisplayData] = useState<any[]>([]);
   const [params, setParams] = useState<any>({pageIndex: 1, pageSize: 10});
   const {
@@ -34,6 +34,7 @@ const ModalListGiaoAn = props => {
         selectedRows
       );
       setGiaoAnId(selectedRows?.[0]?._id);
+      setFileGiaoAnId(selectedRows?.[0]?.file);
     },
     getCheckboxProps: (record: any) => ({
       name: record.name,

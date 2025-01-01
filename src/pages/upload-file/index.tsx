@@ -49,6 +49,9 @@ const UploadFile = props => {
       NotificationService.error("Có lỗi khi xóa tài liệu này");
     }
   };
+  useEffect(() => {
+    setParams({...params, type: type});
+  }, [type]);
   const getListFile = async () => {
     try {
       setLoading(true);

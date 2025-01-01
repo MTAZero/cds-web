@@ -12,15 +12,21 @@ import {
   formatDateToString,
   isValuable,
   NotificationService,
+  toArray,
 } from "utils";
 import Icons from "assests/icons";
 import {usePostFileMutation} from "../../../redux/apiRtk/uploadFile";
 import ModalViewFile from "../modalViewFile";
+import {useGetListUserQuery} from "../../../redux/apiRtk/user";
 const {INPUT, TREE_SELECT, DATE, SELECT} = fieldType;
 const ModalGiaoAnDetail = props => {
   const {idGiaoAn, descendantTreeUnit, setPage} = props;
   const [form] = Form.useForm();
   const modalRef = useRef<any>();
+  const {data: dataUsers, isSuccess: isSuccessUsers} = useGetListUserQuery({
+    pageIndex: 1,
+    pageSize: 200,
+  });
   const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
   const [
     postSyllabus,
@@ -94,12 +100,13 @@ const ModalGiaoAnDetail = props => {
 
   const handleChooseFile = options => {
     const file = options?.file;
-    setSelectedFile(file);
+    console.log(file);
     const formData = new FormData();
-    formData.append("file", selectedFile as Blob);
+    formData.append("file", file as Blob);
     formData.append("name", form.getFieldValue("ten"));
     formData.append("unit", form.getFieldValue("don_vi"));
     formData.append("type", "14");
+    console.log(formData);
     postFile(formData);
   };
   const handleSubmit = async () => {
@@ -111,20 +118,20 @@ const ModalGiaoAnDetail = props => {
       data: {
         ...values,
         thoi_gian_bat_dau_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_bat_dau_thong_qua
+          values?.thoi_gian_bat_dau_thong_qua
         ),
 
         thoi_gian_ket_thuc_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_ket_thuc_thong_qua
+          values?.thoi_gian_ket_thuc_thong_qua
         ),
         thoi_gian_bat_dau_phe_duyet: formatDateToString(
-          dataGet?.thoi_gian_bat_dau_phe_duyet
+          values?.thoi_gian_bat_dau_phe_duyet
         ),
         thoi_gian_ket_thuc_phe_duyet: formatDateToString(
-          dataGet?.thoi_gian_ket_thuc_phe_duyet
+          values?.thoi_gian_ket_thuc_phe_duyet
         ),
         thoi_gian_hoan_thanh_cong_tac_chuan_bi: formatDateToString(
-          dataGet?.thoi_gian_hoan_thanh_cong_tac_chuan_bi
+          values?.thoi_gian_hoan_thanh_cong_tac_chuan_bi
         ),
         file: selectedFile,
       },
@@ -144,9 +151,15 @@ const ModalGiaoAnDetail = props => {
     {
       key: "nguoi_xay_dung",
       name: "nguoi_xay_dung",
-      type: INPUT,
+      type: SELECT,
       label: "Người xây dựng",
       css: css,
+      options: toArray(dataUsers?.items)
+        ?.filter(e => e?.isPersonal)
+        .map(e => ({
+          label: e?.full_name,
+          value: e?._id,
+        })),
     },
     {
       key: "nganh",

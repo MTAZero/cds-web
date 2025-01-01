@@ -1,4 +1,4 @@
-import {Button, Form, Row, Space} from "antd";
+import {Button, Form, Row, Space, Spin} from "antd";
 import {InputFields} from "components";
 import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
@@ -15,7 +15,7 @@ import {
 const {INPUT, SELECT, INPUT_NUMBER} = fieldType;
 const ModalKeHoachThangDetail = props => {
   const {id: ke_hoach_thang} = useParams();
-  const {idRecord} = props;
+  const {idRecord, closeModal} = props;
   const [form] = Form.useForm();
 
   const css = {xs: 24, sm: 24, md: 24, lg: 12, xl: 12};
@@ -41,15 +41,18 @@ const ModalKeHoachThangDetail = props => {
   };
   useEffect(() => {
     console.log(dataGet);
+    form.setFieldsValue(dataGet);
   }, [dataGet]);
   useEffect(() => {
     if (isSuccessPost) {
       NotificationService.success("Thêm dữ liệu thành công");
+      closeModal();
     }
   }, [isSuccessPost]);
   useEffect(() => {
     if (isSuccessPut) {
       NotificationService.success("Sửa dữ liệu thành công");
+      closeModal();
     }
   }, [isSuccessPut]);
 
@@ -152,19 +155,21 @@ const ModalKeHoachThangDetail = props => {
     <div className="page">
       <div className="main">
         <div className="container">
-          <Form form={form}>
-            <Row gutter={[8, 8]}>
-              <InputFields data={fields}></InputFields>
-            </Row>
-          </Form>
+          <Spin spinning={isLoadingPost || isLoadingPut}>
+            <Form form={form}>
+              <Row gutter={[8, 8]}>
+                <InputFields data={fields}></InputFields>
+              </Row>
+            </Form>
 
-          <Row justify={"end"}>
-            <Space>
-              <Button type="primary" onClick={handleSubmit}>
-                Lưu lại
-              </Button>
-            </Space>
-          </Row>
+            <Row justify={"end"}>
+              <Space>
+                <Button type="primary" onClick={handleSubmit}>
+                  Lưu lại
+                </Button>
+              </Space>
+            </Row>
+          </Spin>
         </div>
       </div>
     </div>

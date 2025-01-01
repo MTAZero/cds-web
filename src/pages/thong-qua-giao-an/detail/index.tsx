@@ -45,6 +45,7 @@ const ModalThongQuaGiaoAnDetail = props => {
     usePostFileMutation();
   const [fileId, setFileId] = useState();
   const [giaoAnId, setGiaoAnId] = useState();
+  const [fileGiaoAnId, setFileGiaoAnId] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const getFormValues = async () => {
     try {
@@ -75,15 +76,22 @@ const ModalThongQuaGiaoAnDetail = props => {
   }, [isSuccessPut]);
   const handleChooseFile = options => {
     const file = options?.file;
-    setSelectedFile(file);
+
     const formData = new FormData();
-    formData.append("file", selectedFile as Blob);
-    formData.append("name", form.getFieldValue("ten"));
-    formData.append("unit", form.getFieldValue("don_vi"));
+    formData.append("file", file as Blob);
+    formData.append(
+      "name",
+      form.getFieldValue("ten") ?? "Kế hoạch thông qua giáo án"
+    );
     formData.append("type", "15");
+    console.log(formData);
     postFile(formData);
   };
-
+  useEffect(() => {
+    if (dataUpload) {
+      setSelectedFile(dataUpload?._id);
+    }
+  }, [dataUpload]);
   const handleSubmit = async () => {
     const values = await getFormValues();
     if (!values) {
@@ -92,18 +100,18 @@ const ModalThongQuaGiaoAnDetail = props => {
     const payload = {
       data: {
         ...values,
-        thoi_gian: formatDateToString(dataGet?.thoi_gian),
+        thoi_gian: formatDateToString(values?.thoi_gian, formatTime.iso),
         thoi_gian_bat_dau_phe_duyet: formatDateToString(
-          dataGet?.thoi_gian_bat_dau_phe_duyet
+          values?.thoi_gian_bat_dau_phe_duyet
         ),
         thoi_gian_ket_thuc_phe_duyet: formatDateToString(
-          dataGet?.thoi_gian_ket_thuc_phe_duyet
+          values?.thoi_gian_ket_thuc_phe_duyet
         ),
         thoi_gian_bat_dau_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_bat_dau_thong_qua
+          values?.thoi_gian_bat_dau_thong_qua
         ),
         thoi_gian_ket_thuc_thong_qua: formatDateToString(
-          dataGet?.thoi_gian_ket_thuc_thong_qua
+          values?.thoi_gian_ket_thuc_thong_qua
         ),
         file: selectedFile,
         giao_an: giaoAnId,
@@ -135,6 +143,7 @@ const ModalThongQuaGiaoAnDetail = props => {
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian",
       css: css,
+      disableDate: false,
     },
     {
       key: "dia_diem_phe_duyet",
@@ -150,14 +159,16 @@ const ModalThongQuaGiaoAnDetail = props => {
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian bắt đầu phê duyệt",
       css: css,
+      disableDate: false,
     },
     {
-      key: "thoi_gian_ket_thuc_phe_duyet ",
-      name: "thoi_gian_ket_thuc_phe_duyet ",
+      key: "thoi_gian_ket_thuc_phe_duyet",
+      name: "thoi_gian_ket_thuc_phe_duyet",
       type: DATE,
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian kết thúc phê duyệt",
       css: css,
+      disableDate: false,
     },
     {
       key: "dia_diem_thong_qua",
@@ -173,14 +184,16 @@ const ModalThongQuaGiaoAnDetail = props => {
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian bắt đầu thông qua",
       css: css,
+      disableDate: false,
     },
     {
-      key: "thoi_gian_ket_thuc_thong_qua ",
-      name: "thoi_gian_ket_thuc_thong_qua ",
+      key: "thoi_gian_ket_thuc_thong_qua",
+      name: "thoi_gian_ket_thuc_thong_qua",
       type: DATE,
       optionsTime: {format: formatTime.dateTime},
       label: "Thời gian kết thúc thông qua",
       css: css,
+      disableDate: false,
     },
     {
       key: "noi_dung_phe_duyet",
@@ -236,7 +249,7 @@ const ModalThongQuaGiaoAnDetail = props => {
             </Form>
             <Row justify={"space-between"} style={{marginTop: 8}}>
               <Col xs={10} md={8} xl={3} lg={3}>
-                File
+                Kế hoạch
               </Col>
               <Col xs={14} md={16} xl={21} lg={21} style={{fontWeight: 700}}>
                 {selectedFile ? (
@@ -247,10 +260,10 @@ const ModalThongQuaGiaoAnDetail = props => {
                       setFileId(selectedFile);
                     }}
                   >
-                    Xem File
+                    Xem kế hoạch
                   </Button>
                 ) : (
-                  "Chưa chọn file"
+                  "Chưa chọn kế hoạch"
                 )}
               </Col>
             </Row>
@@ -259,12 +272,12 @@ const ModalThongQuaGiaoAnDetail = props => {
                 Giáo án
               </Col>
               <Col xs={14} md={16} xl={21} lg={21} style={{fontWeight: 700}}>
-                {giaoAnId ? (
+                {fileGiaoAnId ? (
                   <Button
                     type="primary"
                     onClick={() => {
                       modalViewFileRef.current.openModal();
-                      setFileId(giaoAnId);
+                      setFileId(fileGiaoAnId);
                     }}
                   >
                     Xem giáo án
@@ -302,7 +315,10 @@ const ModalThongQuaGiaoAnDetail = props => {
             </Row>
           </Spin>
           <ModalCustom title="Danh sách giáo án" ref={modalGiaoAnRef}>
-            <ModalListGiaoAn setGiaoAnId={setGiaoAnId}></ModalListGiaoAn>
+            <ModalListGiaoAn
+              setGiaoAnId={setGiaoAnId}
+              setFileGiaoAnId={setFileGiaoAnId}
+            ></ModalListGiaoAn>
           </ModalCustom>
           <ModalCustom ref={modalViewFileRef}>
             <ModalViewFile fileId={fileId}></ModalViewFile>
