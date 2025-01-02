@@ -1,13 +1,16 @@
 import dayjs from "dayjs";
 import {CURRENCY_LOCALE, formatTime} from "types";
 const serialize = (obj: any) => {
-  let str = [];
+  let str: string[] = [];
+  if (typeof obj != "object") {
+    return "";
+  }
   for (let p in obj)
     if (obj.hasOwnProperty(p)) {
-      if (obj[p] || obj[p] === 0)
+      if (obj[p] || obj[p] === 0 || obj[p] === false)
         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
-  return str.join("&");
+  return str?.length > 0 ? `?${str.join("&")}` : "";
 };
 const parseJson = (str: any) => {
   try {
@@ -105,8 +108,8 @@ const convertNumberDecimalToWords = (number, addonAfter = "") => {
 
   const words =
     `${convertNumberToWords(firstBlock)}` +
-      `${toNumber(secondBlock) > 0 ? `phẩy ${secondBlockWords}` : ""}` +
-      addonAfter ?? "";
+    `${toNumber(secondBlock) > 0 ? `phẩy ${secondBlockWords}` : ""}` +
+    addonAfter;
   return words;
 };
 const convertNumberToWords = (number, addonAfter = "") => {
@@ -250,7 +253,17 @@ const capitalizeFirstLetter = str => {
   if (!str) return "";
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
-
+const getDescendantTreeUnit = dataUnit => {
+  const _dataUnit = {
+    value: dataUnit?._id,
+    title: dataUnit?.name,
+    children:
+      toArray(dataUnit?.childs)?.length > 0
+        ? toArray(dataUnit?.childs)?.map(e => getDescendantTreeUnit(e))
+        : null,
+  };
+  return _dataUnit;
+};
 export {
   serialize,
   parseJson,
@@ -265,4 +278,5 @@ export {
   convertNumberToWords,
   convertNumberDecimalToWords,
   capitalizeFirstLetter,
+  getDescendantTreeUnit,
 };

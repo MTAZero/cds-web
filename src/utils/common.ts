@@ -10,4 +10,20 @@ const setItemLocalStorage = (key, value) => {
 const getItemLocalStorage = key => {
   return parseJson(localStorage.getItem(key));
 };
-export {renderSTT, setItemLocalStorage, getItemLocalStorage, randomId};
+const exportFile = async (data, nameFile, extension = "docx") => {
+  try {
+    console.log(data);
+    var link = document.createElement("a");
+    const url = window.URL.createObjectURL(data);
+    link.href = url;
+    link.download = `${nameFile}.${extension}`;
+    link.click();
+  } catch (error) {}
+};
+export {
+  renderSTT,
+  setItemLocalStorage,
+  getItemLocalStorage,
+  randomId,
+  exportFile,
+};

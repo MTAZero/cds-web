@@ -1,0 +1,32 @@
+@import "assests/styles/_variables.scss";
+.print-so-sach-ca-nhan {
+  background-color: white;
+  @include font-print;
+  @include page-a4;
+  padding: 1.5cm 2cm 2cm 2cm;
+  .header-time {
+    font-style: italic;
+  }
+  .container-title {
+    margin-top: 0.5cm;
+    margin-left: 2cm;
+    margin-right: 1cm;
+    .title {
+      font-weight: bold;
+      margin-bottom: 0.5cm;
+      text-align: justify;
+    }
+  }
+  .header-content {
+    text-decoration: underline;
+  }
+  div,
+  span,
+  article,
+  h1 {
+    font-size: $sizeXL;
+  }
+  span.label {
+    font-weight: $weightLarge;
+  }
+}

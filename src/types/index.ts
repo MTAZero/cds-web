@@ -6,6 +6,9 @@ export * from "./field-type.enum";
 export * from "./catalog.enum";
 export * from "./currency.enum";
 export * from "./type-meeting-book.enum";
+export * from "./type-content-hl.enum";
+export * from "./syllabus-status.enum";
+export * from "./plan-syllabus-status.enum";
 export enum SystemFeatures {
   ManagerUsers = "ManagerUsers",
   ManagerRoles = "ManagerRoles",
@@ -110,6 +113,6 @@ export const selectTroopData = [
 ];
 
 export const getTextByStatus = (status: TroopStatus) => {
-  const ans = selectTroopData.find((i) => i.value === status);
+  const ans = selectTroopData.find(i => i.value === status);
   return ans ? ans.text : "";
 };

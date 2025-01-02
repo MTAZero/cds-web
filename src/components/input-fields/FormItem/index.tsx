@@ -12,6 +12,7 @@ import {
   InputNumber,
   AutoComplete,
   TimePicker,
+  TreeSelect,
 } from "antd";
 import {useEffect, useState} from "react";
 import "./FormItem.scss";
@@ -37,6 +38,7 @@ const {
   INPUT_NUMBER,
   SELECT_MULTI,
   PASSWORD,
+  TREE_SELECT,
 } = fieldType;
 
 const FormItem = (props: any) => {
@@ -74,6 +76,7 @@ const FormItem = (props: any) => {
     initialValue = null,
     allowClear = true,
     changeOnBlur,
+    treeData,
     ...rest
   } = props;
   const [isOpenDate, setIsOpenDate] = useState<boolean>(false);
@@ -421,7 +424,19 @@ const FormItem = (props: any) => {
             {...rest}
           ></AutoComplete>
         );
-
+      case TREE_SELECT:
+        return (
+          <TreeSelect
+            style={{width: "100%"}}
+            value={value}
+            dropdownStyle={{maxHeight: 400, overflow: "auto"}}
+            treeData={treeData}
+            placeholder={placeholder ?? "Chọn"}
+            treeDefaultExpandAll
+            onChange={onChange}
+            treeLine
+          />
+        );
       default:
         break;
     }

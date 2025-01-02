@@ -202,7 +202,7 @@ span.ant-table-filter-trigger {
       }
     }
     .ant-modal-body {
-      overflow: scroll;
+      overflow-y: scroll;
       max-height: calc(100vh - 100px);
     }
   }

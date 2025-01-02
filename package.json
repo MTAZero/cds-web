@@ -12,7 +12,7 @@
     "@mui/x-date-pickers": "^7.3.2",
     "@mui/x-tree-view": "^7.3.1",
     "@phuocng/react-pdf-viewer": "^1.7.0",
-    "@reduxjs/toolkit": "^2.2.3",
+    "@reduxjs/toolkit": "^2.2.5",
     "@syncfusion/ej2-base": "^25.1.35",
     "@syncfusion/ej2-react-spreadsheet": "^25.1.42",
     "@testing-library/jest-dom": "^5.14.1",

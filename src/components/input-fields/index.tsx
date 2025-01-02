@@ -40,6 +40,7 @@ const InputFields = ({data}: any): JSX.Element => {
               mode,
               allowClear,
               changeOnBlur,
+              treeData,
               ...rest
             }: any,
             index: number
@@ -84,6 +85,7 @@ const InputFields = ({data}: any): JSX.Element => {
                   allowClear={allowClear}
                   mode={mode}
                   changeOnBlur={changeOnBlur}
+                  treeData={treeData}
                   {...rest}
                 />
               </Col>

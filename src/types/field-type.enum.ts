@@ -17,5 +17,6 @@ enum fieldType {
   BUTTON = "BUTTON",
   PASSWORD = "PASSWORD",
   CURRENCY = "CURRENCY",
+  TREE_SELECT = "TREE_SELECT",
 }
 export {fieldType};

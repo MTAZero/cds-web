@@ -89,7 +89,7 @@ const DetailTienTrinh = props => {
           pageIndex: 1,
           pageSize: 100,
         });
-        setListUnit(res?.items);
+        setListUnit(toArray(res?.items).filter(e => e?.name?.includes("Đội")));
       } catch (error) {
         setListUnit([]);
       }

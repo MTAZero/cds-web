@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit";
+import {unitApi} from "../../redux/apiRtk/unit";
 import {APIServices, toArray} from "utils";
 
 export interface CatalogState {
@@ -9,6 +10,7 @@ export interface CatalogState {
   listTask: any[];
   listFuel: any[];
   listPerson: any[];
+  unitTree: any;
 }
 
 const initialState: CatalogState = {
@@ -18,6 +20,7 @@ const initialState: CatalogState = {
   listTask: [],
   listFuel: [],
   listPerson: [],
+  unitTree: null,
 };
 
 export const catalogSlice = createSlice({
@@ -42,6 +45,14 @@ export const catalogSlice = createSlice({
     setListPerson: (state: CatalogState, action: PayloadAction<any>) => {
       state.listPerson = action.payload;
     },
+  },
+  extraReducers: builder => {
+    builder.addMatcher(
+      unitApi.endpoints.getUnitTree.matchFulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.unitTree = action.payload;
+      }
+    );
   },
 });
 

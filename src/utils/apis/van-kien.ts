@@ -1,9 +1,10 @@
+import {serialize} from "utils/parse";
 import createApiServices from "./make-api-request";
 
 const api = createApiServices();
-const getListVanKien = async () => {
+const getListVanKien = async params => {
   const res = await api.makeAuthRequest({
-    url: `/document`,
+    url: `/document${serialize(params)}`,
     method: "GET",
   });
   return res?.data;
