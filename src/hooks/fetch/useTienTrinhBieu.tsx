@@ -4,7 +4,7 @@ const useTienTrinhBieu = (params: any) => {
   const {data, error, isLoading, mutate} = useSWR(
     params
       ? `/progresses/get-of-week` +
-          `${serialize(params) ? `?${serialize(params)}` : ""}`
+          `${serialize(params) ? `${serialize(params)}` : ""}`
       : null,
     {
       revalidateOnReconnect: true,

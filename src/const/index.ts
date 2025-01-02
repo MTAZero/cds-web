@@ -33,6 +33,7 @@ export const FEATURES_SYSTEM = [
   SystemFeatures.ViewStatisticPage,
   SystemFeatures.InComingCall,
   SystemFeatures.GoingCall,
+  SystemFeatures.ManagerTypeBook,
 ];
 
 export const ACTIONS_SYSTEM = [

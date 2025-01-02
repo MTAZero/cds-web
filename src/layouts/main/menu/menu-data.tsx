@@ -1,6 +1,7 @@
 import {
   AdminSVG,
   BookSVG,
+  BuildingSVG,
   CarSVG,
   DocumentSVG,
   DocumentTextSVG,
@@ -732,7 +733,7 @@ export const mainMenu: Array<SideMenuItem> = [
       {
         url: RouterLink.QUAN_TRI_DON_VI_ROUTE,
         key: RouterLink.QUAN_TRI_DON_VI_ROUTE,
-        icon: <FaWrench />,
+        icon: <BuildingSVG />,
         children: [],
         text: "Đơn vị",
         module: SystemFeatures.ManagerUnits,

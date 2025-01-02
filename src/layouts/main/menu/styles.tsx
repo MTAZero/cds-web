@@ -1,5 +1,5 @@
 export const mainContainerStyle = {
-  width: "300px",
+  width: "320px",
   background: "white",
   display: "flex",
   flexDirection: "column",

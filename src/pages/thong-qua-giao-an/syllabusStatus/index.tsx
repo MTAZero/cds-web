@@ -1,6 +1,6 @@
 import {Tag} from "antd";
 import React, {useEffect, useState} from "react";
-import {syllabusStatus} from "types";
+import {planSyllabusStatus} from "types";
 const SyllabusStatus = props => {
   const {status} = props;
   const [color, setColor] = useState<any>();
@@ -8,16 +8,16 @@ const SyllabusStatus = props => {
     const _setColor = status => {
       let _color = "";
       switch (status) {
-        case syllabusStatus.DANG_XAY_DUNG:
+        case planSyllabusStatus.DANG_XAY_DUNG:
           _color = "#EB2D4B";
           break;
-        case syllabusStatus.DA_XAY_DUNG:
+        case planSyllabusStatus.DA_TAO:
           _color = "#FAAD14";
           break;
-        case syllabusStatus.DA_PHE_DUYET:
+        case planSyllabusStatus.DA_PHE_DUYET:
           _color = "#141ED2";
           break;
-        case syllabusStatus.DA_THONG_QUA:
+        case planSyllabusStatus.DA_THONG_QUA:
           _color = "#00B335";
           break;
 

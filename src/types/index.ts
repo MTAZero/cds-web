@@ -40,6 +40,7 @@ export enum SystemFeatures {
   ViewStatisticPage = "ViewStatisticPage",
   GoingCall = "GoingCall",
   InComingCall = "InComingCall",
+  ManagerTypeBook = "ManagerTypeBook",
 }
 
 export enum SystemAction {

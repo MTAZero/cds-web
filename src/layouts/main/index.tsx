@@ -36,7 +36,7 @@ export const MainLayout = () => {
         <Menu />
         <Box
           sx={{
-            paddingLeft: "300px",
+            paddingLeft: "320px",
             display: "flex",
             flex: 1,
             height: "100%",

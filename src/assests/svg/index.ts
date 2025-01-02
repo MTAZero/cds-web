@@ -30,3 +30,4 @@ export {ReactComponent as AdminSVG} from "./admin.svg";
 export {ReactComponent as UserSVG} from "./user.svg";
 export {ReactComponent as DocumentTextSVG} from "./document-text.svg";
 export {ReactComponent as NotebookSVG} from "./notebook.svg";
+export {ReactComponent as BuildingSVG} from "./building.svg";

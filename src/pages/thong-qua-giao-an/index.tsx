@@ -15,7 +15,7 @@ import {
   useGetUnitTreeQuery,
 } from "../../redux/apiRtk/unit";
 import SyllabusStatus from "./syllabusStatus";
-import ModalViewFile from "./modalListGiaoAn";
+import ModalViewFile from "./modalViewFile";
 import ModalThongQuaGiaoAnDetail from "./detail";
 
 const ThongQuaGiaoAn = () => {
@@ -55,9 +55,9 @@ const ThongQuaGiaoAn = () => {
       width: 90,
     },
     {
-      title: "Tên",
-      dataIndex: "ten",
-      key: "ten",
+      title: "Nội dung phê duyệt",
+      dataIndex: "noi_dung_phe_duyet",
+      key: "noi_dung_phe_duyet",
       align: "center",
       showSearch: true,
     },

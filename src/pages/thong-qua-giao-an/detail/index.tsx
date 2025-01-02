@@ -19,9 +19,10 @@ import {useGetListUserQuery} from "../../../redux/apiRtk/user";
 import {usePostFileMutation} from "../../../redux/apiRtk/uploadFile";
 import ModalListGiaoAn from "../modalListGiaoAn";
 import ModalViewFile from "../modalViewFile";
-const {TREE_SELECT, DATE, SELECT, INPUT} = fieldType;
+import {useAppSelector} from "hooks";
+const {TREE_SELECT, DATE, SELECT, INPUT, INPUT_NUMBER} = fieldType;
 const ModalThongQuaGiaoAnDetail = props => {
-  const {id, descendantTreeUnit} = props;
+  const {idRecord, descendantTreeUnit, closeModal} = props;
   const [form] = Form.useForm();
   const modalViewFileRef = useRef<any>();
   const modalGiaoAnRef = useRef<any>();
@@ -34,13 +35,17 @@ const ModalThongQuaGiaoAnDetail = props => {
     putPlanSyllabus,
     {isSuccess: isSuccessPut, isLoading: isLoadingPut, error: errorPut},
   ] = usePutPlanSyllabusMutation();
-  const {data: dataGet, isSuccess: isSuccessGet} = useGetPlanSyllabusQuery(id, {
-    skip: !isValuable(id),
-  });
+  const {data: dataGet, isSuccess: isSuccessGet} = useGetPlanSyllabusQuery(
+    idRecord,
+    {
+      skip: !isValuable(idRecord),
+    }
+  );
   const {data: dataUsers, isSuccess: isSuccessUsers} = useGetListUserQuery({
     pageIndex: 1,
     pageSize: 200,
   });
+  const isOpenModal = useAppSelector(state => state.global.isOpenModal);
   const [postFile, {isSuccess: isSuccessUpload, data: dataUpload}] =
     usePostFileMutation();
   const [fileId, setFileId] = useState();
@@ -56,21 +61,45 @@ const ModalThongQuaGiaoAnDetail = props => {
     }
   };
   useEffect(() => {
+    console.log(isOpenModal);
+    console.log(idRecord);
+    if (isOpenModal && !isValuable(idRecord)) {
+      form.resetFields();
+      setSelectedFile(null);
+      setGiaoAnId(null);
+    }
+  }, [isOpenModal, idRecord]);
+  useEffect(() => {
+    console.log(dataGet);
     const formatValues = {
       ...dataGet,
-      thoi_gian: convertDateStringToDateObject(dataGet?.thoi_gian),
+      thoi_gian_bat_dau_phe_duyet: convertDateStringToDateObject(
+        dataGet?.thoi_gian_bat_dau_phe_duyet
+      ),
+      thoi_gian_ket_thuc_phe_duyet: convertDateStringToDateObject(
+        dataGet?.thoi_gian_ket_thuc_phe_duyet
+      ),
+      thoi_gian_bat_dau_thong_qua: convertDateStringToDateObject(
+        dataGet?.thoi_gian_bat_dau_thong_qua
+      ),
+      thoi_gian_ket_thuc_thong_qua: convertDateStringToDateObject(
+        dataGet?.thoi_gian_ket_thuc_thong_qua
+      ),
     };
     form.setFieldsValue(formatValues);
     setSelectedFile(dataGet?.file);
     setGiaoAnId(dataGet?.giao_an);
   }, [dataGet]);
+
   useEffect(() => {
     if (isSuccessPost) {
+      closeModal();
       NotificationService.success("Thêm dữ liệu thành công");
     }
   }, [isSuccessPost]);
   useEffect(() => {
     if (isSuccessPut) {
+      closeModal();
       NotificationService.success("Sửa dữ liệu thành công");
     }
   }, [isSuccessPut]);
@@ -100,7 +129,6 @@ const ModalThongQuaGiaoAnDetail = props => {
     const payload = {
       data: {
         ...values,
-        thoi_gian: formatDateToString(values?.thoi_gian, formatTime.iso),
         thoi_gian_bat_dau_phe_duyet: formatDateToString(
           values?.thoi_gian_bat_dau_phe_duyet
         ),
@@ -116,9 +144,9 @@ const ModalThongQuaGiaoAnDetail = props => {
         file: selectedFile,
         giao_an: giaoAnId,
       },
-      id: id,
+      id: idRecord,
     };
-    const callApi = isValuable(id) ? putPlanSyllabus : postPlanSyllabus;
+    const callApi = isValuable(idRecord) ? putPlanSyllabus : postPlanSyllabus;
     callApi(payload);
   };
   const fields = [
@@ -139,11 +167,9 @@ const ModalThongQuaGiaoAnDetail = props => {
     {
       key: "thoi_gian",
       name: "thoi_gian",
-      type: DATE,
-      optionsTime: {format: formatTime.dateTime},
+      type: INPUT_NUMBER,
       label: "Thời gian",
       css: css,
-      disableDate: false,
     },
     {
       key: "dia_diem_phe_duyet",
