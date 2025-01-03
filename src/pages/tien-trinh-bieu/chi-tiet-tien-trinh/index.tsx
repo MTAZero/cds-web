@@ -36,6 +36,7 @@ import Icons from "assests/icons";
 import {EyeSVG, RecycleSVG} from "assests/svg";
 import {setListPosition} from "../../../redux/catalog/catalog.slice";
 import ModalPdf from "../modal-pdf";
+import ModalListGiaoAn from "./modalListGiaoAn";
 const DetailTienTrinh = props => {
   const dispatch = useAppDispatch();
   const {id} = useParams();
@@ -50,6 +51,8 @@ const DetailTienTrinh = props => {
   const nameObjectLocal = "tienTrinhBieuDetail";
   const [listUnit, setListUnit] = useState<any[]>();
   const modalPdfRef = useRef(null);
+  const modalListGiaoAnRef = useRef(null);
+  const [giaoAnId, setGiaoAnId] = useState(null);
   useEffect(() => {
     const getTienTrinhBieuById = async id => {
       try {
@@ -318,6 +321,9 @@ const DetailTienTrinh = props => {
       <Button
         type="primary"
         // className="btn-sub"
+        // onClick={() => {
+        //   modalListGiaoAnRef.current.openModal();
+        // }}
         icon={<Icons.file></Icons.file>}
       >
         Chọn giáo án
@@ -438,6 +444,9 @@ const DetailTienTrinh = props => {
           </Spin>
           <ModalCustom ref={modalPdfRef}>
             <ModalPdf base64={base64}></ModalPdf>
+          </ModalCustom>
+          <ModalCustom ref={modalListGiaoAnRef}>
+            <ModalListGiaoAn setGiaoAnId={setGiaoAnId} />
           </ModalCustom>
         </div>
       </div>

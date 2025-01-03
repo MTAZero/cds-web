@@ -1,8 +1,6 @@
-import {Table} from "antd";
 import React, {useEffect, useRef, useState} from "react";
-import {useAppDispatch} from "hooks";
+import {useAppSelector} from "hooks";
 
-import {fields as fieldsInit} from "./config";
 import {CollapseCustom, ExpandSearch} from "components";
 import dayjs from "dayjs";
 
@@ -10,37 +8,33 @@ import {
   APIServices,
   convertDateStringToDateObject,
   formatDateToString,
+  getDescendantTreeUnit,
   getItemLocalStorage,
-  parseJson,
   setItemLocalStorage,
 } from "utils";
-import {formatTime} from "types";
+import {fieldType, formatTime} from "types";
 import KetQuaHL from "./ket-qua";
 import NoiDungHL from "./noi-dung/noi-dung";
 import NhatKyHL from "./nhat-ky";
+import {useGetUnitTreeQuery} from "../../redux/apiRtk/unit";
+import {months} from "const";
+
+const {COMBO_BOX, DATE, TREE_SELECT} = fieldType;
 const ListThongKe = () => {
-  const dispatch = useAppDispatch();
   const expandRef = useRef<any>();
   const [params, setParams] = useState(null);
-  const [fields, setFields] = useState(fieldsInit);
   const nameObjectLocal = "thongKeHuanLuyen";
   const thongKeHuanLuyen = getItemLocalStorage(nameObjectLocal);
-  const [listUnit, setListUnit] = useState<any[]>();
-  const [listPosition, setListPosition] = useState<any[]>();
+  const unitOfUser = useAppSelector(state => state.auth.info.unit);
+  const [descendantTreeUnit, setDescendantTreeUnit] = useState<any>([]);
+  const {data: unitTree, isLoading: isLoadingUnitTree} =
+    useGetUnitTreeQuery(unitOfUser);
   useEffect(() => {
-    const getListUnit = async () => {
-      try {
-        const res = await APIServices.QuanTri.getListUnit({
-          pageIndex: 1,
-          pageSize: 100,
-        });
-        setListUnit(res?.items);
-      } catch (error) {
-        setListUnit([]);
-      }
-    };
-    getListUnit();
-  }, []);
+    const _descendantTreeUnit = getDescendantTreeUnit(unitTree);
+    setDescendantTreeUnit([_descendantTreeUnit]);
+  }, [unitTree]);
+  const [listPosition, setListPosition] = useState<any[]>();
+
   useEffect(() => {
     const getListPosition = async () => {
       try {
@@ -53,18 +47,32 @@ const ListThongKe = () => {
     };
     getListPosition();
   }, []);
-  useEffect(() => {
-    setOptionsDonVi(listUnit);
-  }, [listUnit]);
-  const setOptionsDonVi = async listUnit => {
-    fields.find((e: {name: string}) => e?.name === "unit").options =
-      listUnit?.map((e: {_id: any; name: any}) => ({
-        value: e?._id,
-        label: e?.name,
-      }));
 
-    setFields([...fields]);
-  };
+  const fields: any = [
+    {
+      type: DATE,
+      label: "Năm",
+      name: "year",
+      picker: "year",
+      optionsTime: {format: "YYYY"},
+      allowClear: false,
+    },
+    {
+      type: COMBO_BOX,
+      label: "Tháng",
+      options: months.map(e => ({value: e, label: e})),
+      name: "month",
+      allowClear: false,
+    },
+
+    {
+      type: TREE_SELECT,
+      label: "Đơn vị",
+      name: "unit",
+      allowClear: false,
+      treeData: descendantTreeUnit,
+    },
+  ];
   const onFieldsChange = (changedFields, allFields) => {
     const searchFields = expandRef.current?.getFieldsValue();
     const valuesLocal = {

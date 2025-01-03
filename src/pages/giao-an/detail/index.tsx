@@ -226,15 +226,21 @@ const ModalGiaoAnDetail = props => {
       key: "ket_luan_phe_duyet",
       name: "ket_luan_phe_duyet",
       type: INPUT,
-      label: "Nội dung phê duyệt",
+      label: "Kết luận phê duyệt",
       css: css,
     },
     {
       key: "nguoi_phe_duyet",
       name: "nguoi_phe_duyet",
-      type: INPUT,
+      type: SELECT,
       label: "Người phê duyệt",
       css: css,
+      options: toArray(dataUsers?.items)
+        ?.filter(e => e?.isPersonal)
+        .map(e => ({
+          label: e?.full_name,
+          value: e?._id,
+        })),
     },
     {
       key: "muc_dich",

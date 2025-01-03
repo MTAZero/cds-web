@@ -9,3 +9,4 @@ export * from "./input-fields";
 export * from "./collapse-custom";
 export * from "./description-custom/DescriptionsCustom";
 export * from "./print-receipt";
+export * from "./syllabusStatus";
