@@ -4,6 +4,7 @@ import {Button, Col, Form, Row} from "antd";
 import ListUnit from "./ListUnit/ListUnit";
 import {useGetUnitTreeQuery} from "../../../redux/apiRtk/unit";
 import {useAppSelector} from "hooks";
+import FormUnit from "./FormUnit/FormUnit";
 const Unit = () => {
   const [record, setRecord] = useState(null);
   const unitOfUser = useAppSelector(state => state.auth.info.unit);
@@ -22,9 +23,9 @@ const Unit = () => {
                 isFetching={isFetchingUnit}
               ></ListUnit>
             </Col>
-            {/* <Col span={12}>
-              <FormUnit record={record} listUnit={dataUnit?.data}></FormUnit>
-            </Col> */}
+            <Col span={12}>
+              <FormUnit record={record} listUnit={dataUnit}></FormUnit>
+            </Col>
           </Row>
         </div>
       </div>

@@ -3,7 +3,7 @@ import {API_METHOD} from "types/api-method.enum";
 import {baseQuery} from "../base-query";
 
 export const UNIT_API_REDUCER_KEY = "unitApi";
-const {GET, DELETE} = API_METHOD;
+const {GET, POST, PUT, DELETE} = API_METHOD;
 export const unitApi = createApi({
   reducerPath: UNIT_API_REDUCER_KEY,
   baseQuery,
@@ -26,6 +26,22 @@ export const unitApi = createApi({
       }),
       transformResponse: response => response?.data,
     }),
+    postUnit: builder.mutation<any, any>({
+      query: data => ({
+        url: `/units`,
+        method: POST,
+        data: data?.data,
+      }),
+      invalidatesTags: ["Post"],
+    }),
+    putUnit: builder.mutation<any, any>({
+      query: data => ({
+        url: `/units/${data?.id}`,
+        method: PUT,
+        data: data?.data,
+      }),
+      invalidatesTags: ["Post"],
+    }),
     deleteUnit: builder.mutation<any, any>({
       query: id => ({
         url: `/units/${id}`,
@@ -38,5 +54,10 @@ export const unitApi = createApi({
 
 export const unitApiReducer = unitApi.reducer;
 
-export const {useGetUnitTreeQuery, useGetListUnitQuery, useDeleteUnitMutation} =
-  unitApi;
+export const {
+  useGetUnitTreeQuery,
+  useGetListUnitQuery,
+  usePostUnitMutation,
+  usePutUnitMutation,
+  useDeleteUnitMutation,
+} = unitApi;
